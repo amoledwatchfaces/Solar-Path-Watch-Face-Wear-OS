@@ -91,6 +91,16 @@ object SolarCalculator {
             0f
         } else 0f
 
+        val zone = ZoneId.systemDefault()
+        val srAngle = if (sunrise > 0) epochToDialAngle(sunrise, zone) else 270f
+        val ssAngle = if (sunset > 0) epochToDialAngle(sunset, zone) else 90f
+        val cdawnAngle = if (civilDawn > 0) epochToDialAngle(civilDawn, zone) else 255f
+        val cduskAngle = if (civilDusk > 0) epochToDialAngle(civilDusk, zone) else 105f
+        val ndawnAngle = if (nauticalDawn > 0) epochToDialAngle(nauticalDawn, zone) else 240f
+        val nduskAngle = if (nauticalDusk > 0) epochToDialAngle(nauticalDusk, zone) else 120f
+        val adawnAngle = if (astroDawn > 0) epochToDialAngle(astroDawn, zone) else 225f
+        val aduskAngle = if (astroDusk > 0) epochToDialAngle(astroDusk, zone) else 135f
+
         return SolarData(
             sunriseEpoch = sunrise,
             sunsetEpoch = sunset,
@@ -108,7 +118,41 @@ object SolarCalculator {
             isDay = isDay,
             nextEventName = nextEvent.first,
             nextEventEpoch = nextEvent.second,
-            progressFraction = progress
+            progressFraction = progress,
+            sunriseAngle = srAngle,
+            sunsetAngle = ssAngle,
+            civilDawnAngle = cdawnAngle,
+            civilDuskAngle = cduskAngle,
+            nauticalDawnAngle = ndawnAngle,
+            nauticalDuskAngle = nduskAngle,
+            astroDawnAngle = adawnAngle,
+            astroDuskAngle = aduskAngle
+        )
+    }
+
+    fun epochToDialAngle(epochMillis: Long, zoneId: ZoneId = ZoneId.systemDefault()): Float {
+        if (epochMillis <= 0L) return 0f
+        val localTime = java.time.Instant.ofEpochMilli(epochMillis)
+            .atZone(zoneId)
+            .toLocalTime()
+        val hourDecimal = localTime.hour + localTime.minute / 60.0 + localTime.second / 3600.0
+        var angle = ((hourDecimal + 12.0) * 15.0) % 360.0
+        if (angle < 0.0) angle += 360.0
+        return angle.toFloat()
+    }
+
+    fun formatAnglesForComplication(solar: SolarData, nextEventName: String): String {
+        val ss = (solar.sunsetAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val cdusk = (solar.civilDuskAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val ndusk = (solar.nauticalDuskAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val adusk = (solar.astroDuskAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val adawn = (solar.astroDawnAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val ndawn = (solar.nauticalDawnAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val cdawn = (solar.civilDawnAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val sr = (solar.sunriseAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+
+        return "\uFEFF%03d%03d%03d%03d%03d%03d%03d%03d %s".format(
+            ss, cdusk, ndusk, adusk, adawn, ndawn, cdawn, sr, nextEventName.uppercase()
         )
     }
 

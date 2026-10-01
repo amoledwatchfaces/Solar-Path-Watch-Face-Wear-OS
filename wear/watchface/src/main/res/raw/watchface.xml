@@ -11,41 +11,176 @@
             </Rectangle>
         </PartDraw>
 
-        <!-- 24-Hour Solar Path Ring -->
-        <!-- Night / Astronomical Twilight Arc (Lower Half) -->
-        <PartDraw width="450" height="450" x="0" y="0">
-            <Variant mode="AMBIENT" target="alpha" value="100"/>
-            <!-- Night Arc: 45 to 135 deg (around 6 o'clock midnight) -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="45" endAngle="135">
-                <Stroke color="#0c1427" thickness="36" cap="BUTT"/>
-            </Arc>
-            <!-- Nautical Twilight Arcs: 30 to 45 deg, and 135 to 150 deg -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="30" endAngle="45">
-                <Stroke color="#1e2d5a" thickness="36" cap="BUTT"/>
-            </Arc>
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="135" endAngle="150">
-                <Stroke color="#1e2d5a" thickness="36" cap="BUTT"/>
-            </Arc>
-            <!-- Civil Twilight (Dawn/Dusk) Arcs: 15 to 30 deg, and 150 to 165 deg -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="15" endAngle="30">
-                <Stroke color="#e65100" thickness="36" cap="BUTT"/>
-            </Arc>
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="150" endAngle="165">
-                <Stroke color="#e65100" thickness="36" cap="BUTT"/>
-            </Arc>
-            <!-- Daylight Arc (Upper portion: 165 to 15 deg through 270 noon) -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="165" endAngle="15">
-                <Stroke color="#1976d2" thickness="36" cap="BUTT"/>
-            </Arc>
-            <!-- Outer Ring Border -->
-            <Arc centerX="225" centerY="225" width="408" height="408" startAngle="0" endAngle="360">
-                <Stroke color="#37474f" thickness="2" cap="ROUND"/>
-            </Arc>
-            <!-- Inner Ring Border -->
-            <Arc centerX="225" centerY="225" width="332" height="332" startAngle="0" endAngle="360">
-                <Stroke color="#263238" thickness="2" cap="ROUND"/>
-            </Arc>
-        </PartDraw>
+        <!-- Complication Slot 0: Solar Dial & Complication Provider -->
+        <ComplicationSlot slotId="0"
+            supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY"
+            width="450"
+            height="450"
+            x="0"
+            y="0">
+            <DefaultProviderPolicy
+                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
+                primaryProviderType="SHORT_TEXT"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="SHORT_TEXT"/>
+            <BoundingBox x="155" y="262" width="140" height="50"/>
+
+            <Complication type="SHORT_TEXT">
+                <!-- 24-Hour Solar Path Ring -->
+                <Condition>
+                    <Expressions>
+                        <Expression name="hasSolar">subText([COMPLICATION.TITLE], 0, 1) == &quot;﻿&quot;</Expression>
+                    </Expressions>
+                    <Compare expression="hasSolar">
+                        <PartDraw width="450" height="450" x="0" y="0">
+                            <Variant mode="AMBIENT" target="alpha" value="100"/>
+                            <!-- 1. Civil Dusk: ss -> cdusk -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
+                                <Transform target="startAngle" value="round(subText([COMPLICATION.TITLE], 1, 4))"/>
+                                <Transform target="endAngle" value="round(subText([COMPLICATION.TITLE], 4, 7))"/>
+                                <Stroke color="#e65100" thickness="36" cap="BUTT"/>
+                            </Arc>
+                            <!-- 2. Nautical Dusk: cdusk -> ndusk -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
+                                <Transform target="startAngle" value="round(subText([COMPLICATION.TITLE], 4, 7))"/>
+                                <Transform target="endAngle" value="round(subText([COMPLICATION.TITLE], 7, 10))"/>
+                                <Stroke color="#1e2d5a" thickness="36" cap="BUTT"/>
+                            </Arc>
+                            <!-- 3. Astro Dusk: ndusk -> adusk -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
+                                <Transform target="startAngle" value="round(subText([COMPLICATION.TITLE], 7, 10))"/>
+                                <Transform target="endAngle" value="round(subText([COMPLICATION.TITLE], 10, 13))"/>
+                                <Stroke color="#101935" thickness="36" cap="BUTT"/>
+                            </Arc>
+                            <!-- 4. Night: adusk -> adawn (through 180 midnight) -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
+                                <Transform target="startAngle" value="round(subText([COMPLICATION.TITLE], 10, 13))"/>
+                                <Transform target="endAngle" value="round(subText([COMPLICATION.TITLE], 13, 16))"/>
+                                <Stroke color="#080d1a" thickness="36" cap="BUTT"/>
+                            </Arc>
+                            <!-- 5. Astro Dawn: adawn -> ndawn -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
+                                <Transform target="startAngle" value="round(subText([COMPLICATION.TITLE], 13, 16))"/>
+                                <Transform target="endAngle" value="round(subText([COMPLICATION.TITLE], 16, 19))"/>
+                                <Stroke color="#101935" thickness="36" cap="BUTT"/>
+                            </Arc>
+                            <!-- 6. Nautical Dawn: ndawn -> cdawn -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
+                                <Transform target="startAngle" value="round(subText([COMPLICATION.TITLE], 16, 19))"/>
+                                <Transform target="endAngle" value="round(subText([COMPLICATION.TITLE], 19, 22))"/>
+                                <Stroke color="#1e2d5a" thickness="36" cap="BUTT"/>
+                            </Arc>
+                            <!-- 7. Civil Dawn: cdawn -> sr -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
+                                <Transform target="startAngle" value="round(subText([COMPLICATION.TITLE], 19, 22))"/>
+                                <Transform target="endAngle" value="round(subText([COMPLICATION.TITLE], 22, 25))"/>
+                                <Stroke color="#e65100" thickness="36" cap="BUTT"/>
+                            </Arc>
+                            <!-- 8. Daylight: sr -> ss (through 0 noon) -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
+                                <Transform target="startAngle" value="round(subText([COMPLICATION.TITLE], 22, 25))"/>
+                                <Transform target="endAngle" value="round(subText([COMPLICATION.TITLE], 1, 4))"/>
+                                <Stroke color="#1976d2" thickness="36" cap="BUTT"/>
+                            </Arc>
+                        </PartDraw>
+                    </Compare>
+                    <Default>
+                        <PartDraw width="450" height="450" x="0" y="0">
+                            <Variant mode="AMBIENT" target="alpha" value="100"/>
+                            <!-- Default Arcs when solar complication is not active -->
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="90" endAngle="105"><Stroke color="#e65100" thickness="36" cap="BUTT"/></Arc>
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="105" endAngle="120"><Stroke color="#1e2d5a" thickness="36" cap="BUTT"/></Arc>
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="120" endAngle="135"><Stroke color="#101935" thickness="36" cap="BUTT"/></Arc>
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="135" endAngle="225"><Stroke color="#080d1a" thickness="36" cap="BUTT"/></Arc>
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="225" endAngle="240"><Stroke color="#101935" thickness="36" cap="BUTT"/></Arc>
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="240" endAngle="255"><Stroke color="#1e2d5a" thickness="36" cap="BUTT"/></Arc>
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="255" endAngle="270"><Stroke color="#e65100" thickness="36" cap="BUTT"/></Arc>
+                            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="270" endAngle="90"><Stroke color="#1976d2" thickness="36" cap="BUTT"/></Arc>
+                        </PartDraw>
+                    </Default>
+                </Condition>
+                <!-- Ring Borders -->
+                <PartDraw width="450" height="450" x="0" y="0">
+                    <Arc centerX="225" centerY="225" width="408" height="408" startAngle="0" endAngle="360">
+                        <Stroke color="#37474f" thickness="2" cap="ROUND"/>
+                    </Arc>
+                    <Arc centerX="225" centerY="225" width="332" height="332" startAngle="0" endAngle="360">
+                        <Stroke color="#263238" thickness="2" cap="ROUND"/>
+                    </Arc>
+                </PartDraw>
+
+                <!-- Center Text Area -->
+                <Group name="comp0_group" width="140" height="50" x="155" y="262">
+                    <PartText width="140" height="24" x="0" y="2">
+                        <Text align="CENTER">
+                            <Font family="SYNC_TO_DEVICE" size="13" color="#ffb74d" weight="BOLD">
+                                <Template>%s
+                                    <Parameter expression="subText([COMPLICATION.TITLE], 0, 1) == &quot;﻿&quot; ? subText([COMPLICATION.TITLE], 26, textLength([COMPLICATION.TITLE])) : [COMPLICATION.TITLE]"/>
+                                </Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                    <PartText width="140" height="24" x="0" y="24">
+                        <Text align="CENTER">
+                            <Font family="SYNC_TO_DEVICE" size="15" color="#ffffff" weight="SEMI_BOLD">
+                                <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Complication>
+
+            <Complication type="RANGED_VALUE">
+                <!-- 24-Hour Solar Path Ring -->
+                <PartDraw width="450" height="450" x="0" y="0">
+                    <Variant mode="AMBIENT" target="alpha" value="100"/>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="90" endAngle="105"><Stroke color="#e65100" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="105" endAngle="120"><Stroke color="#1e2d5a" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="120" endAngle="135"><Stroke color="#101935" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="135" endAngle="225"><Stroke color="#080d1a" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="225" endAngle="240"><Stroke color="#101935" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="240" endAngle="255"><Stroke color="#1e2d5a" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="255" endAngle="270"><Stroke color="#e65100" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="270" endAngle="90"><Stroke color="#1976d2" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="408" height="408" startAngle="0" endAngle="360"><Stroke color="#37474f" thickness="2" cap="ROUND"/></Arc>
+                    <Arc centerX="225" centerY="225" width="332" height="332" startAngle="0" endAngle="360"><Stroke color="#263238" thickness="2" cap="ROUND"/></Arc>
+                </PartDraw>
+                <Group name="comp0_rv_group" width="140" height="50" x="155" y="262">
+                    <PartText width="140" height="24" x="0" y="4">
+                        <Text align="CENTER">
+                            <Font family="SYNC_TO_DEVICE" size="14" color="#ffffff" weight="SEMI_BOLD">
+                                <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                    <PartDraw width="100" height="6" x="20" y="32">
+                        <RoundRectangle width="100" height="6" x="0" y="0" cornerRadiusX="3" cornerRadiusY="3">
+                            <Fill color="#37474f"/>
+                        </RoundRectangle>
+                        <RoundRectangle width="100" height="6" x="0" y="0" cornerRadiusX="3" cornerRadiusY="3">
+                            <Transform target="width" value="100 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0, 1)"/>
+                            <Fill color="#ffb74d"/>
+                        </RoundRectangle>
+                    </PartDraw>
+                </Group>
+            </Complication>
+
+            <Complication type="EMPTY">
+                <PartDraw width="450" height="450" x="0" y="0">
+                    <Variant mode="AMBIENT" target="alpha" value="100"/>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="90" endAngle="105"><Stroke color="#e65100" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="105" endAngle="120"><Stroke color="#1e2d5a" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="120" endAngle="135"><Stroke color="#101935" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="135" endAngle="225"><Stroke color="#080d1a" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="225" endAngle="240"><Stroke color="#101935" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="240" endAngle="255"><Stroke color="#1e2d5a" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="255" endAngle="270"><Stroke color="#e65100" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="370" height="370" startAngle="270" endAngle="90"><Stroke color="#1976d2" thickness="36" cap="BUTT"/></Arc>
+                    <Arc centerX="225" centerY="225" width="408" height="408" startAngle="0" endAngle="360"><Stroke color="#37474f" thickness="2" cap="ROUND"/></Arc>
+                    <Arc centerX="225" centerY="225" width="332" height="332" startAngle="0" endAngle="360"><Stroke color="#263238" thickness="2" cap="ROUND"/></Arc>
+                </PartDraw>
+            </Complication>
+        </ComplicationSlot>
 
         <!-- Horizon Line Dividing Day & Twilight/Night -->
         <PartDraw width="450" height="450" x="0" y="0">
@@ -133,59 +268,6 @@
             </Text>
         </PartText>
 
-        <!-- Complication Slot 0: Top Solar Info (Next Event, Sun status) -->
-        <ComplicationSlot slotId="0"
-            supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY"
-            width="140"
-            height="50"
-            x="155"
-            y="262">
-            <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
-                primaryProviderType="SHORT_TEXT"
-                defaultSystemProvider="WATCH_BATTERY"
-                defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingBox x="0" y="0" width="140" height="50"/>
-            <Complication type="SHORT_TEXT">
-                <Group name="comp0_group" width="140" height="50" x="0" y="0">
-                    <PartText width="140" height="24" x="0" y="2">
-                        <Text align="CENTER">
-                            <Font family="SYNC_TO_DEVICE" size="13" color="#ffb74d" weight="BOLD">
-                                <Template>%s<Parameter expression="[COMPLICATION.TITLE]"/></Template>
-                            </Font>
-                        </Text>
-                    </PartText>
-                    <PartText width="140" height="24" x="0" y="24">
-                        <Text align="CENTER">
-                            <Font family="SYNC_TO_DEVICE" size="15" color="#ffffff" weight="SEMI_BOLD">
-                                <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
-                            </Font>
-                        </Text>
-                    </PartText>
-                </Group>
-            </Complication>
-            <Complication type="RANGED_VALUE">
-                <Group name="comp0_rv_group" width="140" height="50" x="0" y="0">
-                    <PartText width="140" height="24" x="0" y="4">
-                        <Text align="CENTER">
-                            <Font family="SYNC_TO_DEVICE" size="14" color="#ffffff" weight="SEMI_BOLD">
-                                <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
-                            </Font>
-                        </Text>
-                    </PartText>
-                    <PartDraw width="100" height="6" x="20" y="32">
-                        <RoundRectangle width="100" height="6" x="0" y="0" cornerRadiusX="3" cornerRadiusY="3">
-                            <Fill color="#37474f"/>
-                        </RoundRectangle>
-                        <RoundRectangle width="100" height="6" x="0" y="0" cornerRadiusX="3" cornerRadiusY="3">
-                            <Transform target="width" value="100 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0, 1)"/>
-                            <Fill color="#ffb74d"/>
-                        </RoundRectangle>
-                    </PartDraw>
-                </Group>
-            </Complication>
-        </ComplicationSlot>
-
         <!-- Analog Hands -->
         <!-- Hour Hand -->
         <Group name="hour_hand" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
@@ -204,7 +286,7 @@
         <Group name="minute_hand" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
             <Transform target="angle" value="[MINUTE] * 6"/>
             <PartDraw width="450" height="450" x="0" y="0">
-                <RoundRectangle width="6" height="110" x="222" y="119" cornerRadiusX="3" cornerRadiusY="3">
+                <RoundRectangle width="6" height="106" x="222" y="123" cornerRadiusX="3" cornerRadiusY="3">
                     <Fill color="#ffffff"/>
                 </RoundRectangle>
                 <RoundRectangle width="4" height="24" x="223" y="225" cornerRadiusX="2" cornerRadiusY="2">
@@ -213,32 +295,35 @@
             </PartDraw>
         </Group>
 
-        <!-- Second Hand (Ambient Alpha 0) -->
+        <!-- Second Hand (Hidden in Ambient) -->
         <Group name="second_hand" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
             <Variant mode="AMBIENT" target="alpha" value="0"/>
             <Transform target="angle" value="[SECOND] * 6"/>
             <PartDraw width="450" height="450" x="0" y="0">
-                <Line startX="225" startY="255" endX="225" endY="102">
-                    <Stroke color="#ffb74d" thickness="2" cap="ROUND"/>
-                </Line>
+                <RoundRectangle width="2" height="125" x="224" y="105" cornerRadiusX="1" cornerRadiusY="1">
+                    <Fill color="#ff9800"/>
+                </RoundRectangle>
+                <RoundRectangle width="3" height="30" x="223.5" y="225" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                    <Fill color="#ff9800"/>
+                </RoundRectangle>
             </PartDraw>
-            <PartDraw width="10" height="10" x="220" y="250">
+            <!-- Counterbalance Circle -->
+            <PartDraw width="10" height="10" x="220" y="248">
                 <Ellipse width="10" height="10" x="0" y="0">
-                    <Fill color="#ffb74d"/>
+                    <Fill color="#ff9800"/>
                 </Ellipse>
             </PartDraw>
         </Group>
 
         <!-- Center Cap -->
-        <PartDraw width="14" height="14" x="218" y="218">
-            <Ellipse width="14" height="14" x="0" y="0">
-                <Fill color="#263238"/>
-                <Stroke color="#ffffff" thickness="2"/>
+        <PartDraw width="12" height="12" x="219" y="219">
+            <Ellipse width="12" height="12" x="0" y="0">
+                <Fill color="#ffffff"/>
             </Ellipse>
         </PartDraw>
-        <PartDraw width="4" height="4" x="223" y="223">
-            <Ellipse width="4" height="4" x="0" y="0">
-                <Fill color="#ffb74d"/>
+        <PartDraw width="6" height="6" x="222" y="222">
+            <Ellipse width="6" height="6" x="0" y="0">
+                <Fill color="#ff9800"/>
             </Ellipse>
         </PartDraw>
 

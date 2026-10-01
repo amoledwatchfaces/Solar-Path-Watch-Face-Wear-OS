@@ -40,62 +40,95 @@ fun SolarDialView(
             val arcSize = Size(outerRadius * 2, outerRadius * 2)
             val arcTopLeft = Offset(center.x - outerRadius, center.y - outerRadius)
 
-            // Night Arc (bottom 45..135 deg in Canvas coordinate system)
+            fun toCanvas(dialAngle: Float): Float = (dialAngle - 90f + 360f) % 360f
+            fun sweep(start: Float, end: Float): Float {
+                var s = (end - start) % 360f
+                if (s <= 0f) s += 360f
+                return s
+            }
+
+            // 1. Full Night (deep midnight)
             drawArc(
-                color = Color(0xFF0C1427),
-                startAngle = 45f,
-                sweepAngle = 90f,
+                color = Color(0xFF080D1A),
+                startAngle = toCanvas(solarData.astroDuskAngle),
+                sweepAngle = sweep(solarData.astroDuskAngle, solarData.astroDawnAngle),
                 useCenter = false,
                 topLeft = arcTopLeft,
                 size = arcSize,
                 style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
             )
 
-            // Nautical Twilight (30..45 and 135..150)
+            // 2. Astronomical Twilight Dusk
+            drawArc(
+                color = Color(0xFF101935),
+                startAngle = toCanvas(solarData.nauticalDuskAngle),
+                sweepAngle = sweep(solarData.nauticalDuskAngle, solarData.astroDuskAngle),
+                useCenter = false,
+                topLeft = arcTopLeft,
+                size = arcSize,
+                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
+            )
+
+            // 3. Astronomical Twilight Dawn
+            drawArc(
+                color = Color(0xFF101935),
+                startAngle = toCanvas(solarData.astroDawnAngle),
+                sweepAngle = sweep(solarData.astroDawnAngle, solarData.nauticalDawnAngle),
+                useCenter = false,
+                topLeft = arcTopLeft,
+                size = arcSize,
+                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
+            )
+
+            // 4. Nautical Twilight Dusk
             drawArc(
                 color = Color(0xFF1E2D5A),
-                startAngle = 30f,
-                sweepAngle = 15f,
+                startAngle = toCanvas(solarData.civilDuskAngle),
+                sweepAngle = sweep(solarData.civilDuskAngle, solarData.nauticalDuskAngle),
                 useCenter = false,
                 topLeft = arcTopLeft,
                 size = arcSize,
                 style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
             )
+
+            // 5. Nautical Twilight Dawn
             drawArc(
                 color = Color(0xFF1E2D5A),
-                startAngle = 135f,
-                sweepAngle = 15f,
+                startAngle = toCanvas(solarData.nauticalDawnAngle),
+                sweepAngle = sweep(solarData.nauticalDawnAngle, solarData.civilDawnAngle),
                 useCenter = false,
                 topLeft = arcTopLeft,
                 size = arcSize,
                 style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
             )
 
-            // Civil Twilight (15..30 and 150..165)
+            // 6. Civil Twilight Dusk
             drawArc(
                 color = Color(0xFFE65100),
-                startAngle = 15f,
-                sweepAngle = 15f,
-                useCenter = false,
-                topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
-            )
-            drawArc(
-                color = Color(0xFFE65100),
-                startAngle = 150f,
-                sweepAngle = 15f,
+                startAngle = toCanvas(solarData.sunsetAngle),
+                sweepAngle = sweep(solarData.sunsetAngle, solarData.civilDuskAngle),
                 useCenter = false,
                 topLeft = arcTopLeft,
                 size = arcSize,
                 style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
             )
 
-            // Daylight Arc (upper portion: 165..375 / 165 to 15 through -90)
+            // 7. Civil Twilight Dawn
+            drawArc(
+                color = Color(0xFFE65100),
+                startAngle = toCanvas(solarData.civilDawnAngle),
+                sweepAngle = sweep(solarData.civilDawnAngle, solarData.sunriseAngle),
+                useCenter = false,
+                topLeft = arcTopLeft,
+                size = arcSize,
+                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
+            )
+
+            // 8. Daylight (vibrant solar sky blue)
             drawArc(
                 color = Color(0xFF1976D2),
-                startAngle = 165f,
-                sweepAngle = 210f,
+                startAngle = toCanvas(solarData.sunriseAngle),
+                sweepAngle = sweep(solarData.sunriseAngle, solarData.sunsetAngle),
                 useCenter = false,
                 topLeft = arcTopLeft,
                 size = arcSize,

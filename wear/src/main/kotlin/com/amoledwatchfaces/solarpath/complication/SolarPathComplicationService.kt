@@ -18,6 +18,7 @@ import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.data.UserPreferencesRepository
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
+import com.amoledwatchfaces.solarpath.solar.SolarData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import java.time.Instant
@@ -45,13 +46,16 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
 
     override fun getPreviewData(type: ComplicationType): ComplicationData? {
         val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.ic_sun)).build()
+        val sampleSolar = SolarData()
+        val previewTitle = SolarCalculator.formatAnglesForComplication(sampleSolar, "SUNSET")
+
         return when (type) {
             ComplicationType.SHORT_TEXT -> {
                 ShortTextComplicationData.Builder(
                     text = PlainComplicationText.Builder("18:42").build(),
                     contentDescription = PlainComplicationText.Builder("Sunset 18:42").build()
                 )
-                    .setTitle(PlainComplicationText.Builder("SUN").build())
+                    .setTitle(PlainComplicationText.Builder(previewTitle).build())
                     .setMonochromaticImage(sunIcon)
                     .setTapAction(null)
                     .build()
@@ -64,7 +68,7 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
                     contentDescription = PlainComplicationText.Builder("Solar progress").build()
                 )
                     .setText(PlainComplicationText.Builder("18:42").build())
-                    .setTitle(PlainComplicationText.Builder("SUN").build())
+                    .setTitle(PlainComplicationText.Builder(previewTitle).build())
                     .setMonochromaticImage(sunIcon)
                     .setTapAction(null)
                     .build()
@@ -106,13 +110,15 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
         val mins = solar.daylightDurationMinutes % 60
         val daylightText = "${hours}h ${mins}m"
 
+        val formattedTitle = SolarCalculator.formatAnglesForComplication(solar, titleText)
+
         return when (request.complicationType) {
             ComplicationType.SHORT_TEXT -> {
                 ShortTextComplicationData.Builder(
                     text = PlainComplicationText.Builder(eventTimeText).build(),
                     contentDescription = PlainComplicationText.Builder("$titleText $eventTimeText").build()
                 )
-                    .setTitle(PlainComplicationText.Builder(titleText).build())
+                    .setTitle(PlainComplicationText.Builder(formattedTitle).build())
                     .setMonochromaticImage(sunIcon)
                     .setTapAction(tapAction)
                     .build()
@@ -125,7 +131,7 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
                     contentDescription = PlainComplicationText.Builder("$titleText $eventTimeText").build()
                 )
                     .setText(PlainComplicationText.Builder(eventTimeText).build())
-                    .setTitle(PlainComplicationText.Builder(titleText).build())
+                    .setTitle(PlainComplicationText.Builder(formattedTitle).build())
                     .setMonochromaticImage(sunIcon)
                     .setTapAction(tapAction)
                     .build()

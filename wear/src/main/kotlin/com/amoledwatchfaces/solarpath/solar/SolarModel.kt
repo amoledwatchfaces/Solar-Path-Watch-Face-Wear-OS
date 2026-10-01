@@ -17,7 +17,16 @@ data class SolarData(
     val isDay: Boolean = false,
     val nextEventName: String = "Sunrise",
     val nextEventEpoch: Long = 0L,
-    val progressFraction: Float = 0f
+    val progressFraction: Float = 0f,
+    // Exact 24-hour dial angles in degrees (0..360, 0 = Solar Noon / 12:00 at top)
+    val sunriseAngle: Float = 270f,
+    val sunsetAngle: Float = 90f,
+    val civilDawnAngle: Float = 255f,
+    val civilDuskAngle: Float = 105f,
+    val nauticalDawnAngle: Float = 240f,
+    val nauticalDuskAngle: Float = 120f,
+    val astroDawnAngle: Float = 225f,
+    val astroDuskAngle: Float = 135f
 )
 
 enum class SolarPhase {
