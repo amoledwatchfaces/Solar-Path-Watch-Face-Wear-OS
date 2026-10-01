@@ -1,0 +1,32 @@
+# Handle line endings automatically for files detected as text
+# and leave binary files untouched.
+* text=auto eol=lf
+
+# Force LF for text-based source files
+*.kt text eol=lf
+*.java text eol=lf
+*.xml text eol=lf
+*.gradle text eol=lf
+*.gradle.kts text eol=lf
+*.properties text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Force CRLF for Windows batch files
+*.bat text eol=crlf
+
+# Treat binary files correctly
+*.png binary
+*.webp binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.jar binary
+*.aar binary
+*.apk binary
+*.aab binary
+*.jks binary

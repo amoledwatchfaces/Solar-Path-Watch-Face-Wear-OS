@@ -1,0 +1,32 @@
+# Built artifacts
+bin/
+gen/
+out/
+build/
+.gradle/
+.kotlin/
+**/build/
+**/release/
+*.apk
+*.aab
+
+# Keystore files
+*.jks
+*.keystore
+*.p12
+
+# Local configuration files
+.idea/
+local.properties
+*.iml
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Crashlytics/Firebase properties
+crashlytics.properties
+crashlytics-build.properties

@@ -1,0 +1,335 @@
+@file:Suppress("UnstableApiUsage")
+package com.amoledwatchfaces.solarpath.presentation
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.WbSunny
+import androidx.compose.material.icons.filled.WatchLater
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.wear.compose.foundation.lazy.TransformingLazyColumn
+import androidx.wear.compose.foundation.lazy.TransformingLazyColumnState
+import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
+import androidx.wear.compose.foundation.rotary.rotaryScrollable
+import androidx.wear.compose.material3.Button
+import androidx.wear.compose.material3.ButtonDefaults
+import androidx.wear.compose.material3.Card
+import androidx.wear.compose.material3.CardDefaults
+import androidx.wear.compose.material3.CircularProgressIndicator
+import androidx.wear.compose.material3.FilledTonalButton
+import androidx.wear.compose.material3.Icon
+import androidx.wear.compose.material3.ListSubHeader
+import androidx.wear.compose.material3.MaterialTheme
+import androidx.wear.compose.material3.ProgressIndicatorDefaults
+import androidx.wear.compose.material3.ScreenScaffold
+import androidx.wear.compose.material3.SurfaceTransformation
+import androidx.wear.compose.material3.SwitchButton
+import androidx.wear.compose.material3.Text
+import androidx.wear.compose.material3.lazy.TransformationSpec
+import androidx.wear.compose.material3.lazy.transformedHeight
+import com.amoledwatchfaces.solarpath.R
+import com.amoledwatchfaces.solarpath.presentation.ui.SolarDialView
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+
+@Composable
+fun MainScreen(
+    navController: NavHostController,
+    viewModel: MainViewModel,
+    transformationSpec: TransformationSpec,
+    focusRequester: FocusRequester,
+    listState: TransformingLazyColumnState
+) {
+    val preferences by viewModel.preferences.collectAsState()
+    val solarData by viewModel.solarData.collectAsState()
+    val isLoading by viewModel.loaderState.collectAsState()
+    val isWatchFaceActive by viewModel.isWatchFaceActive.collectAsState()
+
+    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+        .withZone(ZoneId.systemDefault())
+
+    fun formatEpoch(epoch: Long): String {
+        return if (epoch > 0) timeFormatter.format(Instant.ofEpochMilli(epoch)) else "- -"
+    }
+
+    ScreenScaffold(
+        scrollState = listState
+    ) { paddingValues ->
+        TransformingLazyColumn(
+            contentPadding = paddingValues,
+            modifier = Modifier
+                .fillMaxSize()
+                .rotaryScrollable(
+                    RotaryScrollableDefaults.behavior(scrollableState = listState),
+                    focusRequester = focusRequester
+                ),
+            state = listState,
+        ) {
+            // Solar Dial Visual
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    SolarDialView(solarData = solarData)
+                }
+            }
+
+            // Next Event / Current Solar Status
+            item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = solarData.nextEventName.uppercase(),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.tertiary
+                    )
+                    Text(
+                        text = formatEpoch(solarData.nextEventEpoch),
+                        style = MaterialTheme.typography.displayMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "${String.format(Locale.getDefault(), "%.1f", solarData.sunElevation)}° elevation • ${solarData.daylightDurationMinutes / 60}h ${solarData.daylightDurationMinutes % 60}m day",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            // Push Watch Face Button
+            item {
+                Button(
+                    colors = if (isWatchFaceActive) {
+                        ButtonDefaults.filledTonalButtonColors()
+                    } else {
+                        ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = { viewModel.pushDefaultWatchFace() },
+                    icon = {
+                        Icon(
+                            imageVector = if (isWatchFaceActive) Icons.Default.Check else Icons.Default.WatchLater,
+                            contentDescription = "Watch Face",
+                            tint = if (isWatchFaceActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = if (isWatchFaceActive) stringResource(R.string.watch_face_active) else stringResource(R.string.push_watch_face),
+                            color = if (isWatchFaceActive) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                )
+            }
+
+            // Location Header & Chip
+            item {
+                ListSubHeader(
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.secondary,
+                            text = stringResource(R.string.location),
+                            style = MaterialTheme.typography.labelMedium
+                        )
+                    }
+                )
+            }
+
+            item {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = { navController.navigate("location_choose") },
+                    icon = {
+                        Image(
+                            imageVector = Icons.Default.LocationOn,
+                            contentDescription = "Location",
+                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary)
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = preferences.locationName,
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                    },
+                    secondaryLabel = {
+                        if (preferences.locationSubName.isNotEmpty()) {
+                            Text(
+                                text = preferences.locationSubName,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                )
+            }
+
+            // Background Location Toggle
+            item {
+                SwitchButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    checked = preferences.backgroundLocationState,
+                    onCheckedChange = { viewModel.setBackgroundLocation(it) },
+                    label = { Text(stringResource(R.string.background_location)) },
+                    secondaryLabel = { Text("${preferences.backgroundLocationRepeatInterval} min") }
+                )
+            }
+
+            // Solar Times Breakdown
+            item {
+                ListSubHeader(
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.secondary,
+                            text = "SOLAR TIMES",
+                            style = MaterialTheme.typography.labelMedium
+                        )
+                    }
+                )
+            }
+
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 4.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                    shape = RoundedCornerShape(16.dp),
+                    onClick = {}
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        SolarTimeRow(name = stringResource(R.string.sunrise), time = formatEpoch(solarData.sunriseEpoch), color = Color(0xFFFFB74D))
+                        SolarTimeRow(name = stringResource(R.string.solar_noon), time = formatEpoch(solarData.solarNoonEpoch), color = Color(0xFFFFD54F))
+                        SolarTimeRow(name = stringResource(R.string.sunset), time = formatEpoch(solarData.sunsetEpoch), color = Color(0xFFFF7043))
+                        SolarTimeRow(name = stringResource(R.string.civil_dusk), time = formatEpoch(solarData.civilDuskEpoch), color = Color(0xFFE65100))
+                        SolarTimeRow(name = stringResource(R.string.nautical_dusk), time = formatEpoch(solarData.nauticalDuskEpoch), color = Color(0xFF5C6BC0))
+                        SolarTimeRow(name = stringResource(R.string.astro_dusk), time = formatEpoch(solarData.astroDuskEpoch), color = Color(0xFF283593))
+                        SolarTimeRow(name = stringResource(R.string.solar_midnight), time = formatEpoch(solarData.solarNadirEpoch), color = Color(0xFF90CAF9))
+                    }
+                }
+            }
+
+            item {
+                Spacer(
+                    Modifier
+                        .fillMaxWidth()
+                        .height(24.dp)
+                )
+            }
+        }
+
+        if (isLoading) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(0.18f)
+                        .clip(CircleShape)
+                        .background(Color.Black),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(30.dp),
+                        colors = ProgressIndicatorDefaults.colors(trackColor = Color.DarkGray),
+                        strokeWidth = 4.dp,
+                        gapSize = 6.dp
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SolarTimeRow(
+    name: String,
+    time: String,
+    color: Color
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(8.dp)
+                    .clip(CircleShape)
+                    .background(color)
+            )
+            Text(
+                text = name,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+        Text(
+            text = time,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
+}

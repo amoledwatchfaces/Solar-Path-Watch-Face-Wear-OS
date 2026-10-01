@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WatchFace width="450" height="450">
+    <Metadata key="CLOCK_TYPE" value="ANALOG"/>
+    <Metadata key="PREVIEW_TIME" value="10:08:32"/>
+
+    <Scene>
+        <!-- Background -->
+        <PartDraw width="450" height="450" x="0" y="0">
+            <Rectangle width="450" height="450" x="0" y="0">
+                <Fill color="#000000"/>
+            </Rectangle>
+        </PartDraw>
+
+        <!-- 24-Hour Solar Path Ring -->
+        <!-- Night / Astronomical Twilight Arc (Lower Half) -->
+        <PartDraw width="450" height="450" x="0" y="0">
+            <Variant mode="AMBIENT" target="alpha" value="100"/>
+            <!-- Night Arc: 45 to 135 deg (around 6 o'clock midnight) -->
+            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="45" endAngle="135">
+                <Stroke color="#0c1427" thickness="36" cap="BUTT"/>
+            </Arc>
+            <!-- Nautical Twilight Arcs: 30 to 45 deg, and 135 to 150 deg -->
+            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="30" endAngle="45">
+                <Stroke color="#1e2d5a" thickness="36" cap="BUTT"/>
+            </Arc>
+            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="135" endAngle="150">
+                <Stroke color="#1e2d5a" thickness="36" cap="BUTT"/>
+            </Arc>
+            <!-- Civil Twilight (Dawn/Dusk) Arcs: 15 to 30 deg, and 150 to 165 deg -->
+            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="15" endAngle="30">
+                <Stroke color="#e65100" thickness="36" cap="BUTT"/>
+            </Arc>
+            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="150" endAngle="165">
+                <Stroke color="#e65100" thickness="36" cap="BUTT"/>
+            </Arc>
+            <!-- Daylight Arc (Upper portion: 165 to 15 deg through 270 noon) -->
+            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="165" endAngle="15">
+                <Stroke color="#1976d2" thickness="36" cap="BUTT"/>
+            </Arc>
+            <!-- Outer Ring Border -->
+            <Arc centerX="225" centerY="225" width="408" height="408" startAngle="0" endAngle="360">
+                <Stroke color="#37474f" thickness="2" cap="ROUND"/>
+            </Arc>
+            <!-- Inner Ring Border -->
+            <Arc centerX="225" centerY="225" width="332" height="332" startAngle="0" endAngle="360">
+                <Stroke color="#263238" thickness="2" cap="ROUND"/>
+            </Arc>
+        </PartDraw>
+
+        <!-- Horizon Line Dividing Day & Twilight/Night -->
+        <PartDraw width="450" height="450" x="0" y="0">
+            <Variant mode="AMBIENT" target="alpha" value="120"/>
+            <Line startX="20" startY="225" endX="430" endY="225">
+                <Stroke color="#78909c" thickness="1" dashIntervals="4 4"/>
+            </Line>
+        </PartDraw>
+
+        <!-- 24-Hour Markers (12 Noon Top, 24 Midnight Bottom, 6 Sunrise Left, 18 Sunset Right) -->
+        <PartText width="60" height="24" x="195" y="14">
+            <Text><Font family="SYNC_TO_DEVICE" size="14" color="#ffffff" weight="BOLD">12</Font></Text>
+        </PartText>
+        <PartText width="60" height="24" x="408" y="213">
+            <Text><Font family="SYNC_TO_DEVICE" size="14" color="#ffb74d" weight="BOLD">18</Font></Text>
+        </PartText>
+        <PartText width="60" height="24" x="195" y="412">
+            <Text><Font family="SYNC_TO_DEVICE" size="14" color="#90caf9" weight="BOLD">24</Font></Text>
+        </PartText>
+        <PartText width="60" height="24" x="-18" y="213">
+            <Text><Font family="SYNC_TO_DEVICE" size="14" color="#ffb74d" weight="BOLD">6</Font></Text>
+        </PartText>
+
+        <!-- Sun Orbiting Marker: Rotates at 15 deg per hour, noon at top (0 deg) -->
+        <Group name="solar_track" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
+            <Transform target="angle" value="([HOUR_0_23_MINUTE] + 12) * 15 % 360"/>
+            <!-- Sun Beam Line -->
+            <PartDraw width="450" height="450" x="0" y="0">
+                <Variant mode="AMBIENT" target="alpha" value="0"/>
+                <Line startX="225" startY="225" endX="225" endY="40">
+                    <Stroke color="#8Cffe082" thickness="1"/>
+                </Line>
+            </PartDraw>
+            <!-- Sun Halo Corona -->
+            <PartDraw width="34" height="34" x="208" y="23">
+                <Variant mode="AMBIENT" target="alpha" value="0"/>
+                <Ellipse width="34" height="34" x="0" y="0">
+                    <Fill color="#46ffb300"/>
+                </Ellipse>
+            </PartDraw>
+            <!-- Sun Core Disc -->
+            <PartDraw width="18" height="18" x="216" y="31">
+                <Ellipse width="18" height="18" x="0" y="0">
+                    <Fill color="#ffe082"/>
+                    <Stroke color="#ffffff" thickness="2"/>
+                </Ellipse>
+            </PartDraw>
+        </Group>
+
+        <!-- Inner 12-Hour Analog Subdial Background -->
+        <!-- Dial Surface -->
+        <PartDraw width="280" height="280" x="85" y="85">
+            <Ellipse width="280" height="280" x="0" y="0">
+                <Fill color="#0d1117"/>
+                <Stroke color="#30363d" thickness="2"/>
+            </Ellipse>
+        </PartDraw>
+
+        <PartDraw width="450" height="450" x="0" y="0">
+            <!-- 12 Hour Index Ticks -->
+            <!-- 12 -->
+            <Line startX="225" startY="95" endX="225" endY="108"><Stroke color="#ffffff" thickness="3"/></Line>
+            <!-- 3 -->
+            <Line startX="355" startY="225" endX="342" endY="225"><Stroke color="#ffffff" thickness="3"/></Line>
+            <!-- 6 -->
+            <Line startX="225" startY="355" endX="225" endY="342"><Stroke color="#ffffff" thickness="3"/></Line>
+            <!-- 9 -->
+            <Line startX="95" startY="225" endX="108" endY="225"><Stroke color="#ffffff" thickness="3"/></Line>
+            <!-- Subdial inner circle -->
+            <Arc centerX="225" centerY="225" width="180" height="180" startAngle="0" endAngle="360">
+                <Stroke color="#1f242c" thickness="1"/>
+            </Arc>
+        </PartDraw>
+
+        <!-- Date Display (Inside Subdial) -->
+        <PartText width="160" height="24" x="145" y="160">
+            <Variant mode="AMBIENT" target="alpha" value="160"/>
+            <Text>
+                <Font family="SYNC_TO_DEVICE" size="13" color="#90caf9" weight="SEMI_BOLD">
+                    <Template>%s %s
+                        <Parameter expression="[DAY_OF_WEEK_S]"/>
+                        <Parameter expression="[DAY_OF_MONTH]"/>
+                    </Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Complication Slot 0: Top Solar Info (Next Event, Sun status) -->
+        <ComplicationSlot slotId="0"
+            supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY"
+            width="140"
+            height="50"
+            x="155"
+            y="262">
+            <DefaultProviderPolicy
+                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
+                primaryProviderType="SHORT_TEXT"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="SHORT_TEXT"/>
+            <BoundingBox x="0" y="0" width="140" height="50"/>
+            <Complication type="SHORT_TEXT">
+                <Group name="comp0_group" width="140" height="50" x="0" y="0">
+                    <PartText width="140" height="24" x="0" y="2">
+                        <Text align="CENTER">
+                            <Font family="SYNC_TO_DEVICE" size="13" color="#ffb74d" weight="BOLD">
+                                <Template>%s<Parameter expression="[COMPLICATION.TITLE]"/></Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                    <PartText width="140" height="24" x="0" y="24">
+                        <Text align="CENTER">
+                            <Font family="SYNC_TO_DEVICE" size="15" color="#ffffff" weight="SEMI_BOLD">
+                                <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <Group name="comp0_rv_group" width="140" height="50" x="0" y="0">
+                    <PartText width="140" height="24" x="0" y="4">
+                        <Text align="CENTER">
+                            <Font family="SYNC_TO_DEVICE" size="14" color="#ffffff" weight="SEMI_BOLD">
+                                <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                    <PartDraw width="100" height="6" x="20" y="32">
+                        <RoundRectangle width="100" height="6" x="0" y="0" cornerRadiusX="3" cornerRadiusY="3">
+                            <Fill color="#37474f"/>
+                        </RoundRectangle>
+                        <RoundRectangle width="100" height="6" x="0" y="0" cornerRadiusX="3" cornerRadiusY="3">
+                            <Transform target="width" value="100 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0, 1)"/>
+                            <Fill color="#ffb74d"/>
+                        </RoundRectangle>
+                    </PartDraw>
+                </Group>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- Analog Hands -->
+        <!-- Hour Hand -->
+        <Group name="hour_hand" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
+            <Transform target="angle" value="[HOUR_0_11_MINUTE] * 30"/>
+            <PartDraw width="450" height="450" x="0" y="0">
+                <RoundRectangle width="8" height="76" x="221" y="153" cornerRadiusX="4" cornerRadiusY="4">
+                    <Fill color="#ffffff"/>
+                </RoundRectangle>
+                <RoundRectangle width="4" height="20" x="223" y="225" cornerRadiusX="2" cornerRadiusY="2">
+                    <Fill color="#b0bec5"/>
+                </RoundRectangle>
+            </PartDraw>
+        </Group>
+
+        <!-- Minute Hand -->
+        <Group name="minute_hand" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
+            <Transform target="angle" value="[MINUTE] * 6"/>
+            <PartDraw width="450" height="450" x="0" y="0">
+                <RoundRectangle width="6" height="110" x="222" y="119" cornerRadiusX="3" cornerRadiusY="3">
+                    <Fill color="#ffffff"/>
+                </RoundRectangle>
+                <RoundRectangle width="4" height="24" x="223" y="225" cornerRadiusX="2" cornerRadiusY="2">
+                    <Fill color="#b0bec5"/>
+                </RoundRectangle>
+            </PartDraw>
+        </Group>
+
+        <!-- Second Hand (Ambient Alpha 0) -->
+        <Group name="second_hand" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Transform target="angle" value="[SECOND] * 6"/>
+            <PartDraw width="450" height="450" x="0" y="0">
+                <Line startX="225" startY="255" endX="225" endY="102">
+                    <Stroke color="#ffb74d" thickness="2" cap="ROUND"/>
+                </Line>
+            </PartDraw>
+            <PartDraw width="10" height="10" x="220" y="250">
+                <Ellipse width="10" height="10" x="0" y="0">
+                    <Fill color="#ffb74d"/>
+                </Ellipse>
+            </PartDraw>
+        </Group>
+
+        <!-- Center Cap -->
+        <PartDraw width="14" height="14" x="218" y="218">
+            <Ellipse width="14" height="14" x="0" y="0">
+                <Fill color="#263238"/>
+                <Stroke color="#ffffff" thickness="2"/>
+            </Ellipse>
+        </PartDraw>
+        <PartDraw width="4" height="4" x="223" y="223">
+            <Ellipse width="4" height="4" x="0" y="0">
+                <Fill color="#ffb74d"/>
+            </Ellipse>
+        </PartDraw>
+
+    </Scene>
+</WatchFace>

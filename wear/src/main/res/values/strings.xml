@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Solar Path</string>
+    <string name="watch_face_name">Solar Path</string>
+    <string name="solar_path_comp_name">Solar Path</string>
+    
+    <!-- Watch Face Push -->
+    <string name="push_watch_face">Set Watch Face</string>
+    <string name="activating_watch_face">Activating watch face…</string>
+    <string name="watch_face_active">Solar Path is active</string>
+    <string name="status_manual_activation">Installed. Select from watch faces.</string>
+    <string name="wfp_not_supported">Watch Face Push not supported on this device.</string>
+
+    <!-- Location -->
+    <string name="set_location">Location</string>
+    <string name="locations">Locations</string>
+    <string name="search">Search</string>
+    <string name="location">Location</string>
+    <string name="current_location">Current Location</string>
+    <string name="recent">Recent</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="no_location">Location not available</string>
+    <string name="background_location">Background Location</string>
+    <string name="background_location_summary">Automatically update location periodically</string>
+    <string name="update_interval">Update Interval</string>
+    <string name="enable_permission_toast">Please grant location permission</string>
+
+    <!-- Solar & Astronomical Terms -->
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="solar_noon">Solar Noon</string>
+    <string name="solar_midnight">Solar Midnight</string>
+    <string name="civil_dawn">Civil Dawn</string>
+    <string name="civil_dusk">Civil Dusk</string>
+    <string name="nautical_dawn">Nautical Dawn</string>
+    <string name="nautical_dusk">Nautical Dusk</string>
+    <string name="astro_dawn">Astro Dawn</string>
+    <string name="astro_dusk">Astro Dusk</string>
+    <string name="daylight">Daylight</string>
+    <string name="night">Night</string>
+    <string name="elevation">Elevation</string>
+    <string name="azimuth">Azimuth</string>
+    <string name="open_app">Open Solar Path</string>
+</resources>
