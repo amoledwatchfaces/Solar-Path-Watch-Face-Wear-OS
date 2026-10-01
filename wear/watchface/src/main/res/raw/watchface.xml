@@ -113,12 +113,10 @@
                     </Fill>
                 </Rectangle>
             </PartDraw>
-            <!--
+
+            <!-- Orange Hue -->
             <PartDraw x="0" y="0" width="450" height="450">
                 <Transform target="angle" value="[REFERENCE.noon_angle]"/>
-                <Transform
-                    target="alpha"
-                    value="0+255*(clamp((      (clamp((([HOUR_0_23_MINUTE] + 12) * 15 % 360),0,180))            / [REFERENCE.cdusk_angle]           ),0.3,1))"/>
                 <Rectangle x="0" y="0" width="450" height="450">
                     <Fill color="#ffffff">
                         <LinearGradient
@@ -135,7 +133,6 @@
                     </Fill>
                 </Rectangle>
             </PartDraw>
-            -->
 
             <!-- Sun Halo -->
             <PartDraw name="sun_halo" width="200" height="200" x="125" y="10" pivotY="1.075">
@@ -472,7 +469,6 @@
                     <Fill color="#fffffd"/>
                 </Ellipse>
             </PartDraw>
-
             <!-- Sun Fill (Night) -->
             <Group name="sun_fill" width="30" height="30" x="210" y="95">
                 <PartDraw width="30" height="30" x="0" y="0" renderMode="ALL">

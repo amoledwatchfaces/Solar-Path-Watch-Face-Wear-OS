@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -46,7 +47,7 @@ fun SolarDialView(
             }
 
             // Stacked twilight layers matching watchface.xml:
-            // 0. Daylight = Background Layer
+            // 0. Base Daylight Layer
             drawCircle(
                 color = Color(0xFF1976D2),
                 radius = outerRadius,
@@ -93,6 +94,23 @@ fun SolarDialView(
                 size = arcSize
             )
 
+            // Hour tick marks around dial rim (matching watchface.xml hour_index)
+            for (hour in 0 until 12) {
+                val tickAngle = hour * 30f // every 2 hours
+                val tickRad = Math.toRadians((tickAngle - 90.0))
+                val innerR = outerRadius - 5.dp.toPx()
+                val startX = center.x + (innerR * cos(tickRad)).toFloat()
+                val startY = center.y + (innerR * sin(tickRad)).toFloat()
+                val endX = center.x + (outerRadius * cos(tickRad)).toFloat()
+                val endY = center.y + (outerRadius * sin(tickRad)).toFloat()
+                drawLine(
+                    color = Color.White.copy(alpha = 0.5f),
+                    start = Offset(startX, startY),
+                    end = Offset(endX, endY),
+                    strokeWidth = 1.2.dp.toPx()
+                )
+            }
+
             // Outer ring border
             drawCircle(
                 color = Color(0xFF37474F),
@@ -101,25 +119,16 @@ fun SolarDialView(
                 style = Stroke(width = 1.dp.toPx())
             )
 
-            // Horizon Line
-            drawLine(
-                color = Color(0xFF78909C),
-                start = Offset(center.x - outerRadius, center.y),
-                end = Offset(center.x + outerRadius, center.y),
-                strokeWidth = 1.dp.toPx(),
-                pathEffect = PathEffect.dashPathEffect(floatArrayOf(4f, 4f), 0f)
-            )
-
-            // Timeline Circle (matching watch face inner circle)
-            val timelineRadius = outerRadius * 0.51f
+            // Timeline Circle (matching watchface.xml: 230px on 450px face = radius factor 115/225 ≈ 0.511)
+            val timelineRadius = outerRadius * (115f / 225f)
             drawCircle(
-                color = Color.White.copy(alpha = 0.5f),
+                color = Color.White.copy(alpha = 125f / 255f),
                 radius = timelineRadius,
                 center = center,
-                style = Stroke(width = 1.dp.toPx())
+                style = Stroke(width = 1.2.dp.toPx())
             )
 
-            // Timeline Dots for all solar events
+            // Timeline Dots for all 10 solar events (matching watchface.xml: 8px on 450px face, #60ffffff)
             val eventAngles = listOf(
                 solarData.sunriseAngle,
                 solarData.sunsetAngle,
@@ -137,7 +146,7 @@ fun SolarDialView(
                 val dotX = center.x + (timelineRadius * cos(rad)).toFloat()
                 val dotY = center.y + (timelineRadius * sin(rad)).toFloat()
                 drawCircle(
-                    color = Color.White.copy(alpha = 0.5f),
+                    color = Color.White.copy(alpha = 0.38f),
                     radius = 2.dp.toPx(),
                     center = Offset(dotX, dotY)
                 )
@@ -148,39 +157,106 @@ fun SolarDialView(
             val sunX = center.x + (timelineRadius * cos(sunRad)).toFloat()
             val sunY = center.y + (timelineRadius * sin(sunRad)).toFloat()
 
-            // Ray to center
+            // Calculate Day vs Night state & transition factor for the sun disc
+            // Disc diameter on 450 face is 30px => ~15° angular width (±7.5° radius)
+            fun angularDist(a: Float, b: Float): Float {
+                val diff = kotlin.math.abs(a - b) % 360f
+                return if (diff > 180f) 360f - diff else diff
+            }
+
+            val isNightTime = if (solarData.sunsetAngle <= solarData.sunriseAngle) {
+                sunAngleDeg >= solarData.sunsetAngle && sunAngleDeg <= solarData.sunriseAngle
+            } else {
+                sunAngleDeg >= solarData.sunsetAngle || sunAngleDeg <= solarData.sunriseAngle
+            }
+
+            // Smooth transition over the 7.5° disc radius around sunset / sunrise
+            val transitionHalfWidth = 7.5f
+            val distToSunset = angularDist(sunAngleDeg, solarData.sunsetAngle)
+            val distToSunrise = angularDist(sunAngleDeg, solarData.sunriseAngle)
+            val daylightFactor = when {
+                distToSunset < transitionHalfWidth -> {
+                    // Sunset: sunAngleDeg crossing from < sunset to > sunset
+                    val signedOffset = (sunAngleDeg - solarData.sunsetAngle)
+                    (0.5f - (signedOffset / (2f * transitionHalfWidth))).coerceIn(0f, 1f)
+                }
+                distToSunrise < transitionHalfWidth -> {
+                    // Sunrise: sunAngleDeg crossing from < sunrise to > sunrise
+                    val signedOffset = (sunAngleDeg - solarData.sunriseAngle)
+                    (0.5f + (signedOffset / (2f * transitionHalfWidth))).coerceIn(0f, 1f)
+                }
+                isNightTime -> 0f
+                else -> 1f
+            }
+
+            // Sun Beam Line (matching watchface.xml: from center outward past sun marker, alpha 75/255 ≈ 0.29)
+            val beamEndR = outerRadius * (187f / 225f)
+            val beamEndX = center.x + (beamEndR * cos(sunRad)).toFloat()
+            val beamEndY = center.y + (beamEndR * sin(sunRad)).toFloat()
             drawLine(
-                color = Color(0xFFFFE082).copy(alpha = 0.55f),
+                color = Color.White.copy(alpha = 75f / 255f),
                 start = center,
-                end = Offset(sunX, sunY),
-                strokeWidth = 1.5.dp.toPx()
+                end = Offset(beamEndX, beamEndY),
+                strokeWidth = 1.2.dp.toPx()
             )
 
-            // Corona
+            // Sun Halo (Radial gradient matching watchface.xml sun_halo, fades at night)
+            if (daylightFactor > 0.01f) {
+                val haloOuterRadius = 36.dp.toPx()
+                drawCircle(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            Color(0xFFFFFFFD).copy(alpha = 0.31f * daylightFactor),
+                            Color.Transparent
+                        ),
+                        center = Offset(sunX, sunY),
+                        radius = haloOuterRadius
+                    ),
+                    radius = haloOuterRadius,
+                    center = Offset(sunX, sunY)
+                )
+
+                val haloCoreRadius = 14.dp.toPx()
+                drawCircle(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            Color(0xFFFFFFFD).copy(alpha = 0.65f * daylightFactor),
+                            Color.Transparent
+                        ),
+                        center = Offset(sunX, sunY),
+                        radius = haloCoreRadius
+                    ),
+                    radius = haloCoreRadius,
+                    center = Offset(sunX, sunY)
+                )
+            }
+
+            // Sun Core Disc (matching watchface.xml: 30px outer, 24px inner)
+            // Outer ring: 30px on 450 face => ~5.5dp radius
+            val sunOuterRadius = outerRadius * (15f / 225f)
+            val sunInnerRadius = outerRadius * (12f / 225f)
+
+            // Base white circle (provides crisp outline when inner is dark at night)
             drawCircle(
-                color = Color(0xFFFFB300).copy(alpha = 0.35f),
-                radius = 8.dp.toPx(),
+                color = Color(0xFFFFFFFD),
+                radius = sunOuterRadius,
                 center = Offset(sunX, sunY)
             )
 
-            // Sun Core Disc
+            // Inner Disc: Solid white during day, dark #0D0D0D at night (Apple Solar Dial hollow marker)
+            val innerColor = if (daylightFactor >= 0.99f) {
+                Color(0xFFFFFFFD)
+            } else {
+                // Blend from white to #0D0D0D based on daylightFactor
+                val r = (0xFF * daylightFactor + 0x0D * (1f - daylightFactor)).toInt()
+                val g = (0xFF * daylightFactor + 0x0D * (1f - daylightFactor)).toInt()
+                val b = (0xFD * daylightFactor + 0x0D * (1f - daylightFactor)).toInt()
+                Color(android.graphics.Color.rgb(r, g, b))
+            }
             drawCircle(
-                color = Color(0xFFFFD54F),
-                radius = 4.dp.toPx(),
+                color = innerColor,
+                radius = sunInnerRadius,
                 center = Offset(sunX, sunY)
-            )
-            drawCircle(
-                color = Color.White,
-                radius = 4.dp.toPx(),
-                center = Offset(sunX, sunY),
-                style = Stroke(width = 1.2.dp.toPx())
-            )
-
-            // Center Pin
-            drawCircle(
-                color = Color(0xFFFFD54F),
-                radius = 2.5.dp.toPx(),
-                center = center
             )
         }
     }
