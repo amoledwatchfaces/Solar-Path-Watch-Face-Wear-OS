@@ -2,83 +2,133 @@
 <WatchFace width="450" height="450">
     <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
     <Metadata key="PREVIEW_TIME" value="10:08:32"/>
-
+    <UserConfigurations>
+        <!-- Color Configurations -->
+        <ColorConfiguration defaultValue="34" displayName="id_primary_theme" id="primaryTheme">
+            <ColorOption colors="#e3e3e3 #bcbcbc #dadada" displayName="id_color_graphite" id="0"/>
+            <ColorOption colors="#ffffff #e4e4e4 #eaeaea" displayName="id_color_cloud" id="1"/>
+            <ColorOption colors="#fff7e4 #fff7e4 #fcf7eb" displayName="id_color_almond" id="2"/>
+            <ColorOption colors="#ffeaea #ff9391 #ff4642" displayName="id_color_watermelon" id="3"/>
+            <ColorOption colors="#fff3f2 #ffa49f #ff665d" displayName="id_color_pomelo" id="4"/>
+            <ColorOption colors="#ffe8da #ffc6a3 #ff975d" displayName="id_color_champagne" id="5"/>
+            <ColorOption colors="#fff6e1 #ffe9b9 #ffce63" displayName="id_color_wheat" id="6"/>
+            <ColorOption colors="#feffe9 #fcffb6 #f9ff52" displayName="id_color_limoncello" id="7"/>
+            <ColorOption colors="#faffe4 #eaff8e #deff4c" displayName="id_color_keylime" id="8"/>
+            <ColorOption colors="#f4ffdf #ebffc3 #ceff6c" displayName="id_color_lemongrass" id="9"/>
+            <ColorOption colors="#edffd9 #d3ff9b #b0ff4d" displayName="id_color_spring" id="10"/>
+            <ColorOption colors="#f0ffcd #deff91 #c7ff45" displayName="id_color_lime" id="11"/>
+            <ColorOption colors="#f1ffdd #d6ff9e #aeff4a" displayName="id_color_pear" id="12"/>
+            <ColorOption colors="#e5ffe0 #adff9a #70ff3d" displayName="id_color_grass_green" id="13"/>
+            <ColorOption colors="#e3ffe0 #a9ff9a #4eff58" displayName="id_color_proto_green" id="14"/>
+            <ColorOption colors="#e8fff2 #beffd9 #57ff9d" displayName="id_color_moss" id="15"/>
+            <ColorOption colors="#d8ffea #65df9d #41ff99" displayName="id_color_fern" id="16"/>
+            <ColorOption colors="#e0ffe4 #9ff7ad #52ff6d" displayName="id_color_spearmint" id="17"/>
+            <ColorOption colors="#d4e2d4 #c3e9c3 #b7f297" displayName="id_color_alpine_green" id="72"/>
+            <ColorOption colors="#e5fff5 #abffdf #5effc0" displayName="id_color_mint" id="18"/>
+            <ColorOption colors="#def4ec #beecdb #aaf6d9" displayName="id_color_jade" id="19"/>
+            <ColorOption colors="#e2f0e6 #dfdfdf #bfdcc4" displayName="id_color_steam_green" id="20"/>
+            <ColorOption colors="#e1ece9 #cce4df #bbf6e6" displayName="id_color_sage" id="21"/>
+            <ColorOption colors="#bdd3ca #8bb6a5 #f5fffb" displayName="id_color_avocado" id="22"/>
+            <ColorOption colors="#cde1da #76b89f #8eafa3" displayName="id_color_forest" id="23"/>
+            <ColorOption colors="#d8e6d8 #bfd9bf #acc89e" displayName="id_color_pine" id="71"/>
+            <ColorOption colors="#eefffd #e5fffb #d6fff9" displayName="id_color_seafoam" id="24"/>
+            <ColorOption colors="#daffff #bef6ff #93f0ff" displayName="id_color_stream" id="25"/>
+            <ColorOption colors="#d5faff #a8f4ff #5eebff" displayName="id_color_aqua" id="26"/>
+            <ColorOption colors="#ccefff #99e0ff #5acdff" displayName="id_color_lagoon" id="27"/>
+            <ColorOption colors="#e6f5ff #a8ddff #5ec1ff" displayName="id_color_sky" id="29"/>
+            <ColorOption colors="#e2edff #a3c6ff #5e9bff" displayName="id_color_ocean" id="30"/>
+            <ColorOption colors="#d6e5ff #88b4ff #639cff" displayName="id_color_sapphire" id="31"/>
+            <ColorOption colors="#c6e3ff #8bc6ff #3a9cff" displayName="id_color_royalblue" id="32"/>
+            <ColorOption colors="#d8e6ff #9ec2ff #619bff" displayName="id_color_arctic" id="33"/>
+            <ColorOption colors="#cfdbff #a5baff #687eff" displayName="id_color_icy_blue" id="34"/>
+            <ColorOption colors="#d6daff #959dfd #636fff" displayName="id_color_amethyst" id="35"/>
+            <ColorOption colors="#e1d4ff #b99aff #8e58ff" displayName="id_color_lilac" id="36"/>
+            <ColorOption colors="#f5e0ff #e2a5ff #cc62ff" displayName="id_color_lavender" id="38"/>
+            <ColorOption colors="#fde0ff #f8a6ff #f25fff" displayName="id_color_flamingo" id="39"/>
+            <ColorOption colors="#ffd9f3 #ffb3e6 #ff66ce" displayName="id_color_verbena" id="40"/>
+            <ColorOption colors="#ffdfdc #ffb1ac #ff776d" displayName="id_color_guava" id="41"/>
+            <ColorOption colors="#ffe8e5 #ffa294 #ff5b43" displayName="id_color_coral" id="42"/>
+            <ColorOption colors="#fff5ef #fdb78f #ff985e" displayName="id_color_peach" id="43"/>
+            <ColorOption colors="#ffdbd1 #ff997a #ff693b" displayName="id_color_orange" id="44"/>
+            <ColorOption colors="#f4ebe0 #d8ab77 #f0a752" displayName="id_color_chai" id="45"/>
+            <ColorOption colors="#fff1db #f8c67c #ffb74a" displayName="id_color_honey" id="46"/>
+            <ColorOption colors="#fff4dd #ffd88a #ffc551" displayName="id_color_melon" id="47"/>
+            <ColorOption colors="#fffee0 #fffa86 #fff630" displayName="id_color_dandelion" id="48"/>
+            <ColorOption colors="#fef6e1 #fef6e1 #fef6e1" displayName="id_color_milkshake" id="49"/>
+            <ColorOption colors="#fff9e1 #c4b575 #f1d870" displayName="id_color_sand" id="50"/>
+            <ColorOption colors="#fff4ea #fae7d6 #ffdab8" displayName="id_color_salmon" id="51"/>
+            <ColorOption colors="#fff0d2 #ffd889 #ffcc63" displayName="id_color_amber" id="52"/>
+            <ColorOption colors="#f2f6ff #a0a3ab #dfe3ef" displayName="id_color_charcoal" id="54"/>
+            <ColorOption colors="#dffff3 #a9ffdf #ff8a00" displayName="id_color_oceanresearch" id="55"/>
+            <ColorOption colors="#ff4d4d #fefefe #fefefe" displayName="id_color_nothing" id="56"/>
+            <ColorOption colors="#d2d2d2 #f5f5f5 #ff5b58" displayName="id_color_submarine" id="57"/>
+            <ColorOption colors="#e5f2ff #2391ff #2391ff" displayName="id_color_protoblue" id="58"/>
+            <ColorOption colors="#e4e4d3 #d1d9a0 #cddc68" displayName="id_color_khaki" id="59"/>
+            <ColorOption colors="#eff0e4 #eeff80 #ceff1c" displayName="id_color_olive_vibrant" id="60"/>
+            <ColorOption colors="#eff0e4 #dfdfdf #e8f0b3" displayName="id_color_olive_dull" id="61"/>
+            <ColorOption colors="#b5fbff #e2fdff #ff6dc9" displayName="id_color_candy" id="62"/>
+            <ColorOption colors="#e1eaff #f7ea49 #2f69ff" displayName="id_color_united_24" id="63"/>
+            <ColorOption colors="#d8f7ff #bad1ff #5836ff" displayName="id_color_iridescent" id="64"/>
+            <ColorOption colors="#daebff #ff6f6f #ff2a2a" displayName="id_color_industrial" id="65"/>
+            <ColorOption colors="#daf9ff #84ffe2 #58ff32" displayName="id_color_green_shock" id="66"/>
+            <ColorOption colors="#ebebeb #b0ff54 #8356ff" displayName="id_color_juniper_haze" id="67"/>
+            <ColorOption colors="#d2ffdf #00ff88 #3881ff" displayName="id_color_neon_green" id="68"/>
+            <ColorOption colors="#d9d9d9 #94bfff #acff38" displayName="id_color_neon_lime" id="69"/>
+            <ColorOption colors="#ffd5c0 #ff935c #ff5f0d" displayName="id_color_neon_orange" id="70"/>
+            <ColorOption colors="#d9cbc5 #d7bbab #cca792" displayName="id_color_oak_brown" id="75"/>
+            <ColorOption colors="#e0d9d4 #c8b5a3 #b49e88" displayName="id_color_walnut_brown" id="76"/>
+            <ColorOption colors="#dbd8d3 #c1b9ae #b8ad9f" displayName="id_color_grey_brown" id="77"/>
+            <ColorOption colors="#e4e3da #c7c4ae #afac91" displayName="id_color_grey_mud" id="78"/>
+        </ColorConfiguration>
+        <!-- Boolean Configurations -->
+        <BooleanConfiguration defaultValue="FALSE" displayName="id_progress_bar_gradients
+" id="progressGradients"/>
+    </UserConfigurations>
     <Scene>
-        <!-- Background -->
-        <PartDraw width="450" height="450" x="0" y="0">
-            <Rectangle width="450" height="450" x="0" y="0">
-                <Fill color="#000000"/>
-            </Rectangle>
-        </PartDraw>
-
         <!-- 24-Hour Solar Path Ring -->
-        <PartDraw width="450" height="450" x="0" y="0">
-            <Variant mode="AMBIENT" target="alpha" value="120"/>
+        <Group name="solar_path" width="450" height="450" x="0" y="0">
+            <PartDraw name="circle_base" width="450" height="450" x="0" y="0" renderMode="MASK">
+                <Ellipse x="35" y="35" width="380" height="380">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="layers" width="450" height="450" x="0" y="0">
+                <!-- Using stacked layers -->
 
-            <!-- 1. Civil Twilight Dusk: Sunset -> Civil Dusk (-6°) -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
-                <Transform target="startAngle" value="[REFERENCE.ss_angle]"/>
-                <Transform target="endAngle" value="[REFERENCE.cdusk_angle]"/>
-                <Stroke color="#e65100" thickness="36" cap="BUTT"/>
-            </Arc>
+                <!-- 0. Daylight = Background Layer -->
+                <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="360">
+                    <Stroke color="#1976d2" thickness="225" />
+                </Arc>
 
-            <!-- 2. Nautical Twilight Dusk: Civil Dusk (-6°) -> Nautical Dusk (-12°) -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
-                <Transform target="startAngle" value="[REFERENCE.cdusk_angle]"/>
-                <Transform target="endAngle" value="[REFERENCE.ndusk_angle]"/>
-                <Stroke color="#283593" thickness="36" cap="BUTT"/>
-            </Arc>
+                <!-- 1. Civil Twilight Layer: Sunset -> Sunrise -->
+                <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
+                    <Transform target="startAngle" value="[REFERENCE.ss_angle]"/>
+                    <Transform target="endAngle" value="[REFERENCE.sr_angle]"/>
+                    <Stroke color="#3C4CC5" thickness="225" />
+                </Arc>
 
-            <!-- 3. Astronomical Twilight Dusk: Nautical Dusk (-12°) -> Astro Dusk / Night (-18°) -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
-                <Transform target="startAngle" value="[REFERENCE.ndusk_angle]"/>
-                <Transform target="endAngle" value="[REFERENCE.adusk_angle]"/>
-                <Stroke color="#1a237e" thickness="36" cap="BUTT"/>
-            </Arc>
+                <!-- 2. Nautical Twilight Layer: Civil Dusk (-6°) -> Civil Dawn (-6°) -->
+                <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
+                    <Transform target="startAngle" value="[REFERENCE.cdusk_angle]"/>
+                    <Transform target="endAngle" value="[REFERENCE.cdawn_angle]"/>
+                    <Stroke color="#283593" thickness="225" />
+                </Arc>
 
-            <!-- 4. Full Night: Astro Dusk (-18°) -> Astro Dawn (-18°) through Midnight 180° -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
-                <Transform target="startAngle" value="[REFERENCE.adusk_angle]"/>
-                <Transform target="endAngle" value="[REFERENCE.adawn_angle]"/>
-                <Stroke color="#151b26" thickness="36" cap="BUTT"/>
-            </Arc>
+                <!-- 3. Astronomical Twilight Layer: Nautical Dusk (-12°) -> Nautical Dawn (-12°) -->
+                <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
+                    <Transform target="startAngle" value="[REFERENCE.ndusk_angle]"/>
+                    <Transform target="endAngle" value="[REFERENCE.ndawn_angle]"/>
+                    <Stroke color="#1a237e" thickness="225" />
+                </Arc>
 
-            <!-- 5. Astronomical Twilight Dawn: Astro Dawn (-18°) -> Nautical Dawn (-12°) -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
-                <Transform target="startAngle" value="[REFERENCE.adawn_angle]"/>
-                <Transform target="endAngle" value="[REFERENCE.ndawn_angle]"/>
-                <Stroke color="#1a237e" thickness="36" cap="BUTT"/>
-            </Arc>
-
-            <!-- 6. Nautical Twilight Dawn: Nautical Dawn (-12°) -> Civil Dawn (-6°) -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
-                <Transform target="startAngle" value="[REFERENCE.ndawn_angle]"/>
-                <Transform target="endAngle" value="[REFERENCE.cdawn_angle]"/>
-                <Stroke color="#283593" thickness="36" cap="BUTT"/>
-            </Arc>
-
-            <!-- 7. Civil Twilight Dawn: Civil Dawn (-6°) -> Sunrise (0°) -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
-                <Transform target="startAngle" value="[REFERENCE.cdawn_angle]"/>
-                <Transform target="endAngle" value="[REFERENCE.sr_angle]"/>
-                <Stroke color="#e65100" thickness="36" cap="BUTT"/>
-            </Arc>
-
-            <!-- 8. Daylight: Sunrise (0°) -> Sunset (0°) through Noon 0° -->
-            <Arc centerX="225" centerY="225" width="370" height="370" startAngle="0" endAngle="0">
-                <Transform target="startAngle" value="[REFERENCE.sr_angle]"/>
-                <Transform target="endAngle" value="[REFERENCE.ss_angle]"/>
-                <Stroke color="#1976d2" thickness="36" cap="BUTT"/>
-            </Arc>
-
-            <!-- Solar Ring Concentric Accent Borders -->
-            <Arc centerX="225" centerY="225" width="408" height="408" startAngle="0" endAngle="360">
-                <Stroke color="#37474f" thickness="2" cap="ROUND"/>
-            </Arc>
-            <Arc centerX="225" centerY="225" width="332" height="332" startAngle="0" endAngle="360">
-                <Stroke color="#263238" thickness="2" cap="ROUND"/>
-            </Arc>
-        </PartDraw>
+                <!-- 4. Full Night Layer: Astro Dusk (-18°) -> Astro Dawn (-18°) through Midnight 180° -->
+                <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
+                    <Transform target="startAngle" value="[REFERENCE.adusk_angle]"/>
+                    <Transform target="endAngle" value="[REFERENCE.adawn_angle]"/>
+                    <Stroke color="#151b26" thickness="2250" />
+                </Arc>
+            </PartDraw>
+        </Group>
 
         <!-- Horizon Line Dividing Day & Twilight/Night -->
         <PartDraw width="450" height="450" x="0" y="0">
@@ -88,19 +138,253 @@
             </Line>
         </PartDraw>
 
-        <!-- 24-Hour Markers (12 Noon Top, 24 Midnight Bottom, 6 Sunrise Left, 18 Sunset Right) -->
-        <PartText width="60" height="24" x="195" y="14">
-            <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="14" color="#ffffff" weight="BOLD">12</Font></Text>
-        </PartText>
-        <PartText width="60" height="24" x="408" y="213">
-            <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="14" color="#ffb74d" weight="BOLD">18</Font></Text>
-        </PartText>
-        <PartText width="60" height="24" x="195" y="412">
-            <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="14" color="#90caf9" weight="BOLD">24</Font></Text>
-        </PartText>
-        <PartText width="60" height="24" x="-18" y="213">
-            <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="14" color="#ffb74d" weight="BOLD">6</Font></Text>
-        </PartText>
+        <!-- Index -->
+        <Group name="index" width="450" height="450" x="0" y="0">
+            <PartDraw name="short_dashes" height="450" width="450" x="0" y="0" alpha="100">
+                <Arc centerX="225"
+                    centerY="225"
+                    width="360"
+                    height="360"
+                    startAngle="30"
+                    endAngle="29.999">
+                    <Stroke
+                        color="#ffffff"
+                        dashIntervals="3 6.424777"
+                        dashPhase="1.5"
+                        thickness="14" />
+                </Arc>
+            </PartDraw>
+            <Group name="hour_index" width="450" height="450" x="0" y="0" alpha="190">
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="0">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="30">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="60">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="90">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="120">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="150">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="180">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="210">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="240">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="270">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="300">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw width="4" height="24" x="223" y="38" pivotY="7.79166666" angle="330">
+                    <RoundRectangle width="4" height="24" x="0" y="0" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                        <Fill color="#ffffff"/>
+                    </RoundRectangle>
+                </PartDraw>
+            </Group>
+            <Group name="hours" width="450" height="450" x="0" y="0" alpha="150">
+                <Group name="12" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="0">
+                    <PartText width="60" height="60" x="0" y="0" angle="0">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">12</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="14" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="30">
+                    <PartText width="60" height="60" x="0" y="0" angle="-30">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">14</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="16" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="60">
+                    <PartText width="60" height="60" x="0" y="0" angle="-60">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">16</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="18" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="90">
+                    <PartText width="60" height="60" x="0" y="0" angle="-90">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">18</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="20" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="120">
+                    <PartText width="60" height="60" x="0" y="0" angle="-120">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">20</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="22" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="150">
+                    <PartText width="60" height="60" x="0" y="0" angle="-150">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">22</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="24" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="180">
+                    <PartText width="60" height="60" x="0" y="0" angle="-180">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">24</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="02" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="210">
+                    <PartText width="60" height="60" x="0" y="0" angle="-210">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">02</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="04" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="240">
+                    <PartText width="60" height="60" x="0" y="0" angle="-240">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">04</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="06" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="270">
+                    <PartText width="60" height="60" x="0" y="0" angle="-270">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">06</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="08" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="300">
+                    <PartText width="60" height="60" x="0" y="0" angle="-300">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">08</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="10" width="60" height="60" x="195" y="50" pivotY="2.9166666" angle="330">
+                    <PartText width="60" height="60" x="0" y="0" angle="-330">
+                        <Text>
+                            <Font
+                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                size="26">10</Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Group>
+        </Group>
+
+        <!-- Timeline with Dots -->
+        <Group name="solar_track" width="450" height="450" x="0" y="0">
+            <!-- Timeline Circle -->
+            <PartDraw width="450" height="450" x="0" y="0" alpha="125">
+                <Ellipse height="230" width="230" y="110" x="110">
+                    <Stroke color="#ffffff" thickness="2"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_sr" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.sr_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_ss" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.ss_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_adawn" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.adawn_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_adusk" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.adusk_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_cdawn" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.cdawn_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_cdusk" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.cdusk_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_ndawn" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.ndawn_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_ndusk" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.ndusk_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+        </Group>
 
         <!-- Sun Orbiting Marker: Rotates at 15 deg per hour, noon at top (0 deg) -->
         <Group name="solar_track" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
@@ -109,18 +393,18 @@
             <PartDraw width="450" height="450" x="0" y="0">
                 <Variant mode="AMBIENT" target="alpha" value="0"/>
                 <Line startX="225" startY="225" endX="225" endY="40">
-                    <Stroke color="#8Cffe082" thickness="1"/>
+                    <Stroke color="#8Cffe082" thickness="2"/>
                 </Line>
             </PartDraw>
             <!-- Sun Halo Corona -->
-            <PartDraw width="34" height="34" x="208" y="23">
+            <PartDraw width="34" height="34" x="208" y="93">
                 <Variant mode="AMBIENT" target="alpha" value="0"/>
                 <Ellipse width="34" height="34" x="0" y="0">
                     <Fill color="#46ffb300"/>
                 </Ellipse>
             </PartDraw>
             <!-- Sun Core Disc -->
-            <PartDraw width="18" height="18" x="216" y="31">
+            <PartDraw width="18" height="18" x="216" y="101">
                 <Ellipse width="18" height="18" x="0" y="0">
                     <Fill color="#ffe082"/>
                     <Stroke color="#ffffff" thickness="2"/>
@@ -129,10 +413,10 @@
         </Group>
 
         <!-- Date Display (Centered above Complication) -->
-        <PartText width="200" height="26" x="125" y="165">
+        <PartText width="200" height="40" x="125" y="161">
             <Variant mode="AMBIENT" target="alpha" value="160"/>
-            <Text align="CENTER">
-                <Font family="SYNC_TO_DEVICE" size="14" color="#90caf9" weight="SEMI_BOLD">
+            <Text>
+                <Font family="google_sans_flex_24_semibold_round" size="24" color="#90caf9" weight="SEMI_BOLD">
                     <Template>%s %s
                         <Parameter expression="[DAY_OF_WEEK_S]"/>
                         <Parameter expression="[DAY_OF_MONTH]"/>
@@ -143,7 +427,8 @@
 
         <!-- Complication Slot 0: Center Solar Complication & Angle Reference Provider -->
         <ComplicationSlot slotId="0"
-            supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY"
+            isCustomizable="FALSE"
+            supportedTypes="SHORT_TEXT EMPTY"
             width="200"
             height="90"
             x="125"
@@ -154,7 +439,6 @@
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT"/>
             <BoundingBox x="0" y="0" width="200" height="90"/>
-
             <Complication type="SHORT_TEXT">
                 <!-- Angle extraction references for the 8 solar arcs -->
                 <Group name="ref_ss" x="0" y="0" width="1" height="1" alpha="0">
@@ -191,9 +475,9 @@
                 </Group>
 
                 <!-- Complication Title / Solar Event Label -->
-                <PartText width="200" height="24" x="0" y="10">
-                    <Text align="CENTER">
-                        <Font family="SYNC_TO_DEVICE" size="14" color="#ffb74d" weight="BOLD">
+                <PartText width="200" height="40" x="0" y="6">
+                    <Text>
+                        <Font family="google_sans_flex_24_semibold_round" size="26" color="#ffb74d" weight="SEMI_BOLD">
                             <Template>%s
                                 <Parameter expression="textLength([COMPLICATION.TITLE]) &gt; 25 ? subText([COMPLICATION.TITLE], 26, textLength([COMPLICATION.TITLE])) : [COMPLICATION.TITLE]"/>
                             </Template>
@@ -202,36 +486,1512 @@
                 </PartText>
 
                 <!-- Complication Text / Solar Event Time -->
-                <PartText width="200" height="34" x="0" y="36">
-                    <Text align="CENTER">
-                        <Font family="SYNC_TO_DEVICE" size="24" color="#ffffff" weight="BOLD">
+                <PartText width="200" height="40" x="0" y="34">
+                    <Text>
+                        <Font family="google_sans_flex_24_semibold_round" size="32" color="#ffffff" weight="SEMI_BOLD">
                             <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
                         </Font>
                     </Text>
                 </PartText>
             </Complication>
-
-            <Complication type="RANGED_VALUE">
-                <PartText width="200" height="26" x="0" y="12">
-                    <Text align="CENTER">
-                        <Font family="SYNC_TO_DEVICE" size="18" color="#ffffff" weight="BOLD">
-                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
-                        </Font>
-                    </Text>
-                </PartText>
-                <PartDraw width="120" height="6" x="40" y="44">
-                    <RoundRectangle width="120" height="6" x="0" y="0" cornerRadiusX="3" cornerRadiusY="3">
-                        <Fill color="#37474f"/>
-                    </RoundRectangle>
-                    <RoundRectangle width="120" height="6" x="0" y="0" cornerRadiusX="3" cornerRadiusY="3">
-                        <Transform target="width" value="120 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0, 1)"/>
-                        <Fill color="#ffb74d"/>
-                    </RoundRectangle>
-                </PartDraw>
-            </Complication>
-
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
+        <!-- Arc Complications -->
+        <ComplicationSlot slotId="1"
+            supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
+            width="225"
+            height="225"
+            x="0"
+            y="0">
+            <DefaultProviderPolicy
+                primaryProvider="com.fitbit.FitbitMobile/com.fitbit.complications.offloadable.steps.OffloadableStepsComplicationDataSourceService"
+                primaryProviderType="RANGED_VALUE"
+                secondaryProvider="com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.steps.StepsComplicationProviderService"
+                secondaryProviderType="RANGED_VALUE"
+                defaultSystemProvider="STEP_COUNT"
+                defaultSystemProviderType="SHORT_TEXT"/>
+            <BoundingArc centerX="225"
+                centerY="225"
+                width="450"
+                height="450"
+                startAngle="270"
+                endAngle="360"
+                thickness="50"/>
+            <Complication type="RANGED_VALUE">
+                <Group name="wrapper" width="225" height="225" x="0" y="0" pivotX="1" pivotY="1">
+                    <Group name="progress" x="0" y="0" height="1" width="1" alpha="0">
+                        <Transform target="x" value="clamp(round(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])*100)/100,0,1)" />
+                        <Reference name="c0progress" source="x" defaultValue="0" />
+                    </Group>
+                    <Transform target="angle" value="8 - 9 * clamp(textLength([COMPLICATION.TEXT]),0,5) / 5"/>
+                    <PartDraw name="progress_bar_bg" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                        <Arc centerX="225"
+                            centerY="225"
+                            startAngle="332"
+                            endAngle="284"
+                            direction="COUNTER_CLOCKWISE"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="clamp(284+7+48*[REFERENCE.c0progress],284,332)-7*([REFERENCE.c0progress] == 0)"/>
+                            <Stroke color="#505050" cap="ROUND" thickness="18"/>
+                        </Arc>
+                    </PartDraw>
+                    <Condition>
+                        <Expressions>
+                            <Expression name="progressGradients">[CONFIGURATION.progressGradients] == &quot;TRUE&quot;</Expression>
+                        </Expressions>
+                        <Compare expression="progressGradients">
+                            <PartDraw name="progress_bar_gradient_mid" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="225"
+                                    centerY="225"
+                                    startAngle="284"
+                                    endAngle="332"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="284 + 48 * [REFERENCE.c0progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw name="progress_bar_gradient_end" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                                <Arc startAngle="284" endAngle="332"
+                                    centerX="225"
+                                    centerY="225"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="284 + 48 * [REFERENCE.c0progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="225" centerY="225"
+                                            startAngle="281" endAngle="335"
+                                            colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw name="progress_bar_gradient_start" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                                <Arc startAngle="284" endAngle="332"
+                                    centerX="225"
+                                    centerY="225"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="284 + 48 * [REFERENCE.c0progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="225" centerY="225"
+                                            startAngle="281" endAngle="335"
+                                            colors="#ffffffff #00ffffff #00ffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                        <Default>
+                            <PartDraw name="progress_bar_gradient_mid" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                                <Arc centerX="225"
+                                    centerY="225"
+                                    startAngle="284"
+                                    endAngle="332"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="284 + 48 * [REFERENCE.c0progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                                </Arc>
+                            </PartDraw>
+                        </Default>
+                    </Condition>
+                    <PartText name="text" width="225" height="225" x="0" y="0">
+                        <TextCircular
+                            centerX="225"
+                            centerY="225"
+                            align="START"
+                            ellipsis="TRUE"
+                            direction="CLOCKWISE"
+                            startAngle="336"
+                            endAngle="0"
+                            width="420"
+                            height="420">
+                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                                <Template>%s
+                                    <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
+                                </Template>
+                            </Font>
+                        </TextCircular>
+                    </PartText>
+                    <Condition>
+                        <Expressions>
+                            <Expression name="hasIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        </Expressions>
+                        <Compare expression="hasIcon">
+                            <Group name="icon" width="28" height="28" x="211" y="2" pivotY="7.964" angle="-84">
+                                <PartImage width="26" height="26" x="1" y="1" renderMode="MASK">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
+                                </PartImage>
+                                <PartDraw width="28" height="28" x="0" y="0">
+                                    <Rectangle width="28" height="28" x="0" y="0">
+                                        <Fill color="#ebebeb"/>
+                                    </Rectangle>
+                                </PartDraw>
+                            </Group>
+                        </Compare>
+                    </Condition>
+                </Group>
+            </Complication>
+            <Complication type="LONG_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        <Expression name="textImageTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.SMALL_IMAGE] != null</Expression>
+                        <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                        <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                    </Expressions>
+                    <Compare expression="textIconTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textImageTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage
+                                        resource="empty_icon"
+                                        source="COMPLICATION.SMALL_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textIcon">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                width="419"
+                                height="419">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                        <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                    </Expressions>
+                    <Compare expression="textIconTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textIcon">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="360"
+                                width="419"
+                                height="419">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Complication>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
+        <ComplicationSlot slotId="2"
+            supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
+            x="225"
+            y="0"
+            width="225"
+            height="225">
+            <DefaultProviderPolicy
+                primaryProvider="com.fitbit.FitbitMobile/com.google.android.wearable.fitbit.mainapp.complications.offloadable.calories.OffloadableCaloriesComplicationDataSourceService"
+                primaryProviderType="RANGED_VALUE"
+                secondaryProvider="com.samsung.android.watch.weather/com.samsung.android.watch.weather.complication.UvIndexComplicationService"
+                secondaryProviderType="RANGED_VALUE"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="RANGED_VALUE"/>
+            <BoundingArc centerX="0"
+                centerY="225"
+                width="450"
+                height="450"
+                startAngle="0"
+                endAngle="90"
+                thickness="50" />
+            <Complication type="RANGED_VALUE">
+                <Group name="wrapper" width="225" height="225" x="0" y="0" pivotX="0" pivotY="1">
+                    <Group name="progress" x="0" y="0" height="1" width="1" alpha="0">
+                        <Transform target="x" value="clamp(round(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])*100)/100,0,1)" />
+                        <Reference name="c1progress" source="x" defaultValue="0" />
+                    </Group>
+                    <Transform target="angle" value="8 - 9 * clamp(textLength([COMPLICATION.TEXT]),0,5) / 5"/>
+                    <PartDraw name="progress_bar_bg" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                        <Arc centerX="0"
+                            centerY="225"
+                            startAngle="14"
+                            endAngle="62"
+                            width="420"
+                            height="420">
+                            <Stroke color="#393939" cap="ROUND" thickness="18"/>
+                        </Arc>
+                    </PartDraw>
+                    <PartDraw name="progress_bar_color_0" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                        <Arc centerX="0"
+                            centerY="225"
+                            startAngle="14"
+                            endAngle="62"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress] * ([REFERENCE.c1progress] &lt;= 0.95)"/>
+                            <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                        </Arc>
+                        <Arc centerX="0"
+                            centerY="225"
+                            startAngle="14"
+                            endAngle="62"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
+                            <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                        </Arc>
+                    </PartDraw>
+                    <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                        <Arc centerX="0"
+                            centerY="225"
+                            startAngle="14"
+                            endAngle="62"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
+                            <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                <SweepGradient centerX="0"
+                                    centerY="225"
+                                    startAngle="11" endAngle="65"
+                                    colors="#ffffffff #00ffffff #00ffffff" positions="0 0.5 1" />
+                            </Stroke>
+                        </Arc>
+                    </PartDraw>
+                    <PartDraw name="progress_bar_color_2" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                        <Arc centerX="0"
+                            centerY="225"
+                            startAngle="14"
+                            endAngle="62"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
+                            <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                <SweepGradient centerX="0"
+                                    centerY="225"
+                                    startAngle="11" endAngle="65"
+                                    colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
+                            </Stroke>
+                        </Arc>
+                    </PartDraw>
+                    <PartText name="text" width="225" height="225" x="0" y="0">
+                        <TextCircular centerX="0"
+                            centerY="225"
+                            align="START"
+                            ellipsis="TRUE"
+                            direction="CLOCKWISE"
+                            startAngle="66"
+                            endAngle="90"
+                            width="420"
+                            height="420">
+                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                                <Template>%s
+                                    <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
+                                </Template>
+                            </Font>
+                        </TextCircular>
+                    </PartText>
+                    <Condition>
+                        <Expressions>
+                            <Expression name="hasIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        </Expressions>
+                        <Compare expression="hasIcon">
+                            <Group name="icon" width="28" height="28" x="-14" y="2" pivotY="7.964" angle="6">
+                                <PartImage width="26" height="26" x="1" y="1" renderMode="MASK">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
+                                </PartImage>
+                                <PartDraw width="28" height="28" x="0" y="0">
+                                    <Rectangle width="28" height="28" x="0" y="0">
+                                        <Fill color="#ebebeb"/>
+                                    </Rectangle>
+                                </PartDraw>
+                            </Group>
+                        </Compare>
+                    </Condition>
+                </Group>
+            </Complication>
+            <Complication type="LONG_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        <Expression name="textImageTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.SMALL_IMAGE] != null</Expression>
+                        <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                        <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                    </Expressions>
+                    <Compare expression="textIconTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textImageTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage
+                                        resource="empty_icon"
+                                        source="COMPLICATION.SMALL_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textIcon">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                width="419"
+                                height="419">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                        <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                    </Expressions>
+                    <Compare expression="textIconTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textIcon">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="225"
+                                direction="CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="0"
+                                endAngle="90"
+                                width="419"
+                                height="419">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Complication>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
+        <ComplicationSlot slotId="3"
+            supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
+            x="225"
+            y="225"
+            width="225"
+            height="225">
+            <DefaultProviderPolicy
+                defaultSystemProvider="NEXT_EVENT"
+                defaultSystemProviderType="LONG_TEXT"/>
+            <BoundingArc centerX="0"
+                centerY="0"
+                width="450"
+                height="450"
+                startAngle="90"
+                endAngle="180"
+                thickness="50"/>
+            <Complication type="RANGED_VALUE">
+                <Group name="wrapper" width="225" height="225" x="0" y="0" pivotX="0" pivotY="0">
+                    <Group name="progress" x="0" y="0" height="1" width="1" alpha="0">
+                        <Transform target="x" value="clamp(round(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])*100)/100,0,1)" />
+                        <Reference name="c2progress" source="x" defaultValue="0" />
+                    </Group>
+                    <Transform target="angle" value="8 - 9 * clamp(textLength([COMPLICATION.TEXT]),0,5) / 5"/>
+                    <PartDraw name="progress_bar_bg" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                        <Arc centerX="0"
+                            centerY="0"
+                            startAngle="152"
+                            direction="COUNTER_CLOCKWISE"
+                            endAngle="104"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="clamp(104+7+48*[REFERENCE.c2progress],104,152)-7*([REFERENCE.c2progress] == 0)"/>
+                            <Stroke color="#393939" cap="ROUND" thickness="18"/>
+                        </Arc>
+                    </PartDraw>
+                    <Condition>
+                        <Expressions>
+                            <Expression name="progressGradients">[CONFIGURATION.progressGradients] == &quot;TRUE&quot;</Expression>
+                        </Expressions>
+                        <Compare expression="progressGradients">
+                            <PartDraw name="progress_bar_gradient_mid" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="0"
+                                    centerY="0"
+                                    startAngle="104"
+                                    endAngle="152"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw name="progress_bar_gradient_end" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                                <Arc centerX="0"
+                                    centerY="0"
+                                    startAngle="104"
+                                    endAngle="152"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="0" centerY="0"
+                                            startAngle="101" endAngle="155"
+                                            colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw name="progress_bar_gradient_start" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                                <Arc centerX="0"
+                                    centerY="0"
+                                    startAngle="104"
+                                    endAngle="152"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="0" centerY="0"
+                                            startAngle="101" endAngle="155"
+                                            colors="#ffffffff #00ffffff #00ffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                        <Default>
+                            <PartDraw name="progress_bar_gradient_mid" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                                <Arc centerX="0"
+                                    centerY="0"
+                                    startAngle="104"
+                                    endAngle="152"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                                </Arc>
+                            </PartDraw>
+                        </Default>
+                    </Condition>
+                    <PartText name="text" width="225" height="225" x="0" y="0">
+                        <TextCircular centerX="0"
+                            centerY="0"
+                            align="END"
+                            ellipsis="TRUE"
+                            direction="COUNTER_CLOCKWISE"
+                            startAngle="180"
+                            endAngle="154"
+                            width="420"
+                            height="420">
+                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                                <Template>%s
+                                    <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
+                                </Template>
+                            </Font>
+                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#00000000">.</Font>
+                        </TextCircular>
+                    </PartText>
+                    <Condition>
+                        <Expressions>
+                            <Expression name="hasIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        </Expressions>
+                        <Compare expression="hasIcon">
+                            <Group name="icon" width="28" height="28" x="-14" y="-223" pivotY="7.964" angle="96">
+                                <PartImage width="26" height="26" x="1" y="1" angle="180" renderMode="MASK">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
+                                </PartImage>
+                                <PartDraw width="28" height="28" x="0" y="0">
+                                    <Rectangle width="28" height="28" x="0" y="0">
+                                        <Fill color="#ebebeb"/>
+                                    </Rectangle>
+                                </PartDraw>
+                            </Group>
+                        </Compare>
+                    </Condition>
+                </Group>
+            </Complication>
+            <Complication type="LONG_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        <Expression name="textImageTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.SMALL_IMAGE] != null</Expression>
+                        <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                        <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                    </Expressions>
+                    <Compare expression="textIconTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textImageTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage
+                                        resource="empty_icon"
+                                        source="COMPLICATION.SMALL_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textIcon">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                        <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                    </Expressions>
+                    <Compare expression="textIconTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textIcon">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="0"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="180"
+                                endAngle="90"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Complication>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
+        <ComplicationSlot slotId="4"
+            supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
+            x="0"
+            y="225"
+            width="225"
+            height="225">
+            <DefaultProviderPolicy
+                primaryProvider="com.fitbit.FitbitMobile/com.google.android.wearable.fitbit.mainapp.complications.offloadable.distance.OffloadableDistanceComplicationDataSourceService"
+                primaryProviderType="RANGED_VALUE"
+                secondaryProvider="com.samsung.android.watch.weather/com.samsung.android.watch.weather.complication.PrecipitationComplicationService"
+                secondaryProviderType="RANGED_VALUE"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="RANGED_VALUE"/>
+            <BoundingArc centerX="225"
+                centerY="0"
+                width="450"
+                height="450"
+                startAngle="180"
+                endAngle="270"
+                thickness="50"/>
+            <Complication type="RANGED_VALUE">
+                <Group name="wrapper" width="225" height="225" x="0" y="0" pivotX="1" pivotY="0">
+                    <Group name="progress" x="0" y="0" height="1" width="1" alpha="0">
+                        <Transform target="x" value="clamp(round(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN])*100)/100,0,1)" />
+                        <Reference name="c3progress" source="x" defaultValue="0" />
+                    </Group>
+                    <Transform target="angle" value="8 - 9 * clamp(textLength([COMPLICATION.TEXT]),0,5) / 5"/>
+                    <PartDraw name="progress_bar_bg" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                        <Arc centerX="225"
+                            centerY="0"
+                            startAngle="194"
+                            endAngle="242"
+                            width="420"
+                            height="420">
+                            <Stroke color="#393939" cap="ROUND" thickness="18"/>
+                        </Arc>
+                    </PartDraw>
+                    <PartDraw name="progress_bar_color_0" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                        <Arc centerX="225"
+                            centerY="0"
+                            startAngle="194"
+                            endAngle="242"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress] * ([REFERENCE.c3progress] &lt;= 0.95)"/>
+                            <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                        </Arc>
+                        <Arc centerX="225"
+                            centerY="0"
+                            startAngle="194"
+                            endAngle="242"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
+                            <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                        </Arc>
+                    </PartDraw>
+                    <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                        <Arc centerX="225"
+                            centerY="0"
+                            startAngle="194"
+                            endAngle="242"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
+                            <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                <SweepGradient centerX="225"
+                                    centerY="0"
+                                    startAngle="191" endAngle="245"
+                                    colors="#ffffffff #00ffffff #00ffffff" positions="0 0.5 1" />
+                            </Stroke>
+                        </Arc>
+                    </PartDraw>
+                    <PartDraw name="progress_bar_color_2" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                        <Arc centerX="225"
+                            centerY="0"
+                            startAngle="194"
+                            endAngle="242"
+                            width="420"
+                            height="420">
+                            <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
+                            <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                <SweepGradient centerX="225"
+                                    centerY="0"
+                                    startAngle="191" endAngle="245"
+                                    colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
+                            </Stroke>
+                        </Arc>
+                    </PartDraw>
+                    <PartText name="text" width="225" height="225" x="0" y="0">
+                        <TextCircular centerX="225"
+                            centerY="0"
+                            align="END"
+                            ellipsis="TRUE"
+                            direction="COUNTER_CLOCKWISE"
+                            startAngle="270"
+                            endAngle="244"
+                            width="420"
+                            height="420">
+                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                                <Template>%s
+                                    <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
+                                </Template>
+                            </Font>
+                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#00000000">.</Font>
+                        </TextCircular>
+                    </PartText>
+                    <Condition>
+                        <Expressions>
+                            <Expression name="hasIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        </Expressions>
+                        <Compare expression="hasIcon">
+                            <Group name="icon" width="28" height="28" x="211" y="-223" pivotY="7.964" angle="186">
+                                <PartImage width="26" height="26" x="1" y="1" angle="180" renderMode="MASK">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
+                                </PartImage>
+                                <PartDraw width="28" height="28" x="0" y="0">
+                                    <Rectangle width="28" height="28" x="0" y="0">
+                                        <Fill color="#ebebeb"/>
+                                    </Rectangle>
+                                </PartDraw>
+                            </Group>
+                        </Compare>
+                    </Condition>
+                </Group>
+            </Complication>
+            <Complication type="LONG_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        <Expression name="textImageTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.SMALL_IMAGE] != null</Expression>
+                        <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                        <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                    </Expressions>
+                    <Compare expression="textIconTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textImageTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage
+                                        resource="empty_icon"
+                                        source="COMPLICATION.SMALL_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textIcon">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                        <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                    </Expressions>
+                    <Compare expression="textIconTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                    <Template><![CDATA[ %s]]>
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textTitle">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TITLE]" />
+                                    </Template>
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Compare expression="textIcon">
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                        resource="empty_icon"
+                                        source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                        width="26"
+                                        height="26" />
+                                </Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText width="225" height="225" x="0" y="0">
+                            <TextCircular centerX="225"
+                                centerY="0"
+                                direction="COUNTER_CLOCKWISE"
+                                ellipsis="TRUE"
+                                startAngle="270"
+                                endAngle="180"
+                                height="420"
+                                width="420">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                    <Template>%s
+                                        <Parameter expression="[COMPLICATION.TEXT]" />
+                                    </Template>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Complication>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
     </Scene>
 </WatchFace>
