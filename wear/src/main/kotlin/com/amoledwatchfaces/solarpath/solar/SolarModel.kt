@@ -26,7 +26,9 @@ data class SolarData(
     val nauticalDawnAngle: Float = 240f,
     val nauticalDuskAngle: Float = 120f,
     val astroDawnAngle: Float = 225f,
-    val astroDuskAngle: Float = 135f
+    val astroDuskAngle: Float = 135f,
+    val solarNoonAngle: Float = 0f,
+    val solarMidnightAngle: Float = 180f
 )
 
 enum class SolarPhase {

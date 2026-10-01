@@ -18,6 +18,8 @@ class SolarCalculatorTest {
         println("AstroDusk: ${data.astroDuskEpoch} (angle=${data.astroDuskAngle})")
         println("AstroDawn: ${data.astroDawnEpoch} (angle=${data.astroDawnAngle})")
         println("NauticalDawn: ${data.nauticalDawnEpoch} (angle=${data.nauticalDawnAngle})")
+        println("Noon: ${data.solarNoonEpoch} (angle=${data.solarNoonAngle})")
+        println("Midnight: ${data.solarNadirEpoch} (angle=${data.solarMidnightAngle})")
         val formatted = SolarCalculator.formatAnglesForComplication(data, "SUNSET")
         println("Formatted string: $formatted")
 
@@ -27,6 +29,8 @@ class SolarCalculatorTest {
         org.junit.Assert.assertTrue(data.nauticalDawnAngle > data.astroDawnAngle)
         org.junit.Assert.assertTrue(data.civilDawnAngle > data.nauticalDawnAngle)
         org.junit.Assert.assertTrue(data.sunriseAngle > data.civilDawnAngle)
-        org.junit.Assert.assertTrue(formatted.length >= 26)
+        org.junit.Assert.assertTrue(data.solarNoonAngle >= 0f)
+        org.junit.Assert.assertTrue(data.solarMidnightAngle >= 0f)
+        org.junit.Assert.assertTrue(formatted.length >= 32)
     }
 }

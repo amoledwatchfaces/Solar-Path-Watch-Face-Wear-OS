@@ -112,6 +112,8 @@ object SolarCalculator {
         val nduskAngle = if (nauticalDusk > 0) epochToDialAngle(nauticalDusk, zone) else 120f
         val adawnAngle = if (astroDawn > 0) epochToDialAngle(astroDawn, zone) else 225f
         val aduskAngle = if (astroDusk > 0) epochToDialAngle(astroDusk, zone) else 135f
+        val noonAngle = if (noon > 0) epochToDialAngle(noon, zone) else 0f
+        val nadirAngle = if (nadir > 0) epochToDialAngle(nadir, zone) else 180f
 
         return SolarData(
             sunriseEpoch = sunrise,
@@ -138,7 +140,9 @@ object SolarCalculator {
             nauticalDawnAngle = ndawnAngle,
             nauticalDuskAngle = nduskAngle,
             astroDawnAngle = adawnAngle,
-            astroDuskAngle = aduskAngle
+            astroDuskAngle = aduskAngle,
+            solarNoonAngle = noonAngle,
+            solarMidnightAngle = nadirAngle
         )
     }
 
@@ -162,9 +166,11 @@ object SolarCalculator {
         val ndawn = (solar.nauticalDawnAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val cdawn = (solar.civilDawnAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val sr = (solar.sunriseAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val noon = (solar.solarNoonAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val midnight = (solar.solarMidnightAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
 
-        return "\uFEFF%03d%03d%03d%03d%03d%03d%03d%03d %s".format(
-            ss, cdusk, ndusk, adusk, adawn, ndawn, cdawn, sr, nextEventName.uppercase()
+        return "\uFEFF%03d%03d%03d%03d%03d%03d%03d%03d%03d%03d %s".format(
+            ss, cdusk, ndusk, adusk, adawn, ndawn, cdawn, sr, noon, midnight, nextEventName.uppercase()
         )
     }
 

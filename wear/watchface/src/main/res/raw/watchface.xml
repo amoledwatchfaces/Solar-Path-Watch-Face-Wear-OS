@@ -384,6 +384,18 @@
                     <Fill color="#60ffffff"/>
                 </Ellipse>
             </PartDraw>
+            <PartDraw name="dot_noon" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.noon_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="dot_midnight" x="221" y="106" width="8" height="8" pivotY="14.875" angle="0">
+                <Transform target="angle" value="[REFERENCE.midnight_angle]"/>
+                <Ellipse x="0" y="0" width="8" height="8">
+                    <Fill color="#60ffffff"/>
+                </Ellipse>
+            </PartDraw>
         </Group>
 
         <!-- Sun Orbiting Marker: Rotates at 15 deg per hour, noon at top (0 deg) -->
@@ -419,7 +431,7 @@
                 <Font family="google_sans_flex_24_semibold_round" size="24" color="#90caf9" weight="SEMI_BOLD">
                     <Template>%s %s
                         <Parameter expression="[DAY_OF_WEEK_S]"/>
-                        <Parameter expression="[DAY_OF_MONTH]"/>
+                        <Parameter expression="[DAY]"/>
                     </Template>
                 </Font>
             </Text>
@@ -473,13 +485,21 @@
                     <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 22, 25)) : 283"/>
                     <Reference name="sr_angle" source="x" defaultValue="283"/>
                 </Group>
+                <Group name="ref_noon" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 25, 28)) : 0"/>
+                    <Reference name="noon_angle" source="x" defaultValue="0"/>
+                </Group>
+                <Group name="ref_midnight" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 28, 31)) : 180"/>
+                    <Reference name="midnight_angle" source="x" defaultValue="180"/>
+                </Group>
 
                 <!-- Complication Title / Solar Event Label -->
                 <PartText width="200" height="40" x="0" y="6">
                     <Text>
                         <Font family="google_sans_flex_24_semibold_round" size="26" color="#ffb74d" weight="SEMI_BOLD">
                             <Template>%s
-                                <Parameter expression="textLength([COMPLICATION.TITLE]) &gt; 25 ? subText([COMPLICATION.TITLE], 26, textLength([COMPLICATION.TITLE])) : [COMPLICATION.TITLE]"/>
+                                <Parameter expression="textLength([COMPLICATION.TITLE]) &gt; 31 ? subText([COMPLICATION.TITLE], 32, textLength([COMPLICATION.TITLE])) : (textLength([COMPLICATION.TITLE]) &gt; 25 ? subText([COMPLICATION.TITLE], 26, textLength([COMPLICATION.TITLE])) : [COMPLICATION.TITLE])"/>
                             </Template>
                         </Font>
                     </Text>

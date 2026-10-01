@@ -11,7 +11,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 import com.amoledwatchfaces.solarpath.solar.SolarData
@@ -35,8 +34,7 @@ fun SolarDialView(
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             val center = Offset(size.width / 2f, size.height / 2f)
-            val outerRadius = size.minDimension / 2f - 8.dp.toPx()
-            val ringThickness = 14.dp.toPx()
+            val outerRadius = size.minDimension / 2f - 4.dp.toPx()
             val arcSize = Size(outerRadius * 2, outerRadius * 2)
             val arcTopLeft = Offset(center.x - outerRadius, center.y - outerRadius)
 
@@ -47,155 +45,141 @@ fun SolarDialView(
                 return s
             }
 
-            // 1. Full Night (deep midnight charcoal, distinct from OLED black)
+            // Stacked twilight layers matching watchface.xml:
+            // 0. Daylight = Background Layer
+            drawCircle(
+                color = Color(0xFF1976D2),
+                radius = outerRadius,
+                center = center
+            )
+
+            // 1. Civil Twilight Layer: Sunset -> Sunrise
+            drawArc(
+                color = Color(0xFF3C4CC5),
+                startAngle = toCanvas(solarData.sunsetAngle),
+                sweepAngle = sweep(solarData.sunsetAngle, solarData.sunriseAngle),
+                useCenter = true,
+                topLeft = arcTopLeft,
+                size = arcSize
+            )
+
+            // 2. Nautical Twilight Layer: Civil Dusk (-6°) -> Civil Dawn (-6°)
+            drawArc(
+                color = Color(0xFF283593),
+                startAngle = toCanvas(solarData.civilDuskAngle),
+                sweepAngle = sweep(solarData.civilDuskAngle, solarData.civilDawnAngle),
+                useCenter = true,
+                topLeft = arcTopLeft,
+                size = arcSize
+            )
+
+            // 3. Astronomical Twilight Layer: Nautical Dusk (-12°) -> Nautical Dawn (-12°)
+            drawArc(
+                color = Color(0xFF1A237E),
+                startAngle = toCanvas(solarData.nauticalDuskAngle),
+                sweepAngle = sweep(solarData.nauticalDuskAngle, solarData.nauticalDawnAngle),
+                useCenter = true,
+                topLeft = arcTopLeft,
+                size = arcSize
+            )
+
+            // 4. Full Night Layer: Astro Dusk (-18°) -> Astro Dawn (-18°) through Midnight 180°
             drawArc(
                 color = Color(0xFF151B26),
                 startAngle = toCanvas(solarData.astroDuskAngle),
                 sweepAngle = sweep(solarData.astroDuskAngle, solarData.astroDawnAngle),
-                useCenter = false,
+                useCenter = true,
                 topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
+                size = arcSize
             )
 
-            // 2. Astronomical Twilight Dusk (deep navy)
-            drawArc(
-                color = Color(0xFF1A237E),
-                startAngle = toCanvas(solarData.nauticalDuskAngle),
-                sweepAngle = sweep(solarData.nauticalDuskAngle, solarData.astroDuskAngle),
-                useCenter = false,
-                topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
-            )
-
-            // 3. Astronomical Twilight Dawn (deep navy)
-            drawArc(
-                color = Color(0xFF1A237E),
-                startAngle = toCanvas(solarData.astroDawnAngle),
-                sweepAngle = sweep(solarData.astroDawnAngle, solarData.nauticalDawnAngle),
-                useCenter = false,
-                topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
-            )
-
-            // 4. Nautical Twilight Dusk (rich indigo)
-            drawArc(
-                color = Color(0xFF283593),
-                startAngle = toCanvas(solarData.civilDuskAngle),
-                sweepAngle = sweep(solarData.civilDuskAngle, solarData.nauticalDuskAngle),
-                useCenter = false,
-                topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
-            )
-
-            // 5. Nautical Twilight Dawn (rich indigo)
-            drawArc(
-                color = Color(0xFF283593),
-                startAngle = toCanvas(solarData.nauticalDawnAngle),
-                sweepAngle = sweep(solarData.nauticalDawnAngle, solarData.civilDawnAngle),
-                useCenter = false,
-                topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
-            )
-
-            // 6. Civil Twilight Dusk
-            drawArc(
-                color = Color(0xFFE65100),
-                startAngle = toCanvas(solarData.sunsetAngle),
-                sweepAngle = sweep(solarData.sunsetAngle, solarData.civilDuskAngle),
-                useCenter = false,
-                topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
-            )
-
-            // 7. Civil Twilight Dawn
-            drawArc(
-                color = Color(0xFFE65100),
-                startAngle = toCanvas(solarData.civilDawnAngle),
-                sweepAngle = sweep(solarData.civilDawnAngle, solarData.sunriseAngle),
-                useCenter = false,
-                topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
-            )
-
-            // 8. Daylight (vibrant solar sky blue)
-            drawArc(
-                color = Color(0xFF1976D2),
-                startAngle = toCanvas(solarData.sunriseAngle),
-                sweepAngle = sweep(solarData.sunriseAngle, solarData.sunsetAngle),
-                useCenter = false,
-                topLeft = arcTopLeft,
-                size = arcSize,
-                style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
+            // Outer ring border
+            drawCircle(
+                color = Color(0xFF37474F),
+                radius = outerRadius,
+                center = center,
+                style = Stroke(width = 1.dp.toPx())
             )
 
             // Horizon Line
             drawLine(
                 color = Color(0xFF78909C),
-                start = Offset(center.x - outerRadius - 6.dp.toPx(), center.y),
-                end = Offset(center.x + outerRadius + 6.dp.toPx(), center.y),
-                strokeWidth = 1.5.dp.toPx(),
-                pathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 6f), 0f)
+                start = Offset(center.x - outerRadius, center.y),
+                end = Offset(center.x + outerRadius, center.y),
+                strokeWidth = 1.dp.toPx(),
+                pathEffect = PathEffect.dashPathEffect(floatArrayOf(4f, 4f), 0f)
             )
 
-            // Inner subdial circle
-            val innerRadius = outerRadius - ringThickness - 4.dp.toPx()
+            // Timeline Circle (matching watch face inner circle)
+            val timelineRadius = outerRadius * 0.51f
             drawCircle(
-                color = Color(0xFF0D1117),
-                radius = innerRadius,
-                center = center
-            )
-            drawCircle(
-                color = Color(0xFF30363D),
-                radius = innerRadius,
+                color = Color.White.copy(alpha = 0.5f),
+                radius = timelineRadius,
                 center = center,
                 style = Stroke(width = 1.dp.toPx())
             )
 
-            // Sun marker position on ring
-            val angleRad = Math.toRadians((sunAngleDeg - 90.0))
-            val sunRadius = outerRadius
-            val sunX = center.x + (sunRadius * cos(angleRad)).toFloat()
-            val sunY = center.y + (sunRadius * sin(angleRad)).toFloat()
+            // Timeline Dots for all solar events
+            val eventAngles = listOf(
+                solarData.sunriseAngle,
+                solarData.sunsetAngle,
+                solarData.civilDawnAngle,
+                solarData.civilDuskAngle,
+                solarData.nauticalDawnAngle,
+                solarData.nauticalDuskAngle,
+                solarData.astroDawnAngle,
+                solarData.astroDuskAngle,
+                solarData.solarNoonAngle,
+                solarData.solarMidnightAngle
+            )
+            eventAngles.forEach { angle ->
+                val rad = Math.toRadians((angle - 90.0))
+                val dotX = center.x + (timelineRadius * cos(rad)).toFloat()
+                val dotY = center.y + (timelineRadius * sin(rad)).toFloat()
+                drawCircle(
+                    color = Color.White.copy(alpha = 0.5f),
+                    radius = 2.dp.toPx(),
+                    center = Offset(dotX, dotY)
+                )
+            }
+
+            // Sun marker position on timeline circle
+            val sunRad = Math.toRadians((sunAngleDeg - 90.0))
+            val sunX = center.x + (timelineRadius * cos(sunRad)).toFloat()
+            val sunY = center.y + (timelineRadius * sin(sunRad)).toFloat()
 
             // Ray to center
             drawLine(
-                color = Color(0xFFFFE082).copy(alpha = 0.5f),
+                color = Color(0xFFFFE082).copy(alpha = 0.55f),
                 start = center,
                 end = Offset(sunX, sunY),
-                strokeWidth = 1.dp.toPx()
+                strokeWidth = 1.5.dp.toPx()
             )
 
             // Corona
             drawCircle(
                 color = Color(0xFFFFB300).copy(alpha = 0.35f),
-                radius = 10.dp.toPx(),
+                radius = 8.dp.toPx(),
                 center = Offset(sunX, sunY)
             )
 
-            // Sun Core
+            // Sun Core Disc
             drawCircle(
                 color = Color(0xFFFFD54F),
-                radius = 5.dp.toPx(),
+                radius = 4.dp.toPx(),
                 center = Offset(sunX, sunY)
             )
             drawCircle(
                 color = Color.White,
-                radius = 5.dp.toPx(),
+                radius = 4.dp.toPx(),
                 center = Offset(sunX, sunY),
-                style = Stroke(width = 1.5.dp.toPx())
+                style = Stroke(width = 1.2.dp.toPx())
             )
 
             // Center Pin
             drawCircle(
                 color = Color(0xFFFFD54F),
-                radius = 3.dp.toPx(),
+                radius = 2.5.dp.toPx(),
                 center = center
             )
         }
