@@ -117,6 +117,13 @@
             <!-- Orange Hue -->
             <PartDraw x="0" y="0" width="450" height="450">
                 <Transform target="angle" value="[REFERENCE.noon_angle]"/>
+                <Transform
+                    target="alpha"
+                    value="clamp(round(clamp(255 * (1 - abs((([HOUR_0_23_MINUTE] + 12) * 15 % 360) - [REFERENCE.ss_angle]) / 30), 0, 255) + clamp(255 * (1 - abs((([HOUR_0_23_MINUTE] + 12) * 15 % 360) - [REFERENCE.sr_angle]) / 30), 0, 255)), 0, 255)"/>
+                <Reference
+                    name="orangeGradientAlpha"
+                    source="alpha"/>
+                <Variant mode="AMBIENT" target="alpha" value="0"/>
                 <Rectangle x="0" y="0" width="450" height="450">
                     <Fill color="#ffffff">
                         <LinearGradient
@@ -124,7 +131,7 @@
                             endX="225"
                             startY="0"
                             endY="0"
-                            colors="#00000000 #00000000 #FFB121"
+                            colors="#00000000 #00000000 #ffFF8400"
                             positions="0 0.3 1">
                             <Transform
                                 target="endY"
@@ -156,6 +163,23 @@
                             radius="34"
                             colors="#fffffd #fffffd #00ffffff #00ffffff"
                             positions="0 0.5 0.75 1"/>
+                    </Fill>
+                </Ellipse>
+            </PartDraw>
+            <PartDraw name="sun_halo_orange_hue" width="200" height="200" x="125" y="10" pivotY="1.075">
+                <Transform target="angle" value="([HOUR_0_23_MINUTE] + 12) * 15 % 360"/>
+                <Transform
+                    target="alpha"
+                    value="[REFERENCE.orangeGradientAlpha]"/>
+                <Variant mode="AMBIENT" target="alpha" value="0"/>
+                <Ellipse width="200" height="200" x="0" y="0">
+                    <Fill color="#FF8400">
+                        <RadialGradient
+                            centerX="100"
+                            centerY="100"
+                            radius="200"
+                            colors="#70FF8400 #00ffffff #00ffffff"
+                            positions="0 0.1 1"/>
                     </Fill>
                 </Ellipse>
             </PartDraw>

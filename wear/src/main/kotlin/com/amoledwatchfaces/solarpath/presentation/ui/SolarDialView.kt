@@ -54,6 +54,39 @@ fun SolarDialView(
                 center = center
             )
 
+            // Default Hue (soft daylight linear gradient matching watchface.xml)
+            drawCircle(
+                brush = Brush.verticalGradient(
+                    colors = listOf(Color.Transparent, Color.Transparent, Color.White.copy(alpha = 0.25f)),
+                    startY = center.y - outerRadius,
+                    endY = center.y + outerRadius
+                ),
+                radius = outerRadius,
+                center = center
+            )
+
+            // Orange Hue: Max opacity around sunset/sunrise, fading to 0 at +/- 3 hours (45 deg)
+            fun angularDist(a: Float, b: Float): Float {
+                val diff = kotlin.math.abs(a - b) % 360f
+                return if (diff > 180f) 360f - diff else diff
+            }
+            val distToSunset = angularDist(sunAngleDeg, solarData.sunsetAngle)
+            val distToSunrise = angularDist(sunAngleDeg, solarData.sunriseAngle)
+            val minEventDist = kotlin.math.min(distToSunset, distToSunrise)
+            val orangeHueFactor = (1f - minEventDist / 45f).coerceIn(0f, 1f)
+
+            if (orangeHueFactor > 0.01f) {
+                drawCircle(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Transparent, Color(0xFFFFB121).copy(alpha = 0.55f * orangeHueFactor)),
+                        startY = center.y - outerRadius,
+                        endY = center.y + outerRadius
+                    ),
+                    radius = outerRadius,
+                    center = center
+                )
+            }
+
             // 1. Civil Twilight Layer: Sunset -> Sunrise
             drawArc(
                 color = Color(0xFF3C4CC5),
@@ -159,11 +192,6 @@ fun SolarDialView(
 
             // Calculate Day vs Night state & transition factor for the sun disc
             // Disc diameter on 450 face is 30px => ~15° angular width (±7.5° radius)
-            fun angularDist(a: Float, b: Float): Float {
-                val diff = kotlin.math.abs(a - b) % 360f
-                return if (diff > 180f) 360f - diff else diff
-            }
-
             val isNightTime = if (solarData.sunsetAngle <= solarData.sunriseAngle) {
                 sunAngleDeg >= solarData.sunsetAngle && sunAngleDeg <= solarData.sunriseAngle
             } else {
@@ -172,8 +200,6 @@ fun SolarDialView(
 
             // Smooth transition over the 7.5° disc radius around sunset / sunrise
             val transitionHalfWidth = 7.5f
-            val distToSunset = angularDist(sunAngleDeg, solarData.sunsetAngle)
-            val distToSunrise = angularDist(sunAngleDeg, solarData.sunriseAngle)
             val daylightFactor = when {
                 distToSunset < transitionHalfWidth -> {
                     // Sunset: sunAngleDeg crossing from < sunset to > sunset
