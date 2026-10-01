@@ -34,7 +34,8 @@ object SolarCalculator {
             SolarEvent.NauticalDawn,
             SolarEvent.NauticalDusk,
             SolarEvent.AstronomicalDawn,
-            SolarEvent.AstronomicalDusk
+            SolarEvent.AstronomicalDusk,
+            SolarEvent.Night
         )
 
         val eventsSequence = SolarEventSequence(
@@ -52,12 +53,23 @@ object SolarCalculator {
         val noon = eventList.find { it is SolarEvent.Noon }?.time?.toEpochMilliseconds() ?: 0L
         val nadir = eventList.find { it is SolarEvent.Nadir }?.time?.toEpochMilliseconds() ?: 0L
 
-        val civilDawn = eventList.find { it is SolarEvent.CivilDawn }?.time?.toEpochMilliseconds() ?: 0L
-        val civilDusk = eventList.find { it is SolarEvent.CivilDusk }?.time?.toEpochMilliseconds() ?: 0L
-        val nauticalDawn = eventList.find { it is SolarEvent.NauticalDawn }?.time?.toEpochMilliseconds() ?: 0L
-        val nauticalDusk = eventList.find { it is SolarEvent.NauticalDusk }?.time?.toEpochMilliseconds() ?: 0L
+        // In Kastro, dusk events mark the transitions:
+        // - Sunset begins Civil Dusk (sun at 0°)
+        // - NauticalDusk marks sun reaching -6° (end of Civil Dusk, start of Nautical Dusk)
+        // - AstronomicalDusk marks sun reaching -12° (end of Nautical Dusk, start of Astro Dusk)
+        // - Night marks sun reaching -18° (end of Astro Dusk, start of Night)
+        val civilDusk = eventList.find { it is SolarEvent.NauticalDusk }?.time?.toEpochMilliseconds() ?: 0L
+        val nauticalDusk = eventList.find { it is SolarEvent.AstronomicalDusk }?.time?.toEpochMilliseconds() ?: 0L
+        val astroDusk = eventList.find { it is SolarEvent.Night }?.time?.toEpochMilliseconds() ?: 0L
+
+        // Dawn transitions:
+        // - AstronomicalDawn marks sun reaching -18° (end of Night, start of Astro Dawn)
+        // - NauticalDawn marks sun reaching -12° (end of Astro Dawn, start of Nautical Dawn)
+        // - CivilDawn marks sun reaching -6° (end of Nautical Dawn, start of Civil Dawn)
+        // - Sunrise marks sun reaching 0° (end of Civil Dawn, start of Day)
         val astroDawn = eventList.find { it is SolarEvent.AstronomicalDawn }?.time?.toEpochMilliseconds() ?: 0L
-        val astroDusk = eventList.find { it is SolarEvent.AstronomicalDusk }?.time?.toEpochMilliseconds() ?: 0L
+        val nauticalDawn = eventList.find { it is SolarEvent.NauticalDawn }?.time?.toEpochMilliseconds() ?: 0L
+        val civilDawn = eventList.find { it is SolarEvent.CivilDawn }?.time?.toEpochMilliseconds() ?: 0L
 
         val currentInstant = Instant.fromEpochMilliseconds(currentTimeMillis)
         val solarState = currentInstant.calculateSolarState(latitude = lat, longitude = lon)

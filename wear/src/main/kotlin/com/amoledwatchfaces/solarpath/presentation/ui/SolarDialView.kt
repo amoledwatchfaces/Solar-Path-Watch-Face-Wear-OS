@@ -47,9 +47,9 @@ fun SolarDialView(
                 return s
             }
 
-            // 1. Full Night (deep midnight)
+            // 1. Full Night (deep midnight charcoal, distinct from OLED black)
             drawArc(
-                color = Color(0xFF080D1A),
+                color = Color(0xFF151B26),
                 startAngle = toCanvas(solarData.astroDuskAngle),
                 sweepAngle = sweep(solarData.astroDuskAngle, solarData.astroDawnAngle),
                 useCenter = false,
@@ -58,9 +58,9 @@ fun SolarDialView(
                 style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
             )
 
-            // 2. Astronomical Twilight Dusk
+            // 2. Astronomical Twilight Dusk (deep navy)
             drawArc(
-                color = Color(0xFF101935),
+                color = Color(0xFF1A237E),
                 startAngle = toCanvas(solarData.nauticalDuskAngle),
                 sweepAngle = sweep(solarData.nauticalDuskAngle, solarData.astroDuskAngle),
                 useCenter = false,
@@ -69,9 +69,9 @@ fun SolarDialView(
                 style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
             )
 
-            // 3. Astronomical Twilight Dawn
+            // 3. Astronomical Twilight Dawn (deep navy)
             drawArc(
-                color = Color(0xFF101935),
+                color = Color(0xFF1A237E),
                 startAngle = toCanvas(solarData.astroDawnAngle),
                 sweepAngle = sweep(solarData.astroDawnAngle, solarData.nauticalDawnAngle),
                 useCenter = false,
@@ -80,9 +80,9 @@ fun SolarDialView(
                 style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
             )
 
-            // 4. Nautical Twilight Dusk
+            // 4. Nautical Twilight Dusk (rich indigo)
             drawArc(
-                color = Color(0xFF1E2D5A),
+                color = Color(0xFF283593),
                 startAngle = toCanvas(solarData.civilDuskAngle),
                 sweepAngle = sweep(solarData.civilDuskAngle, solarData.nauticalDuskAngle),
                 useCenter = false,
@@ -91,9 +91,9 @@ fun SolarDialView(
                 style = Stroke(width = ringThickness, cap = StrokeCap.Butt)
             )
 
-            // 5. Nautical Twilight Dawn
+            // 5. Nautical Twilight Dawn (rich indigo)
             drawArc(
-                color = Color(0xFF1E2D5A),
+                color = Color(0xFF283593),
                 startAngle = toCanvas(solarData.nauticalDawnAngle),
                 sweepAngle = sweep(solarData.nauticalDawnAngle, solarData.civilDawnAngle),
                 useCenter = false,
