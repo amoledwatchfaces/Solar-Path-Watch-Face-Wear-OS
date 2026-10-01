@@ -119,7 +119,7 @@
                 <Transform target="angle" value="[REFERENCE.noon_angle]"/>
                 <Transform
                     target="alpha"
-                    value="clamp(round(clamp(255 * (1 - abs((([HOUR_0_23_MINUTE] + 12) * 15 % 360) - [REFERENCE.ss_angle]) / 30), 0, 255) + clamp(255 * (1 - abs((([HOUR_0_23_MINUTE] + 12) * 15 % 360) - [REFERENCE.sr_angle]) / 30), 0, 255)), 0, 255)"/>
+                    value="clamp(round(clamp(255 * (1 - abs(([REFERENCE.solarTrack]) - [REFERENCE.ss_angle]) / 30), 0, 255) + clamp(255 * (1 - abs(([REFERENCE.solarTrack]) - [REFERENCE.sr_angle]) / 30), 0, 255)), 0, 255)"/>
                 <Reference
                     name="orangeGradientAlpha"
                     source="alpha"/>
@@ -143,7 +143,7 @@
 
             <!-- Sun Halo -->
             <PartDraw name="sun_halo" width="200" height="200" x="125" y="10" pivotY="1.075">
-                <Transform target="angle" value="([HOUR_0_23_MINUTE] + 12) * 15 % 360"/>
+                <Transform target="angle" value="[REFERENCE.solarTrack]"/>
                 <Variant mode="AMBIENT" target="alpha" value="0"/>
                 <Ellipse width="200" height="200" x="0" y="0">
                     <Fill color="#fffffd">
@@ -167,7 +167,7 @@
                 </Ellipse>
             </PartDraw>
             <PartDraw name="sun_halo_orange_hue" width="200" height="200" x="125" y="10" pivotY="1.075">
-                <Transform target="angle" value="([HOUR_0_23_MINUTE] + 12) * 15 % 360"/>
+                <Transform target="angle" value="[REFERENCE.solarTrack]"/>
                 <Transform
                     target="alpha"
                     value="[REFERENCE.orangeGradientAlpha]"/>
@@ -480,6 +480,9 @@
         <!-- Sun Orbiting Marker: Rotates at 15 deg per hour, noon at top (0 deg) -->
         <Group name="solar_track" width="450" height="450" x="0" y="0" pivotX="0.5" pivotY="0.5">
             <Transform target="angle" value="([HOUR_0_23_MINUTE] + 12) * 15 % 360"/>
+            <Reference
+                name="solarTrack"
+                source="angle"/>
             <!-- Sun Beam Line -->
             <PartDraw width="450" height="450" x="0" y="0" alpha="75">
                 <Variant mode="AMBIENT" target="alpha" value="0"/>
@@ -501,7 +504,7 @@
                     </Ellipse>
                 </PartDraw>
                 <PartDraw name="sunset_to_sunrise" width="450" height="450" x="-210" y="-95">
-                    <Transform target="angle" value="-(([HOUR_0_23_MINUTE] + 12) * 15 % 360)"/>
+                    <Transform target="angle" value="-[REFERENCE.solarTrack]"/>
                     <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                         <Transform target="startAngle" value="[REFERENCE.ss_angle]"/>
                         <Transform target="endAngle" value="[REFERENCE.sr_angle]"/>
