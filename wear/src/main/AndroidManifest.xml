@@ -51,7 +51,7 @@
 
         <!-- Activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.App.Starting">
