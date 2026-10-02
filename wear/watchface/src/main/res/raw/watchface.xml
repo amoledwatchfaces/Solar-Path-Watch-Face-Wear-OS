@@ -162,6 +162,7 @@
     <Scene>
         <!-- 24-Hour Solar Path Ring -->
         <Group name="solar_path" width="450" height="450" x="0" y="0">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
             <!-- Base -->
             <PartDraw name="canvas" width="450" height="450" x="0" y="0" renderMode="ALL">
                 <Ellipse x="34" y="34" width="382" height="382">
@@ -2348,6 +2349,8 @@
         </ComplicationSlot>
 
         <Group name="digital_clock_wrapper" width="184" height="184" x="133" y="94" pivotY="0.711956">
+            <Variant mode="AMBIENT" target="y" value="133"/>
+            <Variant mode="AMBIENT" target="angle" value="0" angleDirection="CLOCKWISE"/>
             <Transform target="angle" value="180+[REFERENCE.solarTrack]"/>
             <PartDraw x="0" y="0" width="184" height="184" alpha="215" tintColor="[CONFIGURATION.primaryTheme.1]">
                 <Ellipse
@@ -2380,6 +2383,7 @@
                 </Ellipse>
             </PartDraw>
             <Group name="digital_clock" x="0" y="0" width="184" height="184">
+                <Variant mode="AMBIENT" target="angle" value="0" angleDirection="COUNTER_CLOCKWISE"/>
                 <Transform target="angle" value="-(180+[REFERENCE.solarTrack])"/>
                 <PartText name="date" x="0" y="26" width="184" height="40">
                     <Text>
