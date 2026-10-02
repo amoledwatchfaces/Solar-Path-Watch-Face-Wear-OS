@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <WatchFace width="450" height="450">
     <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
     <Metadata key="PREVIEW_TIME" value="18:00:00"/>
@@ -166,7 +166,7 @@
             <PartDraw name="circle_base" width="450" height="450" x="0" y="0" renderMode="ALL">
                 <Transform
                     target="alpha"
-                    value="[REFERENCE.solarTrack] &lt;= [REFERENCE.ss_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 205 * ([REFERENCE.solarTrack] - [REFERENCE.ss_angle]) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle])), 50, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 50 : [REFERENCE.solarTrack] &lt;= [REFERENCE.sr_angle] ? clamp(round(50 + 205 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] - [REFERENCE.adawn_angle])), 50, 255) : 255"/>
+                    value="[REFERENCE.solarTrack] &lt;= [REFERENCE.ss_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 180 * ([REFERENCE.solarTrack] - [REFERENCE.ss_angle]) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle])), 75, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 75 : [REFERENCE.solarTrack] &lt;= [REFERENCE.sr_angle] ? clamp(round(75 + 180 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] - [REFERENCE.adawn_angle])), 75, 255) : 255"/>
                 <Ellipse x="34" y="34" width="382" height="382">
                     <Fill color="[CONFIGURATION.secondaryTheme.2]"/>
                 </Ellipse>
@@ -177,148 +177,148 @@
                 <Transform
                     target="alpha"
                     value="[REFERENCE.solarTrack] &lt;= [REFERENCE.ss_angle] ? 0 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 * ([REFERENCE.solarTrack] - [REFERENCE.ss_angle]) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle])), 0, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.sr_angle] ? clamp(round(255 * ([REFERENCE.sr_angle] - [REFERENCE.solarTrack]) / ([REFERENCE.sr_angle] - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] - [REFERENCE.adawn_angle])), 0, 255) : 0"/>
-                <Ellipse x="223" y="60" width="4" height="4">
+                <Ellipse x="223" y="60" width="5" height="5">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="166" y="82" width="3" height="3">
+                <Ellipse x="166" y="82" width="4" height="4">
                     <Fill color="#ffffffff"/>
                 </Ellipse>
-                <Ellipse x="140" y="106" width="3" height="3">
+                <Ellipse x="140" y="106" width="4" height="4">
                     <Fill color="#d8e8ff"/>
                 </Ellipse>
-                <Ellipse x="184" y="116" width="3" height="3">
+                <Ellipse x="184" y="116" width="4" height="4">
                     <Fill color="#fff8e0"/>
                 </Ellipse>
-                <Ellipse x="280" y="76" width="4" height="4">
+                <Ellipse x="280" y="76" width="5" height="5">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="310" y="94" width="3" height="3">
+                <Ellipse x="310" y="94" width="4" height="4">
                     <Fill color="#d8e8ff"/>
                 </Ellipse>
-                <Ellipse x="336" y="124" width="3" height="3">
+                <Ellipse x="336" y="124" width="4" height="4">
                     <Fill color="#fff8e0"/>
                 </Ellipse>
-                <Ellipse x="110" y="146" width="3" height="3">
+                <Ellipse x="110" y="146" width="4" height="4">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="326" y="160" width="3" height="3">
+                <Ellipse x="326" y="160" width="4" height="4">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="138" y="158" width="3" height="3">
+                <Ellipse x="138" y="158" width="4" height="4">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="392" y="183" width="2" height="2">
+                <Ellipse x="392" y="183" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="298" y="73" width="2" height="2">
+                <Ellipse x="298" y="73" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="162" y="63" width="2" height="2">
+                <Ellipse x="162" y="63" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="191" y="94" width="2" height="2">
+                <Ellipse x="191" y="94" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="158" y="107" width="2" height="2">
+                <Ellipse x="158" y="107" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="58" y="181" width="2" height="2">
+                <Ellipse x="58" y="181" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="300" y="154" width="2" height="2">
+                <Ellipse x="300" y="154" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="268" y="186" width="2" height="2">
+                <Ellipse x="268" y="186" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="275" y="156" width="2" height="2">
+                <Ellipse x="275" y="156" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="97" y="165" width="2" height="2">
+                <Ellipse x="97" y="165" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="128" y="173" width="2" height="2">
+                <Ellipse x="128" y="173" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="341" y="143" width="2" height="2">
+                <Ellipse x="341" y="143" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="232" y="149" width="3" height="3">
+                <Ellipse x="232" y="149" width="4" height="4">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="255" y="136" width="2" height="2">
+                <Ellipse x="255" y="136" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="115" y="96" width="2" height="2">
+                <Ellipse x="115" y="96" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="293" y="184" width="2" height="2">
+                <Ellipse x="293" y="184" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="171" y="136" width="2" height="2">
+                <Ellipse x="171" y="136" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="116" y="125" width="2" height="2">
+                <Ellipse x="116" y="125" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="185" y="64" width="2" height="2">
+                <Ellipse x="185" y="64" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="339" y="176" width="2" height="2">
+                <Ellipse x="339" y="176" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="127" y="73" width="2" height="2">
+                <Ellipse x="127" y="73" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="326" y="186" width="2" height="2">
+                <Ellipse x="326" y="186" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="336" y="91" width="3" height="3">
+                <Ellipse x="336" y="91" width="4" height="4">
                     <Fill color="#d5ffffff"/>
                 </Ellipse>
-                <Ellipse x="136" y="186" width="3" height="3">
+                <Ellipse x="136" y="186" width="4" height="4">
                     <Fill color="#d5ffffff"/>
                 </Ellipse>
-                <Ellipse x="138" y="86" width="3" height="3">
+                <Ellipse x="138" y="86" width="4" height="4">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="312" y="122" width="3" height="3">
+                <Ellipse x="312" y="122" width="4" height="4">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="203" y="165" width="3" height="3">
+                <Ellipse x="203" y="165" width="4" height="4">
                     <Fill color="#d5ffffff"/>
                 </Ellipse>
-                <Ellipse x="249" y="165" width="2" height="2">
+                <Ellipse x="249" y="165" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="208" y="115" width="2" height="2">
+                <Ellipse x="208" y="115" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="299" y="108" width="3" height="3">
+                <Ellipse x="299" y="108" width="4" height="4">
                     <Fill color="#ffffff"/>
                 </Ellipse>
-                <Ellipse x="364" y="158" width="2" height="2">
+                <Ellipse x="364" y="158" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="370" y="136" width="2" height="2">
+                <Ellipse x="370" y="136" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="286" y="170" width="2" height="2">
+                <Ellipse x="286" y="170" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="234" y="128" width="2" height="2">
+                <Ellipse x="234" y="128" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="205" y="131" width="2" height="2">
+                <Ellipse x="205" y="131" width="3" height="3">
                     <Fill color="#a5ffffff"/>
                 </Ellipse>
-                <Ellipse x="209" y="93" width="2" height="2">
+                <Ellipse x="209" y="93" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="257" y="56" width="2" height="2">
+                <Ellipse x="257" y="56" width="3" height="3">
                     <Fill color="#75ffffff"/>
                 </Ellipse>
-                <Ellipse x="270" y="104" width="3" height="3">
+                <Ellipse x="270" y="104" width="4" height="4">
                     <Fill color="#ffffff"/>
                 </Ellipse>
 
@@ -702,7 +702,7 @@
         </Group>
 
         <!-- Timeline with Dots -->
-        <Group name="solar_track" width="450" height="450" x="0" y="0" alpha="175">
+        <Group name="solar_track" width="450" height="450" x="0" y="0" alpha="115">
             <!-- Timeline Circle -->
             <PartDraw width="450" height="450" x="0" y="0">
                 <Ellipse height="224" width="224" y="113" x="113">
