@@ -911,8 +911,7 @@
                             direction="COUNTER_CLOCKWISE"
                             width="420"
                             height="420">
-                            <Transform target="endAngle" value="clamp(284+7+48*[REFERENCE.c0progress],284,332)-7*([REFERENCE.c0progress] == 0)"/>
-                            <Stroke color="#505050" cap="ROUND" thickness="18"/>
+                            <Stroke color="#454545" cap="ROUND" thickness="18"/>
                         </Arc>
                     </PartDraw>
                     <Condition>
@@ -920,7 +919,16 @@
                             <Expression name="progressGradients">[CONFIGURATION.progressGradients] == &quot;TRUE&quot;</Expression>
                         </Expressions>
                         <Compare expression="progressGradients">
-                            <PartDraw name="progress_bar_gradient_mid" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                            <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="225"
+                                    centerY="225"
+                                    startAngle="284"
+                                    endAngle="332"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="284 + 48 * [REFERENCE.c0progress] * ([REFERENCE.c0progress] &lt;= 0.95)"/>
+                                    <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                                </Arc>
                                 <Arc centerX="225"
                                     centerY="225"
                                     startAngle="284"
@@ -931,21 +939,7 @@
                                     <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
                                 </Arc>
                             </PartDraw>
-                            <PartDraw name="progress_bar_gradient_end" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
-                                <Arc startAngle="284" endAngle="332"
-                                    centerX="225"
-                                    centerY="225"
-                                    width="420"
-                                    height="420">
-                                    <Transform target="endAngle" value="284 + 48 * [REFERENCE.c0progress]"/>
-                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
-                                        <SweepGradient centerX="225" centerY="225"
-                                            startAngle="281" endAngle="335"
-                                            colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
-                                    </Stroke>
-                                </Arc>
-                            </PartDraw>
-                            <PartDraw name="progress_bar_gradient_start" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                            <PartDraw name="progress_bar_color_0" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
                                 <Arc startAngle="284" endAngle="332"
                                     centerX="225"
                                     centerY="225"
@@ -959,9 +953,23 @@
                                     </Stroke>
                                 </Arc>
                             </PartDraw>
+                            <PartDraw name="progress_bar_color_2" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                                <Arc startAngle="284" endAngle="332"
+                                    centerX="225"
+                                    centerY="225"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="284 + 48 * [REFERENCE.c0progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="225" centerY="225"
+                                            startAngle="281" endAngle="335"
+                                            colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
                         </Compare>
                         <Default>
-                            <PartDraw name="progress_bar_gradient_mid" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                            <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
                                 <Arc centerX="225"
                                     centerY="225"
                                     startAngle="284"
@@ -1289,61 +1297,90 @@
                             endAngle="62"
                             width="420"
                             height="420">
-                            <Stroke color="#393939" cap="ROUND" thickness="18"/>
+                            <Stroke color="#454545" cap="ROUND" thickness="18"/>
                         </Arc>
                     </PartDraw>
-                    <PartDraw name="progress_bar_color_0" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
-                        <Arc centerX="0"
-                            centerY="225"
-                            startAngle="14"
-                            endAngle="62"
-                            width="420"
-                            height="420">
-                            <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress] * ([REFERENCE.c1progress] &lt;= 0.95)"/>
-                            <Stroke color="#000000" cap="ROUND" thickness="30"/>
-                        </Arc>
-                        <Arc centerX="0"
-                            centerY="225"
-                            startAngle="14"
-                            endAngle="62"
-                            width="420"
-                            height="420">
-                            <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
-                            <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
-                        </Arc>
-                    </PartDraw>
-                    <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
-                        <Arc centerX="0"
-                            centerY="225"
-                            startAngle="14"
-                            endAngle="62"
-                            width="420"
-                            height="420">
-                            <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
-                            <Stroke color="#ffffff" cap="ROUND" thickness="18">
-                                <SweepGradient centerX="0"
+                    <Condition>
+                        <Expressions>
+                            <Expression name="progressGradients">[CONFIGURATION.progressGradients] == &quot;TRUE&quot;</Expression>
+                        </Expressions>
+                        <Compare expression="progressGradients">
+                            <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="0"
                                     centerY="225"
-                                    startAngle="11" endAngle="65"
-                                    colors="#ffffffff #00ffffff #00ffffff" positions="0 0.5 1" />
-                            </Stroke>
-                        </Arc>
-                    </PartDraw>
-                    <PartDraw name="progress_bar_color_2" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
-                        <Arc centerX="0"
-                            centerY="225"
-                            startAngle="14"
-                            endAngle="62"
-                            width="420"
-                            height="420">
-                            <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
-                            <Stroke color="#ffffff" cap="ROUND" thickness="18">
-                                <SweepGradient centerX="0"
+                                    startAngle="14"
+                                    endAngle="62"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress] * ([REFERENCE.c1progress] &lt;= 0.95)"/>
+                                    <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                                </Arc>
+                                <Arc centerX="0"
                                     centerY="225"
-                                    startAngle="11" endAngle="65"
-                                    colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
-                            </Stroke>
-                        </Arc>
-                    </PartDraw>
+                                    startAngle="14"
+                                    endAngle="62"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw name="progress_bar_color_0" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                                <Arc centerX="0"
+                                    centerY="225"
+                                    startAngle="14"
+                                    endAngle="62"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="0"
+                                            centerY="225"
+                                            startAngle="11" endAngle="65"
+                                            colors="#ffffffff #00ffffff #00ffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw name="progress_bar_color_2" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                                <Arc centerX="0"
+                                    centerY="225"
+                                    startAngle="14"
+                                    endAngle="62"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="0"
+                                            centerY="225"
+                                            startAngle="11" endAngle="65"
+                                            colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                        <Default>
+                            <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="0"
+                                    centerY="225"
+                                    startAngle="14"
+                                    endAngle="62"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress] * ([REFERENCE.c1progress] &lt;= 0.95)"/>
+                                    <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                                </Arc>
+                                <Arc centerX="0"
+                                    centerY="225"
+                                    startAngle="14"
+                                    endAngle="62"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="14 + 48 * [REFERENCE.c1progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                                </Arc>
+                            </PartDraw>
+                        </Default>
+                    </Condition>
                     <PartText name="text" width="225" height="225" x="0" y="0">
                         <TextCircular centerX="0"
                             centerY="225"
@@ -1655,8 +1692,7 @@
                             endAngle="104"
                             width="420"
                             height="420">
-                            <Transform target="endAngle" value="clamp(104+7+48*[REFERENCE.c2progress],104,152)-7*([REFERENCE.c2progress] == 0)"/>
-                            <Stroke color="#393939" cap="ROUND" thickness="18"/>
+                            <Stroke color="#454545" cap="ROUND" thickness="18"/>
                         </Arc>
                     </PartDraw>
                     <Condition>
@@ -1664,7 +1700,16 @@
                             <Expression name="progressGradients">[CONFIGURATION.progressGradients] == &quot;TRUE&quot;</Expression>
                         </Expressions>
                         <Compare expression="progressGradients">
-                            <PartDraw name="progress_bar_gradient_mid" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                            <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="0"
+                                    centerY="0"
+                                    startAngle="104"
+                                    endAngle="152"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress] * ([REFERENCE.c2progress] &lt;= 0.95)"/>
+                                    <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                                </Arc>
                                 <Arc centerX="0"
                                     centerY="0"
                                     startAngle="104"
@@ -1675,22 +1720,7 @@
                                     <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
                                 </Arc>
                             </PartDraw>
-                            <PartDraw name="progress_bar_gradient_end" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
-                                <Arc centerX="0"
-                                    centerY="0"
-                                    startAngle="104"
-                                    endAngle="152"
-                                    width="420"
-                                    height="420">
-                                    <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress]"/>
-                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
-                                        <SweepGradient centerX="0" centerY="0"
-                                            startAngle="101" endAngle="155"
-                                            colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
-                                    </Stroke>
-                                </Arc>
-                            </PartDraw>
-                            <PartDraw name="progress_bar_gradient_start" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                            <PartDraw name="progress_bar_color_0" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
                                 <Arc centerX="0"
                                     centerY="0"
                                     startAngle="104"
@@ -1705,9 +1735,24 @@
                                     </Stroke>
                                 </Arc>
                             </PartDraw>
+                            <PartDraw name="progress_bar_color_2" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                                <Arc centerX="0"
+                                    centerY="0"
+                                    startAngle="104"
+                                    endAngle="152"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="0" centerY="0"
+                                            startAngle="101" endAngle="155"
+                                            colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
                         </Compare>
                         <Default>
-                            <PartDraw name="progress_bar_gradient_mid" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                            <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
                                 <Arc centerX="0"
                                     centerY="0"
                                     startAngle="104"
@@ -2035,61 +2080,90 @@
                             endAngle="242"
                             width="420"
                             height="420">
-                            <Stroke color="#393939" cap="ROUND" thickness="18"/>
+                            <Stroke color="#454545" cap="ROUND" thickness="18"/>
                         </Arc>
                     </PartDraw>
-                    <PartDraw name="progress_bar_color_0" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
-                        <Arc centerX="225"
-                            centerY="0"
-                            startAngle="194"
-                            endAngle="242"
-                            width="420"
-                            height="420">
-                            <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress] * ([REFERENCE.c3progress] &lt;= 0.95)"/>
-                            <Stroke color="#000000" cap="ROUND" thickness="30"/>
-                        </Arc>
-                        <Arc centerX="225"
-                            centerY="0"
-                            startAngle="194"
-                            endAngle="242"
-                            width="420"
-                            height="420">
-                            <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
-                            <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
-                        </Arc>
-                    </PartDraw>
-                    <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
-                        <Arc centerX="225"
-                            centerY="0"
-                            startAngle="194"
-                            endAngle="242"
-                            width="420"
-                            height="420">
-                            <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
-                            <Stroke color="#ffffff" cap="ROUND" thickness="18">
-                                <SweepGradient centerX="225"
+                    <Condition>
+                        <Expressions>
+                            <Expression name="progressGradients">[CONFIGURATION.progressGradients] == &quot;TRUE&quot;</Expression>
+                        </Expressions>
+                        <Compare expression="progressGradients">
+                            <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="225"
                                     centerY="0"
-                                    startAngle="191" endAngle="245"
-                                    colors="#ffffffff #00ffffff #00ffffff" positions="0 0.5 1" />
-                            </Stroke>
-                        </Arc>
-                    </PartDraw>
-                    <PartDraw name="progress_bar_color_2" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
-                        <Arc centerX="225"
-                            centerY="0"
-                            startAngle="194"
-                            endAngle="242"
-                            width="420"
-                            height="420">
-                            <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
-                            <Stroke color="#ffffff" cap="ROUND" thickness="18">
-                                <SweepGradient centerX="225"
+                                    startAngle="194"
+                                    endAngle="242"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress] * ([REFERENCE.c3progress] &lt;= 0.95)"/>
+                                    <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                                </Arc>
+                                <Arc centerX="225"
                                     centerY="0"
-                                    startAngle="191" endAngle="245"
-                                    colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
-                            </Stroke>
-                        </Arc>
-                    </PartDraw>
+                                    startAngle="194"
+                                    endAngle="242"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw name="progress_bar_color_0" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                                <Arc centerX="225"
+                                    centerY="0"
+                                    startAngle="194"
+                                    endAngle="242"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="225"
+                                            centerY="0"
+                                            startAngle="191" endAngle="245"
+                                            colors="#ffffffff #00ffffff #00ffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw name="progress_bar_color_2" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.2]">
+                                <Arc centerX="225"
+                                    centerY="0"
+                                    startAngle="194"
+                                    endAngle="242"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18">
+                                        <SweepGradient centerX="225"
+                                            centerY="0"
+                                            startAngle="191" endAngle="245"
+                                            colors="#00ffffff #00ffffff #ffffffff" positions="0 0.5 1" />
+                                    </Stroke>
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                        <Default>
+                            <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="225"
+                                    centerY="0"
+                                    startAngle="194"
+                                    endAngle="242"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress] * ([REFERENCE.c3progress] &lt;= 0.95)"/>
+                                    <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                                </Arc>
+                                <Arc centerX="225"
+                                    centerY="0"
+                                    startAngle="194"
+                                    endAngle="242"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="194 + 48 * [REFERENCE.c3progress]"/>
+                                    <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
+                                </Arc>
+                            </PartDraw>
+                        </Default>
+                    </Condition>
                     <PartText name="text" width="225" height="225" x="0" y="0">
                         <TextCircular centerX="225"
                             centerY="0"
