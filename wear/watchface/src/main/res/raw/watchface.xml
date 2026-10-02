@@ -420,21 +420,21 @@
                     <Stroke color="#C3C3C3" thickness="225" />
                 </Arc>
 
-                <!-- 2. Nautical Twilight Layer: Civil Dusk (-6Â°) -> Civil Dawn (-6Â°) -->
+                <!-- 2. Nautical Twilight Layer: Civil Dusk (-6°) -> Civil Dawn (-6°) -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.cdusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.cdawn_angle]"/>
                     <Stroke color="#8A8A8A" thickness="225" />
                 </Arc>
 
-                <!-- 3. Astronomical Twilight Layer: Nautical Dusk (-12Â°) -> Nautical Dawn (-12Â°) -->
+                <!-- 3. Astronomical Twilight Layer: Nautical Dusk (-12°) -> Nautical Dawn (-12°) -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.ndusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.ndawn_angle]"/>
                     <Stroke color="#545454" thickness="225" />
                 </Arc>
 
-                <!-- 4. Full Night Layer: Astro Dusk (-18Â°) -> Astro Dawn (-18Â°) through Midnight 180Â° -->
+                <!-- 4. Full Night Layer: Astro Dusk (-18°) -> Astro Dawn (-18°) through Midnight 180° -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.adusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.adawn_angle]"/>
@@ -1039,7 +1039,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1068,7 +1068,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1092,7 +1092,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1118,7 +1118,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1174,7 +1174,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1198,7 +1198,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1224,7 +1224,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1408,7 +1408,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1437,7 +1437,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1461,7 +1461,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1487,7 +1487,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1543,7 +1543,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1567,7 +1567,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1593,7 +1593,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1785,7 +1785,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1814,7 +1814,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1838,7 +1838,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1864,7 +1864,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1920,7 +1920,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1944,7 +1944,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1970,7 +1970,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2155,7 +2155,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2184,7 +2184,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2208,7 +2208,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2234,7 +2234,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2290,7 +2290,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2314,7 +2314,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2340,7 +2340,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
