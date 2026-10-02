@@ -57,7 +57,6 @@ import androidx.wear.compose.material3.Text
 import androidx.wear.compose.material3.lazy.TransformationSpec
 import androidx.wear.compose.material3.lazy.transformedHeight
 import com.amoledwatchfaces.solarpath.R
-import com.amoledwatchfaces.solarpath.presentation.ui.SolarDialView
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -96,16 +95,20 @@ fun MainScreen(
                 ),
             state = listState,
         ) {
-            // Solar Dial Visual
+            // Next Event Header
             item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    SolarDialView(solarData = solarData)
-                }
+                ListSubHeader(
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.secondary,
+                            text = stringResource(R.string.next_event),
+                            style = MaterialTheme.typography.labelMedium
+                        )
+                    }
+                )
             }
 
             // Next Event / Current Solar Status
@@ -162,6 +165,66 @@ fun MainScreen(
                         )
                     }
                 )
+            }
+
+            // Solar Times Breakdown
+            item {
+                ListSubHeader(
+                    modifier = Modifier.fillMaxWidth(),
+                    label = {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.secondary,
+                            text = stringResource(R.string.solar_times),
+                            style = MaterialTheme.typography.labelMedium
+                        )
+                    }
+                )
+            }
+
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 4.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                    shape = RoundedCornerShape(16.dp),
+                    onClick = {}
+                ) {
+                    val currentTimeMillis = System.currentTimeMillis()
+                    val solarEvents = listOf(
+                        SolarTimeEntry(stringResource(R.string.astro_dawn), solarData.astroDawnEpoch, MaterialTheme.colorScheme.outlineVariant),
+                        SolarTimeEntry(stringResource(R.string.nautical_dawn), solarData.nauticalDawnEpoch, MaterialTheme.colorScheme.outline),
+                        SolarTimeEntry(stringResource(R.string.civil_dawn), solarData.civilDawnEpoch, MaterialTheme.colorScheme.onSurfaceVariant),
+                        SolarTimeEntry(stringResource(R.string.sunrise), solarData.sunriseEpoch, MaterialTheme.colorScheme.primaryDim),
+                        SolarTimeEntry(stringResource(R.string.solar_noon), solarData.solarNoonEpoch, MaterialTheme.colorScheme.tertiary),
+                        SolarTimeEntry(stringResource(R.string.sunset), solarData.sunsetEpoch, MaterialTheme.colorScheme.primaryDim),
+                        SolarTimeEntry(stringResource(R.string.civil_dusk), solarData.civilDuskEpoch, MaterialTheme.colorScheme.onSurfaceVariant),
+                        SolarTimeEntry(stringResource(R.string.nautical_dusk), solarData.nauticalDuskEpoch, MaterialTheme.colorScheme.outline),
+                        SolarTimeEntry(stringResource(R.string.astro_dusk), solarData.astroDuskEpoch, MaterialTheme.colorScheme.outlineVariant),
+                        SolarTimeEntry(stringResource(R.string.solar_midnight), solarData.solarNadirEpoch, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.45f))
+                    ).sortedBy { entry ->
+                        if (entry.epoch <= 0L) Long.MAX_VALUE
+                        else if (entry.epoch <= currentTimeMillis) entry.epoch + 86_400_000L
+                        else entry.epoch
+                    }
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        solarEvents.forEach { entry ->
+                            SolarTimeRow(
+                                name = entry.name,
+                                time = formatEpoch(entry.epoch),
+                                color = entry.color
+                            )
+                        }
+                    }
+                }
             }
 
             // Location Header & Chip
@@ -258,48 +321,6 @@ fun MainScreen(
                 }
             }
 
-            // Solar Times Breakdown
-            item {
-                ListSubHeader(
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.secondary,
-                            text = "SOLAR TIMES",
-                            style = MaterialTheme.typography.labelMedium
-                        )
-                    }
-                )
-            }
-
-            item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
-                    shape = RoundedCornerShape(16.dp),
-                    onClick = {}
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        SolarTimeRow(name = stringResource(R.string.sunrise), time = formatEpoch(solarData.sunriseEpoch), color = Color(0xFFFFB74D))
-                        SolarTimeRow(name = stringResource(R.string.solar_noon), time = formatEpoch(solarData.solarNoonEpoch), color = Color(0xFFFFD54F))
-                        SolarTimeRow(name = stringResource(R.string.sunset), time = formatEpoch(solarData.sunsetEpoch), color = Color(0xFFFF7043))
-                        SolarTimeRow(name = stringResource(R.string.civil_dusk), time = formatEpoch(solarData.civilDuskEpoch), color = Color(0xFFE65100))
-                        SolarTimeRow(name = stringResource(R.string.nautical_dusk), time = formatEpoch(solarData.nauticalDuskEpoch), color = Color(0xFF5C6BC0))
-                        SolarTimeRow(name = stringResource(R.string.astro_dusk), time = formatEpoch(solarData.astroDuskEpoch), color = Color(0xFF283593))
-                        SolarTimeRow(name = stringResource(R.string.solar_midnight), time = formatEpoch(solarData.solarNadirEpoch), color = Color(0xFF90CAF9))
-                    }
-                }
-            }
-
             item {
                 Spacer(
                     Modifier
@@ -332,6 +353,12 @@ fun MainScreen(
         }
     }
 }
+
+private data class SolarTimeEntry(
+    val name: String,
+    val epoch: Long,
+    val color: Color
+)
 
 @Composable
 fun SolarTimeRow(

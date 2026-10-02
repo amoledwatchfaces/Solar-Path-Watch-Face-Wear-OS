@@ -5,6 +5,7 @@
     <string name="id_progress_bar_gradients">Slot 1,2,3,4 Gradients</string>
 
     <string name="id_primary_theme">Primary Theme</string>
+    <string name="id_secondary_theme">Secondary Theme</string>
 
     <string name="id_color_graphite">Graphite</string>
     <string name="id_color_cloud">Cloud</string>

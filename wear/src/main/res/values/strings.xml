@@ -25,6 +25,8 @@
     <string name="enable_permission_toast">Please grant location permission</string>
 
     <!-- Solar & Astronomical Terms -->
+    <string name="next_event">Next Event</string>
+    <string name="solar_times">Solar Times</string>
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
     <string name="solar_noon">Solar Noon</string>
