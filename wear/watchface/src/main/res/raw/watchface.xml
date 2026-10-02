@@ -186,150 +186,42 @@
                 <Transform
                     target="alpha"
                     value="[REFERENCE.solarTrack] &lt;= [REFERENCE.cdusk_angle] ? 0 : [REFERENCE.solarTrack] &lt;= [REFERENCE.ndusk_angle] ? clamp(round(255 * ([REFERENCE.solarTrack] - [REFERENCE.cdusk_angle]) / ([REFERENCE.ndusk_angle] - [REFERENCE.cdusk_angle] &lt;= 0 ? 1 : [REFERENCE.ndusk_angle] - [REFERENCE.cdusk_angle])), 0, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.ndawn_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.cdawn_angle] ? clamp(round(255 * ([REFERENCE.cdawn_angle] - [REFERENCE.solarTrack]) / ([REFERENCE.cdawn_angle] - [REFERENCE.ndawn_angle] &lt;= 0 ? 1 : [REFERENCE.cdawn_angle] - [REFERENCE.ndawn_angle])), 0, 255) : 0"/>
-                <Ellipse x="223" y="60" width="5" height="5">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="166" y="82" width="4" height="4">
-                    <Fill color="#ffffffff"/>
-                </Ellipse>
-                <Ellipse x="140" y="106" width="4" height="4">
-                    <Fill color="#d8e8ff"/>
-                </Ellipse>
-                <Ellipse x="184" y="116" width="4" height="4">
-                    <Fill color="#fff8e0"/>
-                </Ellipse>
-                <Ellipse x="280" y="76" width="5" height="5">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="310" y="94" width="4" height="4">
-                    <Fill color="#d8e8ff"/>
-                </Ellipse>
-                <Ellipse x="336" y="124" width="4" height="4">
-                    <Fill color="#fff8e0"/>
-                </Ellipse>
-                <Ellipse x="110" y="146" width="4" height="4">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="326" y="160" width="4" height="4">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="138" y="158" width="4" height="4">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="392" y="183" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="298" y="73" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="162" y="63" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="191" y="94" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="158" y="107" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="58" y="181" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="300" y="154" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="268" y="186" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="275" y="156" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="97" y="165" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="128" y="173" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="341" y="143" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="232" y="149" width="4" height="4">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="255" y="136" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="115" y="96" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="293" y="184" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="171" y="136" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="116" y="125" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="185" y="64" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="339" y="176" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="127" y="73" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="326" y="186" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="336" y="91" width="4" height="4">
-                    <Fill color="#d5ffffff"/>
-                </Ellipse>
-                <Ellipse x="136" y="186" width="4" height="4">
-                    <Fill color="#d5ffffff"/>
-                </Ellipse>
-                <Ellipse x="138" y="86" width="4" height="4">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="312" y="122" width="4" height="4">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="203" y="165" width="4" height="4">
-                    <Fill color="#d5ffffff"/>
-                </Ellipse>
-                <Ellipse x="249" y="165" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="208" y="115" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="299" y="108" width="4" height="4">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
-                <Ellipse x="364" y="158" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="370" y="136" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="286" y="170" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="234" y="128" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="205" y="131" width="3" height="3">
-                    <Fill color="#a5ffffff"/>
-                </Ellipse>
-                <Ellipse x="209" y="93" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="257" y="56" width="3" height="3">
-                    <Fill color="#75ffffff"/>
-                </Ellipse>
-                <Ellipse x="270" y="104" width="4" height="4">
-                    <Fill color="#ffffff"/>
-                </Ellipse>
+                <Ellipse x="166" y="82" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
+                <Ellipse x="140" y="116" width="4" height="4"><Fill color="#d8e8ff"/></Ellipse>
+                <Ellipse x="182" y="112" width="2" height="2"><Fill color="#fff8e0"/></Ellipse>
+                <Ellipse x="280" y="76" width="5" height="5"><Fill color="#ffffff"/></Ellipse>
+                <Ellipse x="313" y="94" width="4" height="4"><Fill color="#d8e8ff"/></Ellipse>
+                <Ellipse x="336" y="124" width="4" height="4"><Fill color="#fff8e0"/></Ellipse>
+                <Ellipse x="326" y="160" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
+                <Ellipse x="144" y="158" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
+                <Ellipse x="392" y="183" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="298" y="73" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
+                <Ellipse x="191" y="94" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="58" y="181" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="300" y="154" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
+                <Ellipse x="268" y="186" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="275" y="156" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="97" y="165" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="131" y="173" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="232" y="149" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
+                <Ellipse x="255" y="136" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="115" y="96" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="293" y="184" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
+                <Ellipse x="171" y="136" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
+                <Ellipse x="116" y="125" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="185" y="64" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="345" y="185" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
+                <Ellipse x="136" y="186" width="4" height="4"><Fill color="#d5ffffff"/></Ellipse>
+                <Ellipse x="312" y="122" width="4" height="4"><Fill color="#d8e8ff"/></Ellipse>
+                <Ellipse x="203" y="165" width="4" height="4"><Fill color="#d5ffffff"/></Ellipse>
+                <Ellipse x="249" y="165" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="364" y="158" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="286" y="170" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
+                <Ellipse x="234" y="128" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
+                <Ellipse x="205" y="131" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
+                <Ellipse x="209" y="93" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="257" y="66" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="270" y="104" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
             </PartDraw>
 
             <!-- Default Hue -->
