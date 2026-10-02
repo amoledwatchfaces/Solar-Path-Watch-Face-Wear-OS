@@ -2480,7 +2480,7 @@
             </PartDraw>
             <Group name="digital_clock" x="0" y="0" width="184" height="184">
                 <Transform target="angle" value="-(180+[REFERENCE.solarTrack])"/>
-                <PartText x="0" y="43" width="184" height="100">
+                <PartText name="digital_clock_neutral" x="0" y="43" width="184" height="100" alpha="255">
                     <Text>
                         <Font family="google_sans_flex_24_semibold_round" size="50">
                             <Template>%s:%s
@@ -2490,6 +2490,52 @@
                         </Font>
                     </Text>
                 </PartText>
+                <PartText name="digital_clock_colorful" x="0" y="43" width="184" height="100" alpha="0">
+                    <Text>
+                        <Font family="google_sans_flex_24_semibold_round" size="50">
+                            <Template>%s:%s
+                                <Parameter expression="[IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12]" />
+                                <Parameter expression="[MINUTE_Z]" />
+                            </Template>
+                        </Font>
+                    </Text>
+                </PartText>
+                <Group name="sec_indicator" x="0" y="0" width="184" height="184">
+                    <Variant mode="AMBIENT" target="alpha" value="0"/>
+                    <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.1]">
+                        <Arc
+                            centerX="92"
+                            centerY="92"
+                            width="170"
+                            height="170"
+                            startAngle="0"
+                            endAngle="360">
+                            <Stroke
+                                cap="ROUND"
+                                color="#606060"
+                                thickness="5"/>
+                        </Arc>
+                    </PartDraw>
+                    <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.2]">
+                        <Arc
+                            centerX="92"
+                            centerY="92"
+                            width="170"
+                            height="170"
+                            startAngle="0"
+                            endAngle="360">
+                            <Transform
+                                target="endAngle"
+                                value="[SECOND] * 6">
+                                <Animation angleDirection="CLOCKWISE"
+                                    controls="0.67 2 1.0 1.0"
+                                    duration="0.1"
+                                    interpolation="CUBIC_BEZIER" />
+                            </Transform>
+                            <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
+                        </Arc>
+                    </PartDraw>
+                </Group>
             </Group>
         </Group>
     </Scene>
