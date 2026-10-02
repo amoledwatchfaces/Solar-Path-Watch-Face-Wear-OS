@@ -55,6 +55,7 @@ fun SolarPathMainApp(
     val navController = rememberSwipeDismissableNavController()
     val listState = rememberTransformingLazyColumnState()
     val locationListState = rememberTransformingLazyColumnState()
+    val faqListState = rememberTransformingLazyColumnState()
 
     val preferences by viewModel.preferences.collectAsState()
 
@@ -102,6 +103,15 @@ fun SolarPathMainApp(
                         transformationSpec = transformationSpec,
                         focusRequester = focusRequester,
                         listState = locationListState
+                    )
+                }
+
+                composable("faq") {
+                    FaqScreen(
+                        navController = navController,
+                        transformationSpec = transformationSpec,
+                        focusRequester = focusRequester,
+                        listState = faqListState
                     )
                 }
             }

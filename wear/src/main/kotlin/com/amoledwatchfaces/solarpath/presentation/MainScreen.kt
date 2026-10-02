@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.WbSunny
@@ -98,12 +99,15 @@ fun MainScreen(
             // Next Event Header
             item {
                 ListSubHeader(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
                     label = {
                         Text(
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.secondary,
+                            color = MaterialTheme.colorScheme.outline,
                             text = stringResource(R.string.next_event),
                             style = MaterialTheme.typography.labelMedium
                         )
@@ -163,6 +167,29 @@ fun MainScreen(
                             text = if (isWatchFaceActive) stringResource(R.string.watch_face_active) else stringResource(R.string.push_watch_face),
                             color = if (isWatchFaceActive) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onPrimaryContainer
                         )
+                    }
+                )
+            }
+
+            // FAQ Button
+            item {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = { navController.navigate("faq") },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.HelpOutline,
+                            contentDescription = stringResource(R.string.faq)
+                        )
+                    },
+                    label = {
+                        Text(text = stringResource(R.string.faq))
+                    },
+                    secondaryLabel = {
+                        Text(text = stringResource(R.string.faq_subtitle))
                     }
                 )
             }
@@ -319,6 +346,25 @@ fun MainScreen(
                         }
                     )
                 }
+            }
+
+            // amoledwatchfaces.com
+            item {
+                ListSubHeader(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    label = {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.outlineVariant,
+                            text = "amoledwatchfaces.com",
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                )
             }
 
             item {

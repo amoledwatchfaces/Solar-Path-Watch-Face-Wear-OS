@@ -42,4 +42,18 @@
     <string name="elevation">Elevation</string>
     <string name="azimuth">Azimuth</string>
     <string name="open_app">Open Solar Path</string>
+
+    <!-- FAQ -->
+    <string name="faq">FAQ</string>
+    <string name="faq_subtitle">How this watch face works</string>
+    <string name="faq_dial_title">24-Hour Solar Dial</string>
+    <string name="faq_dial_desc">Unlike standard 12-hour clocks, this dial shows the full 24-hour solar cycle. Solar Noon (zenith) is at the top (12:00), and Solar Midnight (nadir) is at the bottom (00:00). The sun moves clockwise along the path.</string>
+    <string name="faq_phases_title">5 Sky &amp; Twilight Phases</string>
+    <string name="faq_phases_desc">The dial displays five distinct astronomical phases:\n\n• Daylight: Sun is above horizon (&gt; 0°)\n• Civil Twilight: 0° to -6° (natural light remains)\n• Nautical Twilight: -6° to -12° (navigation stars visible)\n• Astro Twilight: -12° to -18° (deep twilight)\n• Night: Below -18° (full astronomical night with stars)</string>
+    <string name="faq_marker_title">Sun Marker &amp; Beam</string>
+    <string name="faq_marker_desc">The sun marker orbits the 24-hour track. It is a solid white disc during daytime, and turns into a hollow ring at night when the sun is below the horizon. The radial beam points to current solar time.</string>
+    <string name="faq_dots_title">10 Timeline Event Dots</string>
+    <string name="faq_dots_desc">The dots around the timeline ring mark 10 solar milestones:\n\n• Morning: Astro Dawn, Nautical Dawn, Civil Dawn, Sunrise, and Solar Noon\n• Evening: Sunset, Civil Dusk, Nautical Dusk, Astro Dusk, and Solar Midnight</string>
+    <string name="faq_location_title">Location &amp; Calculations</string>
+    <string name="faq_location_desc">All astronomical calculations use high-precision NOAA algorithms. Accurate twilight and solar times are computed specifically for your geographic coordinates (latitude and longitude).</string>
 </resources>
