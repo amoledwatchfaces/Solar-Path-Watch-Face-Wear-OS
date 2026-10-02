@@ -33,4 +33,35 @@ class SolarCalculatorTest {
         org.junit.Assert.assertTrue(data.solarMidnightAngle >= 0f)
         org.junit.Assert.assertTrue(formatted.length >= 32)
     }
+
+    @Test
+    fun testDailyCacheAndEventProgression() {
+        val lat = 48.1486
+        val lon = 17.1077
+        val date = LocalDate.of(2026, 6, 21) // Summer solstice
+
+        // First calculation: runs astronomical sequence
+        val data1 = SolarCalculator.calculateSolarData(lat, lon, date, currentTimeMillis = 0L)
+        // Check event times
+        val sunsetTime = data1.sunsetEpoch
+        val civilDuskTime = data1.civilDuskEpoch
+        org.junit.Assert.assertTrue(sunsetTime > 0L)
+        org.junit.Assert.assertTrue(civilDuskTime > sunsetTime)
+
+        // Time 1: 10 minutes before sunset
+        val beforeSunsetMs = sunsetTime - 10 * 60 * 1000L
+        val dataBeforeSunset = SolarCalculator.calculateSolarData(lat, lon, date, beforeSunsetMs)
+        org.junit.Assert.assertEquals("Sunset", dataBeforeSunset.nextEventName)
+        org.junit.Assert.assertEquals(sunsetTime, dataBeforeSunset.nextEventEpoch)
+
+        // Time 2: 10 minutes after sunset (before civil dusk)
+        val afterSunsetMs = sunsetTime + 10 * 60 * 1000L
+        val dataAfterSunset = SolarCalculator.calculateSolarData(lat, lon, date, afterSunsetMs)
+        org.junit.Assert.assertEquals("Civil Dusk", dataAfterSunset.nextEventName)
+        org.junit.Assert.assertEquals(civilDuskTime, dataAfterSunset.nextEventEpoch)
+
+        // Verify base astronomical values (sunrise, sunset, angles) remained identical
+        org.junit.Assert.assertEquals(dataBeforeSunset.sunsetEpoch, dataAfterSunset.sunsetEpoch)
+        org.junit.Assert.assertEquals(dataBeforeSunset.sunsetAngle, dataAfterSunset.sunsetAngle, 0.001f)
+    }
 }

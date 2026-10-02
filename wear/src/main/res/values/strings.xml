@@ -40,4 +40,6 @@
     <string name="elevation">Elevation</string>
     <string name="azimuth">Azimuth</string>
     <string name="open_app">Open Solar Path</string>
+    <string name="hide_app_launcher">Hide from App List</string>
+    <string name="hide_app_launcher_desc">Open via complication tap</string>
 </resources>

@@ -32,6 +32,7 @@ data class UserPreferences(
     val locationName: String = "- -",
     val locationSubName: String = "",
     val recentLocations: List<SavedLocation> = emptyList(),
+    val hideAppFromLauncher: Boolean = false,
 )
 
 class UserPreferencesRepository @Inject constructor(

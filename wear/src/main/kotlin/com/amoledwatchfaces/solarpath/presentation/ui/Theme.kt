@@ -1,9 +1,11 @@
 package com.amoledwatchfaces.solarpath.presentation.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.wear.compose.material3.ColorScheme
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Typography
+import androidx.wear.compose.material3.dynamicColorScheme
 
 val appColorScheme = ColorScheme(
     primary = primary,
@@ -49,8 +51,9 @@ val appTypography = Typography()
 fun SolarPathAppTheme(
     content: @Composable () -> Unit
 ) {
+    val context = LocalContext.current
     MaterialTheme(
-        colorScheme = appColorScheme,
+        colorScheme = dynamicColorScheme(context) ?: appColorScheme,
         typography = appTypography,
         content = content
     )

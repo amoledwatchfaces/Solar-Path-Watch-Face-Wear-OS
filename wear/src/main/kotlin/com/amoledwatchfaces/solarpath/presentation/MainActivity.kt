@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.focus.FocusRequester
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.activity.viewModels
 import androidx.wear.compose.foundation.lazy.rememberTransformingLazyColumnState
 import androidx.wear.compose.material3.AppScaffold
 import androidx.wear.compose.material3.lazy.rememberTransformationSpec
@@ -21,16 +22,26 @@ import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.amoledwatchfaces.solarpath.presentation.ui.SolarPathAppTheme
+import com.amoledwatchfaces.solarpath.utils.updateComplications
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
-            SolarPathMainApp()
+            SolarPathMainApp(viewModel = viewModel)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh()
+        updateComplications()
     }
 }
 

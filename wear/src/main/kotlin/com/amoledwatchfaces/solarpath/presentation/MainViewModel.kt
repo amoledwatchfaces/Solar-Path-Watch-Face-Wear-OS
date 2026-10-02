@@ -31,6 +31,7 @@ import com.amoledwatchfaces.solarpath.solar.SolarData
 import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.utils.formatCoordinate
 import com.amoledwatchfaces.solarpath.utils.isOnline
+import com.amoledwatchfaces.solarpath.utils.setLauncherVisibility
 import com.amoledwatchfaces.solarpath.utils.updateComplications
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFaceData
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFacePackageRepository
@@ -43,6 +44,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -79,11 +81,35 @@ class MainViewModel @Inject constructor(
     private val _isWatchFaceActive = MutableStateFlow(false)
     val isWatchFaceActive: StateFlow<Boolean> = _isWatchFaceActive.asStateFlow()
 
-    val solarData: StateFlow<SolarData> = preferences
-        .combine(_loaderState) { prefs, _ ->
-            SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
+    private val _refreshTrigger = kotlinx.coroutines.flow.MutableStateFlow(System.currentTimeMillis())
+
+    fun refresh(forceRecalculate: Boolean = false) {
+        if (forceRecalculate) {
+            SolarCalculator.invalidateCache()
         }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, SolarData())
+        _refreshTrigger.value = System.currentTimeMillis()
+    }
+
+    private val timeTickerFlow = kotlinx.coroutines.flow.flow {
+        while (true) {
+            emit(System.currentTimeMillis())
+            kotlinx.coroutines.delay(30_000L)
+        }
+    }
+
+    val solarData: StateFlow<SolarData> = combine(
+        preferences,
+        _refreshTrigger,
+        timeTickerFlow
+    ) { prefs, refreshMs, tickerMs ->
+        val nowMs = maxOf(refreshMs, tickerMs)
+        SolarCalculator.calculateSolarData(
+            lat = prefs.latitude,
+            lon = prefs.longitude,
+            date = java.time.LocalDate.now(),
+            currentTimeMillis = nowMs
+        )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), SolarData())
 
     val defaultWatchFace = WatchFaceData(
         name = "default_watchface.apk",
@@ -94,6 +120,10 @@ class MainViewModel @Inject constructor(
 
     init {
         checkWatchFaceActiveStatus()
+        viewModelScope.launch {
+            val hide = preferences.first().hideAppFromLauncher
+            context.setLauncherVisibility(hide)
+        }
     }
 
     fun checkWatchFaceActiveStatus() {
@@ -344,6 +374,13 @@ class MainViewModel @Inject constructor(
             if (preferences.value.backgroundLocationState) {
                 LocationWorker.scheduleBackgroundLocation(context, interval)
             }
+        }
+    }
+
+    fun setHideAppFromLauncher(hide: Boolean) {
+        viewModelScope.launch {
+            dataStore.updateData { it.copy(hideAppFromLauncher = hide) }
+            context.setLauncherVisibility(hide)
         }
     }
 }

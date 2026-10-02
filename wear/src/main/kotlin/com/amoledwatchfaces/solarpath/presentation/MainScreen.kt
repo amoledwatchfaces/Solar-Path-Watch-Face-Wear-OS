@@ -223,6 +223,20 @@ fun MainScreen(
                 )
             }
 
+            // Hide from App Launcher Toggle
+            item {
+                SwitchButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    checked = preferences.hideAppFromLauncher,
+                    onCheckedChange = { viewModel.setHideAppFromLauncher(it) },
+                    label = { Text(stringResource(R.string.hide_app_launcher)) },
+                    secondaryLabel = { Text(stringResource(R.string.hide_app_launcher_desc)) }
+                )
+            }
+
             // Solar Times Breakdown
             item {
                 ListSubHeader(
