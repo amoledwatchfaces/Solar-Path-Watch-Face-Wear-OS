@@ -49,6 +49,8 @@ import androidx.wear.compose.material3.ListSubHeader
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ProgressIndicatorDefaults
 import androidx.wear.compose.material3.ScreenScaffold
+import androidx.wear.compose.material3.Slider
+import androidx.wear.compose.material3.SliderDefaults
 import androidx.wear.compose.material3.SurfaceTransformation
 import androidx.wear.compose.material3.SwitchButton
 import androidx.wear.compose.material3.Text
@@ -223,18 +225,37 @@ fun MainScreen(
                 )
             }
 
-            // Hide from App Launcher Toggle
-            item {
-                SwitchButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .transformedHeight(this, transformationSpec),
-                    transformation = SurfaceTransformation(transformationSpec),
-                    checked = preferences.hideAppFromLauncher,
-                    onCheckedChange = { viewModel.setHideAppFromLauncher(it) },
-                    label = { Text(stringResource(R.string.hide_app_launcher)) },
-                    secondaryLabel = { Text(stringResource(R.string.hide_app_launcher_desc)) }
-                )
+            if (preferences.backgroundLocationState) {
+                item {
+                    Text(
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 4.dp),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        text = "${stringResource(R.string.update_interval)}: ${preferences.backgroundLocationRepeatInterval} min"
+                    )
+                }
+
+                item {
+                    Slider(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 4.dp),
+                        value = preferences.backgroundLocationRepeatInterval.toInt(),
+                        onValueChange = {
+                            viewModel.setBackgroundLocationRepeatInterval(it.toLong())
+                        },
+                        valueProgression = IntProgression.fromClosedRange(30, 240, 15),
+                        decreaseIcon = {
+                            SliderDefaults.DecreaseIcon()
+                        },
+                        increaseIcon = {
+                            SliderDefaults.IncreaseIcon()
+                        }
+                    )
+                }
             }
 
             // Solar Times Breakdown

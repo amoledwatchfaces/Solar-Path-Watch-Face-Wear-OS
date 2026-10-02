@@ -666,15 +666,15 @@
             isCustomizable="FALSE"
             supportedTypes="SHORT_TEXT EMPTY"
             width="200"
-            height="90"
+            height="200"
             x="125"
-            y="230">
+            y="125">
             <DefaultProviderPolicy
                 primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
                 primaryProviderType="SHORT_TEXT"
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingBox x="0" y="0" width="200" height="90"/>
+            <BoundingBox x="0" y="0" width="200" height="200"/>
             <Complication type="SHORT_TEXT">
                 <!-- Angle extraction references for the 8 solar arcs -->
                 <Group name="ref_ss" x="0" y="0" width="1" height="1" alpha="0">

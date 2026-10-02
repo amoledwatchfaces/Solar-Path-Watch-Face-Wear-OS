@@ -10,7 +10,6 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.data.UserPreferencesRepository
-import com.amoledwatchfaces.solarpath.utils.setLauncherVisibility
 import com.amoledwatchfaces.solarpath.utils.updateComplications
 import com.amoledwatchfaces.solarpath.workers.LocationWorker
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +60,6 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
                 }
                 com.amoledwatchfaces.solarpath.workers.SolarRefreshWorker.schedule(context)
                 context.updateComplications()
-                context.setLauncherVisibility(prefs.hideAppFromLauncher)
             }
         }
     }

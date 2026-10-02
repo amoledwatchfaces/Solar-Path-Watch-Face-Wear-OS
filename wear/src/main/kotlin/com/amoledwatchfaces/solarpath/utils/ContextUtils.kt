@@ -50,24 +50,3 @@ fun Context.updateComplications() {
     val req = ComplicationDataSourceUpdateRequester.create(this, component)
     req.requestUpdateAll()
 }
-
-fun Context.setLauncherVisibility(hide: Boolean) {
-    val componentName = ComponentName(
-        packageName,
-        "com.amoledwatchfaces.solarpath.presentation.MainActivityLauncher"
-    )
-    val state = if (hide) {
-        PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-    } else {
-        PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-    }
-    try {
-        packageManager.setComponentEnabledSetting(
-            componentName,
-            state,
-            PackageManager.DONT_KILL_APP
-        )
-    } catch (e: Exception) {
-        android.util.Log.e("ContextUtils", "Error setting launcher visibility: ${e.message}")
-    }
-}

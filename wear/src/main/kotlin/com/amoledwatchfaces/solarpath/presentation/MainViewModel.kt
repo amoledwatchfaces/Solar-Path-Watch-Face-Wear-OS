@@ -31,7 +31,6 @@ import com.amoledwatchfaces.solarpath.solar.SolarData
 import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.utils.formatCoordinate
 import com.amoledwatchfaces.solarpath.utils.isOnline
-import com.amoledwatchfaces.solarpath.utils.setLauncherVisibility
 import com.amoledwatchfaces.solarpath.utils.updateComplications
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFaceData
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFacePackageRepository
@@ -120,10 +119,6 @@ class MainViewModel @Inject constructor(
 
     init {
         checkWatchFaceActiveStatus()
-        viewModelScope.launch {
-            val hide = preferences.first().hideAppFromLauncher
-            context.setLauncherVisibility(hide)
-        }
     }
 
     fun checkWatchFaceActiveStatus() {
@@ -374,13 +369,6 @@ class MainViewModel @Inject constructor(
             if (preferences.value.backgroundLocationState) {
                 LocationWorker.scheduleBackgroundLocation(context, interval)
             }
-        }
-    }
-
-    fun setHideAppFromLauncher(hide: Boolean) {
-        viewModelScope.launch {
-            dataStore.updateData { it.copy(hideAppFromLauncher = hide) }
-            context.setLauncherVisibility(hide)
         }
     }
 }
