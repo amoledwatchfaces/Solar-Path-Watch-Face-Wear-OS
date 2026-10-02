@@ -163,7 +163,13 @@
         <!-- 24-Hour Solar Path Ring -->
         <Group name="solar_path" width="450" height="450" x="0" y="0">
             <!-- Base -->
-            <PartDraw name="circle_base" width="450" height="450" x="0" y="0" renderMode="ALL">
+            <PartDraw name="canvas" width="450" height="450" x="0" y="0" renderMode="ALL">
+                <Ellipse x="34" y="34" width="382" height="382">
+                    <Fill color="#000000"/>
+                </Ellipse>
+            </PartDraw>
+
+            <PartDraw name="circle_base" width="450" height="450" x="0" y="0">
                 <Transform
                     target="alpha"
                     value="[REFERENCE.solarTrack] &lt;= [REFERENCE.ss_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 180 * ([REFERENCE.solarTrack] - [REFERENCE.ss_angle]) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle])), 75, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 75 : [REFERENCE.solarTrack] &lt;= [REFERENCE.sr_angle] ? clamp(round(75 + 180 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] - [REFERENCE.adawn_angle])), 75, 255) : 255"/>
@@ -414,34 +420,34 @@
             </PartDraw>
 
             <!-- Layers -->
-            <PartDraw name="layers" width="450" height="450" x="0" y="0" tintColor="[CONFIGURATION.secondaryTheme.1]">
+            <PartDraw name="layers" width="450" height="450" x="0" y="0" tintColor="[CONFIGURATION.secondaryTheme.2]">
                 <!-- Using stacked layers -->
                 <!-- 1. Civil Twilight Layer: Sunset -> Sunrise -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.ss_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.sr_angle]"/>
-                    <Stroke color="#C3C3C3" thickness="225" />
+                    <Stroke color="#898989" thickness="225" />
                 </Arc>
 
                 <!-- 2. Nautical Twilight Layer: Civil Dusk (-6°) -> Civil Dawn (-6°) -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.cdusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.cdawn_angle]"/>
-                    <Stroke color="#8A8A8A" thickness="225" />
+                    <Stroke color="#696969" thickness="225" />
                 </Arc>
 
                 <!-- 3. Astronomical Twilight Layer: Nautical Dusk (-12°) -> Nautical Dawn (-12°) -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.ndusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.ndawn_angle]"/>
-                    <Stroke color="#545454" thickness="225" />
+                    <Stroke color="#494949" thickness="225" />
                 </Arc>
 
                 <!-- 4. Full Night Layer: Astro Dusk (-18°) -> Astro Dawn (-18°) through Midnight 180° -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.adusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.adawn_angle]"/>
-                    <Stroke color="#212121" thickness="225" />
+                    <Stroke color="#292929" thickness="225" />
                 </Arc>
             </PartDraw>
         </Group>
@@ -2493,6 +2499,7 @@
                     </Text>
                 </PartText>
                 <PartText name="digital_clock_neutral" x="0" y="43" width="184" height="100" alpha="255">
+                    <Variant target="alpha" value="0" mode="AMBIENT"/>
                     <Transform
                         target="alpha"
                         value="[REFERENCE.circleBaseAlpha]"/>
@@ -2506,6 +2513,7 @@
                     </Text>
                 </PartText>
                 <PartText name="digital_clock_colorful" x="0" y="43" width="184" height="100" alpha="0">
+                    <Variant target="alpha" value="255" mode="AMBIENT"/>
                     <Transform
                         target="alpha"
                         value="255-[REFERENCE.circleBaseAlpha]"/>

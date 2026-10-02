@@ -56,4 +56,11 @@
     <string name="faq_dots_desc">The dots around the timeline ring mark 10 solar milestones:\n\n• Morning: Astro Dawn, Nautical Dawn, Civil Dawn, Sunrise, and Solar Noon\n• Evening: Sunset, Civil Dusk, Nautical Dusk, Astro Dusk, and Solar Midnight</string>
     <string name="faq_location_title">Location &amp; Calculations</string>
     <string name="faq_location_desc">All astronomical calculations use high-precision NOAA algorithms. Accurate twilight and solar times are computed specifically for your geographic coordinates (latitude and longitude).</string>
+
+    <!-- About & Privacy -->
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="check_your_phone">Check your phone</string>
+    <string name="check_your_phone_failure">Phone can\'t be reached</string>
 </resources>

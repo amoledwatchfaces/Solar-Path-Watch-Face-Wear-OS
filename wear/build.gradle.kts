@@ -74,6 +74,7 @@ dependencies {
 
     // Wear OS & Watch Face Push
     implementation ("androidx.wear:wear:1.4.0")
+    implementation ("androidx.wear:wear-remote-interactions:1.2.0")
     implementation ("androidx.wear.watchfacepush:watchfacepush:1.0.0")
     implementation ("com.google.android.gms:play-services-wearable:20.0.1")
     compileOnly ("com.google.android.wearable:wearable:2.9.0")
@@ -95,6 +96,7 @@ dependencies {
     implementation ("androidx.compose.ui:ui:1.12.0")
     implementation ("androidx.compose.ui:ui-tooling-preview:1.12.0")
     implementation ("androidx.compose.material:material-icons-extended:1.7.8")
+    implementation ("androidx.compose.animation:animation-graphics")
 
     // Compose for Wear OS
     implementation ("androidx.wear.compose:compose-material3:1.7.0")

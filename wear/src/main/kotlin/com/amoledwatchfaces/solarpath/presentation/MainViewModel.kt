@@ -9,9 +9,11 @@ import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.wear.remote.interactions.RemoteActivityHelper
 import androidx.wear.watchfacepush.WatchFacePushManagerFactory
 import com.google.android.gms.location.CurrentLocationRequest
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -45,10 +47,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import java.util.Locale
+import java.util.concurrent.CancellationException
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.math.abs
@@ -368,6 +372,24 @@ class MainViewModel @Inject constructor(
             dataStore.updateData { it.copy(backgroundLocationRepeatInterval = interval) }
             if (preferences.value.backgroundLocationState) {
                 LocationWorker.scheduleBackgroundLocation(context, interval)
+            }
+        }
+    }
+
+    fun openLinkOnPhone(link: String, onOpened: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val remoteActivityHelper = RemoteActivityHelper(context)
+            val intent = Intent(Intent.ACTION_VIEW)
+                .addCategory(Intent.CATEGORY_BROWSABLE)
+                .setData(link.toUri())
+            try {
+                remoteActivityHelper.startRemoteActivity(targetIntent = intent, targetNodeId = null).await()
+                onOpened(true)
+            } catch (cancellationException: CancellationException) {
+                Log.e(TAG, "$cancellationException")
+            } catch (throwable: Throwable) {
+                Log.e(TAG, "$throwable")
+                onOpened(false)
             }
         }
     }

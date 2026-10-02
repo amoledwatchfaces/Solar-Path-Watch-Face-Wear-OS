@@ -20,24 +20,34 @@ import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.WatchLater
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.wear.compose.foundation.lazy.TransformingLazyColumn
 import androidx.wear.compose.foundation.lazy.TransformingLazyColumnState
 import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
+import com.amoledwatchfaces.solarpath.BuildConfig
+import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
+import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import androidx.wear.compose.foundation.rotary.rotaryScrollable
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
@@ -75,6 +85,10 @@ fun MainScreen(
     val solarData by viewModel.solarData.collectAsState()
     val isLoading by viewModel.loaderState.collectAsState()
     val isWatchFaceActive by viewModel.isWatchFaceActive.collectAsState()
+
+    val context = LocalContext.current
+    var showConfirmation by remember { mutableStateOf(false) }
+    var confirmationState by remember { mutableStateOf(true) }
 
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", LocalLocale.current.platformLocale)
         .withZone(ZoneId.systemDefault())
@@ -240,8 +254,7 @@ fun MainScreen(
 
                         Column(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
+                                .fillMaxWidth(),
                             verticalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
                             solarEvents.forEach { entry ->
@@ -350,6 +363,81 @@ fun MainScreen(
                 }
             }
 
+            // About Section Header
+            item {
+                ListSubHeader(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    label = {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.secondary,
+                            text = stringResource(R.string.about),
+                            style = MaterialTheme.typography.labelMedium
+                        )
+                    }
+                )
+            }
+
+            // App Version Button
+            item {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = { context.openPlayStore() },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = stringResource(R.string.version),
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(R.string.version),
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    },
+                    secondaryLabel = {
+                        Text(text = BuildConfig.VERSION_NAME)
+                    }
+                )
+            }
+
+            // Privacy Policy Button
+            item {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = {
+                        viewModel.openLinkOnPhone("https://amoledwatchfaces.github.io/apps/privacy/solarpath.html") { success ->
+                            confirmationState = success
+                            showConfirmation = true
+                        }
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Outlined.PrivacyTip,
+                            contentDescription = stringResource(R.string.privacy_policy),
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(R.string.privacy_policy),
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                )
+            }
+
             // amoledwatchfaces.com
             item {
                 ListSubHeader(
@@ -377,6 +465,12 @@ fun MainScreen(
                 )
             }
         }
+
+        ConfirmationOverlay(
+            showConfirmation = showConfirmation,
+            confirmationState = confirmationState,
+            onTimeout = { showConfirmation = false }
+        )
 
         if (isLoading) {
             Box(

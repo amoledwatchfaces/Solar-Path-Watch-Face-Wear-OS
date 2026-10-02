@@ -1,11 +1,14 @@
 package com.amoledwatchfaces.solarpath.utils
 
+import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import androidx.core.content.ContextCompat
 import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
 import com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService
@@ -50,3 +53,12 @@ fun Context.updateComplications() {
     val req = ComplicationDataSourceUpdateRequester.create(this, component)
     req.requestUpdateAll()
 }
+
+fun Context.openPlayStore() {
+    try {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+    } catch (_: ActivityNotFoundException) {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+    }
+}
+
