@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <WatchFace width="450" height="450">
     <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
     <Metadata key="PREVIEW_TIME" value="18:00:00"/>
@@ -164,9 +164,164 @@
         <Group name="solar_path" width="450" height="450" x="0" y="0">
             <!-- Base -->
             <PartDraw name="circle_base" width="450" height="450" x="0" y="0" renderMode="ALL">
+                <Transform
+                    target="alpha"
+                    value="[REFERENCE.solarTrack] &lt;= [REFERENCE.ss_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 205 * ([REFERENCE.solarTrack] - [REFERENCE.ss_angle]) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle])), 50, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 50 : [REFERENCE.solarTrack] &lt;= [REFERENCE.sr_angle] ? clamp(round(50 + 205 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] - [REFERENCE.adawn_angle])), 50, 255) : 255"/>
                 <Ellipse x="34" y="34" width="382" height="382">
                     <Fill color="[CONFIGURATION.secondaryTheme.2]"/>
                 </Ellipse>
+            </PartDraw>
+
+            <!-- Stars -->
+            <PartDraw name="stars" width="450" height="450" x="0" y="0">
+                <Transform
+                    target="alpha"
+                    value="[REFERENCE.solarTrack] &lt;= [REFERENCE.ss_angle] ? 0 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 * ([REFERENCE.solarTrack] - [REFERENCE.ss_angle]) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle])), 0, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.sr_angle] ? clamp(round(255 * ([REFERENCE.sr_angle] - [REFERENCE.solarTrack]) / ([REFERENCE.sr_angle] - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] - [REFERENCE.adawn_angle])), 0, 255) : 0"/>
+                <Ellipse x="223" y="60" width="4" height="4">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="166" y="82" width="3" height="3">
+                    <Fill color="#ffffffff"/>
+                </Ellipse>
+                <Ellipse x="140" y="106" width="3" height="3">
+                    <Fill color="#d8e8ff"/>
+                </Ellipse>
+                <Ellipse x="184" y="116" width="3" height="3">
+                    <Fill color="#fff8e0"/>
+                </Ellipse>
+                <Ellipse x="280" y="76" width="4" height="4">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="310" y="94" width="3" height="3">
+                    <Fill color="#d8e8ff"/>
+                </Ellipse>
+                <Ellipse x="336" y="124" width="3" height="3">
+                    <Fill color="#fff8e0"/>
+                </Ellipse>
+                <Ellipse x="110" y="146" width="3" height="3">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="326" y="160" width="3" height="3">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="138" y="158" width="3" height="3">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="392" y="183" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="298" y="73" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="162" y="63" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="191" y="94" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="158" y="107" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="58" y="181" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="300" y="154" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="268" y="186" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="275" y="156" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="97" y="165" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="128" y="173" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="341" y="143" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="232" y="149" width="3" height="3">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="255" y="136" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="115" y="96" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="293" y="184" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="171" y="136" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="116" y="125" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="185" y="64" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="339" y="176" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="127" y="73" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="326" y="186" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="336" y="91" width="3" height="3">
+                    <Fill color="#d5ffffff"/>
+                </Ellipse>
+                <Ellipse x="136" y="186" width="3" height="3">
+                    <Fill color="#d5ffffff"/>
+                </Ellipse>
+                <Ellipse x="138" y="86" width="3" height="3">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="312" y="122" width="3" height="3">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="203" y="165" width="3" height="3">
+                    <Fill color="#d5ffffff"/>
+                </Ellipse>
+                <Ellipse x="249" y="165" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="208" y="115" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="299" y="108" width="3" height="3">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+                <Ellipse x="364" y="158" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="370" y="136" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="286" y="170" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="234" y="128" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="205" y="131" width="2" height="2">
+                    <Fill color="#a5ffffff"/>
+                </Ellipse>
+                <Ellipse x="209" y="93" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="257" y="56" width="2" height="2">
+                    <Fill color="#75ffffff"/>
+                </Ellipse>
+                <Ellipse x="270" y="104" width="3" height="3">
+                    <Fill color="#ffffff"/>
+                </Ellipse>
+
             </PartDraw>
 
             <!-- Default Hue -->
@@ -266,21 +421,21 @@
                     <Stroke color="#C3C3C3" thickness="225" />
                 </Arc>
 
-                <!-- 2. Nautical Twilight Layer: Civil Dusk (-6°) -> Civil Dawn (-6°) -->
+                <!-- 2. Nautical Twilight Layer: Civil Dusk (-6Â°) -> Civil Dawn (-6Â°) -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.cdusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.cdawn_angle]"/>
                     <Stroke color="#8A8A8A" thickness="225" />
                 </Arc>
 
-                <!-- 3. Astronomical Twilight Layer: Nautical Dusk (-12°) -> Nautical Dawn (-12°) -->
+                <!-- 3. Astronomical Twilight Layer: Nautical Dusk (-12Â°) -> Nautical Dawn (-12Â°) -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.ndusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.ndawn_angle]"/>
                     <Stroke color="#545454" thickness="225" />
                 </Arc>
 
-                <!-- 4. Full Night Layer: Astro Dusk (-18°) -> Astro Dawn (-18°) through Midnight 180° -->
+                <!-- 4. Full Night Layer: Astro Dusk (-18Â°) -> Astro Dawn (-18Â°) through Midnight 180Â° -->
                 <Arc centerX="225" centerY="225" width="225" height="225" startAngle="0" endAngle="0">
                     <Transform target="startAngle" value="[REFERENCE.adusk_angle]"/>
                     <Transform target="endAngle" value="[REFERENCE.adawn_angle]"/>
@@ -547,9 +702,9 @@
         </Group>
 
         <!-- Timeline with Dots -->
-        <Group name="solar_track" width="450" height="450" x="0" y="0">
+        <Group name="solar_track" width="450" height="450" x="0" y="0" alpha="175">
             <!-- Timeline Circle -->
-            <PartDraw width="450" height="450" x="0" y="0" alpha="175">
+            <PartDraw width="450" height="450" x="0" y="0">
                 <Ellipse height="224" width="224" y="113" x="113">
                     <Stroke color="#ffffff" thickness="2.5"/>
                 </Ellipse>
@@ -557,61 +712,61 @@
             <PartDraw name="dot_sr" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.sr_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_ss" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.ss_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_adawn" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.adawn_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_adusk" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.adusk_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_cdawn" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.cdawn_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_cdusk" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.cdusk_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_ndawn" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.ndawn_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_ndusk" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.ndusk_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_noon" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.noon_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
             <PartDraw name="dot_midnight" x="220" y="108" width="10" height="10" pivotY="11.7" angle="0">
                 <Transform target="angle" value="[REFERENCE.midnight_angle]"/>
                 <Ellipse x="0" y="0" width="10" height="10">
-                    <Fill color="#70ffffff"/>
+                    <Fill color="#ffffff"/>
                 </Ellipse>
             </PartDraw>
         </Group>
@@ -885,7 +1040,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -914,7 +1069,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -938,7 +1093,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -964,7 +1119,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1020,7 +1175,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1044,7 +1199,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1070,7 +1225,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1254,7 +1409,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1283,7 +1438,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1307,7 +1462,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1333,7 +1488,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1389,7 +1544,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1413,7 +1568,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1439,7 +1594,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1631,7 +1786,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1660,7 +1815,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1684,7 +1839,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1710,7 +1865,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1766,7 +1921,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1790,7 +1945,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -1816,7 +1971,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2001,7 +2156,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2030,7 +2185,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2054,7 +2209,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2080,7 +2235,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2136,7 +2291,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2160,7 +2315,7 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
@@ -2186,7 +2341,7 @@
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ â€¢ ]]></Font>
                                 <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
