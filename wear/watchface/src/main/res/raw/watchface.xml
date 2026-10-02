@@ -186,24 +186,24 @@
                 <Transform
                     target="alpha"
                     value="[REFERENCE.solarTrack] &lt;= [REFERENCE.cdusk_angle] ? 0 : [REFERENCE.solarTrack] &lt;= [REFERENCE.ndusk_angle] ? clamp(round(255 * ([REFERENCE.solarTrack] - [REFERENCE.cdusk_angle]) / ([REFERENCE.ndusk_angle] - [REFERENCE.cdusk_angle] &lt;= 0 ? 1 : [REFERENCE.ndusk_angle] - [REFERENCE.cdusk_angle])), 0, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.ndawn_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.cdawn_angle] ? clamp(round(255 * ([REFERENCE.cdawn_angle] - [REFERENCE.solarTrack]) / ([REFERENCE.cdawn_angle] - [REFERENCE.ndawn_angle] &lt;= 0 ? 1 : [REFERENCE.cdawn_angle] - [REFERENCE.ndawn_angle])), 0, 255) : 0"/>
-                <Ellipse x="166" y="82" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
+                <Ellipse x="166" y="82" width="4" height="4"><Fill color="#EFEFEF"/></Ellipse>
                 <Ellipse x="140" y="116" width="4" height="4"><Fill color="#d8e8ff"/></Ellipse>
                 <Ellipse x="182" y="112" width="2" height="2"><Fill color="#fff8e0"/></Ellipse>
                 <Ellipse x="280" y="76" width="5" height="5"><Fill color="#ffffff"/></Ellipse>
                 <Ellipse x="313" y="94" width="4" height="4"><Fill color="#d8e8ff"/></Ellipse>
                 <Ellipse x="336" y="124" width="4" height="4"><Fill color="#fff8e0"/></Ellipse>
-                <Ellipse x="326" y="160" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
-                <Ellipse x="144" y="158" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
-                <Ellipse x="392" y="183" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="326" y="160" width="4" height="4"><Fill color="#EBEBEB"/></Ellipse>
+                <Ellipse x="144" y="158" width="4" height="4"><Fill color="#EBEBEB"/></Ellipse>
+                <Ellipse x="380" y="18" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="298" y="73" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
                 <Ellipse x="191" y="94" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
-                <Ellipse x="58" y="181" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="70" y="181" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="300" y="154" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
                 <Ellipse x="268" y="186" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="275" y="156" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="97" y="165" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="131" y="173" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
-                <Ellipse x="232" y="149" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
+                <Ellipse x="232" y="149" width="4" height="4"><Fill color="#E7E7E7"/></Ellipse>
                 <Ellipse x="255" y="136" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="115" y="96" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="293" y="184" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
@@ -215,13 +215,13 @@
                 <Ellipse x="312" y="122" width="4" height="4"><Fill color="#d8e8ff"/></Ellipse>
                 <Ellipse x="203" y="165" width="4" height="4"><Fill color="#d5ffffff"/></Ellipse>
                 <Ellipse x="249" y="165" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
-                <Ellipse x="364" y="158" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
+                <Ellipse x="364" y="166" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="286" y="170" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
                 <Ellipse x="234" y="128" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
                 <Ellipse x="205" y="131" width="3" height="3"><Fill color="#a5ffffff"/></Ellipse>
                 <Ellipse x="209" y="93" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
                 <Ellipse x="257" y="66" width="3" height="3"><Fill color="#75ffffff"/></Ellipse>
-                <Ellipse x="270" y="104" width="4" height="4"><Fill color="#ffffff"/></Ellipse>
+                <Ellipse x="260" y="100" width="4" height="4"><Fill color="#EBEBEB"/></Ellipse>
             </PartDraw>
 
             <!-- Default Hue -->
@@ -2390,11 +2390,8 @@
                         </Font>
                     </Text>
                 </PartText>
-                <PartText name="digital_clock_neutral" x="0" y="43" width="184" height="100" alpha="255">
+                <PartText name="digital_clock_neutral" x="0" y="43" width="184" height="100">
                     <Variant target="alpha" value="0" mode="AMBIENT"/>
-                    <Transform
-                        target="alpha"
-                        value="[REFERENCE.circleBaseAlpha]"/>
                     <Text>
                         <Font family="google_sans_flex_24_semibold_round" size="50">
                             <Template>%s:%s
