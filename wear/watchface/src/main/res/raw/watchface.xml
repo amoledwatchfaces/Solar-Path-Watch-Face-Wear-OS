@@ -2489,7 +2489,7 @@
                 </PartDraw>
                 <PartText name="d_mmm" x="0" y="26" width="184" height="40">
                     <Text>
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#E0E0E0">
+                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
                             <Template>%s
                                 <Parameter expression="icuBestText(&quot;d MMM&quot;)" />
                             </Template>
@@ -2520,7 +2520,7 @@
                 </PartText>
                 <PartText name="eee" x="0" y="117" width="184" height="40">
                     <Text>
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#E0E0E0">
+                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
                             <Lower>
                                 <Template>%s
                                     <Parameter expression="icuBestText([IS_24_HOUR_MODE]?&quot;eee&quot;:&quot;a&quot;)" />
