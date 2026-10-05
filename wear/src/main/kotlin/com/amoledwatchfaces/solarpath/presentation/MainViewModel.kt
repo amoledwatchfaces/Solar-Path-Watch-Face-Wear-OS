@@ -34,6 +34,7 @@ import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.utils.formatCoordinate
 import com.amoledwatchfaces.solarpath.utils.isOnline
 import com.amoledwatchfaces.solarpath.utils.updateComplications
+import com.amoledwatchfaces.solarpath.watchfacepush.DEFAULT_WATCH_FACE
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFaceData
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFacePackageRepository
 import com.amoledwatchfaces.solarpath.workers.LocationWorker
@@ -114,12 +115,7 @@ class MainViewModel @Inject constructor(
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), SolarData())
 
-    val defaultWatchFace = WatchFaceData(
-        name = "default_watchface.apk",
-        assetPath = "default_watchface.apk",
-        packageName = "com.amoledwatchfaces.solarpath.watchfacepush.defaultwatchface",
-        versionCode = 30000001L
-    )
+    val defaultWatchFace = DEFAULT_WATCH_FACE
 
     init {
         checkWatchFaceActiveStatus()
@@ -147,37 +143,22 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _loaderState.value = true
             try {
-                val wfpManager = WatchFacePushManagerFactory.createWatchFacePushManager(context)
-                val response = wfpManager.listWatchFaces()
-                val installed = response.installedWatchFaceDetails.filter { it.packageName == defaultWatchFace.packageName }
-
-                if (installed.isNotEmpty()) {
-                    val slot = installed.first()
-                    val isActive = wfpManager.isWatchFaceActive(slot.packageName)
+                val result = packageRepository.updateOrInstallDefaultWatchFace(
+                    scope = this,
+                    watchFaceData = defaultWatchFace,
+                    setAsActive = true
+                )
+                if (result.isSuccess) {
+                    val wfpManager = WatchFacePushManagerFactory.createWatchFacePushManager(context)
+                    val isActive = wfpManager.isWatchFaceActive(defaultWatchFace.packageName)
+                    _isWatchFaceActive.value = isActive
                     if (isActive) {
-                        _isWatchFaceActive.value = true
                         Toast.makeText(context, R.string.watch_face_active, Toast.LENGTH_SHORT).show()
-                        return@launch
-                    }
-                    try {
-                        wfpManager.setWatchFaceAsActive(slot.slotId)
-                        _isWatchFaceActive.value = true
-                        Toast.makeText(context, R.string.watch_face_active, Toast.LENGTH_SHORT).show()
-                    } catch (_: Exception) {
+                    } else {
                         Toast.makeText(context, R.string.status_manual_activation, Toast.LENGTH_LONG).show()
                     }
                 } else {
-                    val token = context.getString(R.string.default_wf_token)
-                    packageRepository.pipeWatchFace(this, defaultWatchFace).use { pipe ->
-                        val slot = wfpManager.addWatchFace(pipe.readFd, token)
-                        try {
-                            wfpManager.setWatchFaceAsActive(slot.slotId)
-                            _isWatchFaceActive.value = true
-                            Toast.makeText(context, R.string.watch_face_active, Toast.LENGTH_SHORT).show()
-                        } catch (_: Exception) {
-                            Toast.makeText(context, R.string.status_manual_activation, Toast.LENGTH_LONG).show()
-                        }
-                    }
+                    Toast.makeText(context, R.string.status_manual_activation, Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Watch Face Push error: ${e.message}", e)

@@ -12,6 +12,7 @@ import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.data.UserPreferencesRepository
 import com.amoledwatchfaces.solarpath.utils.updateComplications
 import com.amoledwatchfaces.solarpath.workers.LocationWorker
+import com.amoledwatchfaces.solarpath.watchfacepush.WatchFacePackageRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +30,9 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
     @Inject
     lateinit var dataStore: DataStore<UserPreferences>
 
+    @Inject
+    lateinit var packageRepository: WatchFacePackageRepository
+
     private val preferences by lazy { UserPreferencesRepository(dataStore).getPreferences() }
 
     @SuppressLint("MissingPermission")
@@ -42,6 +46,28 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
                 }
             }
             return
+        }
+
+        if (intent.action == Intent.ACTION_MY_PACKAGE_REPLACED) {
+            Log.i(TAG, "ACTION_MY_PACKAGE_REPLACED received, updating watch face in Watch Face Push...")
+            val pendingResult = goAsync()
+            scope.launch {
+                try {
+                    val result = packageRepository.updateOrInstallDefaultWatchFace(
+                        scope = this,
+                        setAsActive = false
+                    )
+                    if (result.isSuccess) {
+                        Log.i(TAG, "Successfully updated bundled watch face on MY_PACKAGE_REPLACED: slot ${result.getOrNull()}")
+                    } else {
+                        Log.w(TAG, "Watch face update on MY_PACKAGE_REPLACED: ${result.exceptionOrNull()?.message}")
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error updating watch face on MY_PACKAGE_REPLACED", e)
+                } finally {
+                    pendingResult.finish()
+                }
+            }
         }
 
         if (intent.action in listOf(

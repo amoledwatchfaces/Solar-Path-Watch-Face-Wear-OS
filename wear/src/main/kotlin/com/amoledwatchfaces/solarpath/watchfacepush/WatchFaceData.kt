@@ -20,3 +20,10 @@ data class WatchFaceSlots(
     val installedWatchFaces: List<WatchFaceSlotInfo>,
     val unusedSlots: Int
 )
+
+val DEFAULT_WATCH_FACE = WatchFaceData(
+    name = "default_watchface.apk",
+    assetPath = "default_watchface.apk",
+    packageName = "com.amoledwatchfaces.solarpath.watchfacepush.defaultwatchface",
+    versionCode = 30000001L
+)

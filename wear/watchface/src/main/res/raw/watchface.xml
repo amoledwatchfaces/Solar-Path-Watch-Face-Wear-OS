@@ -2505,7 +2505,7 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <PartText name="digital_clock_neutral" x="12" y="43" width="160" height="100" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                        <PartText name="digital_clock_neutral" x="13" y="43" width="158" height="100" tintColor="[CONFIGURATION.secondaryTheme.0]">
                             <Variant target="alpha" value="0" mode="AMBIENT"/>
                             <Text isAutoSize="TRUE">
                                 <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
@@ -2521,7 +2521,7 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <PartText name="digital_clock_colorful" x="12" y="43" width="160" height="100" alpha="0" tintColor="[CONFIGURATION.secondaryTheme.1]">
+                        <PartText name="digital_clock_colorful" x="13" y="43" width="158" height="100" alpha="0" tintColor="[CONFIGURATION.secondaryTheme.1]">
                             <Variant target="alpha" value="255" mode="AMBIENT"/>
                             <Text isAutoSize="TRUE">
                                 <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
