@@ -158,6 +158,7 @@
         </ColorConfiguration>
         <!-- Boolean Configurations -->
         <BooleanConfiguration defaultValue="FALSE" displayName="id_progress_bar_gradients" id="progressGradients"/>
+        <BooleanConfiguration defaultValue="TRUE" displayName="id_leading_zero" id="leadingZero"/>
     </UserConfigurations>
     <Scene>
         <!-- 24-Hour Solar Path Ring -->
@@ -680,7 +681,6 @@
                 source="angle"/>
             <!-- Sun Beam Line -->
             <PartDraw width="450" height="450" x="0" y="0" alpha="75">
-                <Variant mode="AMBIENT" target="alpha" value="0"/>
                 <Line startX="225" startY="225" endX="225" endY="38">
                     <Stroke color="#ffffff" thickness="2.5">
                         <LinearGradient
@@ -872,6 +872,15 @@
                         </Compare>
                         <Default>
                             <PartDraw name="progress_bar_color_1" width="225" height="225" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.1]">
+                                <Arc centerX="225"
+                                    centerY="225"
+                                    startAngle="284"
+                                    endAngle="332"
+                                    width="420"
+                                    height="420">
+                                    <Transform target="endAngle" value="284 + 48 * [REFERENCE.c0progress] * ([REFERENCE.c0progress] &lt;= 0.95)"/>
+                                    <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                                </Arc>
                                 <Arc centerX="225"
                                     centerY="225"
                                     startAngle="284"
@@ -1661,6 +1670,15 @@
                                     endAngle="152"
                                     width="420"
                                     height="420">
+                                    <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress] * ([REFERENCE.c2progress] &lt;= 0.95)"/>
+                                    <Stroke color="#000000" cap="ROUND" thickness="30"/>
+                                </Arc>
+                                <Arc centerX="0"
+                                    centerY="0"
+                                    startAngle="104"
+                                    endAngle="152"
+                                    width="420"
+                                    height="420">
                                     <Transform target="endAngle" value="104 + 48 * [REFERENCE.c2progress]"/>
                                     <Stroke color="#ffffff" cap="ROUND" thickness="18"/>
                                 </Arc>
@@ -2352,87 +2370,64 @@
             <Variant mode="AMBIENT" target="y" value="133"/>
             <Variant mode="AMBIENT" target="angle" value="0" angleDirection="CLOCKWISE"/>
             <Transform target="angle" value="180+[REFERENCE.solarTrack]"/>
-            <PartDraw x="0" y="0" width="184" height="184" alpha="215" tintColor="[CONFIGURATION.primaryTheme.1]">
-                <Ellipse
-                    x="0"
-                    y="0"
-                    width="184"
-                    height="184">
-                    <Fill color="#ffffff">
-                        <RadialGradient
-                            centerX="92"
-                            centerY="92"
-                            radius="92"
-                            colors="#ff000000 #404040"
-                            positions="0 1"/>
-                    </Fill>
-                </Ellipse>
-                <Ellipse
-                    x="0"
-                    y="0"
-                    width="184"
-                    height="184">
-                    <Fill color="#ffffff">
-                        <RadialGradient
-                            centerX="92"
-                            centerY="92"
-                            radius="92"
-                            colors="#ff000000 #404040"
-                            positions="0 1"/>
-                    </Fill>
-                </Ellipse>
-            </PartDraw>
             <Group name="digital_clock" x="0" y="0" width="184" height="184">
+                <PartDraw x="0" y="0" width="184" height="184" alpha="195">
+                    <Ellipse
+                        x="0"
+                        y="0"
+                        width="184"
+                        height="184">
+                        <Fill color="#1F1F1F"/>
+                    </Ellipse>
+                </PartDraw>
                 <Variant mode="AMBIENT" target="angle" value="0" angleDirection="COUNTER_CLOCKWISE"/>
                 <Transform target="angle" value="-(180+[REFERENCE.solarTrack])"/>
-                <PartText name="date" x="0" y="26" width="184" height="40">
+                <PartText name="d_mmm" x="0" y="26" width="184" height="40">
                     <Text>
-                        <Font family="google_sans_flex_24_semibold_round" size="27" color="[CONFIGURATION.secondaryTheme.2]">
+                        <Font family="google_sans_flex_24_semibold_round" size="27" color="#E0E0E0">
                             <Template>%s
                                 <Parameter expression="icuBestText(&quot;d MMM&quot;)" />
                             </Template>
                         </Font>
                     </Text>
                 </PartText>
-                <PartText name="digital_clock_neutral" x="0" y="43" width="184" height="100">
+                <PartText name="digital_clock_neutral" x="10" y="43" width="164" height="100">
                     <Variant target="alpha" value="0" mode="AMBIENT"/>
-                    <Text>
-                        <Font family="google_sans_flex_24_semibold_round" size="50">
+                    <Text isAutoSize="TRUE">
+                        <Font family="google_sans_flex_24_semibold_round" size="60">
                             <Template>%s:%s
-                                <Parameter expression="[IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12]" />
+                                <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
                                 <Parameter expression="[MINUTE_Z]" />
                             </Template>
                         </Font>
                     </Text>
                 </PartText>
-                <PartText name="digital_clock_colorful" x="0" y="43" width="184" height="100" alpha="0">
+                <PartText name="digital_clock_colorful" x="10" y="43" width="164" height="100" alpha="0">
                     <Variant target="alpha" value="255" mode="AMBIENT"/>
-                    <Transform
-                        target="alpha"
-                        value="255-[REFERENCE.circleBaseAlpha]"/>
-                    <Text>
-                        <Font family="google_sans_flex_24_semibold_round" size="50" color="[CONFIGURATION.secondaryTheme.1]">
+                    <Transform target="alpha" value="255-[REFERENCE.circleBaseAlpha]"/>
+                    <Text isAutoSize="TRUE">
+                        <Font family="google_sans_flex_24_semibold_round" size="60" color="[CONFIGURATION.secondaryTheme.1]">
                             <Template>%s:%s
-                                <Parameter expression="[IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12]" />
+                                <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
                                 <Parameter expression="[MINUTE_Z]" />
                             </Template>
                         </Font>
                     </Text>
                 </PartText>
-                <PartText name="date" x="0" y="118" width="184" height="40">
+                <PartText name="eee" x="0" y="117" width="184" height="40">
                     <Text>
-                        <Font family="google_sans_flex_24_semibold_round" size="27" color="[CONFIGURATION.secondaryTheme.1]">
-                            <Upper>
+                        <Font family="google_sans_flex_24_semibold_round" size="27" color="#E0E0E0">
+                            <Lower>
                                 <Template>%s
                                     <Parameter expression="icuBestText([IS_24_HOUR_MODE]?&quot;eee&quot;:&quot;a&quot;)" />
                                 </Template>
-                            </Upper>
+                            </Lower>
                         </Font>
                     </Text>
                 </PartText>
                 <Group name="sec_indicator" x="0" y="0" width="184" height="184">
                     <Variant mode="AMBIENT" target="alpha" value="0"/>
-                    <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.1]">
+                    <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
                         <Arc
                             centerX="92"
                             centerY="92"
@@ -2446,7 +2441,7 @@
                                 thickness="5"/>
                         </Arc>
                     </PartDraw>
-                    <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.2]">
+                    <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.1]">
                         <Arc
                             centerX="92"
                             centerY="92"

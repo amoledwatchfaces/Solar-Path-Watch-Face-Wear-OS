@@ -19,7 +19,7 @@ buildscript {
     extra.set("namespace", "com.amoledwatchfaces.solarpath")
 
     dependencies {
-        classpath ("com.android.tools.build:gradle:9.4.0")
+        classpath ("com.android.tools.build:gradle:9.4.1")
         classpath ("org.jetbrains.kotlin:kotlin-serialization:2.4.10")
     }
     repositories {

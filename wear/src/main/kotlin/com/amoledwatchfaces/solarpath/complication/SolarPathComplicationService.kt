@@ -6,10 +6,8 @@ import android.graphics.drawable.Icon
 import androidx.datastore.core.DataStore
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
-import androidx.wear.watchface.complications.data.LongTextComplicationData
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
-import androidx.wear.watchface.complications.data.RangedValueComplicationData
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.datasource.ComplicationRequest
 import androidx.wear.watchface.complications.datasource.SuspendingComplicationDataSourceService
@@ -60,29 +58,6 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
                     .setTapAction(null)
                     .build()
             }
-            ComplicationType.RANGED_VALUE -> {
-                RangedValueComplicationData.Builder(
-                    value = 0.65f,
-                    min = 0f,
-                    max = 1f,
-                    contentDescription = PlainComplicationText.Builder("Solar progress").build()
-                )
-                    .setText(PlainComplicationText.Builder("18:42").build())
-                    .setTitle(PlainComplicationText.Builder(previewTitle).build())
-                    .setMonochromaticImage(sunIcon)
-                    .setTapAction(null)
-                    .build()
-            }
-            ComplicationType.LONG_TEXT -> {
-                LongTextComplicationData.Builder(
-                    text = PlainComplicationText.Builder("Sunset 18:42 • 11h 24m").build(),
-                    contentDescription = PlainComplicationText.Builder("Sunset 18:42").build()
-                )
-                    .setTitle(PlainComplicationText.Builder("Solar Path").build())
-                    .setMonochromaticImage(sunIcon)
-                    .setTapAction(null)
-                    .build()
-            }
             else -> null
         }
     }
@@ -106,10 +81,6 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
             prefs.locationName
         } else "SUN"
 
-        val hours = solar.daylightDurationMinutes / 60
-        val mins = solar.daylightDurationMinutes % 60
-        val daylightText = "${hours}h ${mins}m"
-
         val formattedTitle = SolarCalculator.formatAnglesForComplication(solar, titleText)
 
         return when (request.complicationType) {
@@ -119,30 +90,6 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
                     contentDescription = PlainComplicationText.Builder("$titleText $eventTimeText").build()
                 )
                     .setTitle(PlainComplicationText.Builder(formattedTitle).build())
-                    .setMonochromaticImage(sunIcon)
-                    .setTapAction(tapAction)
-                    .build()
-            }
-            ComplicationType.RANGED_VALUE -> {
-                RangedValueComplicationData.Builder(
-                    value = solar.progressFraction,
-                    min = 0f,
-                    max = 1f,
-                    contentDescription = PlainComplicationText.Builder("$titleText $eventTimeText").build()
-                )
-                    .setText(PlainComplicationText.Builder(eventTimeText).build())
-                    .setTitle(PlainComplicationText.Builder(formattedTitle).build())
-                    .setMonochromaticImage(sunIcon)
-                    .setTapAction(tapAction)
-                    .build()
-            }
-            ComplicationType.LONG_TEXT -> {
-                val summary = "${solar.nextEventName} $eventTimeText • $daylightText daylight"
-                LongTextComplicationData.Builder(
-                    text = PlainComplicationText.Builder(summary).build(),
-                    contentDescription = PlainComplicationText.Builder(summary).build()
-                )
-                    .setTitle(PlainComplicationText.Builder(if (prefs.locationName != "- -") prefs.locationName else "Solar Path").build())
                     .setMonochromaticImage(sunIcon)
                     .setTapAction(tapAction)
                     .build()

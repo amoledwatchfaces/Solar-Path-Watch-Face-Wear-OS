@@ -3,7 +3,7 @@
     <Preview value="@drawable/preview" />
     <Category value="CATEGORY_EMPTY" />
     <AvailableInRetail value="false" />
-    <MultipleInstancesAllowed value="false" />
+    <MultipleInstancesAllowed value="true" />
     <Editable value="true" />
     <FlavorsSupported value="false" />
 </WatchFaceInfo>

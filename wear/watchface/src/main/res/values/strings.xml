@@ -2,6 +2,7 @@
     <string name="app_name">Solar Path</string>
     <string name="watch_face_name">Solar Path</string>
 
+    <string name="id_leading_zero">Leading Zero</string>
     <string name="id_progress_bar_gradients">Slot 1,2,3,4 Gradients</string>
 
     <string name="id_primary_theme">Primary Theme</string>
