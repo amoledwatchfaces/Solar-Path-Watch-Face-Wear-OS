@@ -1,6 +1,9 @@
 import org.gradle.api.tasks.Copy
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileInputStream
+import java.util.Properties
 import java.util.regex.Pattern
 
 evaluationDependsOn(":wear:watchface")
@@ -37,6 +40,50 @@ android {
         versionCode = 20000 + (versionCode ?: 0)
     }
 
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
+    signingConfigs {
+        create("release") {
+            val keystoreFileEnv = System.getenv("KEYSTORE_FILE") ?: System.getenv("KEYSTORE_FILE_PATH")
+            val keystorePasswordEnv = System.getenv("KEYSTORE_PASSWORD")
+            val keyAliasEnv = System.getenv("KEY_ALIAS")
+            val keyPasswordEnv = System.getenv("KEY_PASSWORD")
+
+            if (!keystoreFileEnv.isNullOrEmpty() && !keystorePasswordEnv.isNullOrEmpty() && !keyAliasEnv.isNullOrEmpty() && !keyPasswordEnv.isNullOrEmpty()) {
+                storeFile = file(keystoreFileEnv)
+                storePassword = keystorePasswordEnv
+                keyAlias = keyAliasEnv
+                keyPassword = keyPasswordEnv
+            } else {
+                val candidateLocations = listOf(
+                    file("C:\\Users\\amoledwatchfaces\\workspace\\keystore"),
+                    file("C:\\Users\\amoledwatchfaces\\WatchFaceStudio\\keystore")
+                )
+                val targetDir = candidateLocations.firstOrNull {
+                    File(it, "keystore.properties").exists() && File(it, "keystore.jks").exists()
+                }
+                if (targetDir != null) {
+                    val localPropertiesFile = File(targetDir, "keystore.properties")
+                    val localKeystoreFile = File(targetDir, "keystore.jks")
+                    val keystoreProperties = Properties().apply {
+                        load(FileInputStream(localPropertiesFile))
+                    }
+                    storeFile = localKeystoreFile
+                    keyAlias = keystoreProperties.getProperty("KEY_ALIAS") ?: keystoreProperties.getProperty("keyAlias")
+                    storePassword = keystoreProperties.getProperty("STORE_PASSWORD")
+                        ?: keystoreProperties.getProperty("KEYSTORE_PASSWORD")
+                        ?: keystoreProperties.getProperty("storePassword")
+                    keyPassword = keystoreProperties.getProperty("KEY_PASSWORD")
+                        ?: keystoreProperties.getProperty("keyPassword")
+                }
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -45,9 +92,14 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            val releaseConfig = signingConfigs.getByName("release")
+            if (releaseConfig.storeFile != null && releaseConfig.storeFile!!.exists()) {
+                signingConfig = releaseConfig
+            }
         }
         debug {
             versionNameSuffix = " (debug)"
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
