@@ -40,12 +40,6 @@ android {
         versionCode = 20000 + (versionCode ?: 0)
     }
 
-    bundle {
-        language {
-            enableSplit = false
-        }
-    }
-
     signingConfigs {
         create("release") {
             val keystoreFileEnv = System.getenv("KEYSTORE_FILE") ?: System.getenv("KEYSTORE_FILE_PATH")
@@ -138,15 +132,15 @@ dependencies {
     implementation ("dev.jamesyox:kastro:0.6.0")
 
     // Location
-    implementation ("com.google.android.gms:play-services-location:21.3.0")
+    implementation ("com.google.android.gms:play-services-location:21.4.0")
     implementation ("com.google.accompanist:accompanist-permissions:0.37.3")
 
     // General compose dependencies
     val composeBom = platform ("androidx.compose:compose-bom:2026.05.01")
     implementation (composeBom)
     implementation ("androidx.activity:activity-compose:1.13.0")
-    implementation ("androidx.compose.ui:ui:1.12.0")
-    implementation ("androidx.compose.ui:ui-tooling-preview:1.12.0")
+    implementation ("androidx.compose.ui:ui:1.12.1")
+    implementation ("androidx.compose.ui:ui-tooling-preview:1.12.1")
     implementation ("androidx.compose.material:material-icons-extended:1.7.8")
     implementation ("androidx.compose.animation:animation-graphics")
 
@@ -160,7 +154,7 @@ dependencies {
     implementation ("androidx.compose.material3:material3:1.4.0")
 
     // Core
-    implementation ("androidx.core:core-ktx:1.19.0")
+    implementation ("androidx.core:core-ktx:1.19.1")
     implementation ("androidx.core:core-splashscreen:1.2.0")
 
     // Lifecycle
@@ -185,12 +179,12 @@ dependencies {
     ksp ("androidx.hilt:hilt-compiler:1.4.0")
 
     // WorkManager
-    implementation ("androidx.work:work-runtime-ktx:2.11.2")
+    implementation ("androidx.work:work-runtime-ktx:2.12.0")
 
     // Testing
     testImplementation ("junit:junit:4.13.2")
-    debugImplementation ("androidx.compose.ui:ui-tooling:1.12.0")
-    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.12.0")
+    debugImplementation ("androidx.compose.ui:ui-tooling:1.12.1")
+    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.12.1")
 }
 
 androidComponents.onVariants { variant ->
