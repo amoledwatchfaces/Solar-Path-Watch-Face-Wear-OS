@@ -2414,11 +2414,12 @@
         </ComplicationSlot>
 
         <Group name="digital_clock_wrapper" width="184" height="184" x="133" y="94" pivotY="0.711956">
-            <Variant mode="AMBIENT" target="y" value="114.6" />
-            <Variant mode="AMBIENT" target="scaleX" value="[REFERENCE.arcsScale]" />
-            <Variant mode="AMBIENT" target="scaleY" value="[REFERENCE.arcsScale]" />
             <Transform target="angle" value="180+[REFERENCE.solarTrack]"/>
             <Group name="digital_clock" x="0" y="0" width="184" height="184">
+                <Variant mode="AMBIENT" target="y" value="39" />
+                <Variant mode="AMBIENT" target="scaleX" value="1.2" />
+                <Variant mode="AMBIENT" target="scaleY" value="1.2" />
+                <Transform target="angle" value="-(180+[REFERENCE.solarTrack])"/>
                 <PartDraw x="0" y="0" width="184" height="184" alpha="195">
                     <Ellipse
                         x="0"
@@ -2428,7 +2429,6 @@
                         <Fill color="#1F1F1F"/>
                     </Ellipse>
                 </PartDraw>
-                <Transform target="angle" value="-(180+[REFERENCE.solarTrack])"/>
                 <PartText name="d_mmm" x="0" y="26" width="184" height="40">
                     <Text>
                         <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#E0E0E0">
