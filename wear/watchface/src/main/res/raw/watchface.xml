@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WatchFace width="450" height="450">
     <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
-    <Metadata key="PREVIEW_TIME" value="18:00:00"/>
+    <Metadata key="PREVIEW_TIME" value="18:00:50"/>
     <UserConfigurations>
         <!-- Color Configurations -->
         <ColorConfiguration defaultValue="34" displayName="id_primary_theme" id="primaryTheme">
@@ -174,7 +174,7 @@
             <PartDraw name="circle_base" width="450" height="450" x="0" y="0">
                 <Transform
                     target="alpha"
-                    value="[REFERENCE.solarTrack] &lt;= [REFERENCE.ss_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 180 * ([REFERENCE.solarTrack] - [REFERENCE.ss_angle]) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle])), 75, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 75 : [REFERENCE.solarTrack] &lt;= [REFERENCE.sr_angle] ? clamp(round(75 + 180 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] - [REFERENCE.adawn_angle])), 75, 255) : 255"/>
+                    value="[REFERENCE.solarTrack] &lt;= ([REFERENCE.ss_angle] - 30) ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 180 * ([REFERENCE.solarTrack] - ([REFERENCE.ss_angle] - 30)) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 30 &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 30)), 75, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 75 : [REFERENCE.solarTrack] &lt;= ([REFERENCE.sr_angle] + 30) ? clamp(round(75 + 180 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] + 30 - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] + 30 - [REFERENCE.adawn_angle])), 75, 255) : 255"/>
                 <Reference
                     name="circleBaseAlpha"
                     source="alpha"/>
@@ -347,7 +347,7 @@
         </Group>
 
         <!-- Index -->
-        <Group name="index" width="450" height="450" x="0" y="0">
+        <Group name="index" width="450" height="450" x="0" y="0" tintColor="[CONFIGURATION.secondaryTheme.0]">
             <PartDraw name="short_dashes" height="450" width="450" x="0" y="0" alpha="100">
                 <Arc centerX="225"
                     centerY="225"
