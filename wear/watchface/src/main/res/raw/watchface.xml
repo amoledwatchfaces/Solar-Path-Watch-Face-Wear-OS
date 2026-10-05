@@ -160,7 +160,6 @@
         <ListConfiguration defaultValue="1" displayName="id_aod" id="aod">
             <ListOption displayName="id_aod_0" icon="prev_none" id="0" />
             <ListOption displayName="id_aod_1" icon="prev_none" id="1" />
-            <ListOption displayName="id_aod_2" icon="prev_none" id="2" />
         </ListConfiguration>
         <!-- Boolean Configurations -->
         <BooleanConfiguration defaultValue="FALSE" displayName="id_progress_bar_gradients" id="progressGradients"/>
@@ -2471,6 +2470,7 @@
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
+        <!-- Digital Clock -->
         <Group name="digital_clock_wrapper" width="184" height="184" x="133" y="94" pivotY="0.711956">
             <Transform target="angle" value="180+[REFERENCE.solarTrack]"/>
             <Group name="digital_clock" x="0" y="0" width="184" height="184">
