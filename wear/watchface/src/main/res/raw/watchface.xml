@@ -2404,7 +2404,6 @@
                 </PartText>
                 <PartText name="digital_clock_colorful" x="10" y="43" width="164" height="100" alpha="0">
                     <Variant target="alpha" value="255" mode="AMBIENT"/>
-                    <Transform target="alpha" value="255-[REFERENCE.circleBaseAlpha]"/>
                     <Text isAutoSize="TRUE">
                         <Font family="google_sans_flex_24_semibold_round" size="60" color="[CONFIGURATION.secondaryTheme.1]">
                             <Template>%s:%s
