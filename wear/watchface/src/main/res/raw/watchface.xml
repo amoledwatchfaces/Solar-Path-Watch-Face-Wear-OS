@@ -496,7 +496,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="0">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">12</Font>
                         </Text>
                     </PartText>
@@ -505,7 +505,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-30">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">14</Font>
                         </Text>
                     </PartText>
@@ -514,7 +514,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-60">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">16</Font>
                         </Text>
                     </PartText>
@@ -523,7 +523,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-90">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">18</Font>
                         </Text>
                     </PartText>
@@ -532,7 +532,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-120">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">20</Font>
                         </Text>
                     </PartText>
@@ -541,7 +541,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-150">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">22</Font>
                         </Text>
                     </PartText>
@@ -550,7 +550,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-180">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">24</Font>
                         </Text>
                     </PartText>
@@ -559,7 +559,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-210">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">02</Font>
                         </Text>
                     </PartText>
@@ -568,7 +568,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-240">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">04</Font>
                         </Text>
                     </PartText>
@@ -577,7 +577,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-270">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">06</Font>
                         </Text>
                     </PartText>
@@ -586,7 +586,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-300">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">08</Font>
                         </Text>
                     </PartText>
@@ -595,7 +595,7 @@
                     <PartText width="60" height="60" x="0" y="0" angle="-330">
                         <Text>
                             <Font
-                                family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD"
+                                family="SYNC_TO_DEVICE" weight="SEMI_BOLD"
                                 size="24">10</Font>
                         </Text>
                     </PartText>
@@ -904,7 +904,7 @@
                             endAngle="0"
                             width="420"
                             height="420">
-                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#ebebeb">
                                 <Template>%s
                                     <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
                                 </Template>
@@ -948,7 +948,7 @@
                                 endAngle="360"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
@@ -958,8 +958,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -977,7 +977,7 @@
                                 endAngle="360"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage
                                         resource="empty_icon"
                                         source="COMPLICATION.SMALL_IMAGE"
@@ -987,8 +987,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1006,13 +1006,13 @@
                                 endAngle="360"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1030,15 +1030,15 @@
                                 endAngle="360"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1056,7 +1056,7 @@
                                 endAngle="360"
                                 width="419"
                                 height="419">
-                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1083,7 +1083,7 @@
                                 endAngle="360"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
@@ -1093,8 +1093,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1112,13 +1112,13 @@
                                 endAngle="360"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1136,15 +1136,15 @@
                                 endAngle="360"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1162,7 +1162,7 @@
                                 endAngle="360"
                                 width="419"
                                 height="419">
-                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1302,7 +1302,7 @@
                             endAngle="90"
                             width="420"
                             height="420">
-                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#ebebeb">
                                 <Template>%s
                                     <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
                                 </Template>
@@ -1346,7 +1346,7 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
@@ -1356,8 +1356,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1375,7 +1375,7 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage
                                         resource="empty_icon"
                                         source="COMPLICATION.SMALL_IMAGE"
@@ -1385,8 +1385,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1404,13 +1404,13 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1428,15 +1428,15 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1454,7 +1454,7 @@
                                 endAngle="90"
                                 width="419"
                                 height="419">
-                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1481,7 +1481,7 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
@@ -1491,8 +1491,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1510,13 +1510,13 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1534,15 +1534,15 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1560,7 +1560,7 @@
                                 endAngle="90"
                                 width="419"
                                 height="419">
-                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1695,12 +1695,12 @@
                             endAngle="154"
                             width="420"
                             height="420">
-                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#ebebeb">
                                 <Template>%s
                                     <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
                                 </Template>
                             </Font>
-                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#00000000">.</Font>
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#00000000">.</Font>
                         </TextCircular>
                     </PartText>
                     <Condition>
@@ -1740,7 +1740,7 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
@@ -1750,8 +1750,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1769,7 +1769,7 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage
                                         resource="empty_icon"
                                         source="COMPLICATION.SMALL_IMAGE"
@@ -1779,8 +1779,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1798,13 +1798,13 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1822,15 +1822,15 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1848,7 +1848,7 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1875,7 +1875,7 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
@@ -1885,8 +1885,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1904,13 +1904,13 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1928,15 +1928,15 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -1954,7 +1954,7 @@
                                 endAngle="90"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2094,12 +2094,12 @@
                             endAngle="244"
                             width="420"
                             height="420">
-                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#ebebeb">
                                 <Template>%s
                                     <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
                                 </Template>
                             </Font>
-                            <Font family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26" color="#00000000">.</Font>
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#00000000">.</Font>
                         </TextCircular>
                     </PartText>
                     <Condition>
@@ -2139,7 +2139,7 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
@@ -2149,8 +2149,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2168,7 +2168,7 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage
                                         resource="empty_icon"
                                         source="COMPLICATION.SMALL_IMAGE"
@@ -2178,8 +2178,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2197,13 +2197,13 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2221,15 +2221,15 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2247,7 +2247,7 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2274,7 +2274,7 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
@@ -2284,8 +2284,8 @@
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2303,13 +2303,13 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TITLE]" />
                                     </Template>
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2327,15 +2327,15 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <InlineImage color="[CONFIGURATION.primaryTheme.0]"
                                         resource="empty_icon"
                                         source="COMPLICATION.MONOCHROMATIC_IMAGE"
                                         width="26"
                                         height="26" />
                                 </Font>
-                                <Font color="[CONFIGURATION.primaryTheme.0]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
-                                <Font color="[CONFIGURATION.primaryTheme.2]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2353,7 +2353,7 @@
                                 endAngle="180"
                                 height="420"
                                 width="420">
-                                <Font color="[CONFIGURATION.primaryTheme.1]" family="google_sans_flex_24_semibold_round" weight="SEMI_BOLD" size="26">
+                                <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
                                     <Template>%s
                                         <Parameter expression="[COMPLICATION.TEXT]" />
                                     </Template>
@@ -2384,7 +2384,7 @@
                 <Transform target="angle" value="-(180+[REFERENCE.solarTrack])"/>
                 <PartText name="d_mmm" x="0" y="26" width="184" height="40">
                     <Text>
-                        <Font family="google_sans_flex_24_semibold_round" size="27" color="#E0E0E0">
+                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#E0E0E0">
                             <Template>%s
                                 <Parameter expression="icuBestText(&quot;d MMM&quot;)" />
                             </Template>
@@ -2394,7 +2394,7 @@
                 <PartText name="digital_clock_neutral" x="10" y="43" width="164" height="100">
                     <Variant target="alpha" value="0" mode="AMBIENT"/>
                     <Text isAutoSize="TRUE">
-                        <Font family="google_sans_flex_24_semibold_round" size="60" color="[CONFIGURATION.secondaryTheme.0]">
+                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="[CONFIGURATION.secondaryTheme.0]">
                             <Template>%s:%s
                                 <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
                                 <Parameter expression="[MINUTE_Z]" />
@@ -2405,7 +2405,7 @@
                 <PartText name="digital_clock_colorful" x="10" y="43" width="164" height="100" alpha="0">
                     <Variant target="alpha" value="255" mode="AMBIENT"/>
                     <Text isAutoSize="TRUE">
-                        <Font family="google_sans_flex_24_semibold_round" size="60" color="[CONFIGURATION.secondaryTheme.1]">
+                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="[CONFIGURATION.secondaryTheme.1]">
                             <Template>%s:%s
                                 <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
                                 <Parameter expression="[MINUTE_Z]" />
@@ -2415,7 +2415,7 @@
                 </PartText>
                 <PartText name="eee" x="0" y="117" width="184" height="40">
                     <Text>
-                        <Font family="google_sans_flex_24_semibold_round" size="27" color="#E0E0E0">
+                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#E0E0E0">
                             <Lower>
                                 <Template>%s
                                     <Parameter expression="icuBestText([IS_24_HOUR_MODE]?&quot;eee&quot;:&quot;a&quot;)" />
