@@ -157,6 +157,10 @@
             <ColorOption colors="#e4e3da #c7c4ae #afac91" displayName="id_color_grey_mud" id="78"/>
         </ColorConfiguration>
         <!-- List Configurations -->
+        <ListConfiguration defaultValue="0" displayName="id_clock_style" id="clockStyle">
+            <ListOption displayName="id_clock_style_0" icon="prev_none" id="0" />
+            <ListOption displayName="id_clock_style_1" icon="prev_none" id="1" />
+        </ListConfiguration>
         <ListConfiguration defaultValue="1" displayName="id_aod" id="aod">
             <ListOption displayName="id_aod_0" icon="prev_none" id="0" />
             <ListOption displayName="id_aod_1" icon="prev_none" id="1" />
@@ -993,7 +997,7 @@
                             endAngle="0"
                             width="420"
                             height="420">
-                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="[CONFIGURATION.primaryTheme.0]">
                                 <Template>%s
                                     <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
                                 </Template>
@@ -1011,7 +1015,7 @@
                                 </PartImage>
                                 <PartDraw width="28" height="28" x="0" y="0">
                                     <Rectangle width="28" height="28" x="0" y="0">
-                                        <Fill color="#ebebeb"/>
+                                        <Fill color="[CONFIGURATION.primaryTheme.0]"/>
                                     </Rectangle>
                                 </PartDraw>
                             </Group>
@@ -1396,7 +1400,7 @@
                             endAngle="90"
                             width="420"
                             height="420">
-                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="[CONFIGURATION.primaryTheme.0]">
                                 <Template>%s
                                     <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
                                 </Template>
@@ -1414,7 +1418,7 @@
                                 </PartImage>
                                 <PartDraw width="28" height="28" x="0" y="0">
                                     <Rectangle width="28" height="28" x="0" y="0">
-                                        <Fill color="#ebebeb"/>
+                                        <Fill color="[CONFIGURATION.primaryTheme.0]"/>
                                     </Rectangle>
                                 </PartDraw>
                             </Group>
@@ -1794,7 +1798,7 @@
                             endAngle="154"
                             width="420"
                             height="420">
-                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="[CONFIGURATION.primaryTheme.0]">
                                 <Template>%s
                                     <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
                                 </Template>
@@ -1813,7 +1817,7 @@
                                 </PartImage>
                                 <PartDraw width="28" height="28" x="0" y="0">
                                     <Rectangle width="28" height="28" x="0" y="0">
-                                        <Fill color="#ebebeb"/>
+                                        <Fill color="[CONFIGURATION.primaryTheme.0]"/>
                                     </Rectangle>
                                 </PartDraw>
                             </Group>
@@ -2198,7 +2202,7 @@
                             endAngle="244"
                             width="420"
                             height="420">
-                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#ebebeb">
+                            <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="[CONFIGURATION.primaryTheme.0]">
                                 <Template>%s
                                     <Parameter expression="[COMPLICATION.TEXT] != null ? [COMPLICATION.TEXT] : &quot;- -&quot;"/>
                                 </Template>
@@ -2217,7 +2221,7 @@
                                 </PartImage>
                                 <PartDraw width="28" height="28" x="0" y="0">
                                     <Rectangle width="28" height="28" x="0" y="0">
-                                        <Fill color="#ebebeb"/>
+                                        <Fill color="[CONFIGURATION.primaryTheme.0]"/>
                                     </Rectangle>
                                 </PartDraw>
                             </Group>
@@ -2473,7 +2477,7 @@
         <!-- Digital Clock -->
         <Group name="digital_clock_wrapper" width="184" height="184" x="133" y="94" pivotY="0.711956">
             <Transform target="angle" value="180+[REFERENCE.solarTrack]"/>
-            <Group name="digital_clock" x="0" y="0" width="184" height="184">
+            <Group name="clock" x="0" y="0" width="184" height="184">
                 <Variant mode="AMBIENT" target="y" value="39" />
                 <Variant mode="AMBIENT" target="scaleX" value="1.2" />
                 <Variant mode="AMBIENT" target="scaleY" value="1.2" />
@@ -2487,94 +2491,185 @@
                         <Fill color="#1F1F1F"/>
                     </Ellipse>
                 </PartDraw>
-                <PartText name="d_mmm" x="0" y="26" width="184" height="40">
-                    <Text>
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
-                            <Template>%s
-                                <Parameter expression="icuBestText(&quot;d MMM&quot;)" />
-                            </Template>
-                        </Font>
-                    </Text>
-                </PartText>
-                <PartText name="digital_clock_neutral" x="12" y="43" width="160" height="100" tintColor="[CONFIGURATION.secondaryTheme.0]">
-                    <Variant target="alpha" value="0" mode="AMBIENT"/>
-                    <Text isAutoSize="TRUE">
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
-                            <Template>%s
-                                <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
-                            </Template>
-                        </Font>
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#B1B1B1">:</Font>
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
-                            <Template>%s
-                                <Parameter expression="[MINUTE_Z]" />
-                            </Template>
-                        </Font>
-                    </Text>
-                </PartText>
-                <PartText name="digital_clock_colorful" x="12" y="43" width="160" height="100" alpha="0" tintColor="[CONFIGURATION.secondaryTheme.1]">
-                    <Variant target="alpha" value="255" mode="AMBIENT"/>
-                    <Text isAutoSize="TRUE">
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
-                            <Template>%s
-                                <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
-                            </Template>
-                        </Font>
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#B1B1B1">:</Font>
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
-                            <Template>%s
-                                <Parameter expression="[MINUTE_Z]" />
-                            </Template>
-                        </Font>
-                    </Text>
-                </PartText>
-                <PartText name="eee" x="0" y="117" width="184" height="40">
-                    <Text>
-                        <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
-                            <Lower>
-                                <Template>%s
-                                    <Parameter expression="icuBestText([IS_24_HOUR_MODE]?&quot;eee&quot;:&quot;a&quot;)" />
-                                </Template>
-                            </Lower>
-                        </Font>
-                    </Text>
-                </PartText>
-                <Group name="sec_indicator" x="0" y="0" width="184" height="184">
-                    <Variant mode="AMBIENT" target="alpha" value="0"/>
-                    <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
-                        <Arc
-                            centerX="92"
-                            centerY="92"
-                            width="170"
-                            height="170"
-                            startAngle="0"
-                            endAngle="360">
-                            <Stroke
-                                cap="ROUND"
-                                color="#606060"
-                                thickness="5"/>
-                        </Arc>
-                    </PartDraw>
-                    <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.1]">
-                        <Arc
-                            centerX="92"
-                            centerY="92"
-                            width="170"
-                            height="170"
-                            startAngle="0"
-                            endAngle="360">
-                            <Transform
-                                target="endAngle"
-                                value="[SECOND] * 6">
-                                <Animation angleDirection="CLOCKWISE"
-                                    controls="0.67 2 1.0 1.0"
-                                    duration="0.1"
-                                    interpolation="CUBIC_BEZIER" />
-                            </Transform>
-                            <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
-                        </Arc>
-                    </PartDraw>
-                </Group>
+                <Condition>
+                    <Expressions>
+                        <Expression name="digital">[CONFIGURATION.clockStyle] == 0</Expression>
+                    </Expressions>
+                    <Compare expression="digital">
+                        <PartText name="d_mmm" x="0" y="26" width="184" height="40">
+                            <Text>
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
+                                    <Template>%s
+                                        <Parameter expression="icuBestText(&quot;d MMM&quot;)" />
+                                    </Template>
+                                </Font>
+                            </Text>
+                        </PartText>
+                        <PartText name="digital_clock_neutral" x="12" y="43" width="160" height="100" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                            <Variant target="alpha" value="0" mode="AMBIENT"/>
+                            <Text isAutoSize="TRUE">
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
+                                    <Template>%s
+                                        <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
+                                    </Template>
+                                </Font>
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#B1B1B1">:</Font>
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
+                                    <Template>%s
+                                        <Parameter expression="[MINUTE_Z]" />
+                                    </Template>
+                                </Font>
+                            </Text>
+                        </PartText>
+                        <PartText name="digital_clock_colorful" x="12" y="43" width="160" height="100" alpha="0" tintColor="[CONFIGURATION.secondaryTheme.1]">
+                            <Variant target="alpha" value="255" mode="AMBIENT"/>
+                            <Text isAutoSize="TRUE">
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
+                                    <Template>%s
+                                        <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
+                                    </Template>
+                                </Font>
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#B1B1B1">:</Font>
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
+                                    <Template>%s
+                                        <Parameter expression="[MINUTE_Z]" />
+                                    </Template>
+                                </Font>
+                            </Text>
+                        </PartText>
+                        <PartText name="eee" x="0" y="117" width="184" height="40">
+                            <Text>
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
+                                    <Lower>
+                                        <Template>%s
+                                            <Parameter expression="icuBestText([IS_24_HOUR_MODE]?&quot;eee&quot;:&quot;a&quot;)" />
+                                        </Template>
+                                    </Lower>
+                                </Font>
+                            </Text>
+                        </PartText>
+                        <Group name="sec_indicator" x="0" y="0" width="184" height="184">
+                            <Variant mode="AMBIENT" target="alpha" value="0"/>
+                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                                <Arc
+                                    centerX="92"
+                                    centerY="92"
+                                    width="170"
+                                    height="170"
+                                    startAngle="0"
+                                    endAngle="360">
+                                    <Stroke
+                                        cap="ROUND"
+                                        color="#606060"
+                                        thickness="5"/>
+                                </Arc>
+                            </PartDraw>
+                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.1]">
+                                <Arc
+                                    centerX="92"
+                                    centerY="92"
+                                    width="170"
+                                    height="170"
+                                    startAngle="0"
+                                    endAngle="360">
+                                    <Transform
+                                        target="endAngle"
+                                        value="[SECOND] * 6">
+                                        <Animation angleDirection="CLOCKWISE"
+                                            controls="0.67 2 1.0 1.0"
+                                            duration="0.1"
+                                            interpolation="CUBIC_BEZIER" />
+                                    </Transform>
+                                    <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
+                                </Arc>
+                            </PartDraw>
+                        </Group>
+                    </Compare>
+                    <Default>
+                        <PartDraw name="hour" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                            <Transform target="angle" value="[HOUR_0_11_MINUTE] * 30"/>
+                            <Rectangle
+                                x="18"
+                                y="70"
+                                width="4"
+                                height="22">
+                                <Fill color="#ffffff"/>
+                            </Rectangle>
+                            <RoundRectangle
+                                x="14"
+                                y="30"
+                                width="12"
+                                height="46"
+                                cornerRadiusX="6"
+                                cornerRadiusY="6">
+                                <Fill color="#ffffff"/>
+                            </RoundRectangle>
+                        </PartDraw>
+                        <PartDraw name="min" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                            <Transform target="angle" value="[MINUTE] * 6"/>
+                            <Rectangle
+                                x="18"
+                                y="70"
+                                width="4"
+                                height="22">
+                                <Fill color="#ffffff"/>
+                            </Rectangle>
+                            <RoundRectangle
+                                x="14"
+                                y="10"
+                                width="12"
+                                height="66"
+                                cornerRadiusX="6"
+                                cornerRadiusY="6">
+                                <Fill color="#ffffff"/>
+                            </RoundRectangle>
+                        </PartDraw>
+                        <PartDraw name="center" x="72" y="72" width="40" height="40" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                            <Ellipse
+                                x="13"
+                                y="13"
+                                width="14"
+                                height="14">
+                                <Fill color="#ffffff"/>
+                            </Ellipse>
+                        </PartDraw>
+                        <PartDraw name="center2" x="72" y="72" width="40" height="40" tintColor="[CONFIGURATION.secondaryTheme.2]">
+                            <Ellipse
+                                x="15"
+                                y="15"
+                                width="10"
+                                height="10">
+                                <Fill color="#ffffff"/>
+                            </Ellipse>
+                        </PartDraw>
+
+                        <PartDraw name="sec" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.secondaryTheme.2]">
+                            <Variant
+                                target="alpha"
+                                value="0"
+                                mode="AMBIENT"/>
+                            <Transform target="angle" value="[SECOND] * 6"/>
+                            <RoundRectangle
+                                x="18.5"
+                                y="10"
+                                width="3"
+                                height="102"
+                                cornerRadiusX="2"
+                                cornerRadiusY="2">
+                                <Fill color="#ffffff"/>
+                            </RoundRectangle>
+                        </PartDraw>
+                        <PartDraw name="center3" x="72" y="72" width="40" height="40">
+                            <Ellipse
+                                x="18"
+                                y="18"
+                                width="4"
+                                height="4">
+                                <Fill color="#000000"/>
+                            </Ellipse>
+                        </PartDraw>
+                    </Default>
+                </Condition>
             </Group>
         </Group>
     </Scene>
