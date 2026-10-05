@@ -2586,6 +2586,68 @@
                         </Group>
                     </Compare>
                     <Default>
+                        <Group name="index" x="0" y="0" width="184" height="184" alpha="105">
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="0">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="30">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="60">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="90">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="120">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="150">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="180">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="210">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="240">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="270">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="300">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="330">
+                                <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                        </Group>
                         <PartDraw name="hour" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
                             <Transform target="angle" value="[HOUR_0_11_MINUTE] * 30"/>
                             <Rectangle
@@ -2642,7 +2704,6 @@
                                 <Fill color="#ffffff"/>
                             </Ellipse>
                         </PartDraw>
-
                         <PartDraw name="sec" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.secondaryTheme.2]">
                             <Variant
                                 target="alpha"
@@ -2651,9 +2712,9 @@
                             <Transform target="angle" value="[SECOND] * 6"/>
                             <RoundRectangle
                                 x="18.5"
-                                y="10"
+                                y="4"
                                 width="3"
-                                height="102"
+                                height="108"
                                 cornerRadiusX="2"
                                 cornerRadiusY="2">
                                 <Fill color="#ffffff"/>
