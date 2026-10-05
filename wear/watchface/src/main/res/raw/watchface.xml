@@ -371,6 +371,64 @@
                 </PartDraw>
             </Group>
 
+            <Group name="events_aod" width="450" height="450" x="0" y="0" tintColor="[CONFIGURATION.secondaryTheme.2]" alpha="0">
+                <Variant
+                    target="alpha"
+                    value="255"
+                    mode="AMBIENT"/>
+                <PartDraw name="ss" x="224" y="0" width="2" height="225" pivotY="1">
+                    <Transform target="angle" value="[REFERENCE.ss_angle]"/>
+                    <Rectangle x="0" y="0" width="2" height="225">
+                        <Fill color="#898989"/>
+                    </Rectangle>
+                </PartDraw>
+                <PartDraw name="sr" x="224" y="0" width="2" height="225" pivotY="1">
+                    <Transform target="angle" value="[REFERENCE.sr_angle]"/>
+                    <Rectangle x="0" y="0" width="2" height="225">
+                        <Fill color="#898989"/>
+                    </Rectangle>
+                </PartDraw>
+
+                <PartDraw name="cdusk" x="224" y="0" width="2" height="225" pivotY="1">
+                    <Transform target="angle" value="[REFERENCE.cdusk_angle]"/>
+                    <Rectangle x="0" y="0" width="2" height="225">
+                        <Fill color="#696969"/>
+                    </Rectangle>
+                </PartDraw>
+                <PartDraw name="cdawn" x="224" y="0" width="2" height="225" pivotY="1">
+                    <Transform target="angle" value="[REFERENCE.cdawn_angle]"/>
+                    <Rectangle x="0" y="0" width="2" height="225">
+                        <Fill color="#696969"/>
+                    </Rectangle>
+                </PartDraw>
+
+                <PartDraw name="ndusk" x="224" y="0" width="2" height="225" pivotY="1">
+                    <Transform target="angle" value="[REFERENCE.ndusk_angle]"/>
+                    <Rectangle x="0" y="0" width="2" height="225">
+                        <Fill color="#494949"/>
+                    </Rectangle>
+                </PartDraw>
+                <PartDraw name="ndawn" x="224" y="0" width="2" height="225" pivotY="1">
+                    <Transform target="angle" value="[REFERENCE.ndawn_angle]"/>
+                    <Rectangle x="0" y="0" width="2" height="225">
+                        <Fill color="#494949"/>
+                    </Rectangle>
+                </PartDraw>
+
+                <PartDraw name="adusk" x="224" y="0" width="2" height="225" pivotY="1">
+                    <Transform target="angle" value="[REFERENCE.adusk_angle]"/>
+                    <Rectangle x="0" y="0" width="2" height="225">
+                        <Fill color="#292929"/>
+                    </Rectangle>
+                </PartDraw>
+                <PartDraw name="adawn" x="224" y="0" width="2" height="225" pivotY="1">
+                    <Transform target="angle" value="[REFERENCE.adawn_angle]"/>
+                    <Rectangle x="0" y="0" width="2" height="225">
+                        <Fill color="#292929"/>
+                    </Rectangle>
+                </PartDraw>
+            </Group>
+
             <!-- Index -->
             <Group name="index" width="450" height="450" x="0" y="0" tintColor="[CONFIGURATION.secondaryTheme.0]">
                 <PartDraw name="short_dashes" height="450" width="450" x="0" y="0" alpha="100">
