@@ -604,7 +604,7 @@
         </Group>
 
         <!-- Timeline with Dots -->
-        <Group name="solar_track" width="450" height="450" x="0" y="0" alpha="115">
+        <Group name="solar_track" width="450" height="450" x="0" y="0" alpha="115" tintColor="[CONFIGURATION.secondaryTheme.0]">
             <!-- Timeline Circle -->
             <PartDraw width="450" height="450" x="0" y="0">
                 <Ellipse height="224" width="224" y="113" x="113">
@@ -2394,7 +2394,7 @@
                 <PartText name="digital_clock_neutral" x="10" y="43" width="164" height="100">
                     <Variant target="alpha" value="0" mode="AMBIENT"/>
                     <Text isAutoSize="TRUE">
-                        <Font family="google_sans_flex_24_semibold_round" size="60">
+                        <Font family="google_sans_flex_24_semibold_round" size="60" color="[CONFIGURATION.secondaryTheme.0]">
                             <Template>%s:%s
                                 <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
                                 <Parameter expression="[MINUTE_Z]" />
