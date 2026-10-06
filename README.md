@@ -2,7 +2,7 @@
 
 [![Build & Release](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/actions/workflows/build-and-release.yml)
 [![Platform](https://img.shields.io/badge/Platform-Wear_OS_6%2B_(API_36%2B)-brightgreen?logo=android&logoColor=white)](https://developer.android.com/wear)
-[![Format](https://img.shields.io/badge/Format-Watch_Face_Format_5-orange)](https://developer.android.com/training/wearables/wff)
+[![Format](https://img.shields.io/badge/Format-Watch_Face_Format_5-purple)](https://developer.android.com/training/wearables/wff)
 [![Target SDK](https://img.shields.io/badge/Target_SDK-37-blue)](https://developer.android.com)
 [![Compose](https://img.shields.io/badge/Compose-Material_3-blue?logo=jetpackcompose)](https://developer.android.com/training/wearables/compose)
 [![Latest Release](https://img.shields.io/github/v/release/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS?logo=github&color=blue)](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/releases)
