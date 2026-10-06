@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WatchFace width="450" height="450">
     <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
-    <Metadata key="PREVIEW_TIME" value="17:20:45"/>
+    <Metadata key="PREVIEW_TIME" value="17:20:50"/>
     <UserConfigurations>
         <!-- Color Configurations -->
         <ColorConfiguration defaultValue="101" displayName="id_primary_theme" id="primaryTheme">
