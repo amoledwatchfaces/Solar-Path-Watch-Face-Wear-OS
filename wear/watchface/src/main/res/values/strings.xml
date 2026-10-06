@@ -124,4 +124,6 @@
     <string name="id_color_walnut_brown">Walnut Brown</string>
     <string name="id_color_grey_brown">Grey Brown</string>
     <string name="id_color_grey_mud">Grey Mud</string>
+
+    <string name="id_color_atmospheric">Atmospheric</string>
 </resources>

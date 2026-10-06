@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WatchFace width="450" height="450">
     <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
-    <Metadata key="PREVIEW_TIME" value="10:45:55"/>
+    <Metadata key="PREVIEW_TIME" value="17:20:45"/>
     <UserConfigurations>
         <!-- Color Configurations -->
-        <ColorConfiguration defaultValue="34" displayName="id_primary_theme" id="primaryTheme">
+        <ColorConfiguration defaultValue="101" displayName="id_primary_theme" id="primaryTheme">
             <ColorOption colors="#e3e3e3 #bcbcbc #dadada" displayName="id_color_graphite" id="0"/>
             <ColorOption colors="#ffffff #e4e4e4 #eaeaea" displayName="id_color_cloud" id="1"/>
             <ColorOption colors="#fff7e4 #fff7e4 #fcf7eb" displayName="id_color_almond" id="2"/>
@@ -39,6 +39,7 @@
             <ColorOption colors="#e2edff #a3c6ff #5e9bff" displayName="id_color_ocean" id="30"/>
             <ColorOption colors="#d6e5ff #88b4ff #639cff" displayName="id_color_sapphire" id="31"/>
             <ColorOption colors="#c6e3ff #8bc6ff #3a9cff" displayName="id_color_royalblue" id="32"/>
+            <ColorOption colors="#CAE8FF #8DCCFF #4DAEFF" displayName="id_color_atmospheric" id="101"/>
             <ColorOption colors="#d8e6ff #9ec2ff #619bff" displayName="id_color_arctic" id="33"/>
             <ColorOption colors="#cfdbff #a5baff #687eff" displayName="id_color_icy_blue" id="34"/>
             <ColorOption colors="#d6daff #959dfd #636fff" displayName="id_color_amethyst" id="35"/>
@@ -80,7 +81,7 @@
             <ColorOption colors="#dbd8d3 #c1b9ae #b8ad9f" displayName="id_color_grey_brown" id="77"/>
             <ColorOption colors="#e4e3da #c7c4ae #afac91" displayName="id_color_grey_mud" id="78"/>
         </ColorConfiguration>
-        <ColorConfiguration defaultValue="34" displayName="id_secondary_theme" id="secondaryTheme">
+        <ColorConfiguration defaultValue="101" displayName="id_secondary_theme" id="secondaryTheme">
             <ColorOption colors="#e3e3e3 #bcbcbc #dadada" displayName="id_color_graphite" id="0"/>
             <ColorOption colors="#ffffff #e4e4e4 #eaeaea" displayName="id_color_cloud" id="1"/>
             <ColorOption colors="#fff7e4 #fff7e4 #fcf7eb" displayName="id_color_almond" id="2"/>
@@ -115,6 +116,7 @@
             <ColorOption colors="#e2edff #a3c6ff #5e9bff" displayName="id_color_ocean" id="30"/>
             <ColorOption colors="#d6e5ff #88b4ff #639cff" displayName="id_color_sapphire" id="31"/>
             <ColorOption colors="#c6e3ff #8bc6ff #3a9cff" displayName="id_color_royalblue" id="32"/>
+            <ColorOption colors="#CAE8FF #8DCCFF #4DAEFF" displayName="id_color_atmospheric" id="101"/>
             <ColorOption colors="#d8e6ff #9ec2ff #619bff" displayName="id_color_arctic" id="33"/>
             <ColorOption colors="#cfdbff #a5baff #687eff" displayName="id_color_icy_blue" id="34"/>
             <ColorOption colors="#d6daff #959dfd #636fff" displayName="id_color_amethyst" id="35"/>
@@ -156,7 +158,7 @@
             <ColorOption colors="#dbd8d3 #c1b9ae #b8ad9f" displayName="id_color_grey_brown" id="77"/>
             <ColorOption colors="#e4e3da #c7c4ae #afac91" displayName="id_color_grey_mud" id="78"/>
         </ColorConfiguration>
-        <ColorConfiguration defaultValue="34" displayName="id_tertiary_theme" id="tertiaryTheme">
+        <ColorConfiguration defaultValue="101" displayName="id_tertiary_theme" id="tertiaryTheme">
             <ColorOption colors="#e3e3e3 #bcbcbc #dadada" displayName="id_color_graphite" id="0"/>
             <ColorOption colors="#ffffff #e4e4e4 #eaeaea" displayName="id_color_cloud" id="1"/>
             <ColorOption colors="#fff7e4 #fff7e4 #fcf7eb" displayName="id_color_almond" id="2"/>
@@ -191,6 +193,7 @@
             <ColorOption colors="#e2edff #a3c6ff #5e9bff" displayName="id_color_ocean" id="30"/>
             <ColorOption colors="#d6e5ff #88b4ff #639cff" displayName="id_color_sapphire" id="31"/>
             <ColorOption colors="#c6e3ff #8bc6ff #3a9cff" displayName="id_color_royalblue" id="32"/>
+            <ColorOption colors="#CAE8FF #8DCCFF #4DAEFF" displayName="id_color_atmospheric" id="101"/>
             <ColorOption colors="#d8e6ff #9ec2ff #619bff" displayName="id_color_arctic" id="33"/>
             <ColorOption colors="#cfdbff #a5baff #687eff" displayName="id_color_icy_blue" id="34"/>
             <ColorOption colors="#d6daff #959dfd #636fff" displayName="id_color_amethyst" id="35"/>
@@ -283,7 +286,7 @@
                 <PartDraw name="circle_base" width="450" height="450" x="0" y="0">
                     <Transform
                         target="alpha"
-                        value="[REFERENCE.solarTrack] &lt;= ([REFERENCE.ss_angle] - 30) ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 200 * ([REFERENCE.solarTrack] - ([REFERENCE.ss_angle] - 30)) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 30 &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 30)), 55, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 55 : [REFERENCE.solarTrack] &lt;= ([REFERENCE.sr_angle] + 30) ? clamp(round(55 + 200 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] + 30 - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] + 30 - [REFERENCE.adawn_angle])), 55, 255) : 255"/>
+                        value="[REFERENCE.solarTrack] &lt;= ([REFERENCE.ss_angle] - 15) ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 200 * ([REFERENCE.solarTrack] - ([REFERENCE.ss_angle] - 15)) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 15 &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 15)), 55, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 55 : [REFERENCE.solarTrack] &lt;= ([REFERENCE.sr_angle] + 15) ? clamp(round(55 + 200 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] + 15 - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] + 15 - [REFERENCE.adawn_angle])), 55, 255) : 255"/>
                     <Reference
                         name="circleBaseAlpha"
                         source="alpha"/>
@@ -2627,7 +2630,7 @@
                     <Compare expression="digital">
                         <PartText name="d_mmm" x="0" y="26" width="184" height="40">
                             <Text>
-                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="29" color="#CECECE">
                                     <Template>%s
                                         <Parameter expression="icuBestText(&quot;d MMM&quot;)" />
                                     </Template>
@@ -2643,13 +2646,13 @@
                                 value="[CONFIGURATION.tertiaryTheme.1]"
                                 mode="AMBIENT"/>
                             <Text isAutoSize="TRUE">
-                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="55" color="#ffffff">
                                     <Template>%s
                                         <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
                                     </Template>
                                 </Font>
-                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#B1B1B1">:</Font>
-                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="55" color="#B1B1B1">:</Font>
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="55" color="#ffffff">
                                     <Template>%s
                                         <Parameter expression="[MINUTE_Z]" />
                                     </Template>
@@ -2658,7 +2661,7 @@
                         </PartText>
                         <PartText name="eee" x="0" y="118" width="184" height="40">
                             <Text>
-                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
+                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="29" color="#CECECE">
                                     <Lower>
                                         <Template>%s
                                             <Parameter expression="icuBestText([IS_24_HOUR_MODE]?&quot;eee&quot;:&quot;a&quot;)" />
