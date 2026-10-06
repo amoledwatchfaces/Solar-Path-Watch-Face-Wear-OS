@@ -2634,24 +2634,14 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <PartText name="digital_clock_neutral" x="13" y="43" width="158" height="100" tintColor="[CONFIGURATION.tertiaryTheme.0]">
-                            <Variant target="alpha" value="0" mode="AMBIENT"/>
-                            <Text isAutoSize="TRUE">
-                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
-                                    <Template>%s
-                                        <Parameter expression="[CONFIGURATION.leadingZero] ? ([IS_24_HOUR_MODE] ? [HOUR_0_23_Z]: [HOUR_1_12_Z]) : ([IS_24_HOUR_MODE] ? [HOUR_0_23]: [HOUR_1_12])" />
-                                    </Template>
-                                </Font>
-                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#B1B1B1">:</Font>
-                                <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
-                                    <Template>%s
-                                        <Parameter expression="[MINUTE_Z]" />
-                                    </Template>
-                                </Font>
-                            </Text>
-                        </PartText>
-                        <PartText name="digital_clock_colorful" x="13" y="43" width="158" height="100" alpha="0" tintColor="[CONFIGURATION.tertiaryTheme.1]">
-                            <Variant target="alpha" value="255" mode="AMBIENT"/>
+                        <PartText name="digital_clock_neutral" x="13" y="43" width="158" height="100">
+                            <Transform
+                                target="tintColor"
+                                value="[CONFIGURATION.clockAltColors]? [CONFIGURATION.tertiaryTheme.1] : [CONFIGURATION.tertiaryTheme.0]"/>
+                            <Variant
+                                target="tintColor"
+                                value="[CONFIGURATION.tertiaryTheme.1]"
+                                mode="AMBIENT"/>
                             <Text isAutoSize="TRUE">
                                 <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
                                     <Template>%s
@@ -2775,78 +2765,150 @@
                                 </RoundRectangle>
                             </PartDraw>
                         </Group>
-                        <PartDraw name="hour" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
-                            <Transform target="angle" value="[HOUR_0_11_MINUTE] * 30"/>
-                            <Rectangle
-                                x="18"
-                                y="70"
-                                width="4"
-                                height="22">
-                                <Fill color="#ffffff"/>
-                            </Rectangle>
-                            <RoundRectangle
-                                x="14"
-                                y="30"
-                                width="12"
-                                height="46"
-                                cornerRadiusX="6"
-                                cornerRadiusY="6">
-                                <Fill color="#ffffff"/>
-                            </RoundRectangle>
-                        </PartDraw>
-                        <PartDraw name="min" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
-                            <Transform target="angle" value="[MINUTE] * 6"/>
-                            <Rectangle
-                                x="18"
-                                y="70"
-                                width="4"
-                                height="22">
-                                <Fill color="#ffffff"/>
-                            </Rectangle>
-                            <RoundRectangle
-                                x="14"
-                                y="10"
-                                width="12"
-                                height="66"
-                                cornerRadiusX="6"
-                                cornerRadiusY="6">
-                                <Fill color="#ffffff"/>
-                            </RoundRectangle>
-                        </PartDraw>
-                        <PartDraw name="center" x="72" y="72" width="40" height="40" tintColor="[CONFIGURATION.tertiaryTheme.0]">
-                            <Ellipse
-                                x="13"
-                                y="13"
-                                width="14"
-                                height="14">
-                                <Fill color="#ffffff"/>
-                            </Ellipse>
-                        </PartDraw>
-                        <PartDraw name="center2" x="72" y="72" width="40" height="40" tintColor="[CONFIGURATION.tertiaryTheme.2]">
-                            <Ellipse
-                                x="15"
-                                y="15"
-                                width="10"
-                                height="10">
-                                <Fill color="#ffffff"/>
-                            </Ellipse>
-                        </PartDraw>
-                        <PartDraw name="sec" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.tertiaryTheme.2]">
-                            <Variant
-                                target="alpha"
-                                value="0"
-                                mode="AMBIENT"/>
-                            <Transform target="angle" value="[SECOND] * 6"/>
-                            <RoundRectangle
-                                x="18.5"
-                                y="4"
-                                width="3"
-                                height="108"
-                                cornerRadiusX="2"
-                                cornerRadiusY="2">
-                                <Fill color="#ffffff"/>
-                            </RoundRectangle>
-                        </PartDraw>
+                        <Group name="hour_min" x="72" y="0" width="40" height="184">
+                            <Transform
+                                target="tintColor"
+                                value="[CONFIGURATION.clockAltColors]? [CONFIGURATION.tertiaryTheme.1] : [CONFIGURATION.tertiaryTheme.0]"/>
+                            <PartDraw name="hour_shadow" x="0" y="4" width="40" height="184" alpha="175">
+                                <Transform target="angle" value="[HOUR_0_11_MINUTE] * 30">
+                                    <Animation duration="1" angleDirection="CLOCKWISE"/>
+                                </Transform>
+                                <Rectangle
+                                    x="18"
+                                    y="70"
+                                    width="4"
+                                    height="22">
+                                    <Fill color="#000000"/>
+                                </Rectangle>
+                                <RoundRectangle
+                                    x="14"
+                                    y="30"
+                                    width="12"
+                                    height="46"
+                                    cornerRadiusX="6"
+                                    cornerRadiusY="6">
+                                    <Fill color="#000000"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw name="hour" x="0" y="0" width="40" height="184">
+                                <Transform target="angle" value="[HOUR_0_11_MINUTE] * 30">
+                                    <Animation duration="1" angleDirection="CLOCKWISE"/>
+                                </Transform>
+                                <Rectangle
+                                    x="18"
+                                    y="70"
+                                    width="4"
+                                    height="22">
+                                    <Fill color="#ffffff"/>
+                                </Rectangle>
+                                <RoundRectangle
+                                    x="14"
+                                    y="30"
+                                    width="12"
+                                    height="46"
+                                    cornerRadiusX="6"
+                                    cornerRadiusY="6">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw name="min_shadow" x="0" y="4" width="40" height="184" alpha="175">
+                                <Transform target="angle" value="[MINUTE] * 6">
+                                    <Animation duration="1" angleDirection="CLOCKWISE"/>
+                                </Transform>
+                                <Rectangle
+                                    x="18"
+                                    y="70"
+                                    width="4"
+                                    height="22">
+                                    <Fill color="#000000"/>
+                                </Rectangle>
+                                <RoundRectangle
+                                    x="14"
+                                    y="10"
+                                    width="12"
+                                    height="66"
+                                    cornerRadiusX="6"
+                                    cornerRadiusY="6">
+                                    <Fill color="#000000"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw name="min" x="0" y="0" width="40" height="184">
+                                <Transform target="angle" value="[MINUTE] * 6">
+                                    <Animation duration="1" angleDirection="CLOCKWISE"/>
+                                </Transform>
+                                <Rectangle
+                                    x="18"
+                                    y="70"
+                                    width="4"
+                                    height="22">
+                                    <Fill color="#ffffff"/>
+                                </Rectangle>
+                                <RoundRectangle
+                                    x="14"
+                                    y="10"
+                                    width="12"
+                                    height="66"
+                                    cornerRadiusX="6"
+                                    cornerRadiusY="6">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw name="center" x="0" y="72" width="40" height="40">
+                                <Ellipse
+                                    x="13"
+                                    y="13"
+                                    width="14"
+                                    height="14">
+                                    <Fill color="#ffffff"/>
+                                </Ellipse>
+                            </PartDraw>
+                        </Group>
+                        <Group name="sec" x="72" y="0" width="40" height="184">
+                            <Transform
+                                target="tintColor"
+                                value="[CONFIGURATION.clockAltColors]? [CONFIGURATION.tertiaryTheme.0] : [CONFIGURATION.tertiaryTheme.2]"/>
+                            <PartDraw name="center2" x="0" y="72" width="40" height="40">
+                                <Ellipse
+                                    x="15"
+                                    y="15"
+                                    width="10"
+                                    height="10">
+                                    <Fill color="#ffffff"/>
+                                </Ellipse>
+                            </PartDraw>
+                            <PartDraw name="sec_shadow" x="0" y="0" width="40" height="184" alpha="175">
+                                <Variant
+                                    target="alpha"
+                                    value="0"
+                                    mode="AMBIENT"/>
+                                <Transform target="angle" value="[SECOND] * 6"/>
+                                <RoundRectangle
+                                    x="18.5"
+                                    y="4"
+                                    width="3"
+                                    height="108"
+                                    cornerRadiusX="2"
+                                    cornerRadiusY="2">
+                                    <Fill color="#000000"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw name="sec" x="0" y="0" width="40" height="184">
+                                <Variant
+                                    target="alpha"
+                                    value="0"
+                                    mode="AMBIENT"/>
+                                <Transform target="angle" value="[SECOND] * 6"/>
+                                <RoundRectangle
+                                    x="18.5"
+                                    y="4"
+                                    width="3"
+                                    height="108"
+                                    cornerRadiusX="2"
+                                    cornerRadiusY="2">
+                                    <Fill color="#ffffff"/>
+                                </RoundRectangle>
+                            </PartDraw>
+                        </Group>
                         <PartDraw name="center3" x="72" y="72" width="40" height="40">
                             <Ellipse
                                 x="18"
