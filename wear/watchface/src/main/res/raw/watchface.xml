@@ -156,7 +156,88 @@
             <ColorOption colors="#dbd8d3 #c1b9ae #b8ad9f" displayName="id_color_grey_brown" id="77"/>
             <ColorOption colors="#e4e3da #c7c4ae #afac91" displayName="id_color_grey_mud" id="78"/>
         </ColorConfiguration>
+        <ColorConfiguration defaultValue="34" displayName="id_tertiary_theme" id="tertiaryTheme">
+            <ColorOption colors="#e3e3e3 #bcbcbc #dadada" displayName="id_color_graphite" id="0"/>
+            <ColorOption colors="#ffffff #e4e4e4 #eaeaea" displayName="id_color_cloud" id="1"/>
+            <ColorOption colors="#fff7e4 #fff7e4 #fcf7eb" displayName="id_color_almond" id="2"/>
+            <ColorOption colors="#ffeaea #ff9391 #ff4642" displayName="id_color_watermelon" id="3"/>
+            <ColorOption colors="#fff3f2 #ffa49f #ff665d" displayName="id_color_pomelo" id="4"/>
+            <ColorOption colors="#ffe8da #ffc6a3 #ff975d" displayName="id_color_champagne" id="5"/>
+            <ColorOption colors="#fff6e1 #ffe9b9 #ffce63" displayName="id_color_wheat" id="6"/>
+            <ColorOption colors="#feffe9 #fcffb6 #f9ff52" displayName="id_color_limoncello" id="7"/>
+            <ColorOption colors="#faffe4 #eaff8e #deff4c" displayName="id_color_keylime" id="8"/>
+            <ColorOption colors="#f4ffdf #ebffc3 #ceff6c" displayName="id_color_lemongrass" id="9"/>
+            <ColorOption colors="#edffd9 #d3ff9b #b0ff4d" displayName="id_color_spring" id="10"/>
+            <ColorOption colors="#f0ffcd #deff91 #c7ff45" displayName="id_color_lime" id="11"/>
+            <ColorOption colors="#f1ffdd #d6ff9e #aeff4a" displayName="id_color_pear" id="12"/>
+            <ColorOption colors="#e5ffe0 #adff9a #70ff3d" displayName="id_color_grass_green" id="13"/>
+            <ColorOption colors="#e3ffe0 #a9ff9a #4eff58" displayName="id_color_proto_green" id="14"/>
+            <ColorOption colors="#e8fff2 #beffd9 #57ff9d" displayName="id_color_moss" id="15"/>
+            <ColorOption colors="#d8ffea #65df9d #41ff99" displayName="id_color_fern" id="16"/>
+            <ColorOption colors="#e0ffe4 #9ff7ad #52ff6d" displayName="id_color_spearmint" id="17"/>
+            <ColorOption colors="#d4e2d4 #c3e9c3 #b7f297" displayName="id_color_alpine_green" id="72"/>
+            <ColorOption colors="#e5fff5 #abffdf #5effc0" displayName="id_color_mint" id="18"/>
+            <ColorOption colors="#def4ec #beecdb #aaf6d9" displayName="id_color_jade" id="19"/>
+            <ColorOption colors="#e2f0e6 #dfdfdf #bfdcc4" displayName="id_color_steam_green" id="20"/>
+            <ColorOption colors="#e1ece9 #cce4df #bbf6e6" displayName="id_color_sage" id="21"/>
+            <ColorOption colors="#bdd3ca #8bb6a5 #f5fffb" displayName="id_color_avocado" id="22"/>
+            <ColorOption colors="#cde1da #76b89f #8eafa3" displayName="id_color_forest" id="23"/>
+            <ColorOption colors="#d8e6d8 #bfd9bf #acc89e" displayName="id_color_pine" id="71"/>
+            <ColorOption colors="#eefffd #e5fffb #d6fff9" displayName="id_color_seafoam" id="24"/>
+            <ColorOption colors="#daffff #bef6ff #93f0ff" displayName="id_color_stream" id="25"/>
+            <ColorOption colors="#d5faff #a8f4ff #5eebff" displayName="id_color_aqua" id="26"/>
+            <ColorOption colors="#ccefff #99e0ff #5acdff" displayName="id_color_lagoon" id="27"/>
+            <ColorOption colors="#e6f5ff #a8ddff #5ec1ff" displayName="id_color_sky" id="29"/>
+            <ColorOption colors="#e2edff #a3c6ff #5e9bff" displayName="id_color_ocean" id="30"/>
+            <ColorOption colors="#d6e5ff #88b4ff #639cff" displayName="id_color_sapphire" id="31"/>
+            <ColorOption colors="#c6e3ff #8bc6ff #3a9cff" displayName="id_color_royalblue" id="32"/>
+            <ColorOption colors="#d8e6ff #9ec2ff #619bff" displayName="id_color_arctic" id="33"/>
+            <ColorOption colors="#cfdbff #a5baff #687eff" displayName="id_color_icy_blue" id="34"/>
+            <ColorOption colors="#d6daff #959dfd #636fff" displayName="id_color_amethyst" id="35"/>
+            <ColorOption colors="#e1d4ff #b99aff #8e58ff" displayName="id_color_lilac" id="36"/>
+            <ColorOption colors="#f5e0ff #e2a5ff #cc62ff" displayName="id_color_lavender" id="38"/>
+            <ColorOption colors="#fde0ff #f8a6ff #f25fff" displayName="id_color_flamingo" id="39"/>
+            <ColorOption colors="#ffd9f3 #ffb3e6 #ff66ce" displayName="id_color_verbena" id="40"/>
+            <ColorOption colors="#ffdfdc #ffb1ac #ff776d" displayName="id_color_guava" id="41"/>
+            <ColorOption colors="#ffe8e5 #ffa294 #ff5b43" displayName="id_color_coral" id="42"/>
+            <ColorOption colors="#fff5ef #fdb78f #ff985e" displayName="id_color_peach" id="43"/>
+            <ColorOption colors="#ffdbd1 #ff997a #ff693b" displayName="id_color_orange" id="44"/>
+            <ColorOption colors="#f4ebe0 #d8ab77 #f0a752" displayName="id_color_chai" id="45"/>
+            <ColorOption colors="#fff1db #f8c67c #ffb74a" displayName="id_color_honey" id="46"/>
+            <ColorOption colors="#fff4dd #ffd88a #ffc551" displayName="id_color_melon" id="47"/>
+            <ColorOption colors="#fffee0 #fffa86 #fff630" displayName="id_color_dandelion" id="48"/>
+            <ColorOption colors="#fef6e1 #fef6e1 #fef6e1" displayName="id_color_milkshake" id="49"/>
+            <ColorOption colors="#fff9e1 #c4b575 #f1d870" displayName="id_color_sand" id="50"/>
+            <ColorOption colors="#fff4ea #fae7d6 #ffdab8" displayName="id_color_salmon" id="51"/>
+            <ColorOption colors="#fff0d2 #ffd889 #ffcc63" displayName="id_color_amber" id="52"/>
+            <ColorOption colors="#f2f6ff #a0a3ab #dfe3ef" displayName="id_color_charcoal" id="54"/>
+            <ColorOption colors="#dffff3 #a9ffdf #ff8a00" displayName="id_color_oceanresearch" id="55"/>
+            <ColorOption colors="#ff4d4d #fefefe #fefefe" displayName="id_color_nothing" id="56"/>
+            <ColorOption colors="#d2d2d2 #f5f5f5 #ff5b58" displayName="id_color_submarine" id="57"/>
+            <ColorOption colors="#e5f2ff #2391ff #2391ff" displayName="id_color_protoblue" id="58"/>
+            <ColorOption colors="#e4e4d3 #d1d9a0 #cddc68" displayName="id_color_khaki" id="59"/>
+            <ColorOption colors="#eff0e4 #eeff80 #ceff1c" displayName="id_color_olive_vibrant" id="60"/>
+            <ColorOption colors="#eff0e4 #dfdfdf #e8f0b3" displayName="id_color_olive_dull" id="61"/>
+            <ColorOption colors="#b5fbff #e2fdff #ff6dc9" displayName="id_color_candy" id="62"/>
+            <ColorOption colors="#e1eaff #f7ea49 #2f69ff" displayName="id_color_united_24" id="63"/>
+            <ColorOption colors="#d8f7ff #bad1ff #5836ff" displayName="id_color_iridescent" id="64"/>
+            <ColorOption colors="#daebff #ff6f6f #ff2a2a" displayName="id_color_industrial" id="65"/>
+            <ColorOption colors="#daf9ff #84ffe2 #58ff32" displayName="id_color_green_shock" id="66"/>
+            <ColorOption colors="#ebebeb #b0ff54 #8356ff" displayName="id_color_juniper_haze" id="67"/>
+            <ColorOption colors="#d2ffdf #00ff88 #3881ff" displayName="id_color_neon_green" id="68"/>
+            <ColorOption colors="#d9d9d9 #94bfff #acff38" displayName="id_color_neon_lime" id="69"/>
+            <ColorOption colors="#ffd5c0 #ff935c #ff5f0d" displayName="id_color_neon_orange" id="70"/>
+            <ColorOption colors="#d9cbc5 #d7bbab #cca792" displayName="id_color_oak_brown" id="75"/>
+            <ColorOption colors="#e0d9d4 #c8b5a3 #b49e88" displayName="id_color_walnut_brown" id="76"/>
+            <ColorOption colors="#dbd8d3 #c1b9ae #b8ad9f" displayName="id_color_grey_brown" id="77"/>
+            <ColorOption colors="#e4e3da #c7c4ae #afac91" displayName="id_color_grey_mud" id="78"/>
+        </ColorConfiguration>
         <!-- List Configurations -->
+        <ListConfiguration defaultValue="0" displayName="id_clock_bg" id="clockBg">
+            <ListOption displayName="id_clock_bg_0" icon="prev_none" id="0" />
+            <ListOption displayName="id_clock_bg_1" icon="prev_none" id="1" />
+            <ListOption displayName="id_clock_bg_2" icon="prev_none" id="2" />
+        </ListConfiguration>
         <ListConfiguration defaultValue="0" displayName="id_clock_style" id="clockStyle">
             <ListOption displayName="id_clock_style_0" icon="prev_none" id="0" />
             <ListOption displayName="id_clock_style_1" icon="prev_none" id="1" />
@@ -249,6 +330,9 @@
                 <!-- Default Hue -->
                 <PartDraw x="0" y="0" width="450" height="450">
                     <Transform target="angle" value="[REFERENCE.noon_angle]"/>
+                    <Transform
+                        target="alpha"
+                        value="[REFERENCE.solarTrack] &lt;= [REFERENCE.cdusk_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.midnight_angle] ? clamp(round(255 - 130 * ([REFERENCE.solarTrack] - [REFERENCE.cdusk_angle]) / ([REFERENCE.midnight_angle] - [REFERENCE.cdusk_angle] &lt;= 0 ? 1 : [REFERENCE.midnight_angle] - [REFERENCE.cdusk_angle])), 125, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.cdawn_angle] ? clamp(round(125 + 130 * ([REFERENCE.solarTrack] - [REFERENCE.midnight_angle]) / ([REFERENCE.cdawn_angle] - [REFERENCE.midnight_angle] &lt;= 0 ? 1 : [REFERENCE.cdawn_angle] - [REFERENCE.midnight_angle])), 125, 255) : 255"/>
                     <Rectangle x="0" y="0" width="450" height="450">
                         <Fill color="#ffffff">
                             <LinearGradient
@@ -2497,7 +2581,7 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <PartText name="digital_clock_neutral" x="13" y="43" width="158" height="100" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                        <PartText name="digital_clock_neutral" x="13" y="43" width="158" height="100" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                             <Variant target="alpha" value="0" mode="AMBIENT"/>
                             <Text isAutoSize="TRUE">
                                 <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
@@ -2513,7 +2597,7 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <PartText name="digital_clock_colorful" x="13" y="43" width="158" height="100" alpha="0" tintColor="[CONFIGURATION.secondaryTheme.1]">
+                        <PartText name="digital_clock_colorful" x="13" y="43" width="158" height="100" alpha="0" tintColor="[CONFIGURATION.tertiaryTheme.1]">
                             <Variant target="alpha" value="255" mode="AMBIENT"/>
                             <Text isAutoSize="TRUE">
                                 <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
@@ -2529,7 +2613,7 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <PartText name="eee" x="0" y="117" width="184" height="40">
+                        <PartText name="eee" x="0" y="118" width="184" height="40">
                             <Text>
                                 <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="27" color="#C3C3C3">
                                     <Lower>
@@ -2542,7 +2626,7 @@
                         </PartText>
                         <Group name="sec_indicator" x="0" y="0" width="184" height="184">
                             <Variant mode="AMBIENT" target="alpha" value="0"/>
-                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                                 <Arc
                                     centerX="92"
                                     centerY="92"
@@ -2556,7 +2640,7 @@
                                         thickness="5"/>
                                 </Arc>
                             </PartDraw>
-                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.1]">
+                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.2]">
                                 <Arc
                                     centerX="92"
                                     centerY="92"
@@ -2640,7 +2724,7 @@
                                 </RoundRectangle>
                             </PartDraw>
                         </Group>
-                        <PartDraw name="hour" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                        <PartDraw name="hour" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                             <Transform target="angle" value="[HOUR_0_11_MINUTE] * 30"/>
                             <Rectangle
                                 x="18"
@@ -2659,7 +2743,7 @@
                                 <Fill color="#ffffff"/>
                             </RoundRectangle>
                         </PartDraw>
-                        <PartDraw name="min" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                        <PartDraw name="min" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                             <Transform target="angle" value="[MINUTE] * 6"/>
                             <Rectangle
                                 x="18"
@@ -2678,7 +2762,7 @@
                                 <Fill color="#ffffff"/>
                             </RoundRectangle>
                         </PartDraw>
-                        <PartDraw name="center" x="72" y="72" width="40" height="40" tintColor="[CONFIGURATION.secondaryTheme.0]">
+                        <PartDraw name="center" x="72" y="72" width="40" height="40" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                             <Ellipse
                                 x="13"
                                 y="13"
@@ -2687,7 +2771,7 @@
                                 <Fill color="#ffffff"/>
                             </Ellipse>
                         </PartDraw>
-                        <PartDraw name="center2" x="72" y="72" width="40" height="40" tintColor="[CONFIGURATION.secondaryTheme.2]">
+                        <PartDraw name="center2" x="72" y="72" width="40" height="40" tintColor="[CONFIGURATION.tertiaryTheme.2]">
                             <Ellipse
                                 x="15"
                                 y="15"
@@ -2696,7 +2780,7 @@
                                 <Fill color="#ffffff"/>
                             </Ellipse>
                         </PartDraw>
-                        <PartDraw name="sec" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.secondaryTheme.2]">
+                        <PartDraw name="sec" x="72" y="0" width="40" height="184" tintColor="[CONFIGURATION.tertiaryTheme.2]">
                             <Variant
                                 target="alpha"
                                 value="0"

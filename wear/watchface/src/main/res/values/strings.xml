@@ -16,6 +16,7 @@
 
     <string name="id_primary_theme">Primary Theme</string>
     <string name="id_secondary_theme">Secondary Theme</string>
+    <string name="id_tertiary_theme">Tertiary Theme</string>
 
     <string name="id_color_graphite">Graphite</string>
     <string name="id_color_cloud">Cloud</string>
