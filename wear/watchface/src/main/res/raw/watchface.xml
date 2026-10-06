@@ -249,9 +249,111 @@
             <ListOption displayName="id_aod_1" icon="prev_aod_1" id="1" />
         </ListConfiguration>
         <!-- Boolean Configurations -->
-        <BooleanConfiguration defaultValue="FALSE" displayName="id_progress_bar_gradients" id="progressGradients"/>
+        <BooleanConfiguration defaultValue="TRUE" displayName="id_progress_bar_gradients" id="progressGradients"/>
         <BooleanConfiguration defaultValue="TRUE" displayName="id_leading_zero" id="leadingZero"/>
         <BooleanConfiguration defaultValue="FALSE" displayName="id_clock_alt_colors" id="clockAltColors"/>
+        <!-- Flavors -->
+        <Flavors defaultValue="0">
+            <Flavor id="0" displayName="Default">
+                <Configuration id="primaryTheme" optionId="101"/>
+                <Configuration id="secondaryTheme" optionId="101"/>
+                <Configuration id="tertiaryTheme" optionId="101"/>
+                <Configuration id="clockStyle" optionId="0"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="FALSE"/>
+                <Configuration id="progressGradients" optionId="FALSE"/>
+            </Flavor>
+            <Flavor id="1" displayName="Classic Analog">
+                <Configuration id="primaryTheme" optionId="0"/>
+                <Configuration id="secondaryTheme" optionId="1"/>
+                <Configuration id="tertiaryTheme" optionId="0"/>
+                <Configuration id="clockStyle" optionId="1"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="FALSE"/>
+                <Configuration id="progressGradients" optionId="FALSE"/>
+            </Flavor>
+            <Flavor id="2" displayName="Solar Gold">
+                <Configuration id="primaryTheme" optionId="6"/>
+                <Configuration id="secondaryTheme" optionId="5"/>
+                <Configuration id="tertiaryTheme" optionId="6"/>
+                <Configuration id="clockStyle" optionId="1"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="TRUE"/>
+                <Configuration id="progressGradients" optionId="TRUE"/>
+            </Flavor>
+            <Flavor id="3" displayName="Deep Ocean">
+                <Configuration id="primaryTheme" optionId="30"/>
+                <Configuration id="secondaryTheme" optionId="31"/>
+                <Configuration id="tertiaryTheme" optionId="32"/>
+                <Configuration id="clockStyle" optionId="0"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="TRUE"/>
+                <Configuration id="progressGradients" optionId="TRUE"/>
+            </Flavor>
+            <Flavor id="4" displayName="Alpine Green">
+                <Configuration id="primaryTheme" optionId="72"/>
+                <Configuration id="secondaryTheme" optionId="71"/>
+                <Configuration id="tertiaryTheme" optionId="23"/>
+                <Configuration id="clockStyle" optionId="1"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="FALSE"/>
+                <Configuration id="progressGradients" optionId="TRUE"/>
+            </Flavor>
+            <Flavor id="5" displayName="Sunset Glow">
+                <Configuration id="primaryTheme" optionId="44"/>
+                <Configuration id="secondaryTheme" optionId="42"/>
+                <Configuration id="tertiaryTheme" optionId="52"/>
+                <Configuration id="clockStyle" optionId="0"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="TRUE"/>
+                <Configuration id="progressGradients" optionId="TRUE"/>
+            </Flavor>
+            <Flavor id="6" displayName="Midnight Amethyst">
+                <Configuration id="primaryTheme" optionId="35"/>
+                <Configuration id="secondaryTheme" optionId="36"/>
+                <Configuration id="tertiaryTheme" optionId="38"/>
+                <Configuration id="clockStyle" optionId="1"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="FALSE"/>
+                <Configuration id="progressGradients" optionId="FALSE"/>
+            </Flavor>
+            <Flavor id="7" displayName="Nordic Minimal">
+                <Configuration id="primaryTheme" optionId="1"/>
+                <Configuration id="secondaryTheme" optionId="0"/>
+                <Configuration id="tertiaryTheme" optionId="1"/>
+                <Configuration id="clockStyle" optionId="0"/>
+                <Configuration id="clockBg" optionId="1"/>
+                <Configuration id="clockAltColors" optionId="FALSE"/>
+                <Configuration id="progressGradients" optionId="FALSE"/>
+            </Flavor>
+            <Flavor id="8" displayName="Cyberpunk Neon">
+                <Configuration id="primaryTheme" optionId="66"/>
+                <Configuration id="secondaryTheme" optionId="68"/>
+                <Configuration id="tertiaryTheme" optionId="69"/>
+                <Configuration id="clockStyle" optionId="0"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="TRUE"/>
+                <Configuration id="progressGradients" optionId="TRUE"/>
+            </Flavor>
+            <Flavor id="9" displayName="Terracotta Earth">
+                <Configuration id="primaryTheme" optionId="75"/>
+                <Configuration id="secondaryTheme" optionId="76"/>
+                <Configuration id="tertiaryTheme" optionId="45"/>
+                <Configuration id="clockStyle" optionId="1"/>
+                <Configuration id="clockBg" optionId="0"/>
+                <Configuration id="clockAltColors" optionId="TRUE"/>
+                <Configuration id="progressGradients" optionId="FALSE"/>
+            </Flavor>
+            <Flavor id="10" displayName="Pure Stealth">
+                <Configuration id="primaryTheme" optionId="54"/>
+                <Configuration id="secondaryTheme" optionId="0"/>
+                <Configuration id="tertiaryTheme" optionId="1"/>
+                <Configuration id="clockStyle" optionId="0"/>
+                <Configuration id="clockBg" optionId="1"/>
+                <Configuration id="clockAltColors" optionId="FALSE"/>
+                <Configuration id="progressGradients" optionId="FALSE"/>
+            </Flavor>
+        </Flavors>
     </UserConfigurations>
     <Scene>
         <Group name="referenceAod" x="0" y="0" height="1" width="1" alpha="0">
@@ -1761,6 +1863,8 @@
             <Variant mode="AMBIENT" target="scaleY" value="[REFERENCE.arcsScale]" />
             <Variant mode="AMBIENT" target="alpha" value="[REFERENCE.arcsAlpha]" />
             <DefaultProviderPolicy
+                primaryProvider="com.google.android.apps.weather/com.google.android.wearable.weather.pixel.ui.complications.currentweather.CWComplicationService"
+                primaryProviderType="RANGED_VALUE"
                 defaultSystemProvider="NEXT_EVENT"
                 defaultSystemProviderType="LONG_TEXT"/>
             <BoundingArc centerX="0"
