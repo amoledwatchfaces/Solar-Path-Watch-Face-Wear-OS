@@ -14,8 +14,8 @@ tasks.register("clean", Delete::class) {
 
 buildscript {
     /** Set version for wear & watchface modules **/
-    extra.set("versionCode", 10000006)
-    extra.set("versionName", "1.0.6")
+    extra.set("versionCode", 10000007)
+    extra.set("versionName", "1.0.7")
     extra.set("namespace", "com.amoledwatchfaces.solarpath")
 
     dependencies {
