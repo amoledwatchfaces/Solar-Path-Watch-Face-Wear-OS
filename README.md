@@ -1,4 +1,4 @@
-# <img src="/wear/watchface/src/main/res/drawable-nodpi/preview.png" width="48" style="border-radius: 50%;" align="center" alt="Icon"> Solar Path Watch Face for Wear OS
+# <img src="/wear/watchface/src/main/res/drawable-nodpi/preview.png" width="340" style="border-radius: 50%;" align="center" alt="Icon"> Solar Path Watch Face for Wear OS
 
 [![Build & Release](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/actions/workflows/build-and-release.yml)
 [![Platform](https://img.shields.io/badge/Platform-Wear_OS_6%2B_(API_36%2B)-brightgreen?logo=android&logoColor=white)](https://developer.android.com/wear)
@@ -13,10 +13,6 @@
 Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)**.
 
 ---
-
-<p align="center">
-  <img src="/wear/watchface/src/main/res/drawable-nodpi/preview.png" width="340" alt="Solar Path Watch Face Preview" />
-</p>
 
 <p align="center">
   <img src="solarpath.webp" width="32%" alt="Solar Path Preview 1" />
