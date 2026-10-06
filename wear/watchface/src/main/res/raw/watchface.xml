@@ -202,7 +202,7 @@
                 <PartDraw name="circle_base" width="450" height="450" x="0" y="0">
                     <Transform
                         target="alpha"
-                        value="[REFERENCE.solarTrack] &lt;= ([REFERENCE.ss_angle] - 30) ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 180 * ([REFERENCE.solarTrack] - ([REFERENCE.ss_angle] - 30)) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 30 &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 30)), 75, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 75 : [REFERENCE.solarTrack] &lt;= ([REFERENCE.sr_angle] + 30) ? clamp(round(75 + 180 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] + 30 - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] + 30 - [REFERENCE.adawn_angle])), 75, 255) : 255"/>
+                        value="[REFERENCE.solarTrack] &lt;= ([REFERENCE.ss_angle] - 30) ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 200 * ([REFERENCE.solarTrack] - ([REFERENCE.ss_angle] - 30)) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 30 &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 30)), 55, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 55 : [REFERENCE.solarTrack] &lt;= ([REFERENCE.sr_angle] + 30) ? clamp(round(55 + 200 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] + 30 - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] + 30 - [REFERENCE.adawn_angle])), 55, 255) : 255"/>
                     <Reference
                         name="circleBaseAlpha"
                         source="alpha"/>
