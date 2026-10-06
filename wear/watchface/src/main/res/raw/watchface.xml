@@ -2769,7 +2769,7 @@
                             <Transform
                                 target="tintColor"
                                 value="[CONFIGURATION.clockAltColors]? [CONFIGURATION.tertiaryTheme.1] : [CONFIGURATION.tertiaryTheme.0]"/>
-                            <PartDraw name="hour_shadow" x="0" y="4" width="40" height="184" alpha="175">
+                            <PartDraw name="hour_shadow" x="0" y="4" width="40" height="184" alpha="150">
                                 <Transform target="angle" value="[HOUR_0_11_MINUTE] * 30">
                                     <Animation duration="1" angleDirection="CLOCKWISE"/>
                                 </Transform>
@@ -2811,7 +2811,7 @@
                                     <Fill color="#ffffff"/>
                                 </RoundRectangle>
                             </PartDraw>
-                            <PartDraw name="min_shadow" x="0" y="4" width="40" height="184" alpha="175">
+                            <PartDraw name="min_shadow" x="0" y="4" width="40" height="184" alpha="150">
                                 <Transform target="angle" value="[MINUTE] * 6">
                                     <Animation duration="1" angleDirection="CLOCKWISE"/>
                                 </Transform>
@@ -2867,16 +2867,7 @@
                             <Transform
                                 target="tintColor"
                                 value="[CONFIGURATION.clockAltColors]? [CONFIGURATION.tertiaryTheme.0] : [CONFIGURATION.tertiaryTheme.2]"/>
-                            <PartDraw name="center2" x="0" y="72" width="40" height="40">
-                                <Ellipse
-                                    x="15"
-                                    y="15"
-                                    width="10"
-                                    height="10">
-                                    <Fill color="#ffffff"/>
-                                </Ellipse>
-                            </PartDraw>
-                            <PartDraw name="sec_shadow" x="0" y="0" width="40" height="184" alpha="175">
+                            <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
                                 <Variant
                                     target="alpha"
                                     value="0"
@@ -2907,6 +2898,15 @@
                                     cornerRadiusY="2">
                                     <Fill color="#ffffff"/>
                                 </RoundRectangle>
+                            </PartDraw>
+                            <PartDraw name="center2" x="0" y="72" width="40" height="40">
+                                <Ellipse
+                                    x="15"
+                                    y="15"
+                                    width="10"
+                                    height="10">
+                                    <Fill color="#ffffff"/>
+                                </Ellipse>
                             </PartDraw>
                         </Group>
                         <PartDraw name="center3" x="72" y="72" width="40" height="40">
