@@ -5,6 +5,8 @@
     <string name="id_clock_style_0">Digital</string>
     <string name="id_clock_style_1">Analog</string>
 
+    <string name="id_clock_alt_colors">Vibrant Clock Colors</string>
+
     <string name="id_aod">Ambient Mode</string>
     <string name="id_aod_0">Dimmed</string>
     <string name="id_aod_1">Dimmed &amp; No Arcs</string>

@@ -248,6 +248,7 @@
         <!-- Boolean Configurations -->
         <BooleanConfiguration defaultValue="FALSE" displayName="id_progress_bar_gradients" id="progressGradients"/>
         <BooleanConfiguration defaultValue="TRUE" displayName="id_leading_zero" id="leadingZero"/>
+        <BooleanConfiguration defaultValue="FALSE" displayName="id_clock_alt_colors" id="clockAltColors"/>
     </UserConfigurations>
     <Scene>
         <Group name="referenceAod" x="0" y="0" height="1" width="1" alpha="0">
@@ -2649,7 +2650,7 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <PartText name="digital_clock_colorful" x="13" y="43" width="158" height="100" alpha="0" tintColor="[CONFIGURATION.tertiaryTheme.2]">
+                        <PartText name="digital_clock_colorful" x="13" y="43" width="158" height="100" alpha="0" tintColor="[CONFIGURATION.tertiaryTheme.1]">
                             <Variant target="alpha" value="255" mode="AMBIENT"/>
                             <Text isAutoSize="TRUE">
                                 <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
@@ -2676,9 +2677,9 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <Group name="sec_indicator" x="0" y="0" width="184" height="184">
+                        <Group name="sec_indicator" x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                             <Variant mode="AMBIENT" target="alpha" value="0"/>
-                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
+                            <PartDraw x="0" y="0" width="184" height="184">
                                 <Arc
                                     centerX="92"
                                     centerY="92"
@@ -2691,8 +2692,6 @@
                                         color="#303030"
                                         thickness="5"/>
                                 </Arc>
-                            </PartDraw>
-                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                                 <Arc
                                     centerX="92"
                                     centerY="92"
