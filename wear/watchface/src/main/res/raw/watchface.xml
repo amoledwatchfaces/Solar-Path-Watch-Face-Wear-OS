@@ -234,16 +234,16 @@
         </ColorConfiguration>
         <!-- List Configurations -->
         <ListConfiguration defaultValue="0" displayName="id_clock_bg" id="clockBg">
-            <ListOption displayName="id_clock_bg_0" icon="prev_none" id="0" />
-            <ListOption displayName="id_clock_bg_1" icon="prev_none" id="1" />
+            <ListOption displayName="id_clock_bg_0" icon="prev_clock_bg_0" id="0" />
+            <ListOption displayName="id_clock_bg_1" icon="prev_clock_bg_1" id="1" />
         </ListConfiguration>
         <ListConfiguration defaultValue="0" displayName="id_clock_style" id="clockStyle">
-            <ListOption displayName="id_clock_style_0" icon="prev_none" id="0" />
-            <ListOption displayName="id_clock_style_1" icon="prev_none" id="1" />
+            <ListOption displayName="id_clock_style_0" icon="prev_clock_style_0" id="0" />
+            <ListOption displayName="id_clock_style_1" icon="prev_clock_style_1" id="1" />
         </ListConfiguration>
         <ListConfiguration defaultValue="1" displayName="id_aod" id="aod">
-            <ListOption displayName="id_aod_0" icon="prev_none" id="0" />
-            <ListOption displayName="id_aod_1" icon="prev_none" id="1" />
+            <ListOption displayName="id_aod_0" icon="prev_aod_0" id="0" />
+            <ListOption displayName="id_aod_1" icon="prev_aod_1" id="1" />
         </ListConfiguration>
         <!-- Boolean Configurations -->
         <BooleanConfiguration defaultValue="FALSE" displayName="id_progress_bar_gradients" id="progressGradients"/>
