@@ -13,6 +13,7 @@
 Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)**.
 
 ---
+## ✨ Previews
 
 <p align="center">
   <img src="solarpath.webp" width="32%" alt="Solar Path Preview 1" />
