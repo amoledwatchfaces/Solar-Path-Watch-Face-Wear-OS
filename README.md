@@ -18,6 +18,17 @@ Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)*
   <img src="/wear/watchface/src/main/res/drawable-nodpi/preview.png" width="340" alt="Solar Path Watch Face Preview" />
 </p>
 
+<p align="center">
+  <img src="solarpath.webp" width="32%" alt="Solar Path Preview 1" />
+  <img src="solarpath_1.webp" width="32%" alt="Solar Path Preview 2" />
+  <img src="solarpath_2.webp" width="32%" alt="Solar Path Preview 3" />
+</p>
+<p align="center">
+  <img src="solarpath_3.webp" width="32%" alt="Solar Path Preview 4" />
+  <img src="solarpath_4.webp" width="32%" alt="Solar Path Preview 5" />
+  <img src="solarpath_5.webp" width="32%" alt="Solar Path Preview 6" />
+</p>
+
 ---
 
 ## ✨ Features
