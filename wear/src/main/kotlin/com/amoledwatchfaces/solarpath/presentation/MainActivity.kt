@@ -20,7 +20,7 @@ import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import com.google.accompanist.permissions.rememberPermissionState
 import com.amoledwatchfaces.solarpath.presentation.ui.SolarPathAppTheme
 import com.amoledwatchfaces.solarpath.utils.updateComplications
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,15 +59,10 @@ fun SolarPathMainApp(
 
     val preferences by viewModel.preferences.collectAsState()
 
-    val permissionsState = rememberMultiplePermissionsState(
-        permissions = listOf(
-            android.Manifest.permission.ACCESS_COARSE_LOCATION,
-            android.Manifest.permission.ACCESS_FINE_LOCATION
-        ),
-        onPermissionsResult = { granted ->
-            if (granted[android.Manifest.permission.ACCESS_COARSE_LOCATION] == true ||
-                granted[android.Manifest.permission.ACCESS_FINE_LOCATION] == true
-            ) {
+    val permissionState = rememberPermissionState(
+        permission = android.Manifest.permission.ACCESS_COARSE_LOCATION,
+        onPermissionResult = { isGranted ->
+            if (isGranted) {
                 viewModel.requestLocation()
             }
         }
@@ -75,7 +70,7 @@ fun SolarPathMainApp(
 
     LaunchedEffect(Unit) {
         if (preferences.latitude == 0.0 && preferences.longitude == 0.0) {
-            permissionsState.launchMultiplePermissionRequest()
+            permissionState.launchPermissionRequest()
         }
     }
 
@@ -99,7 +94,7 @@ fun SolarPathMainApp(
                     LocationChooseScreen(
                         navController = navController,
                         viewModel = viewModel,
-                        permissionsState = permissionsState,
+                        permissionState = permissionState,
                         transformationSpec = transformationSpec,
                         focusRequester = focusRequester,
                         listState = locationListState

@@ -180,7 +180,7 @@ class MainViewModel @Inject constructor(
         if (context.areLocationPermissionsGranted()) {
             _loaderState.value = true
             val currentLocationRequest = CurrentLocationRequest.Builder()
-                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+                .setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY)
                 .setGranularity(Granularity.GRANULARITY_COARSE)
                 .build()
 

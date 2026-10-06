@@ -52,7 +52,7 @@ import androidx.wear.compose.material3.Text
 import androidx.wear.compose.material3.lazy.TransformationSpec
 import androidx.wear.compose.material3.lazy.transformedHeight
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.MultiplePermissionsState
+import com.google.accompanist.permissions.PermissionState
 import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.presentation.ui.LocationChip
 import com.amoledwatchfaces.solarpath.presentation.ui.TextInputDialog
@@ -66,7 +66,7 @@ import com.amoledwatchfaces.solarpath.utils.isOnline
 fun LocationChooseScreen(
     navController: NavHostController,
     viewModel: MainViewModel,
-    permissionsState: MultiplePermissionsState,
+    permissionState: PermissionState,
     transformationSpec: TransformationSpec,
     focusRequester: FocusRequester,
     listState: TransformingLazyColumnState
@@ -176,7 +176,7 @@ fun LocationChooseScreen(
                                     viewModel.requestLocation()
                                     navController.popBackStack()
                                 } else {
-                                    permissionsState.launchMultiplePermissionRequest()
+                                    permissionState.launchPermissionRequest()
                                 }
                             } else {
                                 context.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))

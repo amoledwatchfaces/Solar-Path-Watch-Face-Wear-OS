@@ -29,7 +29,7 @@ fun formatCoordinate(coordinate: Double, isLatitude: Boolean): String {
 }
 
 fun Context.areLocationPermissionsGranted(): Boolean {
-    return (isPermissionGranted(android.Manifest.permission.ACCESS_COARSE_LOCATION) || isPermissionGranted(android.Manifest.permission.ACCESS_FINE_LOCATION))
+    return isPermissionGranted(android.Manifest.permission.ACCESS_COARSE_LOCATION)
 }
 
 fun Context.isPermissionGranted(permission: String): Boolean {

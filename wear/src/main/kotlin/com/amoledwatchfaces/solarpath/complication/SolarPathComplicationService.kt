@@ -43,7 +43,7 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
     }
 
     override fun getPreviewData(type: ComplicationType): ComplicationData? {
-        val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.ic_sun)).build()
+        val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px)).build()
         val sampleSolar = SolarData()
         val previewTitle = SolarCalculator.formatAnglesForComplication(sampleSolar, "SUNSET")
 
@@ -65,7 +65,7 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
     override suspend fun onComplicationRequest(request: ComplicationRequest): ComplicationData? {
         val prefs = preferences.first()
         val solar = SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
-        val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.ic_sun)).build()
+        val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px)).build()
         val tapAction = openAppIntent()
 
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
