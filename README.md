@@ -8,7 +8,7 @@
 [![Latest Release](https://img.shields.io/github/v/release/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS?logo=github&color=blue)](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/releases)
 [![Privacy Policy](https://img.shields.io/badge/Privacy--Policy-Read-blue?logo=googleplay&logoColor=white)](https://amoledwatchfaces.github.io/apps/privacy/solarpath.html)
 
-**Solar Path** is an astronomically accurate 24-hour solar dial watch face and companion application for Wear OS, inspired by iconic celestial timepieces. It dynamically tracks the sun's passage across the celestial vault and relative to your local horizon—illustrating daylight, twilight phases, and nighttime with mathematical precision.
+**Solar Path** is an astronomically accurate 24-hour solar dial watch face and companion application for Wear OS, heavily inspired by the iconic **Solar Dial** watch face from Apple Watch. It dynamically tracks the sun's passage across the celestial vault and relative to your local horizon—illustrating daylight, twilight phases, and nighttime with mathematical precision.
 
 Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)**.
 
@@ -183,6 +183,7 @@ cd Solar-Path-Watch-Face-Wear-OS
 ## 📄 License & Credits
 
 - Developed by **[amoledwatchfaces™](https://amoledwatchfaces.com/)**.
+- Aesthetic concept heavily inspired by the **Solar Dial** watch face on Apple Watch (Apple Watch is a trademark of Apple Inc.).
 - Ephemeris calculations powered by [Kastro](https://github.com/Yox/kastro).
 - All trademarks and brand names belong to their respective owners.
 
