@@ -236,7 +236,6 @@
         <ListConfiguration defaultValue="0" displayName="id_clock_bg" id="clockBg">
             <ListOption displayName="id_clock_bg_0" icon="prev_none" id="0" />
             <ListOption displayName="id_clock_bg_1" icon="prev_none" id="1" />
-            <ListOption displayName="id_clock_bg_2" icon="prev_none" id="2" />
         </ListConfiguration>
         <ListConfiguration defaultValue="0" displayName="id_clock_style" id="clockStyle">
             <ListOption displayName="id_clock_style_0" icon="prev_none" id="0" />
@@ -2558,15 +2557,68 @@
                 <Variant mode="AMBIENT" target="scaleX" value="[REFERENCE.arcsScale]" />
                 <Variant mode="AMBIENT" target="scaleY" value="[REFERENCE.arcsScale]" />
                 <Transform target="angle" value="-(180+[REFERENCE.solarTrack])"/>
-                <PartDraw x="0" y="0" width="184" height="184" alpha="195">
-                    <Ellipse
-                        x="0"
-                        y="0"
-                        width="184"
-                        height="184">
-                        <Fill color="#1F1F1F"/>
-                    </Ellipse>
-                </PartDraw>
+                <ListConfiguration id="clockBg">
+                    <ListOption id="0">
+                        <PartDraw x="0" y="0" width="184" height="184" alpha="195">
+                            <Ellipse
+                                x="0"
+                                y="0"
+                                width="184"
+                                height="184">
+                                <Fill color="#1F1F1F"/>
+                            </Ellipse>
+                        </PartDraw>
+                    </ListOption>
+                    <ListOption id="1">
+                        <Group name="bg" x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.2]">
+                            <PartDraw x="0" y="0" width="184" height="184" alpha="195" renderMode="ALL">
+                                <Ellipse
+                                    x="0"
+                                    y="0"
+                                    width="184"
+                                    height="184">
+                                    <Fill color="#1F1F1F"/>
+                                </Ellipse>
+                            </PartDraw>
+                            <PartDraw x="0" y="0" width="184" height="184">
+                                <Variant
+                                    target="alpha"
+                                    value="0"
+                                    mode="AMBIENT"/>
+                                <Ellipse
+                                    x="0"
+                                    y="0"
+                                    width="184"
+                                    height="184">
+                                    <Fill color="#ffffff">
+                                        <LinearGradient
+                                            startX="92"
+                                            startY="0"
+                                            endX="92"
+                                            endY="184"
+                                            colors="#ffffffff #00000000"
+                                            positions="0 1"/>
+                                    </Fill>
+                                </Ellipse>
+                                <Ellipse
+                                    x="0"
+                                    y="0"
+                                    width="184"
+                                    height="184">
+                                    <Fill color="#ffffff">
+                                        <LinearGradient
+                                            startX="92"
+                                            startY="0"
+                                            endX="92"
+                                            endY="184"
+                                            colors="#00000000 #ff494949"
+                                            positions="0 1"/>
+                                    </Fill>
+                                </Ellipse>
+                            </PartDraw>
+                        </Group>
+                    </ListOption>
+                </ListConfiguration>
                 <Condition>
                     <Expressions>
                         <Expression name="digital">[CONFIGURATION.clockStyle] == 0</Expression>
@@ -2597,7 +2649,7 @@
                                 </Font>
                             </Text>
                         </PartText>
-                        <PartText name="digital_clock_colorful" x="13" y="43" width="158" height="100" alpha="0" tintColor="[CONFIGURATION.tertiaryTheme.1]">
+                        <PartText name="digital_clock_colorful" x="13" y="43" width="158" height="100" alpha="0" tintColor="[CONFIGURATION.tertiaryTheme.2]">
                             <Variant target="alpha" value="255" mode="AMBIENT"/>
                             <Text isAutoSize="TRUE">
                                 <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="60" color="#ffffff">
@@ -2636,11 +2688,11 @@
                                     endAngle="360">
                                     <Stroke
                                         cap="ROUND"
-                                        color="#606060"
+                                        color="#303030"
                                         thickness="5"/>
                                 </Arc>
                             </PartDraw>
-                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.2]">
+                            <PartDraw x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                                 <Arc
                                     centerX="92"
                                     centerY="92"
@@ -2662,7 +2714,7 @@
                         </Group>
                     </Compare>
                     <Default>
-                        <Group name="index" x="0" y="0" width="184" height="184" alpha="105">
+                        <Group name="index" x="0" y="0" width="184" height="184" alpha="165">
                             <PartDraw x="90" y="4" width="4" height="40" pivotY="2.2" angle="0">
                                 <RoundRectangle x="0" y="0" width="4" height="20" cornerRadiusX="2" cornerRadiusY="2">
                                     <Fill color="#ffffff"/>

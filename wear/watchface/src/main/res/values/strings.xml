@@ -10,6 +10,11 @@
     <string name="id_aod_1">Dimmed &amp; No Arcs</string>
     <string name="id_aod_2">Time Only</string>
 
+    <string name="id_clock_bg">Clock BG</string>
+    <string name="id_clock_bg_0">Dark</string>
+    <string name="id_clock_bg_1">Gradient</string>
+    <string name="id_clock_bg_2">Light</string>
+
 
     <string name="id_leading_zero">Leading Zero</string>
     <string name="id_progress_bar_gradients">Slot 1,2,3,4 Gradients</string>
