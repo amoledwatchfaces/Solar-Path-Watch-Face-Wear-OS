@@ -93,7 +93,7 @@ object SolarCalculator {
         val noon = eventList.find { it is SolarEvent.Noon }?.time?.toEpochMilliseconds() ?: 0L
         val nadir = eventList.find { it is SolarEvent.Nadir }?.time?.toEpochMilliseconds() ?: 0L
 
-        // In Kastro, dusk events mark the transitions:
+        // In Kastro (kotlin), dusk events mark the transitions:
         // - Sunset begins Civil Dusk (sun at 0°)
         // - NauticalDusk marks sun reaching -6° (end of Civil Dusk, start of Nautical Dusk)
         // - AstronomicalDusk marks sun reaching -12° (end of Nautical Dusk, start of Astro Dusk)
