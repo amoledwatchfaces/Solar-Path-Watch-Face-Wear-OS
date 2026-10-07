@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 package com.amoledwatchfaces.solarpath.presentation
 
+import android.Manifest
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -45,10 +46,12 @@ import androidx.navigation.NavHostController
 import androidx.wear.compose.foundation.lazy.TransformingLazyColumn
 import androidx.wear.compose.foundation.lazy.TransformingLazyColumnState
 import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
-import com.amoledwatchfaces.solarpath.BuildConfig
-import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
-import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import androidx.wear.compose.foundation.rotary.rotaryScrollable
+import com.amoledwatchfaces.solarpath.BuildConfig
+import com.amoledwatchfaces.solarpath.presentation.ui.BackgroundPermissionDialog
+import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
+import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
+import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
 import androidx.wear.compose.material3.Card
@@ -324,7 +327,17 @@ fun MainScreen(
                         .transformedHeight(this, transformationSpec),
                     transformation = SurfaceTransformation(transformationSpec),
                     checked = preferences.backgroundLocationState,
-                    onCheckedChange = { viewModel.setBackgroundLocation(it) },
+                    onCheckedChange = { checked ->
+                        if (checked) {
+                            if (context.isPermissionGranted(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                                viewModel.setBackgroundLocation(true)
+                            } else {
+                                viewModel.setBackgroundLocationDialogState(true)
+                            }
+                        } else {
+                            viewModel.setBackgroundLocation(false)
+                        }
+                    },
                     label = { Text(stringResource(R.string.background_location)) },
                     secondaryLabel = { Text("${preferences.backgroundLocationRepeatInterval} min") }
                 )
@@ -471,6 +484,13 @@ fun MainScreen(
             confirmationState = confirmationState,
             onTimeout = { showConfirmation = false }
         )
+
+        val backgroundLocationDialogState by viewModel.backgroundLocationDialogState.collectAsState()
+        if (backgroundLocationDialogState) {
+            BackgroundPermissionDialog(
+                viewModel = viewModel
+            )
+        }
 
         if (isLoading) {
             Box(

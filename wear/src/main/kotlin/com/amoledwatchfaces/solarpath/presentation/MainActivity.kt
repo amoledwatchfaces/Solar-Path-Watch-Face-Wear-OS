@@ -21,7 +21,10 @@ import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import androidx.compose.ui.platform.LocalContext
+import com.amoledwatchfaces.solarpath.presentation.ui.InitialLocationDialog
 import com.amoledwatchfaces.solarpath.presentation.ui.SolarPathAppTheme
+import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.utils.updateComplications
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,6 +53,7 @@ class MainActivity : ComponentActivity() {
 fun SolarPathMainApp(
     viewModel: MainViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val transformationSpec = rememberTransformationSpec()
     val focusRequester = remember { FocusRequester() }
     val navController = rememberSwipeDismissableNavController()
@@ -58,6 +62,7 @@ fun SolarPathMainApp(
     val faqListState = rememberTransformingLazyColumnState()
 
     val preferences by viewModel.preferences.collectAsState()
+    val initialLocationDialogState by viewModel.initialLocationDialogState.collectAsState()
 
     val permissionState = rememberPermissionState(
         permission = android.Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -69,8 +74,8 @@ fun SolarPathMainApp(
     )
 
     LaunchedEffect(Unit) {
-        if (preferences.latitude == 0.0 && preferences.longitude == 0.0) {
-            permissionState.launchPermissionRequest()
+        if (preferences.latitude == 0.0 && preferences.longitude == 0.0 && !context.areLocationPermissionsGranted()) {
+            viewModel.setInitialLocationDialogState(true)
         }
     }
 
@@ -109,6 +114,18 @@ fun SolarPathMainApp(
                         listState = faqListState
                     )
                 }
+            }
+
+            if (initialLocationDialogState) {
+                InitialLocationDialog(
+                    onConfirm = {
+                        viewModel.setInitialLocationDialogState(false)
+                        permissionState.launchPermissionRequest()
+                    },
+                    onDismiss = {
+                        viewModel.setInitialLocationDialogState(false)
+                    }
+                )
             }
         }
     }

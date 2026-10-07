@@ -85,6 +85,20 @@ class MainViewModel @Inject constructor(
     private val _isWatchFaceActive = MutableStateFlow(false)
     val isWatchFaceActive: StateFlow<Boolean> = _isWatchFaceActive.asStateFlow()
 
+    private val _backgroundLocationDialogState = MutableStateFlow(false)
+    val backgroundLocationDialogState: StateFlow<Boolean> = _backgroundLocationDialogState.asStateFlow()
+
+    fun setBackgroundLocationDialogState(state: Boolean) {
+        _backgroundLocationDialogState.value = state
+    }
+
+    private val _initialLocationDialogState = MutableStateFlow(false)
+    val initialLocationDialogState: StateFlow<Boolean> = _initialLocationDialogState.asStateFlow()
+
+    fun setInitialLocationDialogState(state: Boolean) {
+        _initialLocationDialogState.value = state
+    }
+
     private val _refreshTrigger = kotlinx.coroutines.flow.MutableStateFlow(System.currentTimeMillis())
 
     fun refresh(forceRecalculate: Boolean = false) {
