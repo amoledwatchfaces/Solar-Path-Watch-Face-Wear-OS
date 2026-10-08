@@ -6,9 +6,10 @@
 [![Target SDK](https://img.shields.io/badge/Target_SDK-37-blue)](https://developer.android.com)
 [![Compose](https://img.shields.io/badge/Compose-Material_3-blue?logo=jetpackcompose)](https://developer.android.com/training/wearables/compose)
 [![Latest Release](https://img.shields.io/github/v/release/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS?logo=github&color=blue)](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/releases)
+[![License](https://img.shields.io/badge/License-GPLv3-orange.svg)](LICENSE)
 [![Privacy Policy](https://img.shields.io/badge/Privacy--Policy-Read-blue?logo=googleplay&logoColor=white)](https://amoledwatchfaces.github.io/apps/privacy/solarpath.html)
 
-**Solar Path** is an astronomically accurate 24-hour solar dial watch face and companion application for Wear OS, inspired by iconic celestial timepieces and classic 24-hour astronomical dials. It dynamically tracks the sun's passage across the celestial vault and relative to your local horizon—illustrating daylight, twilight phases, and nighttime with mathematical precision.
+**Solar Path** is an astronomically accurate 24-hour solar tracking watch face and companion application for Wear OS, inspired by iconic celestial timepieces and classic 24-hour astronomical timekeeping. It dynamically tracks the sun's passage across the celestial vault and relative to your local horizon—illustrating daylight, twilight phases, and nighttime with mathematical precision.
 
 Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)**.
 
@@ -30,7 +31,7 @@ Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)*
 
 ## ✨ Features
 
-- **24-Hour Circular Solar Dial**:
+- **24-Hour Circular Solar Path**:
   - Solar noon at zenith (top / 12 o'clock / 0°).
   - Solar midnight at nadir (bottom / 6 o'clock / 180°).
   - Real-time celestial sun marker orbiting along the 24-hour circumference with an atmospheric radiating solar beam.
@@ -96,7 +97,7 @@ Quickly switch between **11 curated style presets** designed for different aesth
 
 | ID | Flavor Name | Clock Style | Background | Themes (Primary / Secondary / Tertiary) | Highlights |
 |:---:|:---|:---:|:---:|:---|:---|
-| **0** | **Default** | Digital | Dark | Atmospheric Blue | Balanced, authentic solar dial with flat clean arcs. |
+| **0** | **Default** | Digital | Dark | Atmospheric Blue | Balanced, authentic solar tracker with flat clean arcs. |
 | **1** | **Classic Analog** | Analog | Dark | Graphite & Cloud | Timeless monochrome watch face with analog hands. |
 | **2** | **Solar Gold** | Analog | Dark | Wheat & Champagne | Warm golden sunlight tones with gradient arc accents. |
 | **3** | **Deep Ocean** | Digital | Dark | Ocean, Sapphire & Royal Blue | Vibrant oceanic gradient arcs and crisp digital readout. |
@@ -190,6 +191,7 @@ cd Solar-Path-Watch-Face-Wear-OS
 
 ## 📄 License & Credits
 
+- Licensed under the **[GNU General Public License v3.0 (GPLv3)](LICENSE)**.
 - Developed by **[amoledwatchfaces™](https://amoledwatchfaces.com/)**.
 - Ephemeris calculations powered by [Kastro](https://github.com/Yox/kastro).
 - All trademarks and brand names belong to their respective owners.

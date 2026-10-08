@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (C) 2026 amoledwatchfaces™
+
+    Licensed under the GNU General Public License v3.0 (GPLv3)
+    You may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        https://www.gnu.org/licenses/gpl-3.0.html
+-->
 <WatchFace width="450" height="450">
     <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
     <Metadata key="PREVIEW_TIME" value="17:20:50"/>
@@ -389,9 +398,6 @@
                     <Transform
                         target="alpha"
                         value="[REFERENCE.solarTrack] &lt;= ([REFERENCE.ss_angle] - 15) ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 200 * ([REFERENCE.solarTrack] - ([REFERENCE.ss_angle] - 15)) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 15 &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 15)), 55, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 55 : [REFERENCE.solarTrack] &lt;= ([REFERENCE.sr_angle] + 15) ? clamp(round(55 + 200 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] + 15 - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] + 15 - [REFERENCE.adawn_angle])), 55, 255) : 255"/>
-                    <Reference
-                        name="circleBaseAlpha"
-                        source="alpha"/>
                     <Ellipse x="34" y="34" width="382" height="382">
                         <Fill color="[CONFIGURATION.secondaryTheme.2]"/>
                     </Ellipse>
