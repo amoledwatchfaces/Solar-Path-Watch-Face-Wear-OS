@@ -13,6 +13,7 @@ data class DailySolarEvents(
     val date: LocalDate,
     val lat: Double,
     val lon: Double,
+    val zoneId: ZoneId = ZoneId.systemDefault(),
     val sunrise: Long,
     val sunset: Long,
     val noon: Long,
@@ -38,30 +39,39 @@ data class DailySolarEvents(
 
 object SolarCalculator {
 
-    @Volatile
-    private var cachedEvents: DailySolarEvents? = null
+    private data class CacheKey(
+        val date: LocalDate,
+        val zoneId: ZoneId,
+        val latE4: Long,
+        val lonE4: Long
+    )
+
+    private val cache = java.util.concurrent.ConcurrentHashMap<CacheKey, DailySolarEvents>()
 
     fun invalidateCache() {
-        cachedEvents = null
+        cache.clear()
     }
 
     @Synchronized
     private fun getOrCalculateDailyEvents(
         lat: Double,
         lon: Double,
-        date: LocalDate
+        date: LocalDate,
+        zoneId: ZoneId = ZoneId.systemDefault()
     ): DailySolarEvents {
-        val cached = cachedEvents
-        if (cached != null &&
-            cached.date == date &&
-            abs(cached.lat - lat) < 0.0001 &&
-            abs(cached.lon - lon) < 0.0001
-        ) {
+        val key = CacheKey(
+            date = date,
+            zoneId = zoneId,
+            latE4 = (lat * 10000).toLong(),
+            lonE4 = (lon * 10000).toLong()
+        )
+        val cached = cache[key]
+        if (cached != null) {
             return cached
         }
 
         val startInstant = Instant.fromEpochMilliseconds(
-            date.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+            date.atStartOfDay(zoneId).toInstant().toEpochMilli()
         )
 
         val requestedEvents = listOf(
@@ -115,22 +125,22 @@ object SolarCalculator {
             (sunset - sunrise) / (60 * 1000)
         } else 0L
 
-        val zone = ZoneId.systemDefault()
-        val srAngle = if (sunrise > 0) epochToDialAngle(sunrise, zone) else 270f
-        val ssAngle = if (sunset > 0) epochToDialAngle(sunset, zone) else 90f
-        val cdawnAngle = if (civilDawn > 0) epochToDialAngle(civilDawn, zone) else 255f
-        val cduskAngle = if (civilDusk > 0) epochToDialAngle(civilDusk, zone) else 105f
-        val ndawnAngle = if (nauticalDawn > 0) epochToDialAngle(nauticalDawn, zone) else 240f
-        val nduskAngle = if (nauticalDusk > 0) epochToDialAngle(nauticalDusk, zone) else 120f
-        val adawnAngle = if (astroDawn > 0) epochToDialAngle(astroDawn, zone) else 225f
-        val aduskAngle = if (astroDusk > 0) epochToDialAngle(astroDusk, zone) else 135f
-        val noonAngle = if (noon > 0) epochToDialAngle(noon, zone) else 0f
-        val nadirAngle = if (nadir > 0) epochToDialAngle(nadir, zone) else 180f
+        val srAngle = if (sunrise > 0) epochToDialAngle(sunrise, zoneId) else 270f
+        val ssAngle = if (sunset > 0) epochToDialAngle(sunset, zoneId) else 90f
+        val cdawnAngle = if (civilDawn > 0) epochToDialAngle(civilDawn, zoneId) else 255f
+        val cduskAngle = if (civilDusk > 0) epochToDialAngle(civilDusk, zoneId) else 105f
+        val ndawnAngle = if (nauticalDawn > 0) epochToDialAngle(nauticalDawn, zoneId) else 240f
+        val nduskAngle = if (nauticalDusk > 0) epochToDialAngle(nauticalDusk, zoneId) else 120f
+        val adawnAngle = if (astroDawn > 0) epochToDialAngle(astroDawn, zoneId) else 225f
+        val aduskAngle = if (astroDusk > 0) epochToDialAngle(astroDusk, zoneId) else 135f
+        val noonAngle = if (noon > 0) epochToDialAngle(noon, zoneId) else 0f
+        val nadirAngle = if (nadir > 0) epochToDialAngle(nadir, zoneId) else 180f
 
         val calculated = DailySolarEvents(
             date = date,
             lat = lat,
             lon = lon,
+            zoneId = zoneId,
             sunrise = sunrise,
             sunset = sunset,
             noon = noon,
@@ -153,7 +163,7 @@ object SolarCalculator {
             noonAngle = noonAngle,
             nadirAngle = nadirAngle
         )
-        cachedEvents = calculated
+        cache[key] = calculated
         return calculated
     }
 
@@ -161,19 +171,27 @@ object SolarCalculator {
         lat: Double,
         lon: Double,
         date: LocalDate = LocalDate.now(),
-        currentTimeMillis: Long = System.currentTimeMillis()
+        currentTimeMillis: Long = System.currentTimeMillis(),
+        zoneId: ZoneId = ZoneId.systemDefault()
     ): SolarData {
         if (lat == 0.0 && lon == 0.0) {
             return SolarData()
         }
 
-        val daily = getOrCalculateDailyEvents(lat, lon, date)
+        val daily = getOrCalculateDailyEvents(lat, lon, date, zoneId)
+        val dailyTomorrow = getOrCalculateDailyEvents(lat, lon, date.plusDays(1), zoneId)
 
-        val currentInstant = Instant.fromEpochMilliseconds(currentTimeMillis)
+        val effectiveTimeMillis = if (currentTimeMillis <= 0L) {
+            date.atStartOfDay(zoneId).toInstant().toEpochMilli()
+        } else {
+            currentTimeMillis
+        }
+
+        val currentInstant = Instant.fromEpochMilliseconds(effectiveTimeMillis)
         val solarState = currentInstant.calculateSolarState(latitude = lat, longitude = lon)
         val isDay = solarState.trueAltitude > 0.0
 
-        val upcomingEvents = listOf(
+        val todayEvents = listOf(
             "Sunrise" to daily.sunrise,
             "Solar Noon" to daily.noon,
             "Sunset" to daily.sunset,
@@ -184,10 +202,27 @@ object SolarCalculator {
             "Astro Dawn" to daily.astroDawn,
             "Nautical Dawn" to daily.nauticalDawn,
             "Civil Dawn" to daily.civilDawn
-        ).filter { it.second > currentTimeMillis }.sortedBy { it.second }
+        )
+
+        val tomorrowEvents = listOf(
+            "Sunrise" to dailyTomorrow.sunrise,
+            "Solar Noon" to dailyTomorrow.noon,
+            "Sunset" to dailyTomorrow.sunset,
+            "Civil Dusk" to dailyTomorrow.civilDusk,
+            "Nautical Dusk" to dailyTomorrow.nauticalDusk,
+            "Astro Dusk" to dailyTomorrow.astroDusk,
+            "Solar Midnight" to dailyTomorrow.nadir,
+            "Astro Dawn" to dailyTomorrow.astroDawn,
+            "Nautical Dawn" to dailyTomorrow.nauticalDawn,
+            "Civil Dawn" to dailyTomorrow.civilDawn
+        )
+
+        val upcomingEvents = (todayEvents + tomorrowEvents)
+            .filter { it.second > effectiveTimeMillis }
+            .sortedBy { it.second }
 
         val nextEvent = upcomingEvents.firstOrNull() ?: (
-            "Sunrise" to if (daily.sunrise > 0 && daily.sunrise < currentTimeMillis) daily.sunrise + 86_400_000L else daily.sunrise
+            "Sunrise" to if (daily.sunrise > 0 && daily.sunrise < effectiveTimeMillis) daily.sunrise + 86_400_000L else daily.sunrise
         )
 
         // Daylight progress fraction (0..1)

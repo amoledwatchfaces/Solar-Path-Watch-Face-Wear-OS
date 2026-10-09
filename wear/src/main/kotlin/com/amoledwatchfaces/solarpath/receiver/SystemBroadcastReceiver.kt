@@ -79,6 +79,7 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
                 Intent.ACTION_DATE_CHANGED
             )) {
             Log.i(TAG, "System event received: ${intent.action}")
+            com.amoledwatchfaces.solarpath.solar.SolarCalculator.invalidateCache()
             scope.launch {
                 val prefs = preferences.first()
                 if (prefs.backgroundLocationState) {

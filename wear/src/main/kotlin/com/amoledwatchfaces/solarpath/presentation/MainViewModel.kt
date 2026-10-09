@@ -104,6 +104,7 @@ class MainViewModel @Inject constructor(
     fun refresh(forceRecalculate: Boolean = false) {
         if (forceRecalculate) {
             SolarCalculator.invalidateCache()
+            context.updateComplications()
         }
         _refreshTrigger.value = System.currentTimeMillis()
     }

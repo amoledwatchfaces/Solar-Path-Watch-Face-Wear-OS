@@ -47,6 +47,7 @@
     <string name="elevation">Elevation</string>
     <string name="azimuth">Azimuth</string>
     <string name="open_app">Open Solar Path</string>
+    <string name="refresh_calculation">Recalculate</string>
 
     <!-- FAQ -->
     <string name="faq">FAQ</string>

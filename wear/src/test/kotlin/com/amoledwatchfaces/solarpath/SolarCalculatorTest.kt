@@ -64,4 +64,30 @@ class SolarCalculatorTest {
         org.junit.Assert.assertEquals(dataBeforeSunset.sunsetEpoch, dataAfterSunset.sunsetEpoch)
         org.junit.Assert.assertEquals(dataBeforeSunset.sunsetAngle, dataAfterSunset.sunsetAngle, 0.001f)
     }
+
+    @Test
+    fun testWisconsinNightUpcomingEvents() {
+        val lat = 43.0731
+        val lon = -89.4012
+        val zone = java.time.ZoneId.of("America/Chicago")
+        val date = LocalDate.of(2026, 10, 9)
+
+        // 21:00 (9:00 PM) Central Time on Oct 9, 2026 - pitch black outside
+        val ninePmMillis = date.atTime(21, 0).atZone(zone).toInstant().toEpochMilli()
+        val dataAt9pm = SolarCalculator.calculateSolarData(lat, lon, date, ninePmMillis, zone)
+
+        // Must NOT show Sunrise! Next upcoming event is Solar Midnight (~00:57 AM)
+        org.junit.Assert.assertEquals("Solar Midnight", dataAt9pm.nextEventName)
+        org.junit.Assert.assertTrue(dataAt9pm.nextEventEpoch > ninePmMillis)
+
+        // 02:00 AM Central Time on Oct 10, 2026 - after solar midnight, before dawn
+        val dateNext = LocalDate.of(2026, 10, 10)
+        val twoAmMillis = dateNext.atTime(2, 0).atZone(zone).toInstant().toEpochMilli()
+        val dataAt2am = SolarCalculator.calculateSolarData(lat, lon, dateNext, twoAmMillis, zone)
+
+        // Next upcoming event must be Astro Dawn (~05:30 AM), NOT Sunrise
+        org.junit.Assert.assertEquals("Astro Dawn", dataAt2am.nextEventName)
+        org.junit.Assert.assertTrue(dataAt2am.nextEventEpoch > twoAmMillis)
+    }
 }
+

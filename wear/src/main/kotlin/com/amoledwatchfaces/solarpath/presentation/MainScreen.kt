@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.WatchLater
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.PrivacyTip
@@ -208,6 +209,31 @@ fun MainScreen(
                     },
                     secondaryLabel = {
                         Text(text = stringResource(R.string.faq_subtitle))
+                    }
+                )
+            }
+
+            // Recalculate Button
+            item {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = {
+                        viewModel.refresh(forceRecalculate = true)
+                        confirmationState = true
+                        showConfirmation = true
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = stringResource(R.string.refresh_calculation),
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    label = {
+                        Text(text = stringResource(R.string.refresh_calculation))
                     }
                 )
             }
