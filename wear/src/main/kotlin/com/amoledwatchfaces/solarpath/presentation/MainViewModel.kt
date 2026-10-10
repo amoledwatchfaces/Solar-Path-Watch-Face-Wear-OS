@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
-import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
@@ -15,13 +14,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.wear.remote.interactions.RemoteActivityHelper
 import androidx.wear.watchfacepush.WatchFacePushManagerFactory
-import com.google.android.gms.location.CurrentLocationRequest
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.Granularity
-import com.google.android.gms.location.Priority
-import com.google.android.gms.tasks.CancellationToken
-import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.data.SavedLocation
 import com.amoledwatchfaces.solarpath.data.UserPreferences
@@ -35,28 +27,32 @@ import com.amoledwatchfaces.solarpath.utils.formatCoordinate
 import com.amoledwatchfaces.solarpath.utils.isOnline
 import com.amoledwatchfaces.solarpath.utils.updateComplications
 import com.amoledwatchfaces.solarpath.watchfacepush.DEFAULT_WATCH_FACE
-import com.amoledwatchfaces.solarpath.watchfacepush.WatchFaceData
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFacePackageRepository
 import com.amoledwatchfaces.solarpath.workers.LocationWorker
+import com.google.android.gms.location.CurrentLocationRequest
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.Granularity
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import java.util.Locale
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.math.abs
+import kotlin.time.Duration.Companion.milliseconds
 
 private const val TAG = "SolarPathViewModel"
 
@@ -99,7 +95,7 @@ class MainViewModel @Inject constructor(
         _initialLocationDialogState.value = state
     }
 
-    private val _refreshTrigger = kotlinx.coroutines.flow.MutableStateFlow(System.currentTimeMillis())
+    private val _refreshTrigger = MutableStateFlow(System.currentTimeMillis())
 
     fun refresh(forceRecalculate: Boolean = false) {
         if (forceRecalculate) {
@@ -112,7 +108,7 @@ class MainViewModel @Inject constructor(
     private val timeTickerFlow = kotlinx.coroutines.flow.flow {
         while (true) {
             emit(System.currentTimeMillis())
-            kotlinx.coroutines.delay(30_000L)
+            kotlinx.coroutines.delay(30_000L.milliseconds)
         }
     }
 
@@ -264,35 +260,20 @@ class MainViewModel @Inject constructor(
     private suspend fun fetchLocations(query: String): List<LocationPrediction> = suspendCancellableCoroutine { continuation ->
         val geocoder = Geocoder(context, Locale.getDefault())
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            geocoder.getFromLocationName(query, 5, object : Geocoder.GeocodeListener {
-                override fun onGeocode(addresses: MutableList<Address>) {
-                    val mapped = addresses.map { address ->
-                        val name = address.locality ?: address.subAdminArea ?: address.featureName ?: query
-                        val adminArea = address.adminArea ?: address.countryName ?: ""
-                        LocationPrediction(name, adminArea, address.latitude, address.longitude)
-                    }
-                    if (continuation.isActive) continuation.resume(mapped)
-                }
-
-                override fun onError(errorMessage: String?) {
-                    if (continuation.isActive) continuation.resume(emptyList())
-                }
-            })
-        } else {
-            @Suppress("DEPRECATION")
-            try {
-                val addresses = geocoder.getFromLocationName(query, 5)
-                val mapped = addresses?.map { address ->
+        geocoder.getFromLocationName(query, 5, object : Geocoder.GeocodeListener {
+            override fun onGeocode(addresses: MutableList<Address>) {
+                val mapped = addresses.map { address ->
                     val name = address.locality ?: address.subAdminArea ?: address.featureName ?: query
                     val adminArea = address.adminArea ?: address.countryName ?: ""
                     LocationPrediction(name, adminArea, address.latitude, address.longitude)
-                } ?: emptyList()
-                continuation.resume(mapped)
-            } catch (e: Exception) {
-                continuation.resume(emptyList())
+                }
+                if (continuation.isActive) continuation.resume(mapped)
             }
-        }
+
+            override fun onError(errorMessage: String?) {
+                if (continuation.isActive) continuation.resume(emptyList())
+            }
+        })
     }
 
     fun getLocationCoordinates(prediction: LocationPrediction) {

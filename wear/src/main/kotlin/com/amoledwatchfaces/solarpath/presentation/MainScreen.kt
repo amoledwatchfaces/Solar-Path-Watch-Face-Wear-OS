@@ -2,6 +2,7 @@
 package com.amoledwatchfaces.solarpath.presentation
 
 import android.Manifest
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.Check
@@ -48,15 +48,8 @@ import androidx.wear.compose.foundation.lazy.TransformingLazyColumn
 import androidx.wear.compose.foundation.lazy.TransformingLazyColumnState
 import androidx.wear.compose.foundation.rotary.RotaryScrollableDefaults
 import androidx.wear.compose.foundation.rotary.rotaryScrollable
-import com.amoledwatchfaces.solarpath.BuildConfig
-import com.amoledwatchfaces.solarpath.presentation.ui.BackgroundPermissionDialog
-import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
-import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
-import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
-import androidx.wear.compose.material3.Card
-import androidx.wear.compose.material3.CardDefaults
 import androidx.wear.compose.material3.CircularProgressIndicator
 import androidx.wear.compose.material3.FilledTonalButton
 import androidx.wear.compose.material3.Icon
@@ -72,7 +65,12 @@ import androidx.wear.compose.material3.Text
 import androidx.wear.compose.material3.TitleCard
 import androidx.wear.compose.material3.lazy.TransformationSpec
 import androidx.wear.compose.material3.lazy.transformedHeight
+import com.amoledwatchfaces.solarpath.BuildConfig
 import com.amoledwatchfaces.solarpath.R
+import com.amoledwatchfaces.solarpath.presentation.ui.BackgroundPermissionDialog
+import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
+import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
+import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -222,8 +220,7 @@ fun MainScreen(
                     transformation = SurfaceTransformation(transformationSpec),
                     onClick = {
                         viewModel.refresh(forceRecalculate = true)
-                        confirmationState = true
-                        showConfirmation = true
+                        Toast.makeText(context,"Check watch face",Toast.LENGTH_LONG).show()
                     },
                     icon = {
                         Icon(
