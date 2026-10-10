@@ -74,7 +74,7 @@ Because Google's **Watch Face Format (WFF)** is a declarative XML specification 
      - Automatically active when `showPrompt == true` via `SolarPathComplicationService`'s `tapAction`.
    - **"Dismiss" Button (Slot 6):**
      - Sized with a `210×62` `<BoundingRoundBox>` placed over the "Dismiss" pill graphic.
-     - Powered by `DismissPromptComplicationService`. Tapping fires a `PendingIntent` to `DismissPromptActivity`.
+     - Powered by `SolarPathComplicationService` (Slot 6). Tapping fires a `PendingIntent` to `DismissPromptActivity`.
      - `DismissPromptActivity` commits `isLocationPromptDismissed = true` to `UserPreferences` and calls `ContextUtils.updateComplications()`. This toggles `hasLocation` back to `1`, immediately transitioning the watch face into normal mode.
 
 3. **Touch Bleed Prevention & Document-Order Shielding (Slot 7):**
@@ -91,9 +91,11 @@ Because Google's **Watch Face Format (WFF)** is a declarative XML specification 
      ```
    - **Dynamic Shielding Mechanism:**
      - **`BlockerBroadcastReceiver`:** A lightweight, no-op `BroadcastReceiver` that safely absorbs touches.
-     - **`BlockerComplicationService` (Slot 7):**
-       - When `showPrompt == true`: Provides a `tapAction` targeting `BlockerBroadcastReceiver`. Taps on "Open App" or "Dismiss" hit the top layer (Slots 0 and 6). Taps anywhere else hit the full-screen Slot 7 shield and are absorbed by the receiver—never reaching Slots 1–5 beneath it.
-       - When `showPrompt == false`: Sets `tapAction = null`. In Wear OS, complication slots with null tap actions do not intercept touches, allowing taps to fall straight through to Slots 1–5 unimpeded.
+     - **Consolidated `SolarPathComplicationService` (Serving Slots 0, 6, and 7):**
+       - Rather than exporting individual complication services that would clutter the system complication chooser on other watch faces, `SolarPathComplicationService` handles all three internal slots based on `request.complicationInstanceId`:
+         - When `showPrompt == true`: Slot 7 provides a `tapAction` targeting `BlockerBroadcastReceiver`. Taps on "Open App" or "Dismiss" hit the top layer (Slots 0 and 6). Taps anywhere else hit the full-screen Slot 7 shield and are absorbed by the receiver—never reaching Slots 1–5 beneath it.
+         - When `showPrompt == false`: Slot 7 sets `tapAction = null`. In Wear OS, complication slots with null tap actions do not intercept touches, allowing taps to fall straight through to Slots 1–5 unimpeded.
+         - External requests (on other watch faces): Receive standard solar calculations and event times. "Blocker" and "Dismiss" are never exported as separate complication options.
 
 4. **Lock Screen / Keyguard Guard:**
    - Evaluates `KeyguardManager.isDeviceLocked` and `KeyguardManager.isKeyguardLocked`.
@@ -111,6 +113,7 @@ Because Google's **Watch Face Format (WFF)** is a declarative XML specification 
    - `Slot 7`: Full-Screen Touch Blocker (Non-customizable)
 
 ### 6. Architectural & System Updates
-- Registered `DismissPromptActivity`, `DismissPromptComplicationService`, `BlockerComplicationService`, and `BlockerBroadcastReceiver` in `AndroidManifest.xml`.
-- Extended `ContextUtils.updateComplications()` to ensure all custom complication services update in synchronization.
+- Consolidated all internal prompt and touch management into `SolarPathComplicationService` so only the genuine "Solar Path" complication appears in the Wear OS complication picker.
+- Registered `DismissPromptActivity` and `BlockerBroadcastReceiver` in `AndroidManifest.xml`.
+- Extended `ContextUtils.updateComplications()` to ensure complication data refreshes in synchronization.
 - Bumped project version to `v1.1.3` (version code `10000013`) in `build.gradle.kts`.

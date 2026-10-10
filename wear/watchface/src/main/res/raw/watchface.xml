@@ -2732,7 +2732,7 @@
             y="0"
             alpha="0">
             <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.BlockerComplicationService"
+                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
                 primaryProviderType="SHORT_TEXT"
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT"/>
@@ -2817,7 +2817,7 @@
             y="350"
             alpha="0">
             <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.DismissPromptComplicationService"
+                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
                 primaryProviderType="SHORT_TEXT"
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT"/>
