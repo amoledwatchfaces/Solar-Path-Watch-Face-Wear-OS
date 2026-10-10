@@ -944,6 +944,22 @@
                         <Fill color="#ffffff"/>
                     </Ellipse>
                 </PartDraw>
+
+                <!-- Hide Timeline below Digital Clock Background -->
+                <PartDraw name="ellipsis" width="184" height="184" x="133" y="94" pivotY="0.711956" blendMode="DST_OUT">
+                    <Variant
+                        target="alpha"
+                        value="0"
+                        mode="AMBIENT"/>
+                    <Transform target="angle" value="180+[REFERENCE.solarTrack]"/>
+                    <Ellipse
+                        x="0"
+                        y="0"
+                        width="184"
+                        height="184">
+                        <Fill color="#ffffff"/>
+                    </Ellipse>
+                </PartDraw>
             </Group>
 
             <!-- Sun Orbiting Marker: Rotates at 15 deg per hour, noon at top (0 deg) -->
