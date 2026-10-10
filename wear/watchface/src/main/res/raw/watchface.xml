@@ -3363,29 +3363,34 @@
             </PartText>
 
             <!-- Subtitle Lines -->
-            <PartText x="25" y="140" width="400" height="30">
+            <PartText x="20" y="136" width="410" height="28">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">Solar Path works best</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">Solar Path works best</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="170" width="400" height="30">
+            <PartText x="20" y="164" width="410" height="28">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">with location permissions enabled.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">with location permissions enabled.</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="214" width="400" height="30">
+            <PartText x="20" y="202" width="410" height="28">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">You can also manually set a</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">If you don't want to share</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="244" width="400" height="30">
+            <PartText x="20" y="230" width="410" height="28">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">static location in the app.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">location data, you can also manually</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="284" width="400" height="30">
+            <PartText x="20" y="258" width="410" height="28">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">Open the app to configure.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">set a static location in the app.</Font>
+                </Text>
+            </PartText>
+            <PartText x="20" y="296" width="410" height="28">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">Open the app to configure.</Font>
                 </Text>
             </PartText>
 
