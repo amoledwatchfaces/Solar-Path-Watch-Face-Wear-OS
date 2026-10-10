@@ -561,6 +561,7 @@
                 </PartDraw>
             </Group>
 
+            <!-- Events AOD -->
             <Group name="events_aod" width="450" height="450" x="0" y="0" tintColor="[CONFIGURATION.secondaryTheme.2]" alpha="0">
                 <Variant
                     target="alpha"

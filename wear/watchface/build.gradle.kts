@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId = rootProject.extra["namespace"].toString()+watchFacePkgExt
-        minSdk = 33
-        targetSdk = 33
+        minSdk = 36
+        targetSdk = 37
         versionCode = rootProject.extra["versionCode"] as Int
         versionName = rootProject.extra["versionName"] as String
 
