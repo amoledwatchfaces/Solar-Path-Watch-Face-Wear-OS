@@ -106,4 +106,4 @@ Because Google's **Watch Face Format (WFF)** is a declarative XML specification 
 - Renamed complication provider to `"Solar Path Shortcut"` in `strings.xml`.
 - Extended `SolarPathComplicationService` with preview and runtime data for `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `SMALL_IMAGE`, and `LONG_TEXT`.
 - Added location warning card with "Enable location" and "Use without location" actions to `MainScreen.kt` and `MainViewModel.kt`.
-- Bumped project version to `v1.1.4` (version code `10000014`) in `build.gradle.kts`.
+- Bumped project version to `v1.1.3` (version code `10000013`) in `build.gradle.kts`.
