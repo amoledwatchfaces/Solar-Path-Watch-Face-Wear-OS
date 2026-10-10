@@ -74,6 +74,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".complication.DismissPromptActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:noHistory="true" />
+
         <!-- Solar Path Complication Service -->
         <service
             android:name=".complication.SolarPathComplicationService"
@@ -92,6 +100,47 @@
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="0" />
         </service>
+
+        <!-- Dismiss Prompt Complication Service -->
+        <service
+            android:name=".complication.DismissPromptComplicationService"
+            android:exported="true"
+            android:label="@string/dismiss_prompt_comp_name"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+
+        <!-- Blocker Complication Service for Heads Up screen -->
+        <service
+            android:name=".complication.BlockerComplicationService"
+            android:exported="true"
+            android:label="@string/blocker_comp_name"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT" />
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="0" />
+        </service>
+
+        <!-- Blocker Broadcast Receiver (no-op touch absorber) -->
+        <receiver
+            android:name=".receiver.BlockerBroadcastReceiver"
+            android:exported="false" />
 
         <!-- Broadcast Receiver for Passive Location & System Events -->
         <receiver

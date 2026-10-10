@@ -50,8 +50,13 @@ fun Context.isLocationEnabled(): Boolean {
 
 fun Context.updateComplications() {
     val component = ComponentName(this, SolarPathComplicationService::class.java)
-    val req = ComplicationDataSourceUpdateRequester.create(this, component)
-    req.requestUpdateAll()
+    ComplicationDataSourceUpdateRequester.create(this, component).requestUpdateAll()
+
+    val dismissComponent = ComponentName(this, com.amoledwatchfaces.solarpath.complication.DismissPromptComplicationService::class.java)
+    ComplicationDataSourceUpdateRequester.create(this, dismissComponent).requestUpdateAll()
+
+    val blockerComponent = ComponentName(this, com.amoledwatchfaces.solarpath.complication.BlockerComplicationService::class.java)
+    ComplicationDataSourceUpdateRequester.create(this, blockerComponent).requestUpdateAll()
 }
 
 fun Context.openPlayStore() {

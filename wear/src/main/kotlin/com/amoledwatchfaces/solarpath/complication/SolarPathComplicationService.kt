@@ -17,11 +17,14 @@ import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.MonochromaticImage
 import androidx.wear.watchface.complications.data.PlainComplicationText
+import android.app.KeyguardManager
+import android.content.Context
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.datasource.ComplicationRequest
 import androidx.wear.watchface.complications.datasource.SuspendingComplicationDataSourceService
 import com.amoledwatchfaces.solarpath.presentation.MainActivity
 import com.amoledwatchfaces.solarpath.R
+import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.data.UserPreferencesRepository
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
@@ -73,9 +76,33 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
 
     override suspend fun onComplicationRequest(request: ComplicationRequest): ComplicationData? {
         val prefs = preferences.first()
-        val solar = SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
+        val hasPermission = areLocationPermissionsGranted()
+        val hasConfiguredLocation = prefs.locationName != "- -" && (prefs.latitude != 0.0 || prefs.longitude != 0.0)
+        val isLocationSetup = (hasPermission && (prefs.latitude != 0.0 || prefs.longitude != 0.0 || prefs.locationName != "- -")) || hasConfiguredLocation
+        val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as? KeyguardManager
+        val isLocked = keyguardManager?.isDeviceLocked == true || keyguardManager?.isKeyguardLocked == true
+        val showPrompt = !isLocationSetup && !prefs.isLocationPromptDismissed && !isLocked
+
         val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px)).build()
         val tapAction = openAppIntent()
+
+        if (showPrompt) {
+            return when (request.complicationType) {
+                ComplicationType.SHORT_TEXT -> {
+                    ShortTextComplicationData.Builder(
+                        text = PlainComplicationText.Builder("SETUP").build(),
+                        contentDescription = PlainComplicationText.Builder("Heads up! This watch face works best when location is used. Open configuration app to enable location permissions.").build()
+                    )
+                        .setTitle(PlainComplicationText.Builder("NO_LOCATION").build())
+                        .setMonochromaticImage(sunIcon)
+                        .setTapAction(tapAction)
+                        .build()
+                }
+                else -> null
+            }
+        }
+
+        val solar = SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
 
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
             .withZone(ZoneId.systemDefault())
@@ -100,7 +127,7 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
                 )
                     .setTitle(PlainComplicationText.Builder(formattedTitle).build())
                     .setMonochromaticImage(sunIcon)
-                    .setTapAction(tapAction)
+                    .setTapAction(null)
                     .build()
             }
             else -> null

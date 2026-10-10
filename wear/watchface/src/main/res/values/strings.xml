@@ -4,18 +4,29 @@
     <string name="id_clock_style">Clock Style</string>
     <string name="id_clock_style_0">Digital</string>
     <string name="id_clock_style_1">Analog</string>
+    <string name="id_center_shortcut">Center Shortcut</string>
+    <string name="id_slot_top_left">Top Left Arc</string>
+    <string name="id_slot_top_right">Top Right Arc</string>
+    <string name="id_slot_bottom_right">Bottom Right Arc</string>
+    <string name="id_slot_bottom_left">Bottom Left Arc</string>
 
-    <string name="id_clock_alt_colors">Vibrant Clock Colors</string>
+    <string name="id_clock_alt_colors">Vibrant Clock</string>
 
     <string name="id_aod">Ambient Mode</string>
     <string name="id_aod_0">Dimmed</string>
     <string name="id_aod_1">No Arcs</string>
     <string name="id_aod_2">Time Only</string>
 
-    <string name="id_clock_bg">Clock BG</string>
+    <string name="id_clock_bg">Clock Background</string>
     <string name="id_clock_bg_0">Dark</string>
     <string name="id_clock_bg_1">Gradient</string>
     <string name="id_clock_bg_2">Light</string>
+
+    <string name="id_clock_subtext">Clock Subtext</string>
+    <string name="id_clock_subtext_0">Day of Week</string>
+    <string name="id_clock_subtext_1">AM / PM</string>
+    <string name="id_clock_subtext_2">Seconds</string>
+    <string name="id_clock_subtext_3">Weather</string>
 
 
     <string name="id_leading_zero">Leading Zero</string>
