@@ -3341,61 +3341,46 @@
 
             <!-- Info Badge Icon -->
             <PartDraw width="450" height="450" x="0" y="0">
-                <Ellipse x="201" y="28" width="48" height="48">
+                <Ellipse x="201" y="30" width="48" height="48">
                     <Fill color="#0F1E30" />
                 </Ellipse>
-                <Ellipse x="201" y="28" width="48" height="48">
+                <Ellipse x="201" y="30" width="48" height="48">
                     <Stroke color="[CONFIGURATION.primaryTheme.2]" thickness="2.5" />
                 </Ellipse>
-                <Ellipse x="221.5" y="38" width="7" height="7">
+                <Ellipse x="221.5" y="40" width="7" height="7">
                     <Fill color="[CONFIGURATION.primaryTheme.2]" />
                 </Ellipse>
-                <RoundRectangle x="221.5" y="49" width="7" height="18" cornerRadiusX="2.5" cornerRadiusY="2.5">
+                <RoundRectangle x="221.5" y="51" width="7" height="18" cornerRadiusX="2.5" cornerRadiusY="2.5">
                     <Fill color="[CONFIGURATION.primaryTheme.2]" />
                 </RoundRectangle>
             </PartDraw>
 
             <!-- Title -->
-            <PartText x="25" y="85" width="400" height="46">
+            <PartText x="25" y="90" width="400" height="48">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" weight="BOLD" size="40" color="#FFFFFF">Heads up!</Font>
                 </Text>
             </PartText>
 
             <!-- Subtitle Lines -->
-            <PartText x="20" y="136" width="410" height="28">
+            <PartText x="20" y="165" width="410" height="34">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">Solar Path works best</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">Enable location or set a</Font>
                 </Text>
             </PartText>
-            <PartText x="20" y="164" width="410" height="28">
+            <PartText x="20" y="205" width="410" height="34">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">with location permissions enabled.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">static location in the app</Font>
                 </Text>
             </PartText>
-            <PartText x="20" y="202" width="410" height="28">
+            <PartText x="20" y="245" width="410" height="34">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">If you don't want to share</Font>
-                </Text>
-            </PartText>
-            <PartText x="20" y="230" width="410" height="28">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">location data, you can also manually</Font>
-                </Text>
-            </PartText>
-            <PartText x="20" y="258" width="410" height="28">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">set a static location in the app.</Font>
-                </Text>
-            </PartText>
-            <PartText x="20" y="296" width="410" height="28">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="21" color="#D5D5D5">Open the app to configure.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">to calculate solar times.</Font>
                 </Text>
             </PartText>
 
             <!-- Tap to Open Indicator -->
-            <PartText x="25" y="350" width="400" height="44">
+            <PartText x="25" y="340" width="400" height="44">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" weight="BOLD" size="28" color="[CONFIGURATION.primaryTheme.2]">TAP TO OPEN</Font>
                 </Text>
