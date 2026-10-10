@@ -2818,6 +2818,7 @@
                                     height="170"
                                     startAngle="0"
                                     endAngle="360">
+                                    <!--
                                     <Transform
                                         target="endAngle"
                                         value="[SECOND] * 6">
@@ -2825,6 +2826,12 @@
                                             controls="0.67 2 1.0 1.0"
                                             duration="0.1"
                                             interpolation="CUBIC_BEZIER" />
+                                    </Transform>
+                                    -->
+                                    <Transform
+                                        target="endAngle"
+                                        value="[SECOND] * 6">
+                                        <Animation angleDirection="CLOCKWISE" duration="1"/>
                                     </Transform>
                                     <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
                                 </Arc>
