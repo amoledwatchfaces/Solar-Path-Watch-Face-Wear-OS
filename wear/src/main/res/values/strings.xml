@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Solar Path</string>
     <string name="watch_face_name">Solar Path</string>
-    <string name="solar_path_comp_name">Solar Path</string>
+    <string name="solar_path_comp_name">Solar Path Shortcut</string>
     
+    <!-- Location Disabled Banner -->
+    <string name="location_disabled_title">Location Disabled</string>
+    <string name="location_disabled_message">Solar Path works best with location permissions enabled.</string>
+    <string name="enable_location">Enable location</string>
+    <string name="use_without_location">Use without location</string>
+
     <!-- Watch Face Push -->
     <string name="push_watch_face">Set Watch Face</string>
     <string name="activating_watch_face">Activating watch face…</string>

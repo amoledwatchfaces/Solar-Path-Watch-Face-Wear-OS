@@ -73,16 +73,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".complication.DismissPromptActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:taskAffinity=""
-            android:excludeFromRecents="true"
-            android:noHistory="true" />
-
-        <!-- Solar Path Complication Service -->
+        <!-- Solar Path Complication Service (Solar Path Shortcut) -->
         <service
             android:name=".complication.SolarPathComplicationService"
             android:exported="true"
@@ -95,16 +86,11 @@
 
             <meta-data
                 android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                android:value="SHORT_TEXT,LONG_TEXT,MONOCHROMATIC_IMAGE" />
+                android:value="SHORT_TEXT,MONOCHROMATIC_IMAGE,SMALL_IMAGE,LONG_TEXT" />
             <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="0" />
         </service>
-
-        <!-- Blocker Broadcast Receiver (no-op touch absorber) -->
-        <receiver
-            android:name=".receiver.BlockerBroadcastReceiver"
-            android:exported="false" />
 
         <!-- Broadcast Receiver for Passive Location & System Events -->
         <receiver

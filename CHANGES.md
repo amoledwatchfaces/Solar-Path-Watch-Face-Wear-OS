@@ -67,55 +67,43 @@ Because Google's **Watch Face Format (WFF)** is a declarative XML specification 
      - Heads Up! Layout (Warning icon, Title, Description, Button graphics):
        `<Transform target="alpha" value="[REFERENCE.hasLocation] == 0 ? 255 : 0" />`
 
-2. **Interactive Action Buttons via Non-Customizable Slots:**
-   WFF allows a maximum of 8 complication slots. Slots with `isCustomizable="FALSE"` remain hidden from user customization menus while still receiving input and rendering data:
-   - **"Open App" Button (Slot 0):**
-     - Sized with a `320×80` `<BoundingRoundBox>` positioned directly over the "Open App" pill graphic.
-     - Automatically active when `showPrompt == true` via `SolarPathComplicationService`'s `tapAction`.
-   - **"Dismiss" Button (Slot 6):**
-     - Sized with a `210×62` `<BoundingRoundBox>` placed over the "Dismiss" pill graphic.
-     - Handled by `SolarPathComplicationService` via `ComplicationType.MONOCHROMATIC_IMAGE`. Tapping fires a `PendingIntent` to `DismissPromptActivity`.
-     - `DismissPromptActivity` commits `isLocationPromptDismissed = true` to `UserPreferences` and calls `ContextUtils.updateComplications()`. This toggles `hasLocation` back to `1`, immediately transitioning the watch face into normal mode.
+2. **Full-Screen Tap Target & "TAP TO OPEN" UI (Slot 0):**
+   - The Heads Up screen graphics have been streamlined to remove the individual pill buttons and display a prominent, elegant `"TAP TO OPEN"` call-to-action in the theme accent color.
+   - Slot 0 (`SolarPathComplicationService`) is expanded to full-screen bounds (`450×450`) with `<BoundingBox x="0" y="0" width="450" height="450"/>`.
+   - **When `showPrompt == true`:** Slot 0 attaches `openAppIntent()`. Because it spans the entire 450×450 display and sits above Slots 1–5 in document order, tapping anywhere on the screen cleanly launches `MainActivity`, with zero risk of accidental touches bleeding through to complications underneath.
+   - **When `showPrompt == false`:** Slot 0 sets `tapAction = null`. In Wear OS, complication slots with null tap actions do not intercept touch events, allowing touches to pass through directly to Slots 1–5 underneath.
+   - This eliminates the need for separate internal "Blocker" and "Dismiss" complication slots.
 
-3. **Touch Bleed Prevention & Document-Order Shielding (Slot 7):**
-   - **The Problem:** In Wear OS, setting `alpha="0"` on hidden complication slots (Slots 1–5) hides them visually, but their bounding boxes still capture touch events, causing accidental app launches underneath the warning prompt.
-   - **Document-Order Z-Stacking:** In WFF, elements declared later in the XML sit on top of earlier elements for both rendering and hit-testing:
-     ```
-     ┌─────────────────────────────────────────────────────────┐
-     │  Top Layer:    Slot 0 ("Open App") & Slot 6 ("Dismiss")  │
-     ├─────────────────────────────────────────────────────────┤
-     │  Shield Layer: Slot 7 (450×450 Full-Screen Blocker)     │
-     ├─────────────────────────────────────────────────────────┤
-     │  Bottom Layer: Slots 1–4 (Arcs) & Slot 5 (Center)       │
-     └─────────────────────────────────────────────────────────┘
-     ```
-   - **Dynamic Shielding Mechanism:**
-     - **`BlockerBroadcastReceiver`:** A lightweight, no-op `BroadcastReceiver` that safely absorbs touches.
-     - **Single-Service Architecture (`SolarPathComplicationService`):**
-       - To prevent internal helper complications ("Blocker" and "Dismiss") from cluttering the Wear OS complication chooser on other watch faces, all three internal slots route through `SolarPathComplicationService` using distinct platform `ComplicationType`s:
-         - **Slot 0 (`SHORT_TEXT`):** Supplies solar angles/times, and attaches `openAppIntent()` when `showPrompt == true`.
-         - **Slot 6 (`MONOCHROMATIC_IMAGE`):** Attaches `dismissTapAction` targeting `DismissPromptActivity` when `showPrompt == true`, and `tapAction = null` when normal.
-         - **Slot 7 (`LONG_TEXT`):** Attaches `blockerTapAction` targeting `BlockerBroadcastReceiver` when `showPrompt == true`, and `tapAction = null` when normal.
-       - Taps anywhere else hit the full-screen Slot 7 shield and are absorbed by `BlockerBroadcastReceiver`—never reaching Slots 1–5 beneath it.
-       - When `showPrompt == false`: Slots 6 and 7 set `tapAction = null`. In Wear OS, complication slots with null tap actions do not intercept touches, allowing taps to fall straight through to Slots 1–5 unimpeded.
+3. **Consolidated "Solar Path Shortcut" Complication:**
+   - Instead of exposing internal helper services to other watch faces or system pickers, the app now exports a single, clean, user-friendly complication: **"Solar Path Shortcut"** (`SolarPathComplicationService`).
+   - Supports all common Wear OS complication types (`SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `SMALL_IMAGE`, `LONG_TEXT`).
+   - In all slot types, provides a simple monochromatic twilight icon (`wb_twilight_24px`) and opens the `MainActivity` app.
+   - In `SHORT_TEXT` on the Solar Path watch face (Slot 0), also encodes NOAA solar calculation angles into the complication title to drive the 8 dynamic twilight arcs and provide next event times.
 
-4. **Lock Screen / Keyguard Guard:**
+4. **In-App Location Warning Banner (`MainActivity` / `MainScreen`):**
+   - When location permissions are not granted and the prompt has not been dismissed (`!areLocationPermissionsGranted() && !preferences.isLocationPromptDismissed`), a color-highlighted card appears at the very top of `MainScreen`.
+   - Explains that location is disabled and the app works best with location permissions enabled to calculate accurate solar times.
+   - Provides two dedicated action buttons:
+     - **"Enable location":** Triggers the system runtime permission prompt (`ACCESS_COARSE_LOCATION`). When granted, automatically queries current coordinates and updates complications.
+     - **"Use without location":** Commits `isLocationPromptDismissed = true` to DataStore and notifies `updateComplications()`. This immediately dismisses both the watch face Heads Up overlay and the in-app warning banner.
+
+5. **Lock Screen / Keyguard Guard:**
    - Evaluates `KeyguardManager.isDeviceLocked` and `KeyguardManager.isKeyguardLocked`.
    - If the watch is locked (e.g., off-wrist lock or PIN screen), `showPrompt` is forced to `false`. The face bypasses the prompt and renders fallback/dummy data, avoiding intrusive UI popups on the lock screen.
 
-5. **WFF 8-Slot Allocation Budget:**
-   The implementation takes full, optimal advantage of the WFF 8-slot ceiling without exceeding limits:
+6. **WFF Slot Allocation Budget:**
+   With internal helper complications removed, the watch face operates well within WFF slot limits:
    - `Slot 1`: Top-Left Arc (Customizable)
    - `Slot 2`: Top-Right Arc (Customizable)
    - `Slot 3`: Bottom-Right Arc (Customizable)
    - `Slot 4`: Bottom-Left Arc (Customizable)
    - `Slot 5`: Center Shortcut (Customizable)
-   - `Slot 0`: Open App Button & Solar/Reference Provider (Non-customizable)
-   - `Slot 6`: Dismiss Button (Non-customizable)
-   - `Slot 7`: Full-Screen Touch Blocker (Non-customizable)
+   - `Slot 0`: Full-Screen Tap Target & Solar/Reference Provider (Non-customizable)
 
-### 6. Architectural & System Updates
-- Consolidated all internal complications into a single `SolarPathComplicationService` using distinct `ComplicationType`s (`SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `LONG_TEXT`), completely preventing "Blocker" or "Dismiss" helper services from appearing in the Wear OS complication picker.
-- Registered `DismissPromptActivity` and `BlockerBroadcastReceiver` in `AndroidManifest.xml`.
-- Extended `ContextUtils.updateComplications()` to ensure all complication instances update in synchronization.
-- Bumped project version to `v1.1.3` (version code `10000013`) in `build.gradle.kts`.
+### 7. Architectural & Cleanup Summary
+- Deleted helper components `DismissPromptActivity` and `BlockerBroadcastReceiver` and removed their declarations from `AndroidManifest.xml`.
+- Removed Complication Slots 6 and 7 from `watchface.xml`.
+- Renamed complication provider to `"Solar Path Shortcut"` in `strings.xml`.
+- Extended `SolarPathComplicationService` with preview and runtime data for `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `SMALL_IMAGE`, and `LONG_TEXT`.
+- Added location warning card with "Enable location" and "Use without location" actions to `MainScreen.kt` and `MainViewModel.kt`.
+- Bumped project version to `v1.1.4` (version code `10000014`) in `build.gradle.kts`.

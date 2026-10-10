@@ -95,6 +95,13 @@ class MainViewModel @Inject constructor(
         _initialLocationDialogState.value = state
     }
 
+    fun dismissLocationPrompt() {
+        viewModelScope.launch {
+            dataStore.updateData { it.copy(isLocationPromptDismissed = true) }
+            context.updateComplications()
+        }
+    }
+
     private val _refreshTrigger = MutableStateFlow(System.currentTimeMillis())
 
     fun refresh(forceRecalculate: Boolean = false) {

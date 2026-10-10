@@ -2722,10 +2722,10 @@
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
-        <!-- Complication Slot 7: Full-screen Touch Blocker for Heads Up Screen (Background) -->
-        <ComplicationSlot slotId="7"
+        <!-- Complication Slot 0: Full-Screen Solar Complication, Tap Target & Angle Reference Provider (Background) -->
+        <ComplicationSlot slotId="0"
             isCustomizable="FALSE"
-            supportedTypes="LONG_TEXT SHORT_TEXT EMPTY"
+            supportedTypes="SHORT_TEXT EMPTY"
             width="450"
             height="450"
             x="0"
@@ -2733,30 +2733,10 @@
             alpha="0">
             <DefaultProviderPolicy
                 primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
-                primaryProviderType="LONG_TEXT"
-                defaultSystemProvider="WATCH_BATTERY"
-                defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingBox x="0" y="0" width="450" height="450"/>
-            <Complication type="LONG_TEXT"/>
-            <Complication type="SHORT_TEXT"/>
-            <Complication type="EMPTY"/>
-        </ComplicationSlot>
-
-        <!-- Complication Slot 0: Center Solar Complication & Angle Reference Provider (Background) / Open App Button -->
-        <ComplicationSlot slotId="0"
-            isCustomizable="FALSE"
-            supportedTypes="SHORT_TEXT EMPTY"
-            width="320"
-            height="80"
-            x="65"
-            y="252"
-            alpha="0">
-            <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
                 primaryProviderType="SHORT_TEXT"
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingRoundBox x="0" y="0" width="320" height="80" cornerRadius="40"/>
+            <BoundingBox x="0" y="0" width="450" height="450"/>
             <Complication type="SHORT_TEXT">
                 <!-- Location Setup status: 0 if NO_LOCATION / SETUP (show prompt), 1 otherwise (normal or locked/dummy) -->
                 <Group name="ref_has_location" x="0" y="0" width="1" height="1" alpha="0">
@@ -2805,26 +2785,6 @@
                     <Reference name="midnight_angle" source="x" defaultValue="180"/>
                 </Group>
             </Complication>
-            <Complication type="EMPTY"/>
-        </ComplicationSlot>
-
-        <!-- Complication Slot 6: Dismiss Location Prompt Button (Background) -->
-        <ComplicationSlot slotId="6"
-            isCustomizable="FALSE"
-            supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY"
-            width="210"
-            height="62"
-            x="120"
-            y="350"
-            alpha="0">
-            <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
-                primaryProviderType="MONOCHROMATIC_IMAGE"
-                defaultSystemProvider="APP_SHORTCUT"
-                defaultSystemProviderType="SMALL_IMAGE"/>
-            <BoundingRoundBox x="0" y="0" width="210" height="62" cornerRadius="31"/>
-            <Complication type="MONOCHROMATIC_IMAGE"/>
-            <Complication type="SMALL_IMAGE"/>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
@@ -3424,30 +3384,10 @@
                 </Text>
             </PartText>
 
-            <!-- Open App Button (Primary, Large, Pushed Down) -->
-            <PartDraw width="450" height="450" x="0" y="0">
-                <RoundRectangle x="65" y="252" width="320" height="80" cornerRadiusX="40" cornerRadiusY="40">
-                    <Fill color="[CONFIGURATION.primaryTheme.2]" />
-                </RoundRectangle>
-            </PartDraw>
-            <PartText x="65" y="252" width="320" height="80">
+            <!-- Tap to Open Indicator -->
+            <PartText x="25" y="300" width="400" height="40">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26" color="#000000">Open App</Font>
-                </Text>
-            </PartText>
-
-            <!-- Dismiss Button (Secondary, Substantial, Pushed to Bottom) -->
-            <PartDraw width="450" height="450" x="0" y="0">
-                <RoundRectangle x="120" y="350" width="210" height="62" cornerRadiusX="31" cornerRadiusY="31">
-                    <Fill color="#1E1E1E" />
-                </RoundRectangle>
-                <RoundRectangle x="120" y="350" width="210" height="62" cornerRadiusX="31" cornerRadiusY="31">
-                    <Stroke color="#444444" thickness="1" />
-                </RoundRectangle>
-            </PartDraw>
-            <PartText x="120" y="350" width="210" height="62">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="20" color="#CCCCCC">Dismiss</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="22" color="[CONFIGURATION.primaryTheme.2]">TAP TO OPEN</Font>
                 </Text>
             </PartText>
         </Group>

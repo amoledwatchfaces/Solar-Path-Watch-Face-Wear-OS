@@ -73,12 +73,6 @@ fun SolarPathMainApp(
         }
     )
 
-    LaunchedEffect(Unit) {
-        if (preferences.latitude == 0.0 && preferences.longitude == 0.0 && !context.areLocationPermissionsGranted()) {
-            viewModel.setInitialLocationDialogState(true)
-        }
-    }
-
     SolarPathAppTheme {
         AppScaffold {
             SwipeDismissableNavHost(
@@ -91,7 +85,8 @@ fun SolarPathMainApp(
                         viewModel = viewModel,
                         transformationSpec = transformationSpec,
                         focusRequester = focusRequester,
-                        listState = listState
+                        listState = listState,
+                        onEnableLocation = { permissionState.launchPermissionRequest() }
                     )
                 }
 
