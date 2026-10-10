@@ -66,8 +66,8 @@ fun LocationDisabledScreen(
             contentPadding = PaddingValues(
                 start = 18.dp,
                 end = 18.dp,
-                top = paddingValues.calculateTopPadding() + 8.dp,
-                bottom = paddingValues.calculateBottomPadding() + 16.dp
+                top = paddingValues.calculateTopPadding() + 28.dp,
+                bottom = paddingValues.calculateBottomPadding() + 20.dp
             )
         ) {
             item {

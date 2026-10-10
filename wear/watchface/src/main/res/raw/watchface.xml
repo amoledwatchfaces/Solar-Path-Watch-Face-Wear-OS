@@ -3395,7 +3395,7 @@
             </PartText>
 
             <!-- Tap to Open Indicator -->
-            <PartText x="25" y="338" width="400" height="44">
+            <PartText x="25" y="350" width="400" height="44">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" weight="BOLD" size="28" color="[CONFIGURATION.primaryTheme.2]">TAP TO OPEN</Font>
                 </Text>
