@@ -223,7 +223,7 @@ fun MainScreen(
                         .transformedHeight(this, transformationSpec),
                     transformation = SurfaceTransformation(transformationSpec),
                     onClick = {
-                        viewModel.refresh(forceRecalculate = true)
+                        viewModel.recalculate()
                     },
                     icon = {
                         Icon(

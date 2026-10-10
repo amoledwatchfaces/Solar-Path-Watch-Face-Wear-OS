@@ -54,6 +54,9 @@
     <string name="azimuth">Azimuth</string>
     <string name="open_app">Open Solar Path</string>
     <string name="refresh_calculation">Recalculate</string>
+    <string name="watch_face_refreshed">Watch face refreshed!</string>
+    <string name="location_not_set">Location not set!</string>
+    <string name="something_went_wrong">Something went wrong!</string>
 
     <!-- FAQ -->
     <string name="faq">FAQ</string>
