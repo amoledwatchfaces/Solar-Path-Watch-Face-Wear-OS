@@ -30,7 +30,7 @@
     <string name="update_interval">Update Interval</string>
     <string name="enable_permission_toast">Please grant location permission</string>
     <string name="location_disclosure_title">Location Access</string>
-    <string name="location_disclosure_message">Solar Path needs approximate location to calculate accurate sunrise, sunset, and solar twilight times for your local horizon.\n\nYour location data is processed locally on-device and is never shared.</string>
+    <string name="location_disclosure_message">Solar Path needs approximate location to calculate accurate sunrise, sunset, and solar twilight times for your local horizon.\n\nYour location data is processed locally on-device and is never shared.\n\nIf you prefer not to enable location, you can manually set a static location in the app as well.</string>
     <string name="background_location_rationale">Solar Path will collect approximate location data to enable accurate solar calculations even when the app is closed or not in use.</string>
     <string name="background_location_instruction">Please tick \'All the time\' to finish background location setting.</string>
     <string name="all_the_time_not_granted">All the time permission not granted…</string>

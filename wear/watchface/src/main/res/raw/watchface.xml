@@ -3356,38 +3356,43 @@
             </PartDraw>
 
             <!-- Title -->
-            <PartText x="25" y="90" width="400" height="48">
+            <PartText x="25" y="85" width="400" height="46">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="BOLD" size="42" color="#FFFFFF">Heads up!</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="BOLD" size="40" color="#FFFFFF">Heads up!</Font>
                 </Text>
             </PartText>
 
             <!-- Subtitle Lines -->
-            <PartText x="25" y="150" width="400" height="34">
+            <PartText x="25" y="140" width="400" height="30">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">This watch face works best</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">This watch face works best</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="186" width="400" height="34">
+            <PartText x="25" y="170" width="400" height="30">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">when location is used.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">when location is enabled.</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="236" width="400" height="34">
+            <PartText x="25" y="214" width="400" height="30">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">To enable location permissions,</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">You can also manually set a</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="272" width="400" height="34">
+            <PartText x="25" y="244" width="400" height="30">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">open the configuration app.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="22" color="#D5D5D5">static location in the app.</Font>
+                </Text>
+            </PartText>
+            <PartText x="25" y="284" width="400" height="28">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="20" color="#A8A8A8">Open the app to configure.</Font>
                 </Text>
             </PartText>
 
             <!-- Tap to Open Indicator -->
-            <PartText x="25" y="342" width="400" height="46">
+            <PartText x="25" y="338" width="400" height="44">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="BOLD" size="30" color="[CONFIGURATION.primaryTheme.2]">TAP TO OPEN</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="BOLD" size="28" color="[CONFIGURATION.primaryTheme.2]">TAP TO OPEN</Font>
                 </Text>
             </PartText>
         </Group>
