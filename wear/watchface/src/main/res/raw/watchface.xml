@@ -261,6 +261,7 @@
         <BooleanConfiguration defaultValue="TRUE" displayName="id_progress_bar_gradients" id="progressGradients"/>
         <BooleanConfiguration defaultValue="TRUE" displayName="id_leading_zero" id="leadingZero"/>
         <BooleanConfiguration defaultValue="FALSE" displayName="id_clock_alt_colors" id="clockAltColors"/>
+        <BooleanConfiguration defaultValue="FALSE" displayName="id_smooth_seconds" id="smoothSeconds"/>
         <!-- Flavors -->
         <Flavors defaultValue="0">
             <Flavor id="0" displayName="Default">
@@ -2799,44 +2800,74 @@
                         </PartText>
                         <Group name="sec_indicator" x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                             <Variant mode="AMBIENT" target="alpha" value="0"/>
-                            <PartDraw x="0" y="0" width="184" height="184">
-                                <Arc
-                                    centerX="92"
-                                    centerY="92"
-                                    width="170"
-                                    height="170"
-                                    startAngle="0"
-                                    endAngle="360">
-                                    <Stroke
-                                        cap="ROUND"
-                                        color="#303030"
-                                        thickness="5"/>
-                                </Arc>
-                                <Arc
-                                    centerX="92"
-                                    centerY="92"
-                                    width="170"
-                                    height="170"
-                                    startAngle="0"
-                                    endAngle="360">
-                                    <!--
-                                    <Transform
-                                        target="endAngle"
-                                        value="[SECOND] * 6">
-                                        <Animation angleDirection="CLOCKWISE"
-                                            controls="0.67 2 1.0 1.0"
-                                            duration="0.1"
-                                            interpolation="CUBIC_BEZIER" />
-                                    </Transform>
-                                    -->
-                                    <Transform
-                                        target="endAngle"
-                                        value="[SECOND] * 6">
-                                        <Animation angleDirection="CLOCKWISE" duration="1"/>
-                                    </Transform>
-                                    <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
-                                </Arc>
-                            </PartDraw>
+                            <Condition>
+                                <Expressions>
+                                    <Expression name="smoothSeconds">[CONFIGURATION.smoothSeconds] == &quot;TRUE&quot;</Expression>
+                                </Expressions>
+                                <Compare expression="smoothSeconds">
+                                    <PartDraw x="0" y="0" width="184" height="184">
+                                        <Arc
+                                            centerX="92"
+                                            centerY="92"
+                                            width="170"
+                                            height="170"
+                                            startAngle="0"
+                                            endAngle="360">
+                                            <Stroke
+                                                cap="ROUND"
+                                                color="#303030"
+                                                thickness="5"/>
+                                        </Arc>
+                                        <Arc
+                                            centerX="92"
+                                            centerY="92"
+                                            width="170"
+                                            height="170"
+                                            startAngle="0"
+                                            endAngle="360">
+                                            <Transform
+                                                target="endAngle"
+                                                value="[SECOND] * 6">
+                                                <Animation angleDirection="CLOCKWISE" duration="1"/>
+                                            </Transform>
+                                            <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
+                                        </Arc>
+                                    </PartDraw>
+                                </Compare>
+                                <Default>
+                                    <PartDraw x="0" y="0" width="184" height="184">
+                                        <Arc
+                                            centerX="92"
+                                            centerY="92"
+                                            width="170"
+                                            height="170"
+                                            startAngle="0"
+                                            endAngle="360">
+                                            <Stroke
+                                                cap="ROUND"
+                                                color="#303030"
+                                                thickness="5"/>
+                                        </Arc>
+                                        <Arc
+                                            centerX="92"
+                                            centerY="92"
+                                            width="170"
+                                            height="170"
+                                            startAngle="0"
+                                            endAngle="360">
+                                            <Transform
+                                                target="endAngle"
+                                                value="[SECOND] * 6">
+                                                <Animation angleDirection="CLOCKWISE"
+                                                    controls="0.67 2 1.0 1.0"
+                                                    duration="0.1"
+                                                    interpolation="CUBIC_BEZIER" />
+                                            </Transform>
+                                            <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
+                                        </Arc>
+                                    </PartDraw>
+                                </Default>
+                            </Condition>
                         </Group>
                     </Compare>
                     <Default>
@@ -3004,38 +3035,93 @@
                             <Transform
                                 target="tintColor"
                                 value="[CONFIGURATION.clockAltColors]? [CONFIGURATION.tertiaryTheme.0] : [CONFIGURATION.tertiaryTheme.2]"/>
-                            <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
-                                <Variant
-                                    target="alpha"
-                                    value="0"
-                                    mode="AMBIENT"/>
-                                <Transform target="angle" value="[SECOND] * 6"/>
-                                <RoundRectangle
-                                    x="18.5"
-                                    y="4"
-                                    width="3"
-                                    height="108"
-                                    cornerRadiusX="2"
-                                    cornerRadiusY="2">
-                                    <Fill color="#000000"/>
-                                </RoundRectangle>
-                            </PartDraw>
-                            <PartDraw name="sec" x="0" y="0" width="40" height="184">
-                                <Variant
-                                    target="alpha"
-                                    value="0"
-                                    mode="AMBIENT"/>
-                                <Transform target="angle" value="[SECOND] * 6"/>
-                                <RoundRectangle
-                                    x="18.5"
-                                    y="4"
-                                    width="3"
-                                    height="108"
-                                    cornerRadiusX="2"
-                                    cornerRadiusY="2">
-                                    <Fill color="#ffffff"/>
-                                </RoundRectangle>
-                            </PartDraw>
+                            <Condition>
+                                <Expressions>
+                                    <Expression name="smoothSeconds">[CONFIGURATION.smoothSeconds] == &quot;TRUE&quot;</Expression>
+                                </Expressions>
+                                <Compare expression="smoothSeconds">
+                                    <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
+                                        <Variant
+                                            target="alpha"
+                                            value="0"
+                                            mode="AMBIENT"/>
+                                        <Transform target="angle" value="[SECOND] * 6">
+                                            <Animation angleDirection="CLOCKWISE" duration="1" />
+                                        </Transform>
+                                        <RoundRectangle
+                                            x="18.5"
+                                            y="4"
+                                            width="3"
+                                            height="108"
+                                            cornerRadiusX="2"
+                                            cornerRadiusY="2">
+                                            <Fill color="#000000"/>
+                                        </RoundRectangle>
+                                    </PartDraw>
+                                    <PartDraw name="sec" x="0" y="0" width="40" height="184">
+                                        <Variant
+                                            target="alpha"
+                                            value="0"
+                                            mode="AMBIENT"/>
+                                        <Transform target="angle" value="[SECOND] * 6">
+                                            <Animation angleDirection="CLOCKWISE" duration="1" />
+                                        </Transform>
+                                        <RoundRectangle
+                                            x="18.5"
+                                            y="4"
+                                            width="3"
+                                            height="108"
+                                            cornerRadiusX="2"
+                                            cornerRadiusY="2">
+                                            <Fill color="#ffffff"/>
+                                        </RoundRectangle>
+                                    </PartDraw>
+                                </Compare>
+                                <Default>
+                                    <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
+                                        <Variant
+                                            target="alpha"
+                                            value="0"
+                                            mode="AMBIENT"/>
+                                        <Transform target="angle" value="[SECOND] * 6">
+                                            <Animation angleDirection="CLOCKWISE"
+                                                controls="0.67 2 1.0 1.0"
+                                                duration="0.1"
+                                                interpolation="CUBIC_BEZIER" />
+                                        </Transform>
+                                        <RoundRectangle
+                                            x="18.5"
+                                            y="4"
+                                            width="3"
+                                            height="108"
+                                            cornerRadiusX="2"
+                                            cornerRadiusY="2">
+                                            <Fill color="#000000"/>
+                                        </RoundRectangle>
+                                    </PartDraw>
+                                    <PartDraw name="sec" x="0" y="0" width="40" height="184">
+                                        <Variant
+                                            target="alpha"
+                                            value="0"
+                                            mode="AMBIENT"/>
+                                        <Transform target="angle" value="[SECOND] * 6">
+                                            <Animation angleDirection="CLOCKWISE"
+                                                controls="0.67 2 1.0 1.0"
+                                                duration="0.1"
+                                                interpolation="CUBIC_BEZIER" />
+                                        </Transform>
+                                        <RoundRectangle
+                                            x="18.5"
+                                            y="4"
+                                            width="3"
+                                            height="108"
+                                            cornerRadiusX="2"
+                                            cornerRadiusY="2">
+                                            <Fill color="#ffffff"/>
+                                        </RoundRectangle>
+                                    </PartDraw>
+                                </Default>
+                            </Condition>
                             <PartDraw name="center2" x="0" y="72" width="40" height="40">
                                 <Ellipse
                                     x="15"

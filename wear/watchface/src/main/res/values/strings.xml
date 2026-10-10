@@ -9,7 +9,7 @@
 
     <string name="id_aod">Ambient Mode</string>
     <string name="id_aod_0">Dimmed</string>
-    <string name="id_aod_1">Dimmed &amp; No Arcs</string>
+    <string name="id_aod_1">No Arcs</string>
     <string name="id_aod_2">Time Only</string>
 
     <string name="id_clock_bg">Clock BG</string>
@@ -19,7 +19,8 @@
 
 
     <string name="id_leading_zero">Leading Zero</string>
-    <string name="id_progress_bar_gradients">Slot 1,2,3,4 Gradients</string>
+    <string name="id_progress_bar_gradients">Arc Gradients</string>
+    <string name="id_smooth_seconds">Smooth Seconds</string>
 
     <string name="id_primary_theme">Primary Theme</string>
     <string name="id_secondary_theme">Secondary Theme</string>
