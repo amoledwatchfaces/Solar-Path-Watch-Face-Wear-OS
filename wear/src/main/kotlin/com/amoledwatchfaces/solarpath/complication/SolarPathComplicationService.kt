@@ -29,7 +29,6 @@ import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.data.UserPreferencesRepository
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
 import com.amoledwatchfaces.solarpath.solar.SolarData
-import com.amoledwatchfaces.solarpath.receiver.BlockerBroadcastReceiver
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import java.time.Instant
@@ -90,63 +89,13 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
         if (showPrompt) {
             return when (request.complicationType) {
                 ComplicationType.SHORT_TEXT -> {
-                    when (request.complicationInstanceId) {
-                        6 -> {
-                            val dismissIntent = Intent(this, DismissPromptActivity::class.java).apply {
-                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            }
-                            val dismissTapAction = PendingIntent.getActivity(
-                                this,
-                                6001,
-                                dismissIntent,
-                                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                            )
-                            ShortTextComplicationData.Builder(
-                                text = PlainComplicationText.Builder("").build(),
-                                contentDescription = PlainComplicationText.Builder("Dismiss").build()
-                            )
-                                .setTapAction(dismissTapAction)
-                                .build()
-                        }
-                        7 -> {
-                            val blockerIntent = Intent(this, BlockerBroadcastReceiver::class.java)
-                            val blockerTapAction = PendingIntent.getBroadcast(
-                                this,
-                                7001,
-                                blockerIntent,
-                                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                            )
-                            ShortTextComplicationData.Builder(
-                                text = PlainComplicationText.Builder("").build(),
-                                contentDescription = PlainComplicationText.Builder("").build()
-                            )
-                                .setTapAction(blockerTapAction)
-                                .build()
-                        }
-                        else -> {
-                            ShortTextComplicationData.Builder(
-                                text = PlainComplicationText.Builder("SETUP").build(),
-                                contentDescription = PlainComplicationText.Builder("Heads up! This watch face works best when location is used. Open configuration app to enable location permissions.").build()
-                            )
-                                .setTitle(PlainComplicationText.Builder("NO_LOCATION").build())
-                                .setMonochromaticImage(sunIcon)
-                                .setTapAction(tapAction)
-                                .build()
-                        }
-                    }
-                }
-                else -> null
-            }
-        }
-
-        if (request.complicationInstanceId == 6 || request.complicationInstanceId == 7) {
-            return when (request.complicationType) {
-                ComplicationType.SHORT_TEXT -> {
                     ShortTextComplicationData.Builder(
-                        text = PlainComplicationText.Builder("").build(),
-                        contentDescription = PlainComplicationText.Builder("").build()
+                        text = PlainComplicationText.Builder("SETUP").build(),
+                        contentDescription = PlainComplicationText.Builder("Heads up! This watch face works best when location is used. Open configuration app to enable location permissions.").build()
                     )
-                        .setTapAction(null)
+                        .setTitle(PlainComplicationText.Builder("NO_LOCATION").build())
+                        .setMonochromaticImage(sunIcon)
+                        .setTapAction(tapAction)
                         .build()
                 }
                 else -> null

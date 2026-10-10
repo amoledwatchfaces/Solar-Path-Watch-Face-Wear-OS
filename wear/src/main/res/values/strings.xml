@@ -2,6 +2,8 @@
     <string name="app_name">Solar Path</string>
     <string name="watch_face_name">Solar Path</string>
     <string name="solar_path_comp_name">Solar Path</string>
+    <string name="dismiss_prompt_comp_name">Dismiss Location Prompt</string>
+    <string name="blocker_comp_name">Blocker</string>
     
     <!-- Watch Face Push -->
     <string name="push_watch_face">Set Watch Face</string>
