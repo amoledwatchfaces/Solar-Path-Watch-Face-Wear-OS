@@ -9,26 +9,29 @@
  */
 package com.amoledwatchfaces.solarpath.complication
 
+import android.app.KeyguardManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
 import androidx.datastore.core.DataStore
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.LongTextComplicationData
 import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.MonochromaticImageComplicationData
 import androidx.wear.watchface.complications.data.PlainComplicationText
-import android.app.KeyguardManager
-import android.content.Context
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.datasource.ComplicationRequest
 import androidx.wear.watchface.complications.datasource.SuspendingComplicationDataSourceService
-import com.amoledwatchfaces.solarpath.presentation.MainActivity
 import com.amoledwatchfaces.solarpath.R
-import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.data.UserPreferencesRepository
+import com.amoledwatchfaces.solarpath.presentation.MainActivity
+import com.amoledwatchfaces.solarpath.receiver.BlockerBroadcastReceiver
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
 import com.amoledwatchfaces.solarpath.solar.SolarData
+import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import java.time.Instant
@@ -70,6 +73,24 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
                     .setTapAction(null)
                     .build()
             }
+            ComplicationType.LONG_TEXT -> {
+                LongTextComplicationData.Builder(
+                    text = PlainComplicationText.Builder("Sunset 18:42").build(),
+                    contentDescription = PlainComplicationText.Builder("Sunset 18:42").build()
+                )
+                    .setTitle(PlainComplicationText.Builder("Solar Path").build())
+                    .setMonochromaticImage(sunIcon)
+                    .setTapAction(null)
+                    .build()
+            }
+            ComplicationType.MONOCHROMATIC_IMAGE -> {
+                MonochromaticImageComplicationData.Builder(
+                    monochromaticImage = sunIcon,
+                    contentDescription = PlainComplicationText.Builder("Solar Path").build()
+                )
+                    .setTapAction(null)
+                    .build()
+            }
             else -> null
         }
     }
@@ -84,11 +105,13 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
         val showPrompt = !isLocationSetup && !prefs.isLocationPromptDismissed && !isLocked
 
         val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px)).build()
-        val tapAction = openAppIntent()
 
-        if (showPrompt) {
-            return when (request.complicationType) {
-                ComplicationType.SHORT_TEXT -> {
+        return when (request.complicationType) {
+            ComplicationType.SHORT_TEXT -> {
+                // SLOT 0: Solar Path angles & next event (or "Open App" tapAction when showing prompt)
+                val tapAction = if (showPrompt) openAppIntent() else null
+
+                if (showPrompt) {
                     ShortTextComplicationData.Builder(
                         text = PlainComplicationText.Builder("SETUP").build(),
                         contentDescription = PlainComplicationText.Builder("Heads up! This watch face works best when location is used. Open configuration app to enable location permissions.").build()
@@ -97,39 +120,81 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
                         .setMonochromaticImage(sunIcon)
                         .setTapAction(tapAction)
                         .build()
+                } else {
+                    val solar = SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
+
+                    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+                        .withZone(ZoneId.systemDefault())
+
+                    val eventTimeText = if (solar.nextEventEpoch > 0) {
+                        timeFormatter.format(Instant.ofEpochMilli(solar.nextEventEpoch))
+                    } else "- -"
+
+                    val titleText = if (solar.nextEventName.isNotEmpty()) {
+                        solar.nextEventName.uppercase()
+                    } else if (prefs.locationName != "- -") {
+                        prefs.locationName
+                    } else "SUN"
+
+                    val formattedTitle = SolarCalculator.formatAnglesForComplication(solar, titleText)
+
+                    ShortTextComplicationData.Builder(
+                        text = PlainComplicationText.Builder(eventTimeText).build(),
+                        contentDescription = PlainComplicationText.Builder("$titleText $eventTimeText").build()
+                    )
+                        .setTitle(PlainComplicationText.Builder(formattedTitle).build())
+                        .setMonochromaticImage(sunIcon)
+                        .setTapAction(null)
+                        .build()
                 }
-                else -> null
             }
-        }
 
-        val solar = SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
+            ComplicationType.MONOCHROMATIC_IMAGE -> {
+                // SLOT 6: "Dismiss" Button
+                val tapAction = if (showPrompt) {
+                    val intent = Intent(this, DismissPromptActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    }
+                    PendingIntent.getActivity(
+                        this,
+                        6001,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+                } else {
+                    null
+                }
 
-        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
-            .withZone(ZoneId.systemDefault())
-
-        val eventTimeText = if (solar.nextEventEpoch > 0) {
-            timeFormatter.format(Instant.ofEpochMilli(solar.nextEventEpoch))
-        } else "- -"
-
-        val titleText = if (solar.nextEventName.isNotEmpty()) {
-            solar.nextEventName.uppercase()
-        } else if (prefs.locationName != "- -") {
-            prefs.locationName
-        } else "SUN"
-
-        val formattedTitle = SolarCalculator.formatAnglesForComplication(solar, titleText)
-
-        return when (request.complicationType) {
-            ComplicationType.SHORT_TEXT -> {
-                ShortTextComplicationData.Builder(
-                    text = PlainComplicationText.Builder(eventTimeText).build(),
-                    contentDescription = PlainComplicationText.Builder("$titleText $eventTimeText").build()
+                MonochromaticImageComplicationData.Builder(
+                    monochromaticImage = sunIcon,
+                    contentDescription = PlainComplicationText.Builder("Dismiss").build()
                 )
-                    .setTitle(PlainComplicationText.Builder(formattedTitle).build())
-                    .setMonochromaticImage(sunIcon)
-                    .setTapAction(null)
+                    .setTapAction(tapAction)
                     .build()
             }
+
+            ComplicationType.LONG_TEXT -> {
+                // SLOT 7: Full-Screen Touch Blocker (absorbs touches away from slots 1-5 beneath)
+                val tapAction = if (showPrompt) {
+                    val intent = Intent(this, BlockerBroadcastReceiver::class.java)
+                    PendingIntent.getBroadcast(
+                        this,
+                        7001,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+                } else {
+                    null
+                }
+
+                LongTextComplicationData.Builder(
+                    text = PlainComplicationText.Builder("").build(),
+                    contentDescription = PlainComplicationText.Builder("").build()
+                )
+                    .setTapAction(tapAction)
+                    .build()
+            }
+
             else -> null
         }
     }

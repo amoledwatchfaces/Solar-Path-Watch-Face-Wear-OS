@@ -95,43 +95,7 @@
 
             <meta-data
                 android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                android:value="SHORT_TEXT" />
-            <meta-data
-                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
-                android:value="0" />
-        </service>
-
-        <!-- Dismiss Prompt Complication Service -->
-        <service
-            android:name=".complication.DismissPromptComplicationService"
-            android:exported="false"
-            android:label="@string/dismiss_prompt_comp_name"
-            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
-            <intent-filter>
-                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                android:value="SHORT_TEXT" />
-            <meta-data
-                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
-                android:value="0" />
-        </service>
-
-        <!-- Blocker Complication Service for Heads Up screen -->
-        <service
-            android:name=".complication.BlockerComplicationService"
-            android:exported="false"
-            android:label="@string/blocker_comp_name"
-            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
-            <intent-filter>
-                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                android:value="SHORT_TEXT" />
+                android:value="SHORT_TEXT,LONG_TEXT,MONOCHROMATIC_IMAGE" />
             <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="0" />

@@ -2725,18 +2725,19 @@
         <!-- Complication Slot 7: Full-screen Touch Blocker for Heads Up Screen (Background) -->
         <ComplicationSlot slotId="7"
             isCustomizable="FALSE"
-            supportedTypes="SHORT_TEXT EMPTY"
+            supportedTypes="LONG_TEXT SHORT_TEXT EMPTY"
             width="450"
             height="450"
             x="0"
             y="0"
             alpha="0">
             <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.BlockerComplicationService"
-                primaryProviderType="SHORT_TEXT"
+                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
+                primaryProviderType="LONG_TEXT"
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT"/>
             <BoundingBox x="0" y="0" width="450" height="450"/>
+            <Complication type="LONG_TEXT"/>
             <Complication type="SHORT_TEXT"/>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
@@ -2810,19 +2811,20 @@
         <!-- Complication Slot 6: Dismiss Location Prompt Button (Background) -->
         <ComplicationSlot slotId="6"
             isCustomizable="FALSE"
-            supportedTypes="SHORT_TEXT EMPTY"
+            supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY"
             width="210"
             height="62"
             x="120"
             y="350"
             alpha="0">
             <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.DismissPromptComplicationService"
-                primaryProviderType="SHORT_TEXT"
-                defaultSystemProvider="WATCH_BATTERY"
-                defaultSystemProviderType="SHORT_TEXT"/>
+                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
+                primaryProviderType="MONOCHROMATIC_IMAGE"
+                defaultSystemProvider="APP_SHORTCUT"
+                defaultSystemProviderType="SMALL_IMAGE"/>
             <BoundingRoundBox x="0" y="0" width="210" height="62" cornerRadius="31"/>
-            <Complication type="SHORT_TEXT"/>
+            <Complication type="MONOCHROMATIC_IMAGE"/>
+            <Complication type="SMALL_IMAGE"/>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
