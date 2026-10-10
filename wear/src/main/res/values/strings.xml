@@ -6,7 +6,7 @@
     <!-- Location Disabled Banner -->
     <string name="location_disabled_title">Location Disabled</string>
     <string name="location_disabled_message">Solar Path works best with location permissions enabled.</string>
-    <string name="enable_location">Enable location</string>
+    <string name="enable_location_permissions">Enable location permissions</string>
     <string name="use_without_location">Use without location</string>
 
     <!-- Watch Face Push -->

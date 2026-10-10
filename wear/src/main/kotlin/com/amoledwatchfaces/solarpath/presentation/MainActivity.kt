@@ -80,14 +80,22 @@ fun SolarPathMainApp(
                 startDestination = "main"
             ) {
                 composable("main") {
-                    MainScreen(
-                        navController = navController,
-                        viewModel = viewModel,
-                        transformationSpec = transformationSpec,
-                        focusRequester = focusRequester,
-                        listState = listState,
-                        onEnableLocation = { permissionState.launchPermissionRequest() }
-                    )
+                    if (!context.areLocationPermissionsGranted() && !preferences.isLocationPromptDismissed) {
+                        LocationDisabledScreen(
+                            transformationSpec = transformationSpec,
+                            onEnableLocation = { permissionState.launchPermissionRequest() },
+                            onUseWithoutLocation = { viewModel.dismissLocationPrompt() }
+                        )
+                    } else {
+                        MainScreen(
+                            navController = navController,
+                            viewModel = viewModel,
+                            transformationSpec = transformationSpec,
+                            focusRequester = focusRequester,
+                            listState = listState,
+                            onEnableLocation = { permissionState.launchPermissionRequest() }
+                        )
+                    }
                 }
 
                 composable("location_choose") {
