@@ -261,6 +261,8 @@
         <BooleanConfiguration defaultValue="TRUE" displayName="id_progress_bar_gradients" id="progressGradients"/>
         <BooleanConfiguration defaultValue="TRUE" displayName="id_leading_zero" id="leadingZero"/>
         <BooleanConfiguration defaultValue="FALSE" displayName="id_clock_alt_colors" id="clockAltColors"/>
+        <BooleanConfiguration defaultValue="FALSE" displayName="id_parallax" id="parallax"/>
+        <BooleanConfiguration defaultValue="FALSE" displayName="id_smooth_seconds" id="smoothSeconds"/>
         <!-- Flavors -->
         <Flavors defaultValue="0">
             <Flavor id="0" displayName="Default">
@@ -387,7 +389,7 @@
             <!-- Base -->
             <Group name="base" width="450" height="450" x="0" y="0">
                 <Variant mode="AMBIENT" target="alpha" value="0"/>
-                <!-- Base -->
+                <!-- Base Stationary Mask Window -->
                 <PartDraw name="canvas" width="450" height="450" x="0" y="0" renderMode="ALL">
                     <Ellipse x="34" y="34" width="382" height="382">
                         <Fill color="#000000"/>
@@ -395,48 +397,48 @@
                 </PartDraw>
 
                 <PartDraw name="circle_base" width="450" height="450" x="0" y="0">
-                    <Transform
-                        target="alpha"
-                        value="[REFERENCE.solarTrack] &lt;= ([REFERENCE.ss_angle] - 15) ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 200 * ([REFERENCE.solarTrack] - ([REFERENCE.ss_angle] - 15)) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 15 &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 15)), 55, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 55 : [REFERENCE.solarTrack] &lt;= ([REFERENCE.sr_angle] + 15) ? clamp(round(55 + 200 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] + 15 - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] + 15 - [REFERENCE.adawn_angle])), 55, 255) : 255"/>
-                    <Ellipse x="34" y="34" width="382" height="382">
-                        <Fill color="[CONFIGURATION.secondaryTheme.2]"/>
-                    </Ellipse>
-                </PartDraw>
+                        <Transform
+                            target="alpha"
+                            value="[REFERENCE.solarTrack] &lt;= ([REFERENCE.ss_angle] - 15) ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 - 200 * ([REFERENCE.solarTrack] - ([REFERENCE.ss_angle] - 15)) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 15 &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle] + 15)), 55, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 55 : [REFERENCE.solarTrack] &lt;= ([REFERENCE.sr_angle] + 15) ? clamp(round(55 + 200 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] + 15 - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] + 15 - [REFERENCE.adawn_angle])), 55, 255) : 255"/>
+                        <Rectangle x="0" y="0" width="450" height="450">
+                            <Fill color="[CONFIGURATION.secondaryTheme.2]"/>
+                        </Rectangle>
+                    </PartDraw>
 
-                <!-- Stars -->
-                <PartDraw name="stars" width="450" height="450" x="0" y="0">
-                    <Transform
-                        target="alpha"
-                        value="[REFERENCE.solarTrack] &lt;= [REFERENCE.cdusk_angle] ? 0 : [REFERENCE.solarTrack] &lt;= [REFERENCE.ndusk_angle] ? clamp(round(255 * ([REFERENCE.solarTrack] - [REFERENCE.cdusk_angle]) / ([REFERENCE.ndusk_angle] - [REFERENCE.cdusk_angle] &lt;= 0 ? 1 : [REFERENCE.ndusk_angle] - [REFERENCE.cdusk_angle])), 0, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.ndawn_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.cdawn_angle] ? clamp(round(255 * ([REFERENCE.cdawn_angle] - [REFERENCE.solarTrack]) / ([REFERENCE.cdawn_angle] - [REFERENCE.ndawn_angle] &lt;= 0 ? 1 : [REFERENCE.cdawn_angle] - [REFERENCE.ndawn_angle])), 0, 255) : 0"/>
-                    <Rectangle x="166" y="82" width="3" height="3"><Fill color="#EFEFEF"/></Rectangle>
-                    <Rectangle x="140" y="116" width="3" height="3"><Fill color="#d8e8ff"/></Rectangle>
-                    <Rectangle x="280" y="76" width="3" height="3"><Fill color="#ffffff"/></Rectangle>
-                    <Rectangle x="313" y="94" width="3" height="3"><Fill color="#d8e8ff"/></Rectangle>
-                    <Rectangle x="326" y="160" width="3" height="3"><Fill color="#EBEBEB"/></Rectangle>
-                    <Rectangle x="144" y="158" width="3" height="3"><Fill color="#EBEBEB"/></Rectangle>
-                    <Rectangle x="298" y="73" width="2" height="2"><Fill color="#a5ffffff"/></Rectangle>
-                    <Rectangle x="191" y="94" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="70" y="181" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="268" y="186" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="275" y="156" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="97" y="165" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="131" y="173" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="255" y="136" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="115" y="96" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="293" y="184" width="3" height="3"><Fill color="#a5ffffff"/></Rectangle>
-                    <Rectangle x="171" y="136" width="2" height="2"><Fill color="#a5ffffff"/></Rectangle>
-                    <Rectangle x="185" y="64" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="345" y="185" width="3" height="3"><Fill color="#a5ffffff"/></Rectangle>
-                    <Rectangle x="136" y="186" width="3" height="3"><Fill color="#d5ffffff"/></Rectangle>
-                    <Rectangle x="312" y="122" width="3" height="3"><Fill color="#d8e8ff"/></Rectangle>
-                    <Rectangle x="203" y="165" width="3" height="3"><Fill color="#d5ffffff"/></Rectangle>
-                    <Rectangle x="364" y="166" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="286" y="170" width="2" height="2"><Fill color="#a5ffffff"/></Rectangle>
-                    <Rectangle x="234" y="128" width="3" height="3"><Fill color="#a5ffffff"/></Rectangle>
-                    <Rectangle x="209" y="93" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="257" y="66" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
-                    <Rectangle x="260" y="100" width="3" height="3"><Fill color="#EBEBEB"/></Rectangle>
-                </PartDraw>
+                    <!-- Stars -->
+                    <PartDraw name="stars" width="450" height="450" x="0" y="0">
+                        <Transform
+                            target="alpha"
+                            value="[REFERENCE.solarTrack] &lt;= [REFERENCE.cdusk_angle] ? 0 : [REFERENCE.solarTrack] &lt;= [REFERENCE.ndusk_angle] ? clamp(round(255 * ([REFERENCE.solarTrack] - [REFERENCE.cdusk_angle]) / ([REFERENCE.ndusk_angle] - [REFERENCE.cdusk_angle] &lt;= 0 ? 1 : [REFERENCE.ndusk_angle] - [REFERENCE.cdusk_angle])), 0, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.ndawn_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.cdawn_angle] ? clamp(round(255 * ([REFERENCE.cdawn_angle] - [REFERENCE.solarTrack]) / ([REFERENCE.cdawn_angle] - [REFERENCE.ndawn_angle] &lt;= 0 ? 1 : [REFERENCE.cdawn_angle] - [REFERENCE.ndawn_angle])), 0, 255) : 0"/>
+                        <Rectangle x="166" y="82" width="3" height="3"><Fill color="#EFEFEF"/></Rectangle>
+                        <Rectangle x="140" y="116" width="3" height="3"><Fill color="#d8e8ff"/></Rectangle>
+                        <Rectangle x="280" y="76" width="3" height="3"><Fill color="#ffffff"/></Rectangle>
+                        <Rectangle x="313" y="94" width="3" height="3"><Fill color="#d8e8ff"/></Rectangle>
+                        <Rectangle x="326" y="160" width="3" height="3"><Fill color="#EBEBEB"/></Rectangle>
+                        <Rectangle x="144" y="158" width="3" height="3"><Fill color="#EBEBEB"/></Rectangle>
+                        <Rectangle x="298" y="73" width="2" height="2"><Fill color="#a5ffffff"/></Rectangle>
+                        <Rectangle x="191" y="94" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="70" y="181" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="268" y="186" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="275" y="156" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="97" y="165" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="131" y="173" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="255" y="136" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="115" y="96" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="293" y="184" width="3" height="3"><Fill color="#a5ffffff"/></Rectangle>
+                        <Rectangle x="171" y="136" width="2" height="2"><Fill color="#a5ffffff"/></Rectangle>
+                        <Rectangle x="185" y="64" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="345" y="185" width="3" height="3"><Fill color="#a5ffffff"/></Rectangle>
+                        <Rectangle x="136" y="186" width="3" height="3"><Fill color="#d5ffffff"/></Rectangle>
+                        <Rectangle x="312" y="122" width="3" height="3"><Fill color="#d8e8ff"/></Rectangle>
+                        <Rectangle x="203" y="165" width="3" height="3"><Fill color="#d5ffffff"/></Rectangle>
+                        <Rectangle x="364" y="166" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="286" y="170" width="2" height="2"><Fill color="#a5ffffff"/></Rectangle>
+                        <Rectangle x="234" y="128" width="3" height="3"><Fill color="#a5ffffff"/></Rectangle>
+                        <Rectangle x="209" y="93" width="3" height="3"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="257" y="66" width="2" height="2"><Fill color="#75ffffff"/></Rectangle>
+                        <Rectangle x="260" y="100" width="3" height="3"><Fill color="#EBEBEB"/></Rectangle>
+                    </PartDraw>
 
                 <!-- Default Hue -->
                 <PartDraw x="0" y="0" width="450" height="450">
@@ -487,46 +489,6 @@
                     </Rectangle>
                 </PartDraw>
 
-                <!-- Sun Halo -->
-                <PartDraw name="sun_halo" width="200" height="200" x="125" y="13" pivotY="1.06">
-                    <Transform target="angle" value="[REFERENCE.solarTrack]"/>
-                    <Ellipse width="200" height="200" x="0" y="0">
-                        <Fill color="#fffffd">
-                            <RadialGradient
-                                centerX="100"
-                                centerY="100"
-                                radius="200"
-                                colors="#50fffffd #00ffffff #00ffffff"
-                                positions="0 0.1 1"/>
-                        </Fill>
-                    </Ellipse>
-                    <Ellipse width="200" height="200" x="0" y="0">
-                        <Fill color="#fffffd">
-                            <RadialGradient
-                                centerX="100"
-                                centerY="100"
-                                radius="34"
-                                colors="#fffffd #fffffd #00ffffff #00ffffff"
-                                positions="0 0.5 0.75 1"/>
-                        </Fill>
-                    </Ellipse>
-                </PartDraw>
-                <PartDraw name="sun_halo_orange_hue" width="200" height="200" x="125" y="13" pivotY="1.06">
-                    <Transform target="angle" value="[REFERENCE.solarTrack]"/>
-                    <Transform
-                        target="alpha"
-                        value="[REFERENCE.orangeGradientAlpha]"/>
-                    <Ellipse width="200" height="200" x="0" y="0">
-                        <Fill color="#FF8400">
-                            <RadialGradient
-                                centerX="100"
-                                centerY="100"
-                                radius="200"
-                                colors="#70FF8400 #00ffffff #00ffffff"
-                                positions="0 0.1 1"/>
-                        </Fill>
-                    </Ellipse>
-                </PartDraw>
 
                 <!-- Layers -->
                 <PartDraw name="layers" width="450" height="450" x="0" y="0" tintColor="[CONFIGURATION.secondaryTheme.2]">
@@ -988,6 +950,60 @@
                         </Arc>
                     </PartDraw>
                 </Group>
+            </Group>
+
+            <!-- Sun Glow / Halo with Parallax (on top of Sun Shape) -->
+            <Group name="sun_glow_parallax" width="450" height="450" x="0" y="0">
+                <Gyro
+                    x="[CONFIGURATION.parallax] == &quot;TRUE&quot; ? clamp([ACCELEROMETER_ANGLE_X] * -0.15, -6, 6) : 0"
+                    y="[CONFIGURATION.parallax] == &quot;TRUE&quot; ? clamp([ACCELEROMETER_ANGLE_Y] * 0.15, -6, 6) : 0" />
+                <Variant mode="AMBIENT" target="x" value="0" />
+                <Variant mode="AMBIENT" target="y" value="0" />
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+
+                <!-- Sun Halo -->
+                <PartDraw name="sun_halo" width="200" height="200" x="125" y="13" pivotY="1.06">
+                    <Transform target="angle" value="[REFERENCE.solarTrack]"/>
+                    <Transform
+                        target="alpha"
+                        value="[REFERENCE.solarTrack] &lt;= [REFERENCE.ss_angle] ? 255 : [REFERENCE.solarTrack] &lt;= [REFERENCE.adusk_angle] ? clamp(round(255 * ([REFERENCE.adusk_angle] - [REFERENCE.solarTrack]) / ([REFERENCE.adusk_angle] - [REFERENCE.ss_angle] &lt;= 0 ? 1 : [REFERENCE.adusk_angle] - [REFERENCE.ss_angle])), 0, 255) : [REFERENCE.solarTrack] &lt;= [REFERENCE.adawn_angle] ? 0 : [REFERENCE.solarTrack] &lt;= [REFERENCE.sr_angle] ? clamp(round(255 * ([REFERENCE.solarTrack] - [REFERENCE.adawn_angle]) / ([REFERENCE.sr_angle] - [REFERENCE.adawn_angle] &lt;= 0 ? 1 : [REFERENCE.sr_angle] - [REFERENCE.adawn_angle])), 0, 255) : 255"/>
+                    <Ellipse width="200" height="200" x="0" y="0">
+                        <Fill color="#fffffd">
+                            <RadialGradient
+                                centerX="100"
+                                centerY="100"
+                                radius="200"
+                                colors="#50fffffd #00ffffff #00ffffff"
+                                positions="0 0.1 1"/>
+                        </Fill>
+                    </Ellipse>
+                    <Ellipse width="200" height="200" x="0" y="0">
+                        <Fill color="#fffffd">
+                            <RadialGradient
+                                centerX="100"
+                                centerY="100"
+                                radius="34"
+                                colors="#fffffd #fffffd #00ffffff #00ffffff"
+                                positions="0 0.5 0.75 1"/>
+                        </Fill>
+                    </Ellipse>
+                </PartDraw>
+                <PartDraw name="sun_halo_orange_hue" width="200" height="200" x="125" y="13" pivotY="1.06">
+                    <Transform target="angle" value="[REFERENCE.solarTrack]"/>
+                    <Transform
+                        target="alpha"
+                        value="[REFERENCE.orangeGradientAlpha]"/>
+                    <Ellipse width="200" height="200" x="0" y="0">
+                        <Fill color="#FF8400">
+                            <RadialGradient
+                                centerX="100"
+                                centerY="100"
+                                radius="200"
+                                colors="#70FF8400 #00ffffff #00ffffff"
+                                positions="0 0.1 1"/>
+                        </Fill>
+                    </Ellipse>
+                </PartDraw>
             </Group>
         </Group>
 
@@ -2664,7 +2680,13 @@
         </ComplicationSlot>
 
         <!-- Digital Clock -->
-        <Group name="digital_clock_wrapper" width="184" height="184" x="133" y="94" pivotY="0.711956">
+        <Group name="digital_clock_parallax" width="450" height="450" x="0" y="0">
+            <Gyro
+                x="[CONFIGURATION.parallax] == &quot;TRUE&quot; ? clamp([ACCELEROMETER_ANGLE_X] * 0.1, -4, 4) : 0"
+                y="[CONFIGURATION.parallax] == &quot;TRUE&quot; ? clamp([ACCELEROMETER_ANGLE_Y] * -0.1, -4, 4) : 0" />
+            <Variant mode="AMBIENT" target="x" value="0" />
+            <Variant mode="AMBIENT" target="y" value="0" />
+            <Group name="digital_clock_wrapper" width="184" height="184" x="133" y="94" pivotY="0.711956">
             <Transform target="angle" value="180+[REFERENCE.solarTrack]"/>
             <Group name="clock" x="0" y="0" width="184" height="184">
                 <Variant mode="AMBIENT" target="y" value="39" />
@@ -2795,24 +2817,49 @@
                                         color="#303030"
                                         thickness="5"/>
                                 </Arc>
-                                <Arc
-                                    centerX="92"
-                                    centerY="92"
-                                    width="170"
-                                    height="170"
-                                    startAngle="0"
-                                    endAngle="360">
-                                    <Transform
-                                        target="endAngle"
-                                        value="[SECOND] * 6">
-                                        <Animation angleDirection="CLOCKWISE"
-                                            controls="0.67 2 1.0 1.0"
-                                            duration="0.1"
-                                            interpolation="CUBIC_BEZIER" />
-                                    </Transform>
-                                    <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
-                                </Arc>
                             </PartDraw>
+                            <Condition>
+                                <Expressions>
+                                    <Expression name="smooth">[CONFIGURATION.smoothSeconds] == &quot;TRUE&quot;</Expression>
+                                </Expressions>
+                                <Compare expression="smooth">
+                                    <PartDraw x="0" y="0" width="184" height="184">
+                                        <Arc
+                                            centerX="92"
+                                            centerY="92"
+                                            width="170"
+                                            height="170"
+                                            startAngle="0"
+                                            endAngle="360">
+                                            <Transform
+                                                target="endAngle"
+                                                value="[SECOND_MILLISECOND] * 6"/>
+                                            <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
+                                        </Arc>
+                                    </PartDraw>
+                                </Compare>
+                                <Default>
+                                    <PartDraw x="0" y="0" width="184" height="184">
+                                        <Arc
+                                            centerX="92"
+                                            centerY="92"
+                                            width="170"
+                                            height="170"
+                                            startAngle="0"
+                                            endAngle="360">
+                                            <Transform
+                                                target="endAngle"
+                                                value="[SECOND] * 6">
+                                                <Animation angleDirection="CLOCKWISE"
+                                                    controls="0.67 2 1.0 1.0"
+                                                    duration="0.1"
+                                                    interpolation="CUBIC_BEZIER" />
+                                            </Transform>
+                                            <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
+                                        </Arc>
+                                    </PartDraw>
+                                </Default>
+                            </Condition>
                         </Group>
                     </Compare>
                     <Default>
@@ -2980,38 +3027,89 @@
                             <Transform
                                 target="tintColor"
                                 value="[CONFIGURATION.clockAltColors]? [CONFIGURATION.tertiaryTheme.0] : [CONFIGURATION.tertiaryTheme.2]"/>
-                            <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
-                                <Variant
-                                    target="alpha"
-                                    value="0"
-                                    mode="AMBIENT"/>
-                                <Transform target="angle" value="[SECOND] * 6"/>
-                                <RoundRectangle
-                                    x="18.5"
-                                    y="4"
-                                    width="3"
-                                    height="108"
-                                    cornerRadiusX="2"
-                                    cornerRadiusY="2">
-                                    <Fill color="#000000"/>
-                                </RoundRectangle>
-                            </PartDraw>
-                            <PartDraw name="sec" x="0" y="0" width="40" height="184">
-                                <Variant
-                                    target="alpha"
-                                    value="0"
-                                    mode="AMBIENT"/>
-                                <Transform target="angle" value="[SECOND] * 6"/>
-                                <RoundRectangle
-                                    x="18.5"
-                                    y="4"
-                                    width="3"
-                                    height="108"
-                                    cornerRadiusX="2"
-                                    cornerRadiusY="2">
-                                    <Fill color="#ffffff"/>
-                                </RoundRectangle>
-                            </PartDraw>
+                            <Condition>
+                                <Expressions>
+                                    <Expression name="smooth">[CONFIGURATION.smoothSeconds] == &quot;TRUE&quot;</Expression>
+                                </Expressions>
+                                <Compare expression="smooth">
+                                    <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
+                                        <Variant
+                                            target="alpha"
+                                            value="0"
+                                            mode="AMBIENT"/>
+                                        <Transform target="angle" value="[SECOND_MILLISECOND] * 6"/>
+                                        <RoundRectangle
+                                            x="18.5"
+                                            y="4"
+                                            width="3"
+                                            height="108"
+                                            cornerRadiusX="2"
+                                            cornerRadiusY="2">
+                                            <Fill color="#000000"/>
+                                        </RoundRectangle>
+                                    </PartDraw>
+                                    <PartDraw name="sec" x="0" y="0" width="40" height="184">
+                                        <Variant
+                                            target="alpha"
+                                            value="0"
+                                            mode="AMBIENT"/>
+                                        <Transform target="angle" value="[SECOND_MILLISECOND] * 6"/>
+                                        <RoundRectangle
+                                            x="18.5"
+                                            y="4"
+                                            width="3"
+                                            height="108"
+                                            cornerRadiusX="2"
+                                            cornerRadiusY="2">
+                                            <Fill color="#ffffff"/>
+                                        </RoundRectangle>
+                                    </PartDraw>
+                                </Compare>
+                                <Default>
+                                    <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
+                                        <Variant
+                                            target="alpha"
+                                            value="0"
+                                            mode="AMBIENT"/>
+                                        <Transform target="angle" value="[SECOND] * 6">
+                                            <Animation angleDirection="CLOCKWISE"
+                                                controls="0.67 2 1.0 1.0"
+                                                duration="0.1"
+                                                interpolation="CUBIC_BEZIER" />
+                                        </Transform>
+                                        <RoundRectangle
+                                            x="18.5"
+                                            y="4"
+                                            width="3"
+                                            height="108"
+                                            cornerRadiusX="2"
+                                            cornerRadiusY="2">
+                                            <Fill color="#000000"/>
+                                        </RoundRectangle>
+                                    </PartDraw>
+                                    <PartDraw name="sec" x="0" y="0" width="40" height="184">
+                                        <Variant
+                                            target="alpha"
+                                            value="0"
+                                            mode="AMBIENT"/>
+                                        <Transform target="angle" value="[SECOND] * 6">
+                                            <Animation angleDirection="CLOCKWISE"
+                                                controls="0.67 2 1.0 1.0"
+                                                duration="0.1"
+                                                interpolation="CUBIC_BEZIER" />
+                                        </Transform>
+                                        <RoundRectangle
+                                            x="18.5"
+                                            y="4"
+                                            width="3"
+                                            height="108"
+                                            cornerRadiusX="2"
+                                            cornerRadiusY="2">
+                                            <Fill color="#ffffff"/>
+                                        </RoundRectangle>
+                                    </PartDraw>
+                                </Default>
+                            </Condition>
                             <PartDraw name="center2" x="0" y="72" width="40" height="40">
                                 <Ellipse
                                     x="15"
@@ -3034,6 +3132,7 @@
                     </Default>
                 </Condition>
             </Group>
+        </Group>
         </Group>
     </Scene>
 </WatchFace>

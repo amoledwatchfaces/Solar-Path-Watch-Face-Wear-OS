@@ -23,12 +23,14 @@ class SolarCalculatorTest {
         val formatted = SolarCalculator.formatAnglesForComplication(data, "SUNSET")
         println("Formatted string: $formatted")
 
-        org.junit.Assert.assertTrue(data.civilDuskAngle > data.sunsetAngle)
-        org.junit.Assert.assertTrue(data.nauticalDuskAngle > data.civilDuskAngle)
-        org.junit.Assert.assertTrue(data.astroDuskAngle > data.nauticalDuskAngle)
-        org.junit.Assert.assertTrue(data.nauticalDawnAngle > data.astroDawnAngle)
-        org.junit.Assert.assertTrue(data.civilDawnAngle > data.nauticalDawnAngle)
-        org.junit.Assert.assertTrue(data.sunriseAngle > data.civilDawnAngle)
+        fun angleDiff(to: Float, from: Float) = (to - from + 360f) % 360f
+
+        org.junit.Assert.assertTrue(angleDiff(data.civilDuskAngle, data.sunsetAngle) > 0f)
+        org.junit.Assert.assertTrue(angleDiff(data.nauticalDuskAngle, data.civilDuskAngle) > 0f)
+        org.junit.Assert.assertTrue(angleDiff(data.astroDuskAngle, data.nauticalDuskAngle) > 0f)
+        org.junit.Assert.assertTrue(angleDiff(data.nauticalDawnAngle, data.astroDawnAngle) > 0f)
+        org.junit.Assert.assertTrue(angleDiff(data.civilDawnAngle, data.nauticalDawnAngle) > 0f)
+        org.junit.Assert.assertTrue(angleDiff(data.sunriseAngle, data.civilDawnAngle) > 0f)
         org.junit.Assert.assertTrue(data.solarNoonAngle >= 0f)
         org.junit.Assert.assertTrue(data.solarMidnightAngle >= 0f)
         org.junit.Assert.assertTrue(formatted.length >= 32)
