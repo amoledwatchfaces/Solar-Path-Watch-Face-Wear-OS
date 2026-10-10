@@ -2,7 +2,6 @@
 package com.amoledwatchfaces.solarpath.presentation
 
 import android.Manifest
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -225,7 +224,6 @@ fun MainScreen(
                     transformation = SurfaceTransformation(transformationSpec),
                     onClick = {
                         viewModel.refresh(forceRecalculate = true)
-                        Toast.makeText(context,"Check watch face",Toast.LENGTH_LONG).show()
                     },
                     icon = {
                         Icon(
