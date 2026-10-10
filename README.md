@@ -48,6 +48,10 @@ Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)*
 - **Dual Clock Modes**:
   - **Digital Clock**: Clean, modern digital readout with optional leading zeros and alternate accent colors.
   - **Analog Clock**: Sleek hour, minute, and second hands with hour indices and date indicator.
+- **Interactive Heads Up Screen & Smart Onboarding**:
+  - Full-screen "TAP TO OPEN" onboarding prompt when location is unconfigured.
+  - In-app location warning banner with direct "Enable location" and "Use without location" controls.
+  - Automatic suppression on lock screen / keyguard to protect privacy and battery.
 - **Watch Face Format (WFF v4)**:
   - Declarative XML rendering natively on the Wear OS system with zero background battery drain (`hasCode = false`).
   - Standalone WFF APK bundled inside the companion app and delivered via **AndroidX Watch Face Push** (`androidx.wear.watchfacepush`).
@@ -56,18 +60,21 @@ Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)*
 
 ## 🧭 Complication Slots
 
-Solar Path features **4 customizable outer arc complication slots** around the dial perimeter, plus an internal communication slot powering the astronomical engine:
+Solar Path features **5 customizable complication slots** (4 outer arc complications around the dial perimeter + 1 center app shortcut complication), plus an internal communication and touch-target layer powering the astronomical engine:
 
-| Slot ID | Type / Position | Angle Span | Supported Complication Types | Default Provider |
+| Slot ID | Type / Position | Angle Span / Bounds | Supported Complication Types | Default Provider |
 |:---:|:---|:---:|:---|:---|
-| **0** | **Internal Data Bridge** *(Center)* | N/A | `SHORT_TEXT`, `EMPTY` *(Non-editable)* | **Solar Path Complication Service** (Encodes real-time solar milestone angles) |
+| **0** | **Internal Data Bridge & Tap Target** *(Full-Screen)* | 450×450 | `SHORT_TEXT`, `EMPTY` *(Non-editable)* | **Solar Path Shortcut** (Injects real-time NOAA solar angles into the WFF pipeline; acts as full-screen "TAP TO OPEN" touch target when location setup is needed) |
 | **1** | **Top-Left Arc** | 270° → 360° | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Daily Steps (`Fitbit` / `Samsung Health` / `STEP_COUNT`) |
 | **2** | **Top-Right Arc** | 0° → 90° | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Active Calories / UV Index / Battery (`WATCH_BATTERY`) |
 | **3** | **Bottom-Right Arc** | 90° → 180° | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Current Weather (`Google Weather`) / `NEXT_EVENT` |
 | **4** | **Bottom-Left Arc** | 180° → 270° | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Distance / Precipitation / Battery (`WATCH_BATTERY`) |
+| **5** | **Center Shortcut** | 230×230 Oval | `SHORT_TEXT`, `SMALL_IMAGE`, `MONOCHROMATIC_IMAGE`, `EMPTY` | App Shortcut (`APP_SHORTCUT` / `SMALL_IMAGE`) |
 
 > [!NOTE]
-> **Complication Slot 0** is strictly non-editable (`isCustomizable="FALSE"`). It serves as the internal real-time communication channel between the Solar Path companion service and the Watch Face Format dial. It dynamically injects solar milestone coordinates (sunrise, sunset, dusk, dawn, solar noon, and nadir) directly into the dial's rendering pipeline.
+> **Complication Slot 0** is strictly non-editable (`isCustomizable="FALSE"`). It serves two vital purposes:
+> 1. It acts as the internal real-time communication channel between the Solar Path companion service and the Watch Face Format dial, dynamically injecting solar milestone coordinates (sunrise, sunset, dusk, dawn, solar noon, and nadir) directly into the dial's rendering pipeline.
+> 2. When location permissions or coordinates are not yet set up, it serves as a full-screen tap target (`450×450`) to cleanly open the companion app without interfering with underlying complications during normal operation.
 
 ---
 
@@ -98,8 +105,8 @@ Quickly switch between **11 curated style presets** designed for different aesth
 | ID | Flavor Name | Clock Style | Background | Themes (Primary / Secondary / Tertiary) | Highlights |
 |:---:|:---|:---:|:---:|:---|:---|
 | **0** | **Default** | Digital | Dark | Atmospheric Blue | Balanced, authentic solar tracker with flat clean arcs. |
-| **1** | **Classic Analog** | Analog | Dark | Graphite & Cloud | Timeless monochrome watch face with analog hands. |
-| **2** | **Solar Gold** | Analog | Dark | Wheat & Champagne | Warm golden sunlight tones with gradient arc accents. |
+| **1** | **Solar Gold** | Analog | Dark | Wheat & Champagne | Warm golden sunlight tones with gradient arc accents. |
+| **2** | **Classic Analog** | Analog | Dark | Graphite & Cloud | Timeless monochrome watch face with analog hands. |
 | **3** | **Deep Ocean** | Digital | Dark | Ocean, Sapphire & Royal Blue | Vibrant oceanic gradient arcs and crisp digital readout. |
 | **4** | **Alpine Green** | Analog | Dark | Alpine Green, Pine & Forest | Natural forest greens paired with elegant analog indices. |
 | **5** | **Sunset Glow** | Digital | Dark | Orange, Coral & Amber | Dusk-inspired warm palette with glowing gradient progress bars. |
@@ -111,13 +118,25 @@ Quickly switch between **11 curated style presets** designed for different aesth
 
 ---
 
-## 🧩 Standalone Complication Service
+## 🧩 Standalone "Solar Path Shortcut" Complication
 
-Solar Path also provides a dedicated standalone complication data source that can be added to **any Wear OS watch face**:
+Solar Path provides a clean, universal standalone complication data source that can be added to **any Wear OS watch face**:
 
 | Complication Service | Supported Types | Description |
 |:---|:---|:---|
-| **Solar Path Complication** | `SHORT_TEXT` | Displays the next upcoming solar event (e.g., `SUNRISE`, `SUNSET`, `SOLAR NOON`, `CIVIL DUSK`) with exact time and icon. Tapping opens the Solar Path app. |
+| **Solar Path Shortcut** | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `SMALL_IMAGE`, `LONG_TEXT` | Provides a sleek monochromatic twilight icon (`wb_twilight_24px`) with a direct shortcut action to open Solar Path. In `SHORT_TEXT` slots, also displays upcoming solar event times (e.g., `SUNSET 18:42`). |
+
+---
+
+## 🌅 Heads Up Location Guidance & Onboarding
+
+To deliver mathematically accurate solar arcs and twilight phases, Solar Path requires approximate geographic coordinates. When location permissions or coordinates are not yet configured:
+- **Watch Face "Heads Up!" Overlay**: The watch face displays an informative, high-contrast onboarding screen explaining that the face works best with location permissions enabled, with a clear `"TAP TO OPEN"` call-to-action.
+- **Full-Screen Tap Target**: Tapping anywhere on the watch face cleanly opens the Solar Path configuration app without touch bleed-through to underlying complications.
+- **In-App Location Banner**: A color-highlighted card at the top of the companion app offers two simple options:
+  - **"Enable location"**: Triggers the system permission prompt (`ACCESS_COARSE_LOCATION`) to automatically acquire coordinates.
+  - **"Use without location"**: Dismisses the in-app warning banner and permanently clears the watch face overlay, transitioning the watch face into standard timekeeping mode.
+- **Smart Keyguard Detection**: The prompt is automatically suppressed when the watch is locked (PIN/pattern or off-wrist), ensuring a clean, distraction-free lock screen.
 
 ---
 
@@ -126,6 +145,7 @@ Solar Path also provides a dedicated standalone complication data source that ca
 The integrated Wear OS companion application provides astronomical calculations and location management:
 
 - **Astronomical Timeline**: Cards showing sunrise, sunset, civil/nautical/astronomical dawn & dusk, solar noon, and nadir times.
+- **In-App Onboarding & Settings**: Direct controls to enable location or dismiss location prompts.
 - **Smart Location Management**:
   - Automatic positioning via `FusedLocationProviderClient` using privacy-friendly Approximate Location (`ACCESS_COARSE_LOCATION` only — no precise GPS tracking required).
   - Manual location search with `Geocoder` and recent locations history.
@@ -141,12 +161,12 @@ The integrated Wear OS companion application provides astronomical calculations 
 
 - **Watch Face**: [Watch Face Format (WFF v4)](https://developer.android.com/training/wearables/wff) XML rendered natively by the Wear OS system.
 - **Deployment**: [AndroidX Watch Face Push](https://developer.android.com/reference/androidx/wear/watchfacepush/package-summary) (`androidx.wear.watchfacepush:1.0.0`).
-- **UI & Presentation**: [Jetpack Compose for Wear OS](https://developer.android.com/training/wearables/compose) using **Wear Material 3**.
-- **Astronomy Engine**: [Kastro](https://github.com/Yox/kastro) — 100% on-device astronomical calculations (no external APIs or network required).
+- **UI & Presentation**: [Jetpack Compose for Wear OS](https://developer.android.com/training/wearables/compose) using **Wear Material 3** (`1.7.0`).
+- **Astronomy Engine**: NOAA Solar Position Algorithms — 100% on-device astronomical calculations (no external APIs or network required).
 - **Location**: Privacy-friendly Approximate Location (`ACCESS_COARSE_LOCATION`) via Google Play Services Location (`play-services-location:21.4.0`) with `Geocoder`.
 - **Dependency Injection**: [Dagger Hilt](https://dagger.dev/hilt/) (`hilt-android:2.60.1`).
 - **Background Work**: [AndroidX WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) (`work-runtime-ktx:2.12.0`).
-- **Local Persistence**: [Jetpack DataStore](https://developer.android.com/topic/libraries/architecture/datastore).
+- **Local Persistence**: [Jetpack DataStore](https://developer.android.com/topic/libraries/architecture/datastore) with Kotlin Serialization.
 
 ---
 
@@ -193,6 +213,5 @@ cd Solar-Path-Watch-Face-Wear-OS
 
 - Licensed under the **[GNU General Public License v3.0 (GPLv3)](LICENSE)**.
 - Developed by **[amoledwatchfaces™](https://amoledwatchfaces.com/)**.
-- Ephemeris calculations powered by [Kastro](https://github.com/Yox/kastro).
+- Ephemeris calculations powered by NOAA Astronomical Algorithms.
 - All trademarks and brand names belong to their respective owners.
-
