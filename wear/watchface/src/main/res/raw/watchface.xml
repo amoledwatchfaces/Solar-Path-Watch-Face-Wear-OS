@@ -3339,55 +3339,55 @@
                 </Ellipse>
             </PartDraw>
 
-            <!-- Info Badge Icon (larger and pushed down) -->
+            <!-- Info Badge Icon -->
             <PartDraw width="450" height="450" x="0" y="0">
-                <Ellipse x="202" y="44" width="46" height="46">
+                <Ellipse x="201" y="28" width="48" height="48">
                     <Fill color="#0F1E30" />
                 </Ellipse>
-                <Ellipse x="202" y="44" width="46" height="46">
+                <Ellipse x="201" y="28" width="48" height="48">
                     <Stroke color="[CONFIGURATION.primaryTheme.2]" thickness="2.5" />
                 </Ellipse>
-                <Ellipse x="222" y="53" width="6" height="6">
+                <Ellipse x="221.5" y="38" width="7" height="7">
                     <Fill color="[CONFIGURATION.primaryTheme.2]" />
                 </Ellipse>
-                <RoundRectangle x="222" y="63" width="6" height="17" cornerRadiusX="2" cornerRadiusY="2">
+                <RoundRectangle x="221.5" y="49" width="7" height="18" cornerRadiusX="2.5" cornerRadiusY="2.5">
                     <Fill color="[CONFIGURATION.primaryTheme.2]" />
                 </RoundRectangle>
             </PartDraw>
 
-            <!-- Title (larger and pushed down) -->
-            <PartText x="25" y="98" width="400" height="36">
+            <!-- Title -->
+            <PartText x="25" y="90" width="400" height="48">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="30" color="#FFFFFF">Heads up!</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="BOLD" size="42" color="#FFFFFF">Heads up!</Font>
                 </Text>
             </PartText>
 
-            <!-- Subtitle Lines (larger font and pushed down) -->
-            <PartText x="25" y="137" width="400" height="24">
+            <!-- Subtitle Lines -->
+            <PartText x="25" y="150" width="400" height="34">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="18" color="#C3C3C3">This watch face works best</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">This watch face works best</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="161" width="400" height="24">
+            <PartText x="25" y="186" width="400" height="34">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="18" color="#C3C3C3">when location is used.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">when location is used.</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="191" width="400" height="24">
+            <PartText x="25" y="236" width="400" height="34">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="18" color="#C3C3C3">To enable location permissions,</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">To enable location permissions,</Font>
                 </Text>
             </PartText>
-            <PartText x="25" y="215" width="400" height="24">
+            <PartText x="25" y="272" width="400" height="34">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="18" color="#C3C3C3">open the configuration app.</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="NORMAL" size="24" color="#D5D5D5">open the configuration app.</Font>
                 </Text>
             </PartText>
 
             <!-- Tap to Open Indicator -->
-            <PartText x="25" y="300" width="400" height="40">
+            <PartText x="25" y="342" width="400" height="46">
                 <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="22" color="[CONFIGURATION.primaryTheme.2]">TAP TO OPEN</Font>
+                    <Font family="SYNC_TO_DEVICE" weight="BOLD" size="30" color="[CONFIGURATION.primaryTheme.2]">TAP TO OPEN</Font>
                 </Text>
             </PartText>
         </Group>
