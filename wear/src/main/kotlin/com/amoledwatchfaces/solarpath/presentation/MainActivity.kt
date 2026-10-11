@@ -23,8 +23,8 @@ import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import androidx.activity.compose.BackHandler
 import androidx.compose.ui.platform.LocalContext
-import com.amoledwatchfaces.solarpath.presentation.ui.InitialLocationDialog
 import com.amoledwatchfaces.solarpath.presentation.ui.SolarPathAppTheme
 import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
@@ -161,12 +161,16 @@ fun SolarPathMainApp(
             }
 
             if (initialLocationDialogState) {
-                InitialLocationDialog(
-                    onConfirm = {
+                BackHandler {
+                    viewModel.setInitialLocationDialogState(false)
+                }
+                LocationDisabledScreen(
+                    transformationSpec = transformationSpec,
+                    onEnableLocation = {
                         viewModel.setInitialLocationDialogState(false)
                         requestPermissionsSequentially()
                     },
-                    onDismiss = {
+                    onUseWithoutLocation = {
                         viewModel.setInitialLocationDialogState(false)
                     }
                 )

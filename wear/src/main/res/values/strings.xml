@@ -24,7 +24,6 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="no_location">Location not available</string>
     <string name="background_location">Background Location Updates</string>
-    <string name="background_location_summary">Automatically update location periodically</string>
     <string name="update_interval">Update Interval</string>
     <string name="location_disclosure_title">Location Access</string>
     <string name="location_disclosure_message">Solar Path uses location to fetch and calculate local sun times. Background location access can also be enabled for continuous updates. Data is processed locally on-device and is never shared.\n\nYou can also set your location manually if you don\'t wish to enable these permissions.</string>
@@ -42,11 +41,6 @@
     <string name="nautical_dusk">Nautical Dusk</string>
     <string name="astro_dawn">Astro Dawn</string>
     <string name="astro_dusk">Astro Dusk</string>
-    <string name="daylight">Daylight</string>
-    <string name="night">Night</string>
-    <string name="elevation">Elevation</string>
-    <string name="azimuth">Azimuth</string>
-    <string name="open_app">Open Solar Path</string>
     <string name="refresh_calculation">Recalculate</string>
     <string name="watch_face_refreshed">Watch face refreshed!</string>
     <string name="location_not_set">Location not set!</string>

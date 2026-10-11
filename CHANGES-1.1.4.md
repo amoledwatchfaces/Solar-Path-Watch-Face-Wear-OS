@@ -33,7 +33,7 @@
     All rights reserved
     ```
 - **Cleaned Up Obsolete String Resources:**
-  - Removed unused strings from previous separate dialogs and the removed "Set Watch Face" button (`location_disabled_title`, `location_disabled_message`, `push_watch_face`, `activating_watch_face`, `enable_permission_toast`, `background_location_rationale`, `background_location_instruction`, `all_the_time_not_granted`).
+  - Removed unused strings from previous separate dialogs, unused astronomy/status tokens, and the removed "Set Watch Face" button (`location_disabled_title`, `location_disabled_message`, `push_watch_face`, `activating_watch_face`, `enable_permission_toast`, `background_location_rationale`, `background_location_instruction`, `all_the_time_not_granted`, `background_location_summary`, `daylight`, `night`, `elevation`, `azimuth`, `open_app`).
 
 ### 2. Background Location Updates & Interval Adjustments
 
@@ -44,20 +44,20 @@
 
 ### 3. Unified Location Access Architecture & Sequential Permission Requesting
 
-- **Replaced Multi-Stage Permission Dialogs:**
+- **Replaced Multi-Stage Permission Dialogs with Unified Screen:**
   - Removed the obsolete multi-step `BackgroundPermissionDialog` and its separate rationale and instruction screens.
-  - Replaced all secondary location permission entry points with the unified **Location Access** initialization disclosure (`InitialLocationDialog` in-app, `LocationDisabledScreen` on first run).
+  - Replaced all secondary location permission entry points with the exact same **Location Access** screen (`LocationDisabledScreen`) used during first-run initialization, providing a unified and consistent layout across the app.
   - Updated `location_disclosure_message` to comprehensively detail both foreground calculation access and optional background location access, reminding users of the manual location fallback option.
 - **Unified Trigger Flows:**
-  - Tapping **Current Location** in `LocationChooseScreen` when location permissions are missing now presents the Location Access dialog.
-  - Toggling **Background Location Updates** in `MainScreen` when background permission is missing now presents the Location Access dialog.
+  - Tapping **Current Location** in `LocationChooseScreen` when location permissions are missing now presents the Location Access screen.
+  - Toggling **Background Location Updates** in `MainScreen` when background permission is missing now presents the Location Access screen.
 - **Sequential Dual-Level Permission Flow (`requestPermissionsSequentially`):**
   - Implemented sequential runtime permission dispatching in `MainActivity`:
     1. Prompts for approximate/foreground location permission (`ACCESS_COARSE_LOCATION`).
     2. Once foreground access is granted, immediately triggers the NOAA location query and sequentially requests background location permission (`ACCESS_BACKGROUND_LOCATION`).
     3. If background permission is granted, automatically activates background updates (`viewModel.setBackgroundLocation(true)`).
     4. Automatically pops `LocationChooseScreen` back to `MainScreen` upon successful location authorization.
-  - Applied consistently whenever permissions are requested from the Location Access prompt, including first run (`LocationDisabledScreen`) and in-app requests (`InitialLocationDialog`).
+  - Applied consistently whenever permissions are requested from the Location Access screen, both on initial setup and in-app.
 
 ### 4. Watch Face "Heads up!" Screen Layout Adjustment
 - **Vertical Rebalance on Circular Displays:**
