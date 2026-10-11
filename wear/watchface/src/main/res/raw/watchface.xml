@@ -297,10 +297,10 @@
             <ListOption displayName="id_aod_1" icon="prev_aod_1" id="1" />
         </ListConfiguration>
         <ListConfiguration defaultValue="0" displayName="id_clock_subText" id="clockSubText">
-            <ListOption displayName="id_clock_subText_0" icon="prev_none" id="0" />
-            <ListOption displayName="id_clock_subText_1" icon="prev_none" id="1" />
-            <ListOption displayName="id_clock_subText_2" icon="prev_none" id="2" />
-            <ListOption displayName="id_clock_subText_3" icon="prev_none" id="3" />
+            <ListOption displayName="id_clock_subText_0" icon="prev_clock_subtext_0" id="0" />
+            <ListOption displayName="id_clock_subText_1" icon="prev_clock_subtext_1" id="1" />
+            <ListOption displayName="id_clock_subText_2" icon="prev_clock_subtext_2" id="2" />
+            <ListOption displayName="id_clock_subText_3" icon="prev_clock_subtext_3" id="3" />
         </ListConfiguration>
         <!-- Boolean Configurations -->
         <BooleanConfiguration defaultValue="TRUE" displayName="id_progress_bar_gradients" id="progressGradients"/>
