@@ -75,7 +75,8 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
         val prefs = preferences.first()
         val solar = SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
         val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px)).build()
-        val tapAction = openAppIntent()
+
+        val tapAction = if (prefs.latitude == 0.0 && prefs.longitude == 0.0) openAppIntent() else null
 
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
             .withZone(ZoneId.systemDefault())

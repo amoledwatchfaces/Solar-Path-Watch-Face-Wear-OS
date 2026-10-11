@@ -2620,70 +2620,21 @@
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
-        <!-- Complication Slot 0: Center Solar Complication & Angle Reference Provider -->
-        <ComplicationSlot slotId="0"
-            isCustomizable="FALSE"
-            supportedTypes="SHORT_TEXT EMPTY"
-            width="450"
-            height="450"
-            x="0"
-            y="0"
+        <!-- Complication Slot 6: Custom App Shortcut -->
+        <ComplicationSlot slotId="5"
+            isCustomizable="TRUE"
+            supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY"
+            width="224"
+            height="224"
+            x="113"
+            y="113"
             alpha="0">
             <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
-                primaryProviderType="SHORT_TEXT"
-                defaultSystemProvider="WATCH_BATTERY"
-                defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingBox x="0" y="0" width="200" height="200"/>
-            <Complication type="SHORT_TEXT">
-                <!-- Angle extraction references for the 8 solar arcs -->
-                <Group name="ref_ss" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 1, 4)) : 90"/>
-                    <Reference name="ss_angle" source="x" defaultValue="98"/>
-                </Group>
-                <Group name="ref_cdusk" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 4, 7)) : 96"/>
-                    <Reference name="cdusk_angle" source="x" defaultValue="106"/>
-                </Group>
-                <Group name="ref_ndusk" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 7, 10)) : 102"/>
-                    <Reference name="ndusk_angle" source="x" defaultValue="115"/>
-                </Group>
-                <Group name="ref_adusk" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 10, 13)) : 108"/>
-                    <Reference name="adusk_angle" source="x" defaultValue="124"/>
-                </Group>
-                <Group name="ref_adawn" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 13, 16)) : 252"/>
-                    <Reference name="adawn_angle" source="x" defaultValue="256"/>
-                </Group>
-                <Group name="ref_ndawn" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 16, 19)) : 258"/>
-                    <Reference name="ndawn_angle" source="x" defaultValue="266"/>
-                </Group>
-                <Group name="ref_cdawn" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 19, 22)) : 264"/>
-                    <Reference name="cdawn_angle" source="x" defaultValue="275"/>
-                </Group>
-                <Group name="ref_sr" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 22, 25)) : 270"/>
-                    <Reference name="sr_angle" source="x" defaultValue="283"/>
-                </Group>
-                <Group name="ref_noon" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 25, 28)) : 0"/>
-                    <Reference name="noon_angle" source="x" defaultValue="0"/>
-                </Group>
-                <Group name="ref_midnight" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 28, 31)) : 180"/>
-                    <Reference name="midnight_angle" source="x" defaultValue="180"/>
-                </Group>
-                <Group name="ref_location_available" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 32 ? round(subText([COMPLICATION.TITLE], 31, 32)) : 1"/>
-                    <Reference name="locationAvailable" source="x" defaultValue="1"/>
-                </Group>
-
-
-            </Complication>
+                defaultSystemProvider="APP_SHORTCUT"
+                defaultSystemProviderType="SMALL_IMAGE"/>
+            <BoundingOval x="0" y="0" width="224" height="224"/>
+            <Complication type="MONOCHROMATIC_IMAGE"/>
+            <Complication type="SMALL_IMAGE"/>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
@@ -3149,35 +3100,123 @@
                         </PartDraw>
                     </Default>
                 </Condition>
-                <!-- Location not available badge -->
-                <Condition>
-                    <Expressions>
-                        <Expression name="locationNotAvailable">[REFERENCE.locationAvailable] == 0</Expression>
-                    </Expressions>
-                    <Compare expression="locationNotAvailable">
-                        <PartDraw
-                            x="140"
-                            y="140"
-                            width="40"
-                            height="40">
-                            <Ellipse
-                                x="0"
-                                y="0"
-                                width="40"
-                                height="40">
-                                <Fill color="[CONFIGURATION.tertiaryTheme.1]"/>
-                            </Ellipse>
-                        </PartDraw>
-                        <PartImage tintColor="#000000"
-                            x="146"
-                            y="146"
-                            width="28"
-                            height="28">
-                            <Image resource="icon_location_off" />
-                        </PartImage>
-                    </Compare>
-                </Condition>
             </Group>
         </Group>
+
+        <!-- Complication Slot 5: Center Solar Complication & Angle Reference Provider -->
+        <ComplicationSlot slotId="6"
+            isCustomizable="FALSE"
+            supportedTypes="SHORT_TEXT EMPTY"
+            width="450"
+            height="450"
+            x="0"
+            y="0">
+            <Variant target="alpha" value="0" mode="AMBIENT"/>
+            <DefaultProviderPolicy
+                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
+                primaryProviderType="SHORT_TEXT"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="SHORT_TEXT"/>
+            <BoundingBox x="0" y="0" width="450" height="450"/>
+            <Complication type="SHORT_TEXT">
+                <!-- Angle extraction references for the 8 solar arcs -->
+                <Group name="ref_ss" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 1, 4)) : 90"/>
+                    <Reference name="ss_angle" source="x" defaultValue="98"/>
+                </Group>
+                <Group name="ref_cdusk" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 4, 7)) : 96"/>
+                    <Reference name="cdusk_angle" source="x" defaultValue="106"/>
+                </Group>
+                <Group name="ref_ndusk" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 7, 10)) : 102"/>
+                    <Reference name="ndusk_angle" source="x" defaultValue="115"/>
+                </Group>
+                <Group name="ref_adusk" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 10, 13)) : 108"/>
+                    <Reference name="adusk_angle" source="x" defaultValue="124"/>
+                </Group>
+                <Group name="ref_adawn" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 13, 16)) : 252"/>
+                    <Reference name="adawn_angle" source="x" defaultValue="256"/>
+                </Group>
+                <Group name="ref_ndawn" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 16, 19)) : 258"/>
+                    <Reference name="ndawn_angle" source="x" defaultValue="266"/>
+                </Group>
+                <Group name="ref_cdawn" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 19, 22)) : 264"/>
+                    <Reference name="cdawn_angle" source="x" defaultValue="275"/>
+                </Group>
+                <Group name="ref_sr" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 22, 25)) : 270"/>
+                    <Reference name="sr_angle" source="x" defaultValue="283"/>
+                </Group>
+                <Group name="ref_noon" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 25, 28)) : 0"/>
+                    <Reference name="noon_angle" source="x" defaultValue="0"/>
+                </Group>
+                <Group name="ref_midnight" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 28, 31)) : 180"/>
+                    <Reference name="midnight_angle" source="x" defaultValue="180"/>
+                </Group>
+                <Group name="ref_location_available" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 32 ? round(subText([COMPLICATION.TITLE], 31, 32)) : 1"/>
+                    <Reference name="locationAvailable" source="x" defaultValue="1"/>
+                </Group>
+
+                <!-- Location Not Available Screen -->
+                <Condition>
+                    <Expressions>
+                        <Expression name="locationNotAvailable">![REFERENCE.locationAvailable]</Expression>
+                    </Expressions>
+                    <Compare expression="locationNotAvailable">
+                        <Group name="location_not_available_screen" x="0" y="0" width="450" height="450">
+                            <!-- Solid Background to cover any elements beneath -->
+                            <PartDraw width="450" height="450" x="0" y="0">
+                                <Ellipse x="0" y="0" width="450" height="450">
+                                    <Fill color="#000000" />
+                                </Ellipse>
+                            </PartDraw>
+                            <!-- Info Badge Icon -->
+                            <PartDraw width="450" height="450" x="0" y="0" tintColor="[CONFIGURATION.primaryTheme.0]">
+                                <Ellipse x="201" y="60" width="48" height="48">
+                                    <Fill color="#2E2E2E" />
+                                </Ellipse>
+                                <Ellipse x="201" y="60" width="48" height="48">
+                                    <Stroke color="#ffffff" thickness="2.5" />
+                                </Ellipse>
+                                <Ellipse x="221.5" y="70" width="7" height="7">
+                                    <Fill color="#ffffff" />
+                                </Ellipse>
+                                <RoundRectangle x="221.5" y="81" width="7" height="18" cornerRadiusX="3.5" cornerRadiusY="3.5">
+                                    <Fill color="#ffffff" />
+                                </RoundRectangle>
+                            </PartDraw>
+                            <!-- Title -->
+                            <PartText x="25" y="125" width="400" height="48">
+                                <Text>
+                                    <Font family="SYNC_TO_DEVICE" weight="BOLD" size="40">no_location_title</Font>
+                                </Text>
+                            </PartText>
+                            <!-- Subtitle Lines -->
+                            <PartText x="25" y="195" width="400" height="200">
+                                <Text isAutoSize="TRUE" maxLines="5">
+                                    <Font family="SYNC_TO_DEVICE" weight="MEDIUM" size="30" color="#d5d5d5">no_location_text</Font>
+                                </Text>
+                            </PartText>
+                            <!-- Tap to Open Indicator -->
+                            <PartText x="25" y="340" width="400" height="44">
+                                <Text>
+                                    <Font family="SYNC_TO_DEVICE" weight="BOLD" size="30" color="[CONFIGURATION.primaryTheme.0]">
+                                        <Upper>no_location_continue</Upper></Font>
+                                </Text>
+                            </PartText>
+                        </Group>
+                    </Compare>
+                </Condition>
+            </Complication>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
     </Scene>
 </WatchFace>
