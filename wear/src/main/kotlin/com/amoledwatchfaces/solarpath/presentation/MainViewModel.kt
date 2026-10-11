@@ -78,8 +78,8 @@ class MainViewModel @Inject constructor(
     private val _pushStatus = MutableStateFlow<String?>(null)
     val pushStatus: StateFlow<String?> = _pushStatus.asStateFlow()
 
-    private val _isWatchFaceActive = MutableStateFlow(false)
-    val isWatchFaceActive: StateFlow<Boolean> = _isWatchFaceActive.asStateFlow()
+    private val _isWatchFaceActive = MutableStateFlow<Boolean?>(null)
+    val isWatchFaceActive: StateFlow<Boolean?> = _isWatchFaceActive.asStateFlow()
 
     private val _backgroundLocationDialogState = MutableStateFlow(false)
     val backgroundLocationDialogState: StateFlow<Boolean> = _backgroundLocationDialogState.asStateFlow()
@@ -154,11 +154,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _loaderState.value = true
             try {
-                val result = packageRepository.updateOrInstallDefaultWatchFace(
-                    scope = this,
-                    watchFaceData = defaultWatchFace,
-                    setAsActive = true
-                )
+                val result = packageRepository.setWatchFaceAsActive(defaultWatchFace)
                 if (result.isSuccess) {
                     val wfpManager = WatchFacePushManagerFactory.createWatchFacePushManager(context)
                     val isActive = wfpManager.isWatchFaceActive(defaultWatchFace.packageName)

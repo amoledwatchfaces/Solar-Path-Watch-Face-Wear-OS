@@ -84,6 +84,24 @@ class WatchFacePackageRepository(
             slotId
         }
     }
+
+    suspend fun setWatchFaceAsActive(
+        watchFaceData: WatchFaceData = DEFAULT_WATCH_FACE
+    ): Result<String> = withContext(Dispatchers.IO) {
+        runCatching {
+            if (!WatchFacePushManagerFactory.isSupported()) {
+                throw IllegalStateException("Watch Face Push is not supported on this device")
+            }
+            val wfpManager = WatchFacePushManagerFactory.createWatchFacePushManager(context)
+            val response = wfpManager.listWatchFaces()
+            val installed = response.installedWatchFaceDetails.firstOrNull { it.packageName == watchFaceData.packageName }
+                ?: throw IllegalStateException("Watch face not found in installed list")
+
+            wfpManager.setWatchFaceAsActive(installed.slotId)
+            Log.i(TAG, "Watch face set as active on slot ${installed.slotId}")
+            installed.slotId
+        }
+    }
 }
 
 data class FdPipe(

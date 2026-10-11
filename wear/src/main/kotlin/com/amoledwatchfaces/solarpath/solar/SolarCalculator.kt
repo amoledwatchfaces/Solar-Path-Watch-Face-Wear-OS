@@ -271,7 +271,11 @@ object SolarCalculator {
         return angle.toFloat()
     }
 
-    fun formatAnglesForComplication(solar: SolarData, nextEventName: String): String {
+    fun formatAnglesForComplication(
+        solar: SolarData,
+        nextEventName: String,
+        locationAvailable: Boolean = true
+    ): String {
         val ss = (solar.sunsetAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val cdusk = (solar.civilDuskAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val ndusk = (solar.nauticalDuskAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
@@ -282,9 +286,10 @@ object SolarCalculator {
         val sr = (solar.sunriseAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val noon = (solar.solarNoonAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val midnight = (solar.solarMidnightAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val loc = if (locationAvailable) 1 else 0
 
-        return "\uFEFF%03d%03d%03d%03d%03d%03d%03d%03d%03d%03d %s".format(
-            ss, cdusk, ndusk, adusk, adawn, ndawn, cdawn, sr, noon, midnight, nextEventName.uppercase()
+        return "\uFEFF%03d%03d%03d%03d%03d%03d%03d%03d%03d%03d%d %s".format(
+            ss, cdusk, ndusk, adusk, adawn, ndawn, cdawn, sr, noon, midnight, loc, nextEventName.uppercase()
         )
     }
 

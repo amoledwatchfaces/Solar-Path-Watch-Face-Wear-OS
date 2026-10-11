@@ -90,7 +90,8 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
             prefs.locationName
         } else "SUN"
 
-        val formattedTitle = SolarCalculator.formatAnglesForComplication(solar, titleText)
+        val isLocationAvailable = prefs.latitude != 0.0 || prefs.longitude != 0.0
+        val formattedTitle = SolarCalculator.formatAnglesForComplication(solar, titleText, isLocationAvailable)
 
         return when (request.complicationType) {
             ComplicationType.SHORT_TEXT -> {

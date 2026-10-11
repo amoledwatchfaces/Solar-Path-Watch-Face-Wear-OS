@@ -28,6 +28,8 @@ fun formatCoordinate(coordinate: Double, isLatitude: Boolean): String {
     return "$degrees°$minutes'$direction"
 }
 
+const val PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE = "com.google.wear.permission.SET_PUSHED_WATCH_FACE_AS_ACTIVE"
+
 fun Context.areLocationPermissionsGranted(): Boolean {
     return isPermissionGranted(android.Manifest.permission.ACCESS_COARSE_LOCATION)
 }

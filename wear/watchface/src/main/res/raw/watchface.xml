@@ -1066,6 +1066,10 @@
                     <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 28, 31)) : 180"/>
                     <Reference name="midnight_angle" source="x" defaultValue="180"/>
                 </Group>
+                <Group name="ref_location_available" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 32 ? round(subText([COMPLICATION.TITLE], 31, 32)) : 1"/>
+                    <Reference name="locationAvailable" source="x" defaultValue="1"/>
+                </Group>
             </Complication>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
@@ -3142,6 +3146,34 @@
                             </Ellipse>
                         </PartDraw>
                     </Default>
+                </Condition>
+                <!-- Location not available badge -->
+                <Condition>
+                    <Expressions>
+                        <Expression name="locationNotAvailable">[REFERENCE.locationAvailable] == 0</Expression>
+                    </Expressions>
+                    <Compare expression="locationNotAvailable">
+                        <PartDraw
+                            x="140"
+                            y="140"
+                            width="40"
+                            height="40">
+                            <Ellipse
+                                x="0"
+                                y="0"
+                                width="40"
+                                height="40">
+                                <Fill color="[CONFIGURATION.tertiaryTheme.1]"/>
+                            </Ellipse>
+                        </PartDraw>
+                        <PartImage tintColor="#000000"
+                            x="146"
+                            y="146"
+                            width="28"
+                            height="28">
+                            <Image resource="icon_location_off" />
+                        </PartImage>
+                    </Compare>
                 </Condition>
             </Group>
         </Group>

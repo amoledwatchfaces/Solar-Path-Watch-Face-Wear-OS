@@ -25,11 +25,13 @@ import androidx.compose.material.icons.filled.WatchLater
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -69,6 +71,9 @@ import com.amoledwatchfaces.solarpath.BuildConfig
 import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.presentation.ui.BackgroundPermissionDialog
 import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import com.amoledwatchfaces.solarpath.utils.PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE
 import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
 import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import java.time.Instant
@@ -87,10 +92,35 @@ fun MainScreen(
     val solarData by viewModel.solarData.collectAsState()
     val isLoading by viewModel.loaderState.collectAsState()
     val isWatchFaceActive by viewModel.isWatchFaceActive.collectAsState()
+    var isButtonVisible by remember { mutableStateOf(false) }
+    var hasSetInitialVisibility by remember { mutableStateOf(false) }
+
+    LaunchedEffect(isWatchFaceActive) {
+        val active = isWatchFaceActive ?: return@LaunchedEffect
+        if (!hasSetInitialVisibility) {
+            hasSetInitialVisibility = true
+            isButtonVisible = !active
+        } else if (active && isButtonVisible) {
+            delay(2500)
+            isButtonVisible = false
+        } else if (!active) {
+            isButtonVisible = true
+        }
+    }
 
     val context = LocalContext.current
     var showConfirmation by remember { mutableStateOf(false) }
     var confirmationState by remember { mutableStateOf(true) }
+
+    val setWatchFacePermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            viewModel.pushDefaultWatchFace()
+        } else {
+            Toast.makeText(context, R.string.status_manual_activation, Toast.LENGTH_LONG).show()
+        }
+    }
 
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", LocalLocale.current.platformLocale)
         .withZone(ZoneId.systemDefault())
@@ -113,7 +143,7 @@ fun MainScreen(
             state = listState,
         ) {
             // Next Event Header
-            item {
+            item(key = "header") {
                 ListSubHeader(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -132,7 +162,7 @@ fun MainScreen(
             }
 
             // Next Event / Current Solar Status
-            item {
+            item(key = "next_event") {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -159,84 +189,48 @@ fun MainScreen(
                 }
             }
 
-            // Push Watch Face Button
-            item {
-                Button(
-                    colors = if (isWatchFaceActive) {
-                        ButtonDefaults.filledTonalButtonColors()
-                    } else {
-                        ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .transformedHeight(this, transformationSpec),
-                    transformation = SurfaceTransformation(transformationSpec),
-                    onClick = { viewModel.pushDefaultWatchFace() },
-                    icon = {
-                        Icon(
-                            imageVector = if (isWatchFaceActive) Icons.Default.Check else Icons.Default.WatchLater,
-                            contentDescription = "Watch Face",
-                            tint = if (isWatchFaceActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    },
-                    label = {
-                        Text(
-                            text = if (isWatchFaceActive) stringResource(R.string.watch_face_active) else stringResource(R.string.push_watch_face),
-                            color = if (isWatchFaceActive) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-                )
-            }
-
-            // FAQ Button
-            item {
-                FilledTonalButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .transformedHeight(this, transformationSpec),
-                    transformation = SurfaceTransformation(transformationSpec),
-                    onClick = { navController.navigate("faq") },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.HelpOutline,
-                            contentDescription = stringResource(R.string.faq)
-                        )
-                    },
-                    label = {
-                        Text(text = stringResource(R.string.faq))
-                    },
-                    secondaryLabel = {
-                        Text(text = stringResource(R.string.faq_subtitle))
-                    }
-                )
-            }
-
-            // Recalculate Button
-            item {
-                FilledTonalButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .transformedHeight(this, transformationSpec),
-                    transformation = SurfaceTransformation(transformationSpec),
-                    onClick = {
-                        viewModel.refresh(forceRecalculate = true)
-                        Toast.makeText(context,"Check watch face",Toast.LENGTH_LONG).show()
-                    },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Default.Refresh,
-                            contentDescription = stringResource(R.string.refresh_calculation),
-                            tint = MaterialTheme.colorScheme.secondary
-                        )
-                    },
-                    label = {
-                        Text(text = stringResource(R.string.refresh_calculation))
-                    }
-                )
+            if (isButtonVisible) {
+                // Set Watch Face Button
+                item(key = "set_watch_face_button") {
+                    Button(
+                        colors = if (isWatchFaceActive == true) {
+                            ButtonDefaults.filledTonalButtonColors()
+                        } else {
+                            ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                        },
+                        modifier = Modifier
+                            .animateItem()
+                            .fillMaxWidth()
+                            .transformedHeight(this, transformationSpec),
+                        transformation = SurfaceTransformation(transformationSpec),
+                        onClick = {
+                            if (isWatchFaceActive == true) {
+                                Toast.makeText(context, R.string.watch_face_active, Toast.LENGTH_SHORT).show()
+                            } else if (context.isPermissionGranted(PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE)) {
+                                viewModel.pushDefaultWatchFace()
+                            } else {
+                                setWatchFacePermissionLauncher.launch(PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE)
+                            }
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = if (isWatchFaceActive == true) Icons.Default.Check else Icons.Default.WatchLater,
+                                contentDescription = "Watch Face",
+                                tint = if (isWatchFaceActive == true) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        },
+                        label = {
+                            Text(
+                                text = if (isWatchFaceActive == true) stringResource(R.string.watch_face_active) else stringResource(R.string.push_watch_face),
+                                color = if (isWatchFaceActive == true) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+                    )
+                }
             }
 
             // Solar Times Breakdown
-            item {
+            item(key = "solar_times_header") {
                 ListSubHeader(
                     modifier = Modifier.fillMaxWidth(),
                     label = {
@@ -250,8 +244,7 @@ fun MainScreen(
                     }
                 )
             }
-
-            item {
+            item(key = "solar_times") {
                 TitleCard(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -294,9 +287,32 @@ fun MainScreen(
                     }
                 )
             }
+            // Recalculate Button
+            item(key = "recalculate_button") {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = {
+                        viewModel.refresh(forceRecalculate = true)
+                        Toast.makeText(context,"Check watch face",Toast.LENGTH_LONG).show()
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = stringResource(R.string.refresh_calculation),
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    label = {
+                        Text(text = stringResource(R.string.refresh_calculation))
+                    }
+                )
+            }
 
             // Location Header & Chip
-            item {
+            item(key = "location_header") {
                 ListSubHeader(
                     modifier = Modifier.fillMaxWidth(),
                     label = {
@@ -311,7 +327,7 @@ fun MainScreen(
                 )
             }
 
-            item {
+            item(key = "location") {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -343,7 +359,7 @@ fun MainScreen(
             }
 
             // Background Location Toggle
-            item {
+            item(key = "background_location") {
                 SwitchButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -361,13 +377,12 @@ fun MainScreen(
                             viewModel.setBackgroundLocation(false)
                         }
                     },
-                    label = { Text(stringResource(R.string.background_location)) },
-                    secondaryLabel = { Text("${preferences.backgroundLocationRepeatInterval} min") }
+                    label = { Text(stringResource(R.string.background_location)) }
                 )
             }
 
             if (preferences.backgroundLocationState) {
-                item {
+                item(key = "update_interval_text") {
                     Text(
                         textAlign = TextAlign.Center,
                         modifier = Modifier
@@ -378,8 +393,7 @@ fun MainScreen(
                         text = "${stringResource(R.string.update_interval)}: ${preferences.backgroundLocationRepeatInterval} min"
                     )
                 }
-
-                item {
+                item(key = "update_interval_slider") {
                     Slider(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -400,7 +414,7 @@ fun MainScreen(
             }
 
             // About Section Header
-            item {
+            item(key = "about_header") {
                 ListSubHeader(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -418,35 +432,31 @@ fun MainScreen(
                 )
             }
 
-            // App Version Button
-            item {
+            // FAQ Button
+            item(key = "faq") {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .transformedHeight(this, transformationSpec),
                     transformation = SurfaceTransformation(transformationSpec),
-                    onClick = { context.openPlayStore() },
+                    onClick = { navController.navigate("faq") },
                     icon = {
                         Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = stringResource(R.string.version),
-                            tint = MaterialTheme.colorScheme.secondary
+                            imageVector = Icons.AutoMirrored.Filled.HelpOutline,
+                            contentDescription = stringResource(R.string.faq)
                         )
                     },
                     label = {
-                        Text(
-                            text = stringResource(R.string.version),
-                            overflow = TextOverflow.Ellipsis
-                        )
+                        Text(text = stringResource(R.string.faq))
                     },
                     secondaryLabel = {
-                        Text(text = BuildConfig.VERSION_NAME)
+                        Text(text = stringResource(R.string.faq_subtitle))
                     }
                 )
             }
 
             // Privacy Policy Button
-            item {
+            item(key = "privacy_policy") {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -474,8 +484,35 @@ fun MainScreen(
                 )
             }
 
+            // App Version Button
+            item(key = "version") {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = { context.openPlayStore() },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = stringResource(R.string.version),
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(R.string.version),
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    },
+                    secondaryLabel = {
+                        Text(text = BuildConfig.VERSION_NAME)
+                    }
+                )
+            }
+
             // amoledwatchfaces.com
-            item {
+            item(key = "footer") {
                 ListSubHeader(
                     modifier = Modifier
                         .fillMaxWidth()
