@@ -79,6 +79,7 @@ import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun MainScreen(
@@ -101,7 +102,7 @@ fun MainScreen(
             hasSetInitialVisibility = true
             isButtonVisible = !active
         } else if (active && isButtonVisible) {
-            delay(2500)
+            delay(2500.milliseconds)
             isButtonVisible = false
         } else if (!active) {
             isButtonVisible = true

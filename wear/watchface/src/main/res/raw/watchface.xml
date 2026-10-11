@@ -1009,71 +1009,6 @@
             </Group>
         </Group>
 
-        <!-- Complication Slot 0: Center Solar Complication & Angle Reference Provider -->
-        <ComplicationSlot slotId="0"
-            isCustomizable="FALSE"
-            supportedTypes="SHORT_TEXT EMPTY"
-            width="200"
-            height="200"
-            x="125"
-            y="125"
-            alpha="0">
-            <DefaultProviderPolicy
-                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
-                primaryProviderType="SHORT_TEXT"
-                defaultSystemProvider="WATCH_BATTERY"
-                defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingBox x="0" y="0" width="200" height="200"/>
-            <Complication type="SHORT_TEXT">
-                <!-- Angle extraction references for the 8 solar arcs -->
-                <Group name="ref_ss" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 1, 4)) : 90"/>
-                    <Reference name="ss_angle" source="x" defaultValue="98"/>
-                </Group>
-                <Group name="ref_cdusk" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 4, 7)) : 96"/>
-                    <Reference name="cdusk_angle" source="x" defaultValue="106"/>
-                </Group>
-                <Group name="ref_ndusk" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 7, 10)) : 102"/>
-                    <Reference name="ndusk_angle" source="x" defaultValue="115"/>
-                </Group>
-                <Group name="ref_adusk" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 10, 13)) : 108"/>
-                    <Reference name="adusk_angle" source="x" defaultValue="124"/>
-                </Group>
-                <Group name="ref_adawn" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 13, 16)) : 252"/>
-                    <Reference name="adawn_angle" source="x" defaultValue="256"/>
-                </Group>
-                <Group name="ref_ndawn" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 16, 19)) : 258"/>
-                    <Reference name="ndawn_angle" source="x" defaultValue="266"/>
-                </Group>
-                <Group name="ref_cdawn" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 19, 22)) : 264"/>
-                    <Reference name="cdawn_angle" source="x" defaultValue="275"/>
-                </Group>
-                <Group name="ref_sr" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 22, 25)) : 270"/>
-                    <Reference name="sr_angle" source="x" defaultValue="283"/>
-                </Group>
-                <Group name="ref_noon" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 25, 28)) : 0"/>
-                    <Reference name="noon_angle" source="x" defaultValue="0"/>
-                </Group>
-                <Group name="ref_midnight" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 28, 31)) : 180"/>
-                    <Reference name="midnight_angle" source="x" defaultValue="180"/>
-                </Group>
-                <Group name="ref_location_available" x="0" y="0" width="1" height="1" alpha="0">
-                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 32 ? round(subText([COMPLICATION.TITLE], 31, 32)) : 1"/>
-                    <Reference name="locationAvailable" source="x" defaultValue="1"/>
-                </Group>
-            </Complication>
-            <Complication type="EMPTY"/>
-        </ComplicationSlot>
-
         <!-- Arc Complications -->
         <ComplicationSlot slotId="1"
             supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
@@ -2681,6 +2616,73 @@
                         </PartText>
                     </Default>
                 </Condition>
+            </Complication>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
+
+        <!-- Complication Slot 0: Center Solar Complication & Angle Reference Provider -->
+        <ComplicationSlot slotId="0"
+            isCustomizable="FALSE"
+            supportedTypes="SHORT_TEXT EMPTY"
+            width="450"
+            height="450"
+            x="0"
+            y="0"
+            alpha="0">
+            <DefaultProviderPolicy
+                primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
+                primaryProviderType="SHORT_TEXT"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="SHORT_TEXT"/>
+            <BoundingBox x="0" y="0" width="200" height="200"/>
+            <Complication type="SHORT_TEXT">
+                <!-- Angle extraction references for the 8 solar arcs -->
+                <Group name="ref_ss" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 1, 4)) : 90"/>
+                    <Reference name="ss_angle" source="x" defaultValue="98"/>
+                </Group>
+                <Group name="ref_cdusk" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 4, 7)) : 96"/>
+                    <Reference name="cdusk_angle" source="x" defaultValue="106"/>
+                </Group>
+                <Group name="ref_ndusk" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 7, 10)) : 102"/>
+                    <Reference name="ndusk_angle" source="x" defaultValue="115"/>
+                </Group>
+                <Group name="ref_adusk" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 10, 13)) : 108"/>
+                    <Reference name="adusk_angle" source="x" defaultValue="124"/>
+                </Group>
+                <Group name="ref_adawn" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 13, 16)) : 252"/>
+                    <Reference name="adawn_angle" source="x" defaultValue="256"/>
+                </Group>
+                <Group name="ref_ndawn" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 16, 19)) : 258"/>
+                    <Reference name="ndawn_angle" source="x" defaultValue="266"/>
+                </Group>
+                <Group name="ref_cdawn" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 19, 22)) : 264"/>
+                    <Reference name="cdawn_angle" source="x" defaultValue="275"/>
+                </Group>
+                <Group name="ref_sr" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 25 ? round(subText([COMPLICATION.TITLE], 22, 25)) : 270"/>
+                    <Reference name="sr_angle" source="x" defaultValue="283"/>
+                </Group>
+                <Group name="ref_noon" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 25, 28)) : 0"/>
+                    <Reference name="noon_angle" source="x" defaultValue="0"/>
+                </Group>
+                <Group name="ref_midnight" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 31 ? round(subText([COMPLICATION.TITLE], 28, 31)) : 180"/>
+                    <Reference name="midnight_angle" source="x" defaultValue="180"/>
+                </Group>
+                <Group name="ref_location_available" x="0" y="0" width="1" height="1" alpha="0">
+                    <Transform target="x" value="textLength([COMPLICATION.TITLE]) &gt;= 32 ? round(subText([COMPLICATION.TITLE], 31, 32)) : 1"/>
+                    <Reference name="locationAvailable" source="x" defaultValue="1"/>
+                </Group>
+
+
             </Complication>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
