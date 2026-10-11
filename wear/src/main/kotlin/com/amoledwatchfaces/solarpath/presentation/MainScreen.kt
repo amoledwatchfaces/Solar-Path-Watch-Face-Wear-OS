@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.stringResource
@@ -113,6 +114,69 @@ fun MainScreen(
             state = listState,
         ) {
 
+            val isLocationSet = preferences.locationName.isNotBlank() &&
+                    preferences.locationName != "- -" &&
+                    (preferences.latitude != 0.0 || preferences.longitude != 0.0)
+
+            // Set Location Button (only shown if no location is set; placed above everything else)
+            if (!isLocationSet) {
+                item {
+                    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+                    val topSpacerHeight = ((screenHeight / 2) - 26.dp - paddingValues.calculateTopPadding()).coerceAtLeast(0.dp)
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(topSpacerHeight)
+                    )
+                }
+                item {
+                    val alertRed = Color(0xFFE57373)
+                    OutlinedButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .transformedHeight(this, transformationSpec),
+                        transformation = SurfaceTransformation(transformationSpec),
+                        onClick = { navController.navigate("location_choose") },
+                        border = ButtonDefaults.outlinedButtonBorder(
+                            enabled = true,
+                            borderColor = alertRed,
+                            borderWidth = 2.dp
+                        ),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = alertRed,
+                            secondaryContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                        ),
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Default.LocationOn,
+                                contentDescription = stringResource(R.string.set_location_button),
+                                tint = alertRed
+                            )
+                        },
+                        label = {
+                            Text(
+                                text = stringResource(R.string.set_location_button),
+                                color = alertRed,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        },
+                        secondaryLabel = {
+                            Text(
+                                text = stringResource(R.string.no_location_set),
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    )
+                }
+                item {
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(16.dp)
+                    )
+                }
+            }
+
             // Next Event Header
             item {
                 ListSubHeader(
@@ -156,53 +220,6 @@ fun MainScreen(
                         text = "${String.format(LocalLocale.current.platformLocale, "%.1f", solarData.sunElevation)}° elevation • ${solarData.daylightDurationMinutes / 60}h ${solarData.daylightDurationMinutes % 60}m day",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-
-            val isLocationSet = preferences.locationName.isNotBlank() &&
-                    preferences.locationName != "- -" &&
-                    (preferences.latitude != 0.0 || preferences.longitude != 0.0)
-
-            // Set Location Button (only shown if no location is set)
-            if (!isLocationSet) {
-                item {
-                    val alertRed = Color(0xFFFF5252)
-                    OutlinedButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .transformedHeight(this, transformationSpec),
-                        transformation = SurfaceTransformation(transformationSpec),
-                        onClick = { navController.navigate("location_choose") },
-                        border = ButtonDefaults.outlinedButtonBorder(
-                            enabled = true,
-                            borderColor = alertRed,
-                            borderWidth = 2.dp
-                        ),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = alertRed,
-                            secondaryContentColor = alertRed
-                        ),
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Default.LocationOn,
-                                contentDescription = stringResource(R.string.set_location_button),
-                                tint = alertRed
-                            )
-                        },
-                        label = {
-                            Text(
-                                text = stringResource(R.string.set_location_button),
-                                color = alertRed,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        },
-                        secondaryLabel = {
-                            Text(
-                                text = stringResource(R.string.no_location_set),
-                                color = alertRed
-                            )
-                        }
                     )
                 }
             }

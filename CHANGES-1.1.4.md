@@ -18,18 +18,22 @@
   - In the About section, reordered the entries so Privacy Policy precedes App Version (FAQ → Privacy Policy → Version).
 - **Relocated Recalculate Button:**
   - Moved the Recalculate button directly beneath the Solar Times breakdown card, positioning it alongside the solar calculations it refreshes.
-- **Prominent "Set Location" Warning Button:**
-  - Added an outlined action button directly above the Solar Times section, rendered with a 2dp red outline (`#FFFF5252`), red text, and red icon.
-  - Labeled **Set Location** and subtitled **No location set**.
-  - Dynamically appears only when no location is configured (`preferences.locationName == "- -" || (preferences.latitude == 0.0 && preferences.longitude == 0.0)`).
+- **Centered "Set Location" Warning Button at App Root:**
+  - Positioned above everything else in the configuration app (above the Next Event section).
+  - Added dynamic top whitespace padding calculated from the device screen height and scaffold insets so the button sits vertically centered when the app opens without a location set.
+  - Toned down the red styling to a softer Material red (`#E57373`) to eliminate glare on AMOLED watch displays.
+  - Styled the subtext (**No location set**) in subtle gray (`MaterialTheme.colorScheme.onSurfaceVariant`).
+  - Labeled **Set Location** and dynamically hidden once a valid location is configured.
   - Tapping opens the location selection menu (`location_choose`) with Search and Current Location options.
 - **Updated Copyright Footer:**
-  - Updated the bottom list footer to display the full copyright notice:
+  - Updated the bottom list footer to display `amoledwatchfaces™`:
     ```
     Copyright (c) 2026
-    amoledwatchfaces.com
+    amoledwatchfaces™
     All rights reserved
     ```
+- **Cleaned Up Obsolete String Resources:**
+  - Removed unused strings from previous separate dialogs and the removed "Set Watch Face" button (`location_disabled_title`, `location_disabled_message`, `push_watch_face`, `activating_watch_face`, `enable_permission_toast`, `background_location_rationale`, `background_location_instruction`, `all_the_time_not_granted`).
 
 ### 2. Background Location Updates & Interval Adjustments
 
