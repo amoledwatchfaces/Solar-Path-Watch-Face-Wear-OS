@@ -73,8 +73,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Solar Path Complication Service -->
+        <!-- Solar Path Complication Service (Solar Path Shortcut) -->
         <service
             android:name=".complication.SolarPathComplicationService"
             android:exported="true"
@@ -87,7 +86,7 @@
 
             <meta-data
                 android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                android:value="SHORT_TEXT" />
+                android:value="SHORT_TEXT,MONOCHROMATIC_IMAGE,SMALL_IMAGE,LONG_TEXT" />
             <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="0" />

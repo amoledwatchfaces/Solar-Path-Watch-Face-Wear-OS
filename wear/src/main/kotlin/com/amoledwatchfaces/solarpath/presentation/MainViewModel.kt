@@ -95,14 +95,47 @@ class MainViewModel @Inject constructor(
         _initialLocationDialogState.value = state
     }
 
-    private val _refreshTrigger = MutableStateFlow(System.currentTimeMillis())
-
-    fun refresh(forceRecalculate: Boolean = false) {
-        if (forceRecalculate) {
-            SolarCalculator.invalidateCache()
+    fun dismissLocationPrompt() {
+        viewModelScope.launch {
+            dataStore.updateData { it.copy(isLocationPromptDismissed = true) }
             context.updateComplications()
         }
+    }
+
+    private val _refreshTrigger = MutableStateFlow(System.currentTimeMillis())
+
+    fun refresh(forceRecalculate: Boolean = false, showFeedbackToast: Boolean = false) {
+        if (forceRecalculate) {
+            val prefs = preferences.value
+            val isLocationConfigured = prefs.locationName != "- -" && (prefs.latitude != 0.0 || prefs.longitude != 0.0)
+
+            if (!isLocationConfigured) {
+                if (showFeedbackToast) {
+                    Toast.makeText(context, R.string.location_not_set, Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
+
+            try {
+                SolarCalculator.invalidateCache()
+                context.updateComplications()
+                _refreshTrigger.value = System.currentTimeMillis()
+                if (showFeedbackToast) {
+                    Toast.makeText(context, R.string.watch_face_refreshed, Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error refreshing watch face data: ${e.message}", e)
+                if (showFeedbackToast) {
+                    Toast.makeText(context, R.string.something_went_wrong, Toast.LENGTH_SHORT).show()
+                }
+            }
+            return
+        }
         _refreshTrigger.value = System.currentTimeMillis()
+    }
+
+    fun recalculate() {
+        refresh(forceRecalculate = true, showFeedbackToast = true)
     }
 
     private val timeTickerFlow = kotlinx.coroutines.flow.flow {

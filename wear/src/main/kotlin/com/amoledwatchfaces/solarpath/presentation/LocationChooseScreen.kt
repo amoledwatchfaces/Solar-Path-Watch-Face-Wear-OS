@@ -176,7 +176,7 @@ fun LocationChooseScreen(
                                     viewModel.requestLocation()
                                     navController.popBackStack()
                                 } else {
-                                    permissionState.launchPermissionRequest()
+                                    viewModel.setInitialLocationDialogState(true)
                                 }
                             } else {
                                 context.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
