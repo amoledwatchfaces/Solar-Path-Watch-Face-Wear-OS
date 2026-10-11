@@ -45,9 +45,11 @@ Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)*
   - Day / night disk with smooth alpha transitions based on solar elevation ($\pm 15^\circ$ horizon threshold).
   - Dynamic sky hue adjusting smoothly through civil dusk and dawn.
   - Subtle starlight field emerging across the upper celestial quadrant after dusk.
-- **Dual Clock Modes**:
+- **Dual Clock Modes & Sub-Text Customization**:
   - **Digital Clock**: Clean, modern digital readout with optional leading zeros and alternate accent colors.
+  - **Clock Sub-Text Options**: Configurable line beneath the digital clock displaying **Day of Week**, **AM/PM**, **Seconds**, or live **Weather** (temperature & condition with dynamic weather icons).
   - **Analog Clock**: Sleek hour, minute, and second hands with hour indices and date indicator.
+  - **Battery-Efficient Smooth Seconds**: Smooth per-second animation sweep without high-frequency display processor wakeups.
 - **Interactive Heads Up Screen & Smart Onboarding**:
   - Full-screen "TAP TO OPEN" onboarding prompt on the watch face when location is unconfigured, vertically balanced for circular displays.
   - Unified **Location Access** screen with on-device privacy disclosure and sequential foreground/background permission requesting.
@@ -87,12 +89,19 @@ Solar Path offers extensive customization options available directly in the Wear
 - **Clock Style**:
   - `Digital`: Crisp modern digital time readout.
   - `Analog`: Elegant minimalist analog hands and indices.
+- **Clock Sub-Text**:
+  - `Day of Week`: Current day name (e.g., `SATURDAY`).
+  - `AM/PM`: 12-hour period indicator (e.g., `PM`).
+  - `Seconds`: Live seconds indicator (e.g., `45`).
+  - `Weather`: Live weather conditions and temperature with dynamic weather icons (e.g., `72° SUNNY`).
 - **Clock Background**:
   - `Dark`: Solid contrast background disk behind the center dial.
   - `Transparent`: Clean, see-through dial showing the solar gradients and starfield.
 - **Always-On Display (AOD) Mode**:
   - `Dimmed`: Keeps dial elements visible with optimized ambient brightness.
   - `Dimmed & No Arcs`: Minimalist ambient face hiding outer arcs to conserve battery life.
+  - `Time Only`: Minimalist ambient mode showing only the digital clock for maximum power conservation and burn-in prevention.
+- **Center Shortcut Slot (Slot 5)**: Dedicated 230×230 circular complication target inside the solar ring configured for Wear OS App Shortcuts, allowing one-tap launching of any app.
 - **Arc Gradients**: Toggle smooth progress bar color gradients on slots 1–4 on or off.
 - **Leading Zero**: Toggle 12/24-hour leading zero (e.g. `09:41` vs `9:41`).
 - **Clock Alternate Colors**: Switch clock text and hands between primary theme and high-contrast accent colors.
