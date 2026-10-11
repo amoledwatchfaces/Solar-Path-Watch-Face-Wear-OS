@@ -50,8 +50,7 @@ fun Context.isLocationEnabled(): Boolean {
 
 fun Context.updateComplications() {
     val component = ComponentName(this, SolarPathComplicationService::class.java)
-    val req = ComplicationDataSourceUpdateRequester.create(this, component)
-    req.requestUpdateAll()
+    ComplicationDataSourceUpdateRequester.create(this, component).requestUpdateAll()
 }
 
 fun Context.openPlayStore() {

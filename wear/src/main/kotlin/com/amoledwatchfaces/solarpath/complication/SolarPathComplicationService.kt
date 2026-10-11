@@ -9,23 +9,31 @@
  */
 package com.amoledwatchfaces.solarpath.complication
 
+import android.app.KeyguardManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
 import androidx.datastore.core.DataStore
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.LongTextComplicationData
 import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.MonochromaticImageComplicationData
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
+import androidx.wear.watchface.complications.data.SmallImage
+import androidx.wear.watchface.complications.data.SmallImageComplicationData
+import androidx.wear.watchface.complications.data.SmallImageType
 import androidx.wear.watchface.complications.datasource.ComplicationRequest
 import androidx.wear.watchface.complications.datasource.SuspendingComplicationDataSourceService
-import com.amoledwatchfaces.solarpath.presentation.MainActivity
 import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.data.UserPreferencesRepository
+import com.amoledwatchfaces.solarpath.presentation.MainActivity
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
 import com.amoledwatchfaces.solarpath.solar.SolarData
+import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import java.time.Instant
@@ -53,6 +61,8 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
 
     override fun getPreviewData(type: ComplicationType): ComplicationData? {
         val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px)).build()
+        val smallImage = SmallImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px), SmallImageType.ICON).build()
+        val shortcutDesc = PlainComplicationText.Builder(getString(R.string.solar_path_comp_name)).build()
         val sampleSolar = SolarData()
         val previewTitle = SolarCalculator.formatAnglesForComplication(sampleSolar, "SUNSET")
 
@@ -64,7 +74,32 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
                 )
                     .setTitle(PlainComplicationText.Builder(previewTitle).build())
                     .setMonochromaticImage(sunIcon)
-                    .setTapAction(null)
+                    .setTapAction(openAppIntent())
+                    .build()
+            }
+            ComplicationType.MONOCHROMATIC_IMAGE -> {
+                MonochromaticImageComplicationData.Builder(
+                    monochromaticImage = sunIcon,
+                    contentDescription = shortcutDesc
+                )
+                    .setTapAction(openAppIntent())
+                    .build()
+            }
+            ComplicationType.SMALL_IMAGE -> {
+                SmallImageComplicationData.Builder(
+                    smallImage = smallImage,
+                    contentDescription = shortcutDesc
+                )
+                    .setTapAction(openAppIntent())
+                    .build()
+            }
+            ComplicationType.LONG_TEXT -> {
+                LongTextComplicationData.Builder(
+                    text = PlainComplicationText.Builder(getString(R.string.app_name)).build(),
+                    contentDescription = shortcutDesc
+                )
+                    .setMonochromaticImage(sunIcon)
+                    .setTapAction(openAppIntent())
                     .build()
             }
             else -> null
@@ -73,36 +108,88 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
 
     override suspend fun onComplicationRequest(request: ComplicationRequest): ComplicationData? {
         val prefs = preferences.first()
-        val solar = SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
+        val hasPermission = areLocationPermissionsGranted()
+        val hasConfiguredLocation = prefs.locationName != "- -" && (prefs.latitude != 0.0 || prefs.longitude != 0.0)
+        val isLocationSetup = (hasPermission && (prefs.latitude != 0.0 || prefs.longitude != 0.0 || prefs.locationName != "- -")) || hasConfiguredLocation
+        val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as? KeyguardManager
+        val isLocked = keyguardManager?.isDeviceLocked == true || keyguardManager?.isKeyguardLocked == true
+        val showPrompt = !isLocationSetup && !prefs.isLocationPromptDismissed && !isLocked
+
         val sunIcon = MonochromaticImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px)).build()
-        val tapAction = openAppIntent()
-
-        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
-            .withZone(ZoneId.systemDefault())
-
-        val eventTimeText = if (solar.nextEventEpoch > 0) {
-            timeFormatter.format(Instant.ofEpochMilli(solar.nextEventEpoch))
-        } else "- -"
-
-        val titleText = if (solar.nextEventName.isNotEmpty()) {
-            solar.nextEventName.uppercase()
-        } else if (prefs.locationName != "- -") {
-            prefs.locationName
-        } else "SUN"
-
-        val formattedTitle = SolarCalculator.formatAnglesForComplication(solar, titleText)
+        val smallImage = SmallImage.Builder(Icon.createWithResource(this, R.drawable.wb_twilight_24px), SmallImageType.ICON).build()
+        val shortcutDesc = PlainComplicationText.Builder(getString(R.string.solar_path_comp_name)).build()
 
         return when (request.complicationType) {
             ComplicationType.SHORT_TEXT -> {
-                ShortTextComplicationData.Builder(
-                    text = PlainComplicationText.Builder(eventTimeText).build(),
-                    contentDescription = PlainComplicationText.Builder("$titleText $eventTimeText").build()
+                // SLOT 0: Solar Path angles & next event (or full-screen "Tap to Open" tapAction when showing prompt)
+                val tapAction = if (showPrompt) openAppIntent() else null
+
+                if (showPrompt) {
+                    ShortTextComplicationData.Builder(
+                        text = PlainComplicationText.Builder("SETUP").build(),
+                        contentDescription = PlainComplicationText.Builder("Heads up! Tap to open Solar Path.").build()
+                    )
+                        .setTitle(PlainComplicationText.Builder("NO_LOCATION").build())
+                        .setMonochromaticImage(sunIcon)
+                        .setTapAction(tapAction)
+                        .build()
+                } else {
+                    val solar = SolarCalculator.calculateSolarData(prefs.latitude, prefs.longitude)
+
+                    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+                        .withZone(ZoneId.systemDefault())
+
+                    val eventTimeText = if (solar.nextEventEpoch > 0) {
+                        timeFormatter.format(Instant.ofEpochMilli(solar.nextEventEpoch))
+                    } else "- -"
+
+                    val titleText = if (solar.nextEventName.isNotEmpty()) {
+                        solar.nextEventName.uppercase()
+                    } else if (prefs.locationName != "- -") {
+                        prefs.locationName
+                    } else "SUN"
+
+                    val formattedTitle = SolarCalculator.formatAnglesForComplication(solar, titleText)
+
+                    ShortTextComplicationData.Builder(
+                        text = PlainComplicationText.Builder(eventTimeText).build(),
+                        contentDescription = PlainComplicationText.Builder("$titleText $eventTimeText").build()
+                    )
+                        .setTitle(PlainComplicationText.Builder(formattedTitle).build())
+                        .setMonochromaticImage(sunIcon)
+                        .setTapAction(null)
+                        .build()
+                }
+            }
+
+            ComplicationType.MONOCHROMATIC_IMAGE -> {
+                MonochromaticImageComplicationData.Builder(
+                    monochromaticImage = sunIcon,
+                    contentDescription = shortcutDesc
                 )
-                    .setTitle(PlainComplicationText.Builder(formattedTitle).build())
-                    .setMonochromaticImage(sunIcon)
-                    .setTapAction(tapAction)
+                    .setTapAction(openAppIntent())
                     .build()
             }
+
+            ComplicationType.SMALL_IMAGE -> {
+                SmallImageComplicationData.Builder(
+                    smallImage = smallImage,
+                    contentDescription = shortcutDesc
+                )
+                    .setTapAction(openAppIntent())
+                    .build()
+            }
+
+            ComplicationType.LONG_TEXT -> {
+                LongTextComplicationData.Builder(
+                    text = PlainComplicationText.Builder(getString(R.string.app_name)).build(),
+                    contentDescription = shortcutDesc
+                )
+                    .setMonochromaticImage(sunIcon)
+                    .setTapAction(openAppIntent())
+                    .build()
+            }
+
             else -> null
         }
     }
