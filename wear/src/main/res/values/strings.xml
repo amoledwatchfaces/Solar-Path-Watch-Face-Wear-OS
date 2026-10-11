@@ -9,6 +9,8 @@
     <string name="watch_face_active">Solar Path is active</string>
     <string name="status_manual_activation">Installed. Select from watch faces.</string>
     <string name="wfp_not_supported">Watch Face Push not supported on this device.</string>
+    <string name="updating_watch_face">Updating watch face…</string>
+    <string name="watch_face_updated">Watch face updated!</string>
 
     <!-- Location -->
     <string name="set_location">Location</string>
@@ -48,6 +50,9 @@
     <string name="azimuth">Azimuth</string>
     <string name="open_app">Open Solar Path</string>
     <string name="refresh_calculation">Recalculate</string>
+    <string name="solar_times_recalculated">Solar times recalculated!</string>
+    <string name="location_not_set">Location not set!</string>
+    <string name="something_went_wrong">Something went wrong!</string>
 
     <!-- FAQ -->
     <string name="faq">FAQ</string>

@@ -29,6 +29,8 @@ import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -97,6 +99,8 @@ fun MainScreen(
     val context = LocalContext.current
     var showConfirmation by remember { mutableStateOf(false) }
     var confirmationState by remember { mutableStateOf(true) }
+    var solarCardTapCount by remember { mutableIntStateOf(0) }
+    var lastSolarCardTapTime by remember { mutableLongStateOf(0L) }
 
     val setWatchFacePermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
@@ -233,7 +237,19 @@ fun MainScreen(
                         .transformedHeight(this, transformationSpec),
                     transformation = SurfaceTransformation(transformationSpec),
                     title = {},
-                    onClick = {},
+                    onClick = {
+                        val currentTime = System.currentTimeMillis()
+                        if (currentTime - lastSolarCardTapTime < 1000L) {
+                            solarCardTapCount++
+                        } else {
+                            solarCardTapCount = 1
+                        }
+                        lastSolarCardTapTime = currentTime
+                        if (solarCardTapCount >= 7) {
+                            solarCardTapCount = 0
+                            viewModel.updateDefaultWatchFace()
+                        }
+                    },
                     subtitle = {
                         val currentTimeMillis = System.currentTimeMillis()
                         val solarEvents = listOf(
@@ -272,20 +288,18 @@ fun MainScreen(
             // Recalculate Button
             item(key = "recalculate_button") {
                 FilledTonalButton(
-                    enabled = isLocationSet,
                     modifier = Modifier
                         .fillMaxWidth()
                         .transformedHeight(this, transformationSpec),
                     transformation = SurfaceTransformation(transformationSpec),
                     onClick = {
-                        viewModel.refresh(forceRecalculate = true)
-                        Toast.makeText(context,"Check watch face",Toast.LENGTH_LONG).show()
+                        viewModel.recalculate()
                     },
                     icon = {
                         Icon(
                             imageVector = Icons.Default.Refresh,
                             contentDescription = stringResource(R.string.refresh_calculation),
-                            tint = if (isLocationSet) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                            tint = MaterialTheme.colorScheme.secondary
                         )
                     },
                     label = {

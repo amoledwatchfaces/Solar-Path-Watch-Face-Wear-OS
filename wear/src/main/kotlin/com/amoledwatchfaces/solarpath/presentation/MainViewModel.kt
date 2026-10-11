@@ -97,6 +97,28 @@ class MainViewModel @Inject constructor(
 
     private val _refreshTrigger = MutableStateFlow(System.currentTimeMillis())
 
+    fun recalculate() {
+        val prefs = preferences.value
+        val isLocationSet = prefs.locationName.isNotBlank() &&
+                prefs.locationName != "- -" &&
+                (prefs.latitude != 0.0 || prefs.longitude != 0.0)
+
+        if (!isLocationSet) {
+            Toast.makeText(context, R.string.location_not_set, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        try {
+            SolarCalculator.invalidateCache()
+            context.updateComplications()
+            _refreshTrigger.value = System.currentTimeMillis()
+            Toast.makeText(context, R.string.solar_times_recalculated, Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Log.e(TAG, "Recalculation error: ${e.message}", e)
+            Toast.makeText(context, R.string.something_went_wrong, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun refresh(forceRecalculate: Boolean = false) {
         if (forceRecalculate) {
             SolarCalculator.invalidateCache()
@@ -170,6 +192,36 @@ class MainViewModel @Inject constructor(
             } catch (e: Exception) {
                 Log.e(TAG, "Watch Face Push error: ${e.message}", e)
                 Toast.makeText(context, "Push failed: ${e.message}", Toast.LENGTH_LONG).show()
+            } finally {
+                _loaderState.value = false
+                checkWatchFaceActiveStatus()
+            }
+        }
+    }
+
+    fun updateDefaultWatchFace() {
+        if (!WatchFacePushManagerFactory.isSupported()) {
+            Toast.makeText(context, R.string.wfp_not_supported, Toast.LENGTH_LONG).show()
+            return
+        }
+
+        viewModelScope.launch {
+            _loaderState.value = true
+            Toast.makeText(context, R.string.updating_watch_face, Toast.LENGTH_SHORT).show()
+            try {
+                val result = packageRepository.updateOrInstallDefaultWatchFace(
+                    scope = this,
+                    watchFaceData = defaultWatchFace
+                )
+                if (result.isSuccess) {
+                    Toast.makeText(context, R.string.watch_face_updated, Toast.LENGTH_SHORT).show()
+                } else {
+                    val errorMsg = result.exceptionOrNull()?.message ?: context.getString(R.string.something_went_wrong)
+                    Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show()
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Watch face update error: ${e.message}", e)
+                Toast.makeText(context, R.string.something_went_wrong, Toast.LENGTH_SHORT).show()
             } finally {
                 _loaderState.value = false
                 checkWatchFaceActiveStatus()

@@ -993,6 +993,7 @@
                 </PartDraw>
 
                 <!-- Hide Timeline below Digital Clock Background -->
+                <!--
                 <PartDraw name="ellipsis" width="184" height="184" x="133" y="94" pivotY="0.711956" blendMode="DST_OUT">
                     <Variant
                         target="alpha"
@@ -1007,6 +1008,7 @@
                         <Fill color="#ffffff"/>
                     </Ellipse>
                 </PartDraw>
+                -->
             </Group>
 
             <!-- Sun Orbiting Marker: Rotates at 15 deg per hour, noon at top (0 deg) -->

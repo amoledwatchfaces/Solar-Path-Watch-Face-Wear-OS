@@ -7,7 +7,7 @@
 
     <string name="id_clock_alt_colors">Vibrant Clock Colors</string>
 
-    <string name="id_clock_subText">Digital Clock SubText</string>
+    <string name="id_clock_subText">Digital Clock Info</string>
     <string name="id_clock_subText_0">Day of Week</string>
     <string name="id_clock_subText_1">Am-Pm</string>
     <string name="id_clock_subText_2">Seconds</string>
