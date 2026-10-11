@@ -7,6 +7,12 @@
 
     <string name="id_clock_alt_colors">Vibrant Clock Colors</string>
 
+    <string name="id_clock_subText">Digital Clock SubText</string>
+    <string name="id_clock_subText_0">Day of Week</string>
+    <string name="id_clock_subText_1">Am-Pm</string>
+    <string name="id_clock_subText_2">Seconds</string>
+    <string name="id_clock_subText_3">Weather</string>
+
     <string name="id_aod">Ambient Mode</string>
     <string name="id_aod_0">Dimmed</string>
     <string name="id_aod_1">No Arcs</string>
@@ -16,11 +22,6 @@
     <string name="id_clock_bg_0">Dark</string>
     <string name="id_clock_bg_1">Gradient</string>
     <string name="id_clock_bg_2">Light</string>
-
-    <!-- No Location Notice -->
-    <string name="no_location_title">Heads up!</string>
-    <string name="no_location_text">Enable location or set a static location in the app to calculate solar times</string>
-    <string name="no_location_continue">Continue</string>
 
     <string name="id_leading_zero">Leading Zero</string>
     <string name="id_progress_bar_gradients">Arc Gradients</string>

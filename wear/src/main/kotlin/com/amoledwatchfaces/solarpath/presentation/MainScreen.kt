@@ -3,6 +3,8 @@ package com.amoledwatchfaces.solarpath.presentation
 
 import android.Manifest
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,13 +27,11 @@ import androidx.compose.material.icons.filled.WatchLater
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import kotlinx.coroutines.delay
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -71,15 +71,12 @@ import com.amoledwatchfaces.solarpath.BuildConfig
 import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.presentation.ui.BackgroundPermissionDialog
 import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import com.amoledwatchfaces.solarpath.utils.PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE
 import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
 import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun MainScreen(
@@ -93,21 +90,9 @@ fun MainScreen(
     val solarData by viewModel.solarData.collectAsState()
     val isLoading by viewModel.loaderState.collectAsState()
     val isWatchFaceActive by viewModel.isWatchFaceActive.collectAsState()
-    var isButtonVisible by remember { mutableStateOf(false) }
-    var hasSetInitialVisibility by remember { mutableStateOf(false) }
-
-    LaunchedEffect(isWatchFaceActive) {
-        val active = isWatchFaceActive ?: return@LaunchedEffect
-        if (!hasSetInitialVisibility) {
-            hasSetInitialVisibility = true
-            isButtonVisible = !active
-        } else if (active && isButtonVisible) {
-            delay(2500.milliseconds)
-            isButtonVisible = false
-        } else if (!active) {
-            isButtonVisible = true
-        }
-    }
+    val isLocationSet = preferences.locationName.isNotBlank() &&
+            preferences.locationName != "- -" &&
+            (preferences.latitude != 0.0 || preferences.longitude != 0.0)
 
     val context = LocalContext.current
     var showConfirmation by remember { mutableStateOf(false) }
@@ -190,44 +175,40 @@ fun MainScreen(
                 }
             }
 
-            if (isButtonVisible) {
-                // Set Watch Face Button
-                item(key = "set_watch_face_button") {
-                    Button(
-                        colors = if (isWatchFaceActive == true) {
-                            ButtonDefaults.filledTonalButtonColors()
+            // Set Watch Face Button
+            item(key = "set_watch_face_button") {
+                Button(
+                    enabled = isWatchFaceActive == false,
+                    colors = if (isWatchFaceActive == true) {
+                        ButtonDefaults.filledTonalButtonColors()
+                    } else {
+                        ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = {
+                        if (context.isPermissionGranted(PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE)) {
+                            viewModel.pushDefaultWatchFace()
                         } else {
-                            ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
-                        },
-                        modifier = Modifier
-                            .animateItem()
-                            .fillMaxWidth()
-                            .transformedHeight(this, transformationSpec),
-                        transformation = SurfaceTransformation(transformationSpec),
-                        onClick = {
-                            if (isWatchFaceActive == true) {
-                                Toast.makeText(context, R.string.watch_face_active, Toast.LENGTH_SHORT).show()
-                            } else if (context.isPermissionGranted(PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE)) {
-                                viewModel.pushDefaultWatchFace()
-                            } else {
-                                setWatchFacePermissionLauncher.launch(PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE)
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = if (isWatchFaceActive == true) Icons.Default.Check else Icons.Default.WatchLater,
-                                contentDescription = "Watch Face",
-                                tint = if (isWatchFaceActive == true) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimaryContainer
-                            )
-                        },
-                        label = {
-                            Text(
-                                text = if (isWatchFaceActive == true) stringResource(R.string.watch_face_active) else stringResource(R.string.push_watch_face),
-                                color = if (isWatchFaceActive == true) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onPrimaryContainer
-                            )
+                            setWatchFacePermissionLauncher.launch(PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE)
                         }
-                    )
-                }
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = if (isWatchFaceActive == true) Icons.Default.Check else Icons.Default.WatchLater,
+                            contentDescription = "Watch Face",
+                            tint = if (isWatchFaceActive == true) MaterialTheme.colorScheme.primary.copy(alpha = 0.6f) else MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = if (isWatchFaceActive == true) stringResource(R.string.watch_face_active) else stringResource(R.string.push_watch_face),
+                            color = if (isWatchFaceActive == true) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f) else MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                )
             }
 
             // Solar Times Breakdown
@@ -291,6 +272,7 @@ fun MainScreen(
             // Recalculate Button
             item(key = "recalculate_button") {
                 FilledTonalButton(
+                    enabled = isLocationSet,
                     modifier = Modifier
                         .fillMaxWidth()
                         .transformedHeight(this, transformationSpec),
@@ -303,7 +285,7 @@ fun MainScreen(
                         Icon(
                             imageVector = Icons.Default.Refresh,
                             contentDescription = stringResource(R.string.refresh_calculation),
-                            tint = MaterialTheme.colorScheme.secondary
+                            tint = if (isLocationSet) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                         )
                     },
                     label = {
