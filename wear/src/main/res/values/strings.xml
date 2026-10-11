@@ -32,7 +32,7 @@
     <string name="update_interval">Update Interval</string>
     <string name="enable_permission_toast">Please grant location permission</string>
     <string name="location_disclosure_title">Location Access</string>
-    <string name="location_disclosure_message">Solar Path uses location to fetch and calculate local sun times. Background location access can also be enabled for continuous updates. Data is processed locally on-device and is never stored or shared.\n\nYou can also set your location manually if you don't wish to enable these permissions.</string>
+    <string name="location_disclosure_message">Solar Path uses location to fetch and calculate local sun times. Background location access can also be enabled for continuous updates. Data is processed locally on-device and is never stored or shared.\n\nYou can also set your location manually if you don\'t wish to enable these permissions.</string>
     <string name="background_location_rationale">Solar Path will collect coarse location data to enable accurate solar calculations even when the app is closed or not in use. This data is processed locally on-device and is never stored or shared.</string>
     <string name="background_location_instruction">Please tick \'All the time\' to finish background location setting.</string>
     <string name="all_the_time_not_granted">All the time permission not granted…</string>
