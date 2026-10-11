@@ -17,6 +17,8 @@
     <string name="wfp_not_supported">Watch Face Push not supported on this device.</string>
 
     <!-- Location -->
+    <string name="set_location_button">Set Location</string>
+    <string name="no_location_set">No location set</string>
     <string name="set_location">Location</string>
     <string name="locations">Locations</string>
     <string name="search">Search</string>
@@ -25,13 +27,13 @@
     <string name="recent">Recent</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="no_location">Location not available</string>
-    <string name="background_location">Background Location</string>
+    <string name="background_location">Background Location Updates</string>
     <string name="background_location_summary">Automatically update location periodically</string>
     <string name="update_interval">Update Interval</string>
     <string name="enable_permission_toast">Please grant location permission</string>
     <string name="location_disclosure_title">Location Access</string>
-    <string name="location_disclosure_message">Solar Path uses approximate location to calculate local sun times. Data is processed locally on-device and is never stored or shared.\n\nYou can also set a static location manually.</string>
-    <string name="background_location_rationale">Solar Path will collect approximate location data to enable accurate solar calculations even when the app is closed or not in use.</string>
+    <string name="location_disclosure_message">Solar Path uses location to fetch and calculate local sun times. Background location access can also be enabled for continuous updates. Data is processed locally on-device and is never stored or shared.\n\nYou can also set your location manually if you don't wish to enable these permissions.</string>
+    <string name="background_location_rationale">Solar Path will collect coarse location data to enable accurate solar calculations even when the app is closed or not in use. This data is processed locally on-device and is never stored or shared.</string>
     <string name="background_location_instruction">Please tick \'All the time\' to finish background location setting.</string>
     <string name="all_the_time_not_granted">All the time permission not granted…</string>
 
@@ -78,4 +80,5 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="check_your_phone">Check your phone</string>
     <string name="check_your_phone_failure">Phone can\'t be reached</string>
+    <string name="copyright_footer">Copyright (c) 2026\namoledwatchfaces.com\nAll rights reserved</string>
 </resources>

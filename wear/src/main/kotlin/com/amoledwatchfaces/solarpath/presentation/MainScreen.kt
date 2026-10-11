@@ -18,11 +18,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.LocationOff
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.WatchLater
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.runtime.Composable
@@ -56,6 +54,7 @@ import androidx.wear.compose.material3.FilledTonalButton
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.ListSubHeader
 import androidx.wear.compose.material3.MaterialTheme
+import androidx.wear.compose.material3.OutlinedButton
 import androidx.wear.compose.material3.ProgressIndicatorDefaults
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Slider
@@ -68,7 +67,6 @@ import androidx.wear.compose.material3.lazy.TransformationSpec
 import androidx.wear.compose.material3.lazy.transformedHeight
 import com.amoledwatchfaces.solarpath.BuildConfig
 import com.amoledwatchfaces.solarpath.R
-import com.amoledwatchfaces.solarpath.presentation.ui.BackgroundPermissionDialog
 import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
 import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
@@ -89,7 +87,6 @@ fun MainScreen(
     val preferences by viewModel.preferences.collectAsState()
     val solarData by viewModel.solarData.collectAsState()
     val isLoading by viewModel.loaderState.collectAsState()
-    val isWatchFaceActive by viewModel.isWatchFaceActive.collectAsState()
 
     val context = LocalContext.current
     var showConfirmation by remember { mutableStateOf(false) }
@@ -163,79 +160,51 @@ fun MainScreen(
                 }
             }
 
-            // Push Watch Face Button
-            item {
-                Button(
-                    colors = if (isWatchFaceActive) {
-                        ButtonDefaults.filledTonalButtonColors()
-                    } else {
-                        ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .transformedHeight(this, transformationSpec),
-                    transformation = SurfaceTransformation(transformationSpec),
-                    onClick = { viewModel.pushDefaultWatchFace() },
-                    icon = {
-                        Icon(
-                            imageVector = if (isWatchFaceActive) Icons.Default.Check else Icons.Default.WatchLater,
-                            contentDescription = "Watch Face",
-                            tint = if (isWatchFaceActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    },
-                    label = {
-                        Text(
-                            text = if (isWatchFaceActive) stringResource(R.string.watch_face_active) else stringResource(R.string.push_watch_face),
-                            color = if (isWatchFaceActive) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-                )
-            }
+            val isLocationSet = preferences.locationName.isNotBlank() &&
+                    preferences.locationName != "- -" &&
+                    (preferences.latitude != 0.0 || preferences.longitude != 0.0)
 
-            // FAQ Button
-            item {
-                FilledTonalButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .transformedHeight(this, transformationSpec),
-                    transformation = SurfaceTransformation(transformationSpec),
-                    onClick = { navController.navigate("faq") },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.HelpOutline,
-                            contentDescription = stringResource(R.string.faq)
-                        )
-                    },
-                    label = {
-                        Text(text = stringResource(R.string.faq))
-                    },
-                    secondaryLabel = {
-                        Text(text = stringResource(R.string.faq_subtitle))
-                    }
-                )
-            }
-
-            // Recalculate Button
-            item {
-                FilledTonalButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .transformedHeight(this, transformationSpec),
-                    transformation = SurfaceTransformation(transformationSpec),
-                    onClick = {
-                        viewModel.recalculate()
-                    },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Default.Refresh,
-                            contentDescription = stringResource(R.string.refresh_calculation),
-                            tint = MaterialTheme.colorScheme.secondary
-                        )
-                    },
-                    label = {
-                        Text(text = stringResource(R.string.refresh_calculation))
-                    }
-                )
+            // Set Location Button (only shown if no location is set)
+            if (!isLocationSet) {
+                item {
+                    val alertRed = Color(0xFFFF5252)
+                    OutlinedButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .transformedHeight(this, transformationSpec),
+                        transformation = SurfaceTransformation(transformationSpec),
+                        onClick = { navController.navigate("location_choose") },
+                        border = ButtonDefaults.outlinedButtonBorder(
+                            enabled = true,
+                            borderColor = alertRed,
+                            borderWidth = 2.dp
+                        ),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = alertRed,
+                            secondaryContentColor = alertRed
+                        ),
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Default.LocationOn,
+                                contentDescription = stringResource(R.string.set_location_button),
+                                tint = alertRed
+                            )
+                        },
+                        label = {
+                            Text(
+                                text = stringResource(R.string.set_location_button),
+                                color = alertRed,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        },
+                        secondaryLabel = {
+                            Text(
+                                text = stringResource(R.string.no_location_set),
+                                color = alertRed
+                            )
+                        }
+                    )
+                }
             }
 
             // Solar Times Breakdown
@@ -294,6 +263,29 @@ fun MainScreen(
                                 )
                             }
                         }
+                    }
+                )
+            }
+
+            // Recalculate Button
+            item {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = {
+                        viewModel.recalculate()
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = stringResource(R.string.refresh_calculation),
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    label = {
+                        Text(text = stringResource(R.string.refresh_calculation))
                     }
                 )
             }
@@ -358,7 +350,7 @@ fun MainScreen(
                             if (context.isPermissionGranted(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                                 viewModel.setBackgroundLocation(true)
                             } else {
-                                viewModel.setBackgroundLocationDialogState(true)
+                                viewModel.setInitialLocationDialogState(true)
                             }
                         } else {
                             viewModel.setBackgroundLocation(false)
@@ -391,7 +383,7 @@ fun MainScreen(
                         onValueChange = {
                             viewModel.setBackgroundLocationRepeatInterval(it.toLong())
                         },
-                        valueProgression = IntProgression.fromClosedRange(30, 240, 15),
+                        valueProgression = IntProgression.fromClosedRange(30, 240, 30),
                         decreaseIcon = {
                             SliderDefaults.DecreaseIcon()
                         },
@@ -421,29 +413,25 @@ fun MainScreen(
                 )
             }
 
-            // App Version Button
+            // FAQ Button
             item {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .transformedHeight(this, transformationSpec),
                     transformation = SurfaceTransformation(transformationSpec),
-                    onClick = { context.openPlayStore() },
+                    onClick = { navController.navigate("faq") },
                     icon = {
                         Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = stringResource(R.string.version),
-                            tint = MaterialTheme.colorScheme.secondary
+                            imageVector = Icons.AutoMirrored.Filled.HelpOutline,
+                            contentDescription = stringResource(R.string.faq)
                         )
                     },
                     label = {
-                        Text(
-                            text = stringResource(R.string.version),
-                            overflow = TextOverflow.Ellipsis
-                        )
+                        Text(text = stringResource(R.string.faq))
                     },
                     secondaryLabel = {
-                        Text(text = BuildConfig.VERSION_NAME)
+                        Text(text = stringResource(R.string.faq_subtitle))
                     }
                 )
             }
@@ -477,6 +465,33 @@ fun MainScreen(
                 )
             }
 
+            // App Version Button
+            item {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = { context.openPlayStore() },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = stringResource(R.string.version),
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(R.string.version),
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    },
+                    secondaryLabel = {
+                        Text(text = BuildConfig.VERSION_NAME)
+                    }
+                )
+            }
+
             // amoledwatchfaces.com
             item {
                 ListSubHeader(
@@ -489,7 +504,7 @@ fun MainScreen(
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center,
                             color = MaterialTheme.colorScheme.outlineVariant,
-                            text = "amoledwatchfaces.com",
+                            text = stringResource(R.string.copyright_footer),
                             style = MaterialTheme.typography.bodySmall
                         )
                     }
@@ -510,13 +525,6 @@ fun MainScreen(
             confirmationState = confirmationState,
             onTimeout = { showConfirmation = false }
         )
-
-        val backgroundLocationDialogState by viewModel.backgroundLocationDialogState.collectAsState()
-        if (backgroundLocationDialogState) {
-            BackgroundPermissionDialog(
-                viewModel = viewModel
-            )
-        }
 
         if (isLoading) {
             Box(
