@@ -44,8 +44,7 @@ class WatchFacePackageRepository(
 
     suspend fun updateOrInstallDefaultWatchFace(
         scope: CoroutineScope,
-        watchFaceData: WatchFaceData = DEFAULT_WATCH_FACE,
-        setAsActive: Boolean = false
+        watchFaceData: WatchFaceData = DEFAULT_WATCH_FACE
     ): Result<String> = withContext(Dispatchers.IO) {
         runCatching {
             if (!WatchFacePushManagerFactory.isSupported()) {
@@ -70,15 +69,6 @@ class WatchFacePackageRepository(
                 }
                 slotId = slot.slotId
                 Log.i(TAG, "Default watch face installed into new slot $slotId")
-            }
-
-            if (setAsActive) {
-                try {
-                    wfpManager.setWatchFaceAsActive(slotId)
-                    Log.i(TAG, "Default watch face set as active on slot $slotId")
-                } catch (e: Exception) {
-                    Log.w(TAG, "Could not set watch face as active: ${e.message}")
-                }
             }
 
             slotId

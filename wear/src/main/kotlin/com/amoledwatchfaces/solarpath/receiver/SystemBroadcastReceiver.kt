@@ -54,8 +54,7 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
             scope.launch {
                 try {
                     val result = packageRepository.updateOrInstallDefaultWatchFace(
-                        scope = this,
-                        setAsActive = false
+                        scope = this
                     )
                     if (result.isSuccess) {
                         Log.i(TAG, "Successfully updated bundled watch face on MY_PACKAGE_REPLACED: slot ${result.getOrNull()}")
