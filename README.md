@@ -49,8 +49,9 @@ Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)*
   - **Digital Clock**: Clean, modern digital readout with optional leading zeros and alternate accent colors.
   - **Analog Clock**: Sleek hour, minute, and second hands with hour indices and date indicator.
 - **Interactive Heads Up Screen & Smart Onboarding**:
-  - Full-screen "TAP TO OPEN" onboarding prompt when location is unconfigured.
-  - In-app location warning banner with direct "Enable location" and "Use without location" controls.
+  - Full-screen "TAP TO OPEN" onboarding prompt on the watch face when location is unconfigured, vertically balanced for circular displays.
+  - Unified **Location Access** screen with on-device privacy disclosure and sequential foreground/background permission requesting.
+  - Centered **Set Location** action button dynamically displayed at the top of the companion app when coordinates are not yet configured.
   - Automatic suppression on lock screen / keyguard to protect privacy and battery.
 - **Watch Face Format (WFF v4)**:
   - Declarative XML rendering natively on the Wear OS system with zero background battery drain (`hasCode = false`).
@@ -131,11 +132,12 @@ Solar Path provides a clean, universal standalone complication data source that 
 ## 🌅 Heads Up Location Guidance & Onboarding
 
 To deliver mathematically accurate solar arcs and twilight phases, Solar Path requires approximate geographic coordinates. When location permissions or coordinates are not yet configured:
-- **Watch Face "Heads Up!" Overlay**: The watch face displays an informative, high-contrast onboarding screen explaining that the face works best with location permissions enabled, with a clear `"TAP TO OPEN"` call-to-action.
+- **Watch Face "Heads Up!" Overlay**: The watch face displays an informative, high-contrast onboarding screen explaining that the face works best with location permissions enabled, positioned with balanced vertical alignment and a clear `"TAP TO OPEN"` call-to-action.
 - **Full-Screen Tap Target**: Tapping anywhere on the watch face cleanly opens the Solar Path configuration app without touch bleed-through to underlying complications.
-- **In-App Location Banner**: A color-highlighted card at the top of the companion app offers two simple options:
-  - **"Enable location"**: Triggers the system permission prompt (`ACCESS_COARSE_LOCATION`) to automatically acquire coordinates.
-  - **"Use without location"**: Dismisses the in-app warning banner and permanently clears the watch face overlay, transitioning the watch face into standard timekeeping mode.
+- **Unified Location Access Screen**: A dedicated full-screen disclosure explaining that solar times are computed 100% on-device and never shared, offering two straightforward actions:
+  - **"Enable location permissions"**: Initiates a smooth, sequential permission flow (requesting approximate foreground access first, followed by optional background updates).
+  - **"Use without location"**: Dismisses the initialization prompt, allowing users to configure coordinates manually via city search.
+- **Dynamic "Set Location" Quick-Action**: If no location has been chosen, a prominent centered button with soft red highlight and gray subtext appears at the very top of the companion app to open location search immediately.
 - **Smart Keyguard Detection**: The prompt is automatically suppressed when the watch is locked (PIN/pattern or off-wrist), ensuring a clean, distraction-free lock screen.
 
 ---
@@ -144,16 +146,15 @@ To deliver mathematically accurate solar arcs and twilight phases, Solar Path re
 
 The integrated Wear OS companion application provides astronomical calculations and location management:
 
-- **Astronomical Timeline**: Cards showing sunrise, sunset, civil/nautical/astronomical dawn & dusk, solar noon, and nadir times.
-- **In-App Onboarding & Settings**: Direct controls to enable location or dismiss location prompts.
+- **Dynamic Set Location Call-to-Action**: Vertically centered button at the app root that alerts the user when coordinates are missing and directs them to location setup.
+- **Next Event & Solar Status**: Real-time display of the upcoming celestial event, sun elevation, and total daylight duration.
+- **Astronomical Timeline**: Chronological solar card showing sunrise, sunset, civil/nautical/astronomical dawn & dusk, solar noon, and nadir times with direct **Recalculate** action button below.
 - **Smart Location Management**:
   - Automatic positioning via `FusedLocationProviderClient` using privacy-friendly Approximate Location (`ACCESS_COARSE_LOCATION` only — no precise GPS tracking required).
   - Manual location search with `Geocoder` and recent locations history.
-  - Periodic background location updates via `WorkManager`.
-- **One-Tap Watch Face Activation**:
-  - Seamlessly pushes and activates the bundled WFF watch face via AndroidX Watch Face Push.
-  - Automatic watch face update on app update (`ACTION_MY_PACKAGE_REPLACED`).
-- **Celestial Mechanics Guide**: Interactive FAQ explaining solar elevation, twilight sectors, and horizon calculations.
+  - Configurable **Background Location Updates** via `WorkManager` with 30-minute interval increments (30 to 240 minutes).
+  - Sequential dual-level permission dispatching for seamless background configuration.
+- **Celestial Mechanics Guide & About**: Interactive FAQ explaining 24-hour solar dial mechanics, twilight phases, sun marker orbit, and NOAA algorithms, positioned right at the top of the About section alongside the privacy policy and version information.
 
 ---
 
