@@ -43,6 +43,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
@@ -152,6 +153,32 @@ class MainViewModel @Inject constructor(
 
     init {
         checkWatchFaceActiveStatus()
+        checkAndMigrateToWff5()
+    }
+
+    private fun checkAndMigrateToWff5() {
+        if (android.os.Build.VERSION.SDK_INT < 37) return
+        if (!WatchFacePushManagerFactory.isSupported()) return
+
+        viewModelScope.launch {
+            val currentPrefs = preferences.first()
+            if (currentPrefs.isWff5Updated) return@launch
+
+            try {
+                Log.i(TAG, "Wear OS 7+ detected (API ${android.os.Build.VERSION.SDK_INT}). Auto-migrating default watch face to WFF 5...")
+                val result = packageRepository.updateToWff5WatchFace(scope = this)
+                if (result.isSuccess) {
+                    Log.i(TAG, "Successfully updated default watch face to WFF 5 (slot ${result.getOrNull()})")
+                    preferencesRepository.setWff5Updated(true)
+                } else {
+                    Log.w(TAG, "WFF 5 migration failed: ${result.exceptionOrNull()?.message}")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error during WFF 5 migration: ${e.message}", e)
+            } finally {
+                checkWatchFaceActiveStatus()
+            }
+        }
     }
 
     fun checkWatchFaceActiveStatus() {
@@ -209,10 +236,16 @@ class MainViewModel @Inject constructor(
             _loaderState.value = true
             Toast.makeText(context, R.string.updating_watch_face, Toast.LENGTH_SHORT).show()
             try {
-                val result = packageRepository.updateOrInstallDefaultWatchFace(
-                    scope = this,
-                    watchFaceData = defaultWatchFace
-                )
+                val result = if (android.os.Build.VERSION.SDK_INT >= 37) {
+                    packageRepository.updateToWff5WatchFace(scope = this).also {
+                        if (it.isSuccess) preferencesRepository.setWff5Updated(true)
+                    }
+                } else {
+                    packageRepository.updateOrInstallDefaultWatchFace(
+                        scope = this,
+                        watchFaceData = defaultWatchFace
+                    )
+                }
                 if (result.isSuccess) {
                     Toast.makeText(context, R.string.watch_face_updated, Toast.LENGTH_SHORT).show()
                 } else {

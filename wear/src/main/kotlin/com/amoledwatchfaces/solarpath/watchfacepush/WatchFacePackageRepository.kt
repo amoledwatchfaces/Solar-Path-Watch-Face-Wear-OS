@@ -42,9 +42,10 @@ class WatchFacePackageRepository(
         return FdPipe(readFd, writeFd)
     }
 
-    suspend fun updateOrInstallDefaultWatchFace(
+    suspend fun updateOrInstallWatchFace(
         scope: CoroutineScope,
-        watchFaceData: WatchFaceData = DEFAULT_WATCH_FACE
+        watchFaceData: WatchFaceData = DEFAULT_WATCH_FACE,
+        token: String = context.getString(R.string.default_wf_token)
     ): Result<String> = withContext(Dispatchers.IO) {
         runCatching {
             if (!WatchFacePushManagerFactory.isSupported()) {
@@ -53,7 +54,6 @@ class WatchFacePackageRepository(
             val wfpManager = WatchFacePushManagerFactory.createWatchFacePushManager(context)
             val response = wfpManager.listWatchFaces()
             val installed = response.installedWatchFaceDetails.filter { it.packageName == watchFaceData.packageName }
-            val token = context.getString(R.string.default_wf_token)
 
             val slotId: String
             if (installed.isNotEmpty()) {
@@ -62,18 +62,35 @@ class WatchFacePackageRepository(
                     wfpManager.updateWatchFace(existingSlot.slotId, pipe.readFd, token)
                 }
                 slotId = existingSlot.slotId
-                Log.i(TAG, "Default watch face updated on existing slot $slotId")
+                Log.i(TAG, "${watchFaceData.name} updated on existing slot $slotId")
             } else {
                 val slot = pipeWatchFace(scope, watchFaceData).use { pipe ->
                     wfpManager.addWatchFace(pipe.readFd, token)
                 }
                 slotId = slot.slotId
-                Log.i(TAG, "Default watch face installed into new slot $slotId")
+                Log.i(TAG, "${watchFaceData.name} installed into new slot $slotId")
             }
 
             slotId
         }
     }
+
+    suspend fun updateOrInstallDefaultWatchFace(
+        scope: CoroutineScope,
+        watchFaceData: WatchFaceData = DEFAULT_WATCH_FACE
+    ): Result<String> = updateOrInstallWatchFace(
+        scope = scope,
+        watchFaceData = watchFaceData,
+        token = context.getString(R.string.default_wf_token)
+    )
+
+    suspend fun updateToWff5WatchFace(
+        scope: CoroutineScope
+    ): Result<String> = updateOrInstallWatchFace(
+        scope = scope,
+        watchFaceData = SOLARPATH_WFF5_WATCH_FACE,
+        token = context.getString(R.string.wff5_wf_token)
+    )
 
     suspend fun setWatchFaceAsActive(
         watchFaceData: WatchFaceData = DEFAULT_WATCH_FACE

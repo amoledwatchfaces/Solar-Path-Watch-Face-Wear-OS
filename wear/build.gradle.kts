@@ -116,7 +116,7 @@ configurations {
 }
 
 dependencies {
-    "cliToolConfiguration"("com.google.android.wearable.watchface.validator:validator-push-cli:1.0.0-alpha09")
+    "cliToolConfiguration"("com.google.android.wearable.watchface.validator:validator-push-cli:1.1.0-alpha01")
 
     // Wear OS & Watch Face Push
     implementation ("androidx.wear:wear:1.4.0")
@@ -145,10 +145,10 @@ dependencies {
     implementation ("androidx.compose.animation:animation-graphics")
 
     // Compose for Wear OS
-    implementation ("androidx.wear.compose:compose-material3:1.7.0")
-    implementation ("androidx.wear.compose:compose-navigation:1.7.0")
-    implementation ("androidx.wear.compose:compose-foundation:1.7.0")
-    implementation ("androidx.wear.compose:compose-ui-tooling:1.7.0")
+    implementation ("androidx.wear.compose:compose-material3:1.7.1")
+    implementation ("androidx.wear.compose:compose-navigation:1.7.1")
+    implementation ("androidx.wear.compose:compose-foundation:1.7.1")
+    implementation ("androidx.wear.compose:compose-ui-tooling:1.7.1")
 
     // Input / Material3
     implementation ("androidx.compose.material3:material3:1.4.0")
@@ -192,11 +192,16 @@ androidComponents.onVariants { variant ->
 
     val copyTaskProvider = tasks.register<Copy>("copyWatchface${capsVariant}Output") {
         description = ""
-        val packageTask = project(":wear:watchface").tasks.named("package$capsVariant")
-        
-        from(packageTask) {
+        val packageWff4Task = project(":wear:watchface").tasks.named("packageWff4$capsVariant")
+        val packageWff5Task = project(":wear:watchface").tasks.named("packageWff5$capsVariant")
+
+        from(packageWff4Task) {
             include("**/*.apk")
             rename { "default_watchface.apk" }
+        }
+        from(packageWff5Task) {
+            include("**/*.apk")
+            rename { "solarpath_wff5.apk" }
         }
         into(layout.buildDirectory.dir("intermediates/watchfaceAssets/${variant.name}"))
 
@@ -249,56 +254,68 @@ abstract class ProcessFilesTask : DefaultTask() {
 
     @TaskAction
     fun taskAction() {
-        val apkFile = inputAssets.asFileTree.files.find { it.name.endsWith(".apk") }
-            ?: throw GradleException("No APK found in inputAssets. Files: ${inputAssets.asFileTree.files.joinToString()}")
-        
-        // Copy APK to apkDirectory
-        val targetFile = apkDirectory.get().file("default_watchface.apk").asFile
-        targetFile.parentFile.mkdirs()
-        apkFile.copyTo(targetFile, overwrite = true)
+        val defaultApk = inputAssets.asFileTree.files.find { it.name == "default_watchface.apk" }
+            ?: throw GradleException("default_watchface.apk not found in inputAssets. Files: ${inputAssets.asFileTree.files.joinToString()}")
+        val wff5Apk = inputAssets.asFileTree.files.find { it.name == "solarpath_wff5.apk" }
+            ?: throw GradleException("solarpath_wff5.apk not found in inputAssets. Files: ${inputAssets.asFileTree.files.joinToString()}")
 
-        val stdOut = ByteArrayOutputStream()
-        val stdErr = ByteArrayOutputStream()
+        // Copy APKs to apkDirectory
+        val targetDefaultFile = apkDirectory.get().file("default_watchface.apk").asFile
+        targetDefaultFile.parentFile.mkdirs()
+        defaultApk.copyTo(targetDefaultFile, overwrite = true)
 
-        execOperations.javaexec {
-            classpath = cliToolClasspath.get()
-            mainClass = "com.google.android.wearable.watchface.validator.cli.DwfValidation"
+        val targetWff5File = apkDirectory.get().file("solarpath_wff5.apk").asFile
+        wff5Apk.copyTo(targetWff5File, overwrite = true)
 
-            args(
-                "--apk_path=${apkFile.absolutePath}",
-                "--package_name=${rootPackage.get()}",
-            )
-            standardOutput = stdOut
-            errorOutput = stdErr
-            isIgnoreExitValue = true
-        }
+        fun generateToken(apk: File): String {
+            val stdOut = ByteArrayOutputStream()
+            val stdErr = ByteArrayOutputStream()
 
-        val outputAsText = stdOut.toString()
-        val errorAsText = stdErr.toString()
+            execOperations.javaexec {
+                classpath = cliToolClasspath.get()
+                mainClass = "com.google.android.wearable.watchface.validator.cli.DwfValidation"
 
-        if (outputAsText.contains("Failed check")) {
-            println(outputAsText)
-            if (errorAsText.isNotEmpty()) {
-                println(errorAsText)
+                args(
+                    "--apk_path=${apk.absolutePath}",
+                    "--package_name=${rootPackage.get()}",
+                )
+                standardOutput = stdOut
+                errorOutput = stdErr
+                isIgnoreExitValue = true
             }
-            throw GradleException("Watch face validation failed")
+
+            val outputAsText = stdOut.toString()
+            val errorAsText = stdErr.toString()
+
+            if (outputAsText.contains("Failed check")) {
+                println(outputAsText)
+                if (errorAsText.isNotEmpty()) {
+                    println(errorAsText)
+                }
+                throw GradleException("Watch face validation failed for ${apk.name}")
+            }
+
+            val match = Pattern.compile("generated token: (\\S+)").matcher(outputAsText)
+            if (match.find()) {
+                return match.group(1)
+            } else {
+                throw TaskExecutionException(
+                    this,
+                    GradleException("No token generated for watch face ${apk.name}! Output: $outputAsText Error: $errorAsText"),
+                )
+            }
         }
 
-        val match = Pattern.compile("generated token: (\\S+)").matcher(stdOut.toString())
-        if (match.find()) {
-            val token = match.group(1)
-            val output = outputFile.get().asFile
-            output.parentFile.mkdirs()
-            val tokenResText = """<resources>
-                         |    <string name="default_wf_token">$token</string>
-                         |</resources>
-                       """.trimMargin()
-            output.writeText(tokenResText)
-        } else {
-            throw TaskExecutionException(
-                this,
-                GradleException("No token generated for watch face!"),
-            )
-        }
+        val defaultToken = generateToken(defaultApk)
+        val wff5Token = generateToken(wff5Apk)
+
+        val output = outputFile.get().asFile
+        output.parentFile.mkdirs()
+        val tokenResText = """<resources>
+                     |    <string name="default_wf_token">$defaultToken</string>
+                     |    <string name="wff5_wf_token">$wff5Token</string>
+                     |</resources>
+                   """.trimMargin()
+        output.writeText(tokenResText)
     }
 }

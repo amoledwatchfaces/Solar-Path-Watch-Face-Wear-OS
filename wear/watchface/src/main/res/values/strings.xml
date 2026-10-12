@@ -5,6 +5,12 @@
     <string name="id_clock_style_0">Digital</string>
     <string name="id_clock_style_1">Analog</string>
 
+    <string name="id_layout">Layout</string>
+    <string name="id_layout_0">4x</string>
+    <string name="id_layout_1">2x</string>
+    <string name="id_layout_2">3x Up</string>
+    <string name="id_layout_3">3x Down</string>
+
     <string name="id_clock_alt_colors">Vibrant Clock Colors</string>
 
     <string name="id_clock_subText">Digital Clock Info</string>
