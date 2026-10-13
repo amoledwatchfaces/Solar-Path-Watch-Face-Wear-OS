@@ -162,13 +162,10 @@ Download the app directly to your Wear OS smartwatch from Google Play:
 </p>
 
 ### Sideloading (GitHub Releases)
-Precompiled `.apk` packages are available on our [GitHub Releases](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/releases) page:
-
-- **`wear-release.apk`**: Standard release APK signed with our repository release key.
-- **`wear-release-playstore.apk`**: Universal APK signed with Google Play App Signing key. Use this if you already have the Google Play version installed and want to update without uninstalling.
+Precompiled `.apk` packages (`wear-release.apk`) are available on our [GitHub Releases](https://github.com/amoledwatchfaces/Solar-Path-Watch-Face-Wear-OS/releases) page.
 
 > [!NOTE]
-> Standard GitHub APKs (`wear-release.apk`) and Google Play Store installations are signed with different keys due to Google Play App Signing. If switching between them, you must uninstall the existing app first, or use `wear-release-playstore.apk` to update existing Play Store installations directly.
+> Sideloaded APKs from GitHub and Google Play Store installations are signed with different keys due to Google Play App Signing. To switch between them, you must uninstall the existing app first.
 
 ---
 
