@@ -1289,7 +1289,10 @@
                                             <Transform
                                                 target="endAngle"
                                                 value="[SECOND] * 6">
-                                                <Animation angleDirection="CLOCKWISE" duration="1"/>
+                                                <Animation angleDirection="CLOCKWISE"
+                                                    controls="0.67 2 1.0 1.0"
+                                                    duration="0.1"
+                                                    interpolation="CUBIC_BEZIER" />
                                             </Transform>
                                             <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
                                         </Arc>
@@ -1319,10 +1322,7 @@
                                             <Transform
                                                 target="endAngle"
                                                 value="[SECOND] * 6">
-                                                <Animation angleDirection="CLOCKWISE"
-                                                    controls="0.67 2 1.0 1.0"
-                                                    duration="0.1"
-                                                    interpolation="CUBIC_BEZIER" />
+                                                <Animation angleDirection="CLOCKWISE" duration="1"/>
                                             </Transform>
                                             <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
                                         </Arc>
@@ -1508,7 +1508,10 @@
                                             value="0"
                                             mode="AMBIENT"/>
                                         <Transform target="angle" value="[SECOND] * 6">
-                                            <Animation angleDirection="CLOCKWISE" duration="1" />
+                                            <Animation angleDirection="CLOCKWISE"
+                                                controls="0.67 2 1.0 1.0"
+                                                duration="0.1"
+                                                interpolation="CUBIC_BEZIER" />
                                         </Transform>
                                         <RoundRectangle
                                             x="18.5"
@@ -1526,7 +1529,10 @@
                                             value="0"
                                             mode="AMBIENT"/>
                                         <Transform target="angle" value="[SECOND] * 6">
-                                            <Animation angleDirection="CLOCKWISE" duration="1" />
+                                            <Animation angleDirection="CLOCKWISE"
+                                                controls="0.67 2 1.0 1.0"
+                                                duration="0.1"
+                                                interpolation="CUBIC_BEZIER" />
                                         </Transform>
                                         <RoundRectangle
                                             x="18.5"
@@ -1546,10 +1552,7 @@
                                             value="0"
                                             mode="AMBIENT"/>
                                         <Transform target="angle" value="[SECOND] * 6">
-                                            <Animation angleDirection="CLOCKWISE"
-                                                controls="0.67 2 1.0 1.0"
-                                                duration="0.1"
-                                                interpolation="CUBIC_BEZIER" />
+                                            <Animation angleDirection="CLOCKWISE" duration="1" />
                                         </Transform>
                                         <RoundRectangle
                                             x="18.5"
@@ -1567,10 +1570,7 @@
                                             value="0"
                                             mode="AMBIENT"/>
                                         <Transform target="angle" value="[SECOND] * 6">
-                                            <Animation angleDirection="CLOCKWISE"
-                                                controls="0.67 2 1.0 1.0"
-                                                duration="0.1"
-                                                interpolation="CUBIC_BEZIER" />
+                                            <Animation angleDirection="CLOCKWISE" duration="1" />
                                         </Transform>
                                         <RoundRectangle
                                             x="18.5"
