@@ -98,8 +98,8 @@ Quickly switch between **11 curated style presets** designed for different aesth
 | ID | Flavor Name | Clock Style | Background | Themes (Primary / Secondary / Tertiary) | Highlights |
 |:---:|:---|:---:|:---:|:---|:---|
 | **0** | **Default** | Digital | Dark | Atmospheric Blue | Balanced, authentic solar tracker with flat clean arcs. |
-| **1** | **Classic Analog** | Analog | Dark | Graphite & Cloud | Timeless monochrome watch face with analog hands. |
-| **2** | **Solar Gold** | Analog | Dark | Wheat & Champagne | Warm golden sunlight tones with gradient arc accents. |
+| **1** | **Solar Gold** | Analog | Dark | Wheat & Champagne | Warm golden sunlight tones with gradient arc accents. |
+| **2** | **Classic Analog** | Analog | Dark | Graphite & Cloud | Timeless monochrome watch face with analog hands. |
 | **3** | **Deep Ocean** | Digital | Dark | Ocean, Sapphire & Royal Blue | Vibrant oceanic gradient arcs and crisp digital readout. |
 | **4** | **Alpine Green** | Analog | Dark | Alpine Green, Pine & Forest | Natural forest greens paired with elegant analog indices. |
 | **5** | **Sunset Glow** | Digital | Dark | Orange, Coral & Amber | Dusk-inspired warm palette with glowing gradient progress bars. |
