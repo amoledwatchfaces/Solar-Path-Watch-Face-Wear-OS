@@ -1233,7 +1233,7 @@
                                                 </BitmapFont>
                                                 <Font family="SYNC_TO_DEVICE" size="28" weight="SEMI_BOLD">
                                                     <Template><![CDATA[ %s°]]>
-                                                        <Parameter expression="[WEATHER.TEMPERATURE]"/>
+                                                        <Parameter expression="[WEATHER.IS_AVAILABLE] ? [WEATHER.TEMPERATURE] : &quot;--&quot;"/>
                                                     </Template>
                                                 </Font>
                                             </Text>
@@ -1249,7 +1249,7 @@
                                                 </BitmapFont>
                                                 <Font family="SYNC_TO_DEVICE" size="28" weight="SEMI_BOLD">
                                                     <Template><![CDATA[ %s°]]>
-                                                        <Parameter expression="[WEATHER.TEMPERATURE]"/>
+                                                        <Parameter expression="[WEATHER.IS_AVAILABLE] ? [WEATHER.TEMPERATURE] : &quot;--&quot;"/>
                                                     </Template>
                                                 </Font>
                                             </Text>
