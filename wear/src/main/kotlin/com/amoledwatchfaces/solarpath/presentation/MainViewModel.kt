@@ -220,7 +220,7 @@ class MainViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Watch Face Push error: ${e.message}", e)
-                Toast.makeText(context, "Push failed: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, context.getString(R.string.push_failed, e.message ?: ""), Toast.LENGTH_LONG).show()
             } finally {
                 _loaderState.value = false
                 checkWatchFaceActiveStatus()
@@ -321,7 +321,7 @@ class MainViewModel @Inject constructor(
                 }
                 .addOnFailureListener {
                     _loaderState.value = false
-                    Toast.makeText(context, "Location request failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.location_request_failed, Toast.LENGTH_SHORT).show()
                 }
         }
     }
@@ -337,7 +337,7 @@ class MainViewModel @Inject constructor(
             val predictions = fetchLocations(query)
             _loaderState.value = false
             if (predictions.isEmpty()) {
-                Toast.makeText(context, "No results found", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.no_results_found, Toast.LENGTH_LONG).show()
             }
             _searchPredictions.value = predictions
             callback.invoke(predictions.isNotEmpty())

@@ -85,7 +85,9 @@ class SolarPathComplicationService : SuspendingComplicationDataSourceService() {
             timeFormatter.format(Instant.ofEpochMilli(solar.nextEventEpoch))
         } else "- -"
 
-        val titleText = if (solar.nextEventName.isNotEmpty()) {
+        val titleText = if (solar.nextEventNameResId != 0) {
+            getString(solar.nextEventNameResId).uppercase()
+        } else if (solar.nextEventName.isNotEmpty()) {
             solar.nextEventName.uppercase()
         } else if (prefs.locationName != "- -") {
             prefs.locationName

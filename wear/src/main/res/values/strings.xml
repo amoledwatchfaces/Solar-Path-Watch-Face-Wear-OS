@@ -77,4 +77,16 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="check_your_phone">Check your phone</string>
     <string name="check_your_phone_failure">Phone can\'t be reached</string>
+    <!-- Actions & Common UI -->
+    <string name="continue_action">Continue</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete">Delete</string>
+    <string name="submit">Submit</string>
+    <string name="minutes_unit">min</string>
+    <string name="day_unit">day</string>
+    <string name="solar_status_format">%1$.1f° %2$s • %3$dh %4$dm %5$s</string>
+    <string name="push_failed">Push failed: %1$s</string>
+    <string name="location_request_failed">Location request failed</string>
+    <string name="no_results_found">No results found</string>
+    <string name="unknown_location">Unknown</string>
 </resources>

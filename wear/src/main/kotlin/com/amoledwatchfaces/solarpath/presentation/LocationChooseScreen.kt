@@ -123,7 +123,7 @@ fun LocationChooseScreen(
                             Image(
                                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary),
                                 imageVector = Icons.Default.Search,
-                                contentDescription = "Search"
+                                contentDescription = stringResource(R.string.search)
                             )
                         },
                         label = {
@@ -157,7 +157,7 @@ fun LocationChooseScreen(
                             Image(
                                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary),
                                 imageVector = Icons.Default.MyLocation,
-                                contentDescription = "Current location"
+                                contentDescription = stringResource(R.string.current_location)
                             )
                         },
                         label = {
@@ -212,7 +212,7 @@ fun LocationChooseScreen(
                                     icon = {
                                         Icon(
                                             imageVector = Icons.Outlined.Delete,
-                                            contentDescription = "Delete",
+                                            contentDescription = stringResource(R.string.delete),
                                             tint = MaterialTheme.colorScheme.onError
                                         )
                                     },

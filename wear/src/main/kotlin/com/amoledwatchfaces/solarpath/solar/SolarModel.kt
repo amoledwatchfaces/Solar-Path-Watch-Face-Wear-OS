@@ -1,5 +1,8 @@
 package com.amoledwatchfaces.solarpath.solar
 
+import androidx.annotation.StringRes
+import com.amoledwatchfaces.solarpath.R
+
 data class SolarData(
     val sunriseEpoch: Long = 0L,
     val sunsetEpoch: Long = 0L,
@@ -16,6 +19,7 @@ data class SolarData(
     val sunAzimuth: Double = 0.0,
     val isDay: Boolean = false,
     val nextEventName: String = "Sunrise",
+    @StringRes val nextEventNameResId: Int = R.string.sunrise,
     val nextEventEpoch: Long = 0L,
     val progressFraction: Float = 0f,
     // Exact 24-hour dial angles in degrees (0..360, 0 = Solar Noon / 12:00 at top)

@@ -53,7 +53,7 @@ fun InitialLocationDialog(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "Continue",
+                    contentDescription = stringResource(R.string.continue_action),
                     modifier = Modifier
                         .size(28.dp)
                         .align(Alignment.CenterVertically),

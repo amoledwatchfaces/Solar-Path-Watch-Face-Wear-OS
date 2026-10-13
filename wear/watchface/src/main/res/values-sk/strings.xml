@@ -1,0 +1,49 @@
+<resources>
+    <string name="id_clock_style">Štýl hodín</string>
+    <string name="id_clock_style_0">Digitálne</string>
+    <string name="id_clock_style_1">Analógové</string>
+
+    <string name="id_layout">Rozloženie</string>
+    <string name="id_layout_0">4x</string>
+    <string name="id_layout_1">2x</string>
+    <string name="id_layout_2">3x Hore</string>
+    <string name="id_layout_3">3x Dole</string>
+
+    <string name="id_center_shortcut">Skratka aplikácie</string>
+    <string name="id_slot_top_left">Oblúk vľavo hore</string>
+    <string name="id_slot_top_right">Oblúk vpravo hore</string>
+    <string name="id_slot_bottom_right">Oblúk vpravo dole</string>
+    <string name="id_slot_bottom_left">Oblúk vľavo dole</string>
+    <string name="id_slot_large_top">Veľký oblúk hore</string>
+    <string name="id_slot_large_bottom">Veľký oblúk dole</string>
+
+    <string name="id_seconds">Indikátor sekúnd</string>
+    <string name="id_seconds_0">Skokový</string>
+    <string name="id_seconds_1">Plynulý</string>
+    <string name="id_seconds_2">Žiadny</string>
+
+    <string name="id_clock_alt_colors">Živé farby hodín</string>
+
+    <string name="id_clock_subText">Informácie digitálnych hodín</string>
+    <string name="id_clock_subText_0">Deň v týždni</string>
+    <string name="id_clock_subText_1">AM/PM</string>
+    <string name="id_clock_subText_2">Sekundy</string>
+    <string name="id_clock_subText_3">Počasie</string>
+
+    <string name="id_aod">Režim Always-On</string>
+    <string name="id_aod_0">Stmavený</string>
+    <string name="id_aod_1">Bez oblúkov</string>
+    <string name="id_aod_2">Iba čas</string>
+
+    <string name="id_clock_bg">Pozadie hodín</string>
+    <string name="id_clock_bg_0">Tmavé</string>
+    <string name="id_clock_bg_1">Prechod</string>
+    <string name="id_clock_bg_2">Svetlé</string>
+
+    <string name="id_leading_zero">Úvodná nula</string>
+    <string name="id_progress_bar_gradients">Prechody oblúkov</string>
+
+    <string name="id_primary_theme">Primárny motív</string>
+    <string name="id_secondary_theme">Sekundárny motív</string>
+    <string name="id_tertiary_theme">Terciárny motív</string>
+</resources>

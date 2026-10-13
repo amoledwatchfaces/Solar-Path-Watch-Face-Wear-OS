@@ -298,6 +298,11 @@
             <ListOption displayName="id_clock_subText_2" icon="prev_clock_subtext_2" id="2" />
             <ListOption displayName="id_clock_subText_3" icon="prev_clock_subtext_3" id="3" />
         </ListConfiguration>
+        <ListConfiguration defaultValue="0" displayName="id_seconds" id="seconds">
+            <ListOption displayName="id_seconds_0" icon="prev_seconds_0" id="0"/>
+            <ListOption displayName="id_seconds_1" icon="prev_seconds_1" id="1"/>
+            <ListOption displayName="id_seconds_2" icon="prev_none" id="2"/>
+        </ListConfiguration>
         <ListConfiguration defaultValue="1" displayName="id_aod" id="aod">
             <ListOption displayName="id_aod_0" icon="prev_aod_0" id="0" />
             <ListOption displayName="id_aod_1" icon="prev_aod_1" id="1" />
@@ -306,7 +311,6 @@
         <BooleanConfiguration defaultValue="TRUE" displayName="id_progress_bar_gradients" id="progressGradients"/>
         <BooleanConfiguration defaultValue="TRUE" displayName="id_leading_zero" id="leadingZero"/>
         <BooleanConfiguration defaultValue="FALSE" displayName="id_clock_alt_colors" id="clockAltColors"/>
-        <BooleanConfiguration defaultValue="FALSE" displayName="id_smooth_seconds" id="smoothSeconds"/>
         <!-- Flavors -->
         <Flavors defaultValue="0">
             <Flavor id="0" displayName="Default">
@@ -1248,13 +1252,14 @@
                                 </Condition>
                             </Compare>
                         </Condition>
-                        <Group name="sec_indicator" x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
+                        <Group name="seconds" x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.tertiaryTheme.0]">
                             <Variant mode="AMBIENT" target="alpha" value="0"/>
                             <Condition>
                                 <Expressions>
-                                    <Expression name="smoothSeconds">[CONFIGURATION.smoothSeconds] == &quot;TRUE&quot;</Expression>
+                                    <Expression name="seconds0">[CONFIGURATION.seconds] == 0</Expression>
+                                    <Expression name="seconds1">[CONFIGURATION.seconds] == 1</Expression>
                                 </Expressions>
-                                <Compare expression="smoothSeconds">
+                                <Compare expression="seconds0">
                                     <PartDraw x="0" y="0" width="184" height="184">
                                         <Arc
                                             centerX="92"
@@ -1284,7 +1289,7 @@
                                         </Arc>
                                     </PartDraw>
                                 </Compare>
-                                <Default>
+                                <Compare expression="seconds1">
                                     <PartDraw x="0" y="0" width="184" height="184">
                                         <Arc
                                             centerX="92"
@@ -1316,7 +1321,7 @@
                                             <Stroke cap="ROUND" color="#ffffff" thickness="5"/>
                                         </Arc>
                                     </PartDraw>
-                                </Default>
+                                </Compare>
                             </Condition>
                         </Group>
                     </Compare>
@@ -1481,15 +1486,16 @@
                                 </Ellipse>
                             </PartDraw>
                         </Group>
-                        <Group name="sec" x="72" y="0" width="40" height="184">
+                        <Group name="seconds" x="72" y="0" width="40" height="184">
                             <Transform
                                 target="tintColor"
                                 value="[CONFIGURATION.clockAltColors]? [CONFIGURATION.tertiaryTheme.0] : [CONFIGURATION.tertiaryTheme.2]"/>
                             <Condition>
                                 <Expressions>
-                                    <Expression name="smoothSeconds">[CONFIGURATION.smoothSeconds] == &quot;TRUE&quot;</Expression>
+                                    <Expression name="seconds0">[CONFIGURATION.seconds] == 0</Expression>
+                                    <Expression name="seconds1">[CONFIGURATION.seconds] == 1</Expression>
                                 </Expressions>
-                                <Compare expression="smoothSeconds">
+                                <Compare expression="seconds0">
                                     <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
                                         <Variant
                                             target="alpha"
@@ -1527,7 +1533,7 @@
                                         </RoundRectangle>
                                     </PartDraw>
                                 </Compare>
-                                <Default>
+                                <Compare expression="seconds1">
                                     <PartDraw name="sec_shadow" x="0" y="3" width="40" height="184" alpha="150">
                                         <Variant
                                             target="alpha"
@@ -1570,7 +1576,7 @@
                                             <Fill color="#ffffff"/>
                                         </RoundRectangle>
                                     </PartDraw>
-                                </Default>
+                                </Compare>
                             </Condition>
                             <PartDraw name="center2" x="0" y="72" width="40" height="40">
                                 <Ellipse
@@ -1618,6 +1624,7 @@
         <!-- Arc Complications -->
         <ComplicationSlot slotId="1"
             supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
+            displayName="id_slot_top_left"
             width="225"
             height="225"
             x="0"
@@ -2019,6 +2026,7 @@
         </ComplicationSlot>
         <ComplicationSlot slotId="2"
             supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
+            displayName="id_slot_top_right"
             x="225"
             y="0"
             width="225"
@@ -2422,6 +2430,7 @@
         </ComplicationSlot>
         <ComplicationSlot slotId="3"
             supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
+            displayName="id_slot_bottom_right"
             x="225"
             y="225"
             width="225"
@@ -2823,6 +2832,7 @@
         </ComplicationSlot>
         <ComplicationSlot slotId="4"
             supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
+            displayName="id_slot_bottom_left"
             x="0"
             y="225"
             width="225"
@@ -3230,6 +3240,7 @@
         <ComplicationSlot slotId="5"
             isCustomizable="TRUE"
             supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY"
+            displayName="id_center_shortcut"
             width="224"
             height="224"
             x="113"
@@ -3248,6 +3259,7 @@
         <ComplicationSlot slotId="6"
             isCustomizable="FALSE"
             supportedTypes="SHORT_TEXT EMPTY"
+            displayName="app_name"
             width="224"
             height="224"
             x="113"

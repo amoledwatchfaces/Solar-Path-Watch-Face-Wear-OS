@@ -1,0 +1,49 @@
+<resources>
+    <string name="id_clock_style">Estilo do relógio</string>
+    <string name="id_clock_style_0">Digital</string>
+    <string name="id_clock_style_1">Analógico</string>
+
+    <string name="id_layout">Layout</string>
+    <string name="id_layout_0">4x</string>
+    <string name="id_layout_1">2x</string>
+    <string name="id_layout_2">3x Superior</string>
+    <string name="id_layout_3">3x Inferior</string>
+
+    <string name="id_center_shortcut">Atalho de app</string>
+    <string name="id_slot_top_left">Arco superior esquerdo</string>
+    <string name="id_slot_top_right">Arco superior direito</string>
+    <string name="id_slot_bottom_right">Arco inferior direito</string>
+    <string name="id_slot_bottom_left">Arco inferior esquerdo</string>
+    <string name="id_slot_large_top">Arco grande superior</string>
+    <string name="id_slot_large_bottom">Arco grande inferior</string>
+
+    <string name="id_seconds">Indicador de segundos</string>
+    <string name="id_seconds_0">Salto</string>
+    <string name="id_seconds_1">Fluido</string>
+    <string name="id_seconds_2">Nenhum</string>
+
+    <string name="id_clock_alt_colors">Cores vibrantes do relógio</string>
+
+    <string name="id_clock_subText">Info do relógio digital</string>
+    <string name="id_clock_subText_0">Dia da semana</string>
+    <string name="id_clock_subText_1">AM/PM</string>
+    <string name="id_clock_subText_2">Segundos</string>
+    <string name="id_clock_subText_3">Clima</string>
+
+    <string name="id_aod">Modo ambiente</string>
+    <string name="id_aod_0">Esmaecido</string>
+    <string name="id_aod_1">Sem arcos</string>
+    <string name="id_aod_2">Apenas hora</string>
+
+    <string name="id_clock_bg">Fundo do relógio</string>
+    <string name="id_clock_bg_0">Escuro</string>
+    <string name="id_clock_bg_1">Gradiente</string>
+    <string name="id_clock_bg_2">Claro</string>
+
+    <string name="id_leading_zero">Zero à esquerda</string>
+    <string name="id_progress_bar_gradients">Gradientes dos arcos</string>
+
+    <string name="id_primary_theme">Tema primário</string>
+    <string name="id_secondary_theme">Tema secundário</string>
+    <string name="id_tertiary_theme">Tema terciário</string>
+</resources>

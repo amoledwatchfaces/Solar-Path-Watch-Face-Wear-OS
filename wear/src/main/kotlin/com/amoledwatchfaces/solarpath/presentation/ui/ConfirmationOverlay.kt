@@ -49,7 +49,7 @@ fun ConfirmationOverlay(
         }
         Image(
             painter = rememberAnimatedVectorPainter(animation, atEnd),
-            contentDescription = "Open on phone",
+            contentDescription = stringResource(R.string.check_your_phone),
             modifier = Modifier.size(ConfirmationDialogDefaults.SmallIconSize),
         )
     }

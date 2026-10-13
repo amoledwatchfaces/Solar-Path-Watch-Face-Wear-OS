@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Solar Path</string>
+    <string name="watch_face_name">Solar Path</string>
+    <string name="solar_path_comp_name">Solar Path</string>
+    
+    <!-- Watch Face Push -->
+    <string name="push_watch_face">Nastaviť ciferník</string>
+    <string name="activating_watch_face">Aktivuje sa ciferník…</string>
+    <string name="watch_face_active">Solar Path je aktívny</string>
+    <string name="status_manual_activation">Nainštalované. Vyberte zo zoznamu ciferníkov.</string>
+    <string name="wfp_not_supported">Watch Face Push nie je na tomto zariadení podporované.</string>
+    <string name="updating_watch_face">Aktualizuje sa ciferník…</string>
+    <string name="updating_watch_face_wff5">Aktualizuje sa ciferník na Watch Face Format verziu 5…</string>
+    <string name="watch_face_updated">Ciferník bol aktualizovaný!</string>
+
+    <!-- Location -->
+    <string name="set_location">Poloha</string>
+    <string name="locations">Polohy</string>
+    <string name="search">Hľadať</string>
+    <string name="location">Poloha</string>
+    <string name="current_location">Aktuálna poloha</string>
+    <string name="recent">Nedávne</string>
+    <string name="no_internet_connection">Žiadne internetové pripojenie</string>
+    <string name="no_location">Poloha nie je k dispozícii</string>
+    <string name="background_location">Poloha na pozadí</string>
+    <string name="background_location_summary">Automaticky pravidelne aktualizovať polohu</string>
+    <string name="update_interval">Interval aktualizácie</string>
+    <string name="enable_permission_toast">Povoľte povolenie na prístup k polohe</string>
+    <string name="location_disclosure_title">Prístup k polohe</string>
+    <string name="location_disclosure_message">Solar Path potrebuje vašu približnú polohu na výpočet presných časov východu a západu slnka a slnečného súmraku pre váš miestny horizont.\n\nVaše údaje o polohe sa spracúvajú lokálne v zariadení a nikdy sa nezdieľajú.</string>
+    <string name="background_location_rationale">Solar Path bude zhromažďovať približné údaje o polohe, aby umožnil presné slnečné výpočty, aj keď je aplikácia zatvorená alebo sa nepoužíva.</string>
+    <string name="background_location_instruction">Začiarknite možnosť \'Vždy povoliť\' na dokončenie nastavenia polohy na pozadí.</string>
+    <string name="all_the_time_not_granted">Povolenie \'Vždy povoliť\' nebolo udelené…</string>
+
+    <!-- Solar & Astronomical Terms -->
+    <string name="next_event">Nasledujúca udalosť</string>
+    <string name="solar_times">Slnečné časy</string>
+    <string name="sunrise">Východ slnka</string>
+    <string name="sunset">Západ slnka</string>
+    <string name="solar_noon">Pravé poludnie</string>
+    <string name="solar_midnight">Pravá polnoc</string>
+    <string name="civil_dawn">Občiansky svit</string>
+    <string name="civil_dusk">Občiansky súmrak</string>
+    <string name="nautical_dawn">Navigačný svit</string>
+    <string name="nautical_dusk">Navigačný súmrak</string>
+    <string name="astro_dawn">Astronomický svit</string>
+    <string name="astro_dusk">Astronomický súmrak</string>
+    <string name="daylight">Denné svetlo</string>
+    <string name="night">Noc</string>
+    <string name="elevation">Elevácia</string>
+    <string name="azimuth">Azimut</string>
+    <string name="open_app">Otvoriť Solar Path</string>
+    <string name="refresh_calculation">Prepočítať</string>
+    <string name="solar_times_recalculated">Slnečné časy boli prepočítané!</string>
+    <string name="location_not_set">Poloha nie je nastavená!</string>
+    <string name="something_went_wrong">Niečo sa pokazilo!</string>
+
+    <!-- FAQ -->
+    <string name="faq">Časté otázky</string>
+    <string name="faq_subtitle">Ako tento ciferník funguje</string>
+    <string name="faq_dial_title">24-hodinový slnečný ciferník</string>
+    <string name="faq_dial_desc">Na rozdiel od štandardných 12-hodinových hodín tento ciferník zobrazuje celý 24-hodinový slnečný cyklus. Pravé poludnie (zenit) je hore (12:00) a pravá polnoc (nadir) je dole (00:00). Slnko sa pohybuje v smere hodinových ručičiek pozdĺž dráhy.</string>
+    <string name="faq_phases_title">5 fáz oblohy a súmraku</string>
+    <string name="faq_phases_desc">Ciferník zobrazuje päť odlišných astronomických fáz:\n\n• Denné svetlo: Slnko je nad horizontom (&gt; 0°)\n• Občiansky súmrak: 0° až -6° (zostáva prirodzené svetlo)\n• Navigačný súmrak: -6° až -12° (viditeľné navigačné hviezdy)\n• Astronomický súmrak: -12° až -18° (hlboký súmrak)\n• Noc: Pod -18° (úplná astronomická noc s hviezdami)</string>
+    <string name="faq_marker_title">Ukazovateľ slnka a lúč</string>
+    <string name="faq_marker_desc">Ukazovateľ slnka obieha po 24-hodinovej dráhe. Cez deň je to plný biely disk a v noci, keď je slnko pod horizontom, sa zmení na prázdny krúžok. Radiálny lúč ukazuje na aktuálny slnečný čas.</string>
+    <string name="faq_dots_title">10 bodov udalostí na časovej osi</string>
+    <string name="faq_dots_desc">Body okolo časového prstenca označujú 10 slnečných míľnikov:\n\n• Ráno: Astronomický, navigačný a občiansky svit, východ slnka a pravé poludnie\n• Večer: Západ slnka, občiansky, navigačný a astronomický súmrak a pravá polnoc</string>
+    <string name="faq_location_title">Poloha a výpočty</string>
+    <string name="faq_location_desc">Všetky astronomické výpočty využívajú vysoko presné algoritmy NOAA. Presné časy súmraku a slnka sa počítajú špeciálne pre vaše geografické súradnice (zemepisnú šírku a dĺžku).</string>
+
+    <!-- About & Privacy -->
+    <string name="about">O aplikácii</string>
+    <string name="version">Verzia</string>
+    <string name="privacy_policy">Zásady ochrany osobných údajov</string>
+    <string name="check_your_phone">Skontrolujte telefón</string>
+    <string name="check_your_phone_failure">K telefónu sa nedá pripojiť</string>
+
+    <!-- Actions & Common UI -->
+    <string name="continue_action">Pokračovať</string>
+    <string name="confirm">Potvrdiť</string>
+    <string name="delete">Odstrániť</string>
+    <string name="submit">Odoslať</string>
+    <string name="minutes_unit">min</string>
+    <string name="day_unit">deň</string>
+    <string name="solar_status_format">%1$.1f° %2$s • %3$dh %4$dm %5$s</string>
+    <string name="push_failed">Odoslanie zlyhalo: %1$s</string>
+    <string name="location_request_failed">Žiadosť o polohu zlyhala</string>
+    <string name="no_results_found">Nenašli sa žiadne výsledky</string>
+    <string name="unknown_location">Neznáma</string>
+</resources>

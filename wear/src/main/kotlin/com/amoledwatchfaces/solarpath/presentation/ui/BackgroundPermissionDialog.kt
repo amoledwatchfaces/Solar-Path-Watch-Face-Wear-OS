@@ -81,7 +81,7 @@ fun BackgroundPermissionDialog(
             Icon(
                 tint = MaterialTheme.colorScheme.secondary,
                 imageVector = Icons.Default.MyLocation,
-                contentDescription = "Background Location",
+                contentDescription = stringResource(R.string.background_location),
                 modifier = Modifier
                     .size(24.dp)
                     .wrapContentSize(align = Alignment.Center),
@@ -117,7 +117,7 @@ fun BackgroundPermissionDialog(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "Confirm",
+                    contentDescription = stringResource(R.string.confirm),
                     modifier = Modifier
                         .size(28.dp)
                         .align(Alignment.CenterVertically),

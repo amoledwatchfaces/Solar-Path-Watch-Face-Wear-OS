@@ -1,0 +1,49 @@
+<resources>
+    <string name="id_clock_style">Styl zegara</string>
+    <string name="id_clock_style_0">Cyfrowy</string>
+    <string name="id_clock_style_1">Analogowy</string>
+
+    <string name="id_layout">Układ</string>
+    <string name="id_layout_0">4x</string>
+    <string name="id_layout_1">2x</string>
+    <string name="id_layout_2">3x Góra</string>
+    <string name="id_layout_3">3x Dół</string>
+
+    <string name="id_center_shortcut">Skrót do aplikacji</string>
+    <string name="id_slot_top_left">Łuk górny lewy</string>
+    <string name="id_slot_top_right">Łuk górny prawy</string>
+    <string name="id_slot_bottom_right">Łuk dolny prawy</string>
+    <string name="id_slot_bottom_left">Łuk dolny lewy</string>
+    <string name="id_slot_large_top">Duży łuk górny</string>
+    <string name="id_slot_large_bottom">Duży łuk dolny</string>
+
+    <string name="id_seconds">Wskaźnik sekund</string>
+    <string name="id_seconds_0">Skokowy</string>
+    <string name="id_seconds_1">Płynny</string>
+    <string name="id_seconds_2">Brak</string>
+
+    <string name="id_clock_alt_colors">Żywe kolory zegara</string>
+
+    <string name="id_clock_subText">Informacje zegara cyfrowego</string>
+    <string name="id_clock_subText_0">Dzień tygodnia</string>
+    <string name="id_clock_subText_1">AM/PM</string>
+    <string name="id_clock_subText_2">Sekundy</string>
+    <string name="id_clock_subText_3">Pogoda</string>
+
+    <string name="id_aod">Tryb Always-On</string>
+    <string name="id_aod_0">Przyciemniony</string>
+    <string name="id_aod_1">Bez łuków</string>
+    <string name="id_aod_2">Tylko czas</string>
+
+    <string name="id_clock_bg">Tło zegara</string>
+    <string name="id_clock_bg_0">Ciemne</string>
+    <string name="id_clock_bg_1">Gradient</string>
+    <string name="id_clock_bg_2">Jasne</string>
+
+    <string name="id_leading_zero">Wiodące zero</string>
+    <string name="id_progress_bar_gradients">Gradienty łuków</string>
+
+    <string name="id_primary_theme">Motyw główny</string>
+    <string name="id_secondary_theme">Motyw dodatkowy</string>
+    <string name="id_tertiary_theme">Motyw trzeci</string>
+</resources>

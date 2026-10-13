@@ -73,7 +73,7 @@ fun TextInputDialog(
                     dismissDialog()
                 },
                 content = {
-                    Icon(Icons.Default.Search, "Submit")
+                    Icon(Icons.Default.Search, stringResource(R.string.submit))
                 }
             )
         },

@@ -160,7 +160,7 @@ fun MainScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = solarData.nextEventName.uppercase(),
+                        text = stringResource(solarData.nextEventNameResId).uppercase(),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.tertiary
                     )
@@ -172,7 +172,14 @@ fun MainScreen(
                     )
                     Text(
                         textAlign = TextAlign.Center,
-                        text = "${String.format(LocalLocale.current.platformLocale, "%.1f", solarData.sunElevation)}° elevation • ${solarData.daylightDurationMinutes / 60}h ${solarData.daylightDurationMinutes % 60}m day",
+                        text = stringResource(
+                            R.string.solar_status_format,
+                            solarData.sunElevation,
+                            stringResource(R.string.elevation),
+                            solarData.daylightDurationMinutes / 60,
+                            solarData.daylightDurationMinutes % 60,
+                            stringResource(R.string.day_unit)
+                        ),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -202,7 +209,7 @@ fun MainScreen(
                     icon = {
                         Icon(
                             imageVector = if (isWatchFaceActive == true) Icons.Default.Check else Icons.Default.WatchLater,
-                            contentDescription = "Watch Face",
+                            contentDescription = stringResource(R.string.watch_face_name),
                             tint = if (isWatchFaceActive == true) MaterialTheme.colorScheme.primary.copy(alpha = 0.6f) else MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     },
@@ -334,7 +341,7 @@ fun MainScreen(
                     icon = {
                         Image(
                             imageVector = Icons.Default.LocationOn,
-                            contentDescription = "Location",
+                            contentDescription = stringResource(R.string.location),
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary)
                         )
                     },
@@ -387,7 +394,7 @@ fun MainScreen(
                             .padding(top = 4.dp),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        text = "${stringResource(R.string.update_interval)}: ${preferences.backgroundLocationRepeatInterval} min"
+                        text = "${stringResource(R.string.update_interval)}: ${preferences.backgroundLocationRepeatInterval} ${stringResource(R.string.minutes_unit)}"
                     )
                 }
                 item(key = "update_interval_slider") {

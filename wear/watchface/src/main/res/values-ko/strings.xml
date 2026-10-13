@@ -1,0 +1,49 @@
+<resources>
+    <string name="id_clock_style">시계 스타일</string>
+    <string name="id_clock_style_0">디지털</string>
+    <string name="id_clock_style_1">아날로그</string>
+
+    <string name="id_layout">레이아웃</string>
+    <string name="id_layout_0">4x</string>
+    <string name="id_layout_1">2x</string>
+    <string name="id_layout_2">3x 상단</string>
+    <string name="id_layout_3">3x 하단</string>
+
+    <string name="id_center_shortcut">앱 바로가기</string>
+    <string name="id_slot_top_left">왼쪽 상단 원호</string>
+    <string name="id_slot_top_right">오른쪽 상단 원호</string>
+    <string name="id_slot_bottom_right">오른쪽 하단 원호</string>
+    <string name="id_slot_bottom_left">왼쪽 하단 원호</string>
+    <string name="id_slot_large_top">상단 대형 원호</string>
+    <string name="id_slot_large_bottom">하단 대형 원호</string>
+
+    <string name="id_seconds">초 표시기</string>
+    <string name="id_seconds_0">점프</string>
+    <string name="id_seconds_1">부드럽게</string>
+    <string name="id_seconds_2">없음</string>
+
+    <string name="id_clock_alt_colors">선명한 시계 색상</string>
+
+    <string name="id_clock_subText">디지털 시계 정보</string>
+    <string name="id_clock_subText_0">요일</string>
+    <string name="id_clock_subText_1">오전/오후</string>
+    <string name="id_clock_subText_2">초</string>
+    <string name="id_clock_subText_3">날씨</string>
+
+    <string name="id_aod">AOD 모드</string>
+    <string name="id_aod_0">어둡게</string>
+    <string name="id_aod_1">원호 숨김</string>
+    <string name="id_aod_2">시간만 표시</string>
+
+    <string name="id_clock_bg">시계 배경</string>
+    <string name="id_clock_bg_0">어둡게</string>
+    <string name="id_clock_bg_1">그라데이션</string>
+    <string name="id_clock_bg_2">밝게</string>
+
+    <string name="id_leading_zero">앞에 0 표시</string>
+    <string name="id_progress_bar_gradients">원호 그라데이션</string>
+
+    <string name="id_primary_theme">기본 테마</string>
+    <string name="id_secondary_theme">보조 테마</string>
+    <string name="id_tertiary_theme">세 번째 테마</string>
+</resources>

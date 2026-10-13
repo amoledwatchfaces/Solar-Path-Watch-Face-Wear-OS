@@ -1,0 +1,49 @@
+<resources>
+    <string name="id_clock_style">Uhrenstil</string>
+    <string name="id_clock_style_0">Digital</string>
+    <string name="id_clock_style_1">Analog</string>
+
+    <string name="id_layout">Layout</string>
+    <string name="id_layout_0">4x</string>
+    <string name="id_layout_1">2x</string>
+    <string name="id_layout_2">3x Oben</string>
+    <string name="id_layout_3">3x Unten</string>
+
+    <string name="id_center_shortcut">App-Verknüpfung</string>
+    <string name="id_slot_top_left">Bogen oben links</string>
+    <string name="id_slot_top_right">Bogen oben rechts</string>
+    <string name="id_slot_bottom_right">Bogen unten rechts</string>
+    <string name="id_slot_bottom_left">Bogen unten links</string>
+    <string name="id_slot_large_top">Großer Bogen oben</string>
+    <string name="id_slot_large_bottom">Großer Bogen unten</string>
+
+    <string name="id_seconds">Sekundenanzeige</string>
+    <string name="id_seconds_0">Sprung</string>
+    <string name="id_seconds_1">Fließend</string>
+    <string name="id_seconds_2">Keine</string>
+
+    <string name="id_clock_alt_colors">Kräftige Uhrenfarben</string>
+
+    <string name="id_clock_subText">Digitaluhr-Info</string>
+    <string name="id_clock_subText_0">Wochentag</string>
+    <string name="id_clock_subText_1">AM/PM</string>
+    <string name="id_clock_subText_2">Sekunden</string>
+    <string name="id_clock_subText_3">Wetter</string>
+
+    <string name="id_aod">Always-On-Modus</string>
+    <string name="id_aod_0">Gedimmt</string>
+    <string name="id_aod_1">Keine Bögen</string>
+    <string name="id_aod_2">Nur Zeit</string>
+
+    <string name="id_clock_bg">Uhrenhintergrund</string>
+    <string name="id_clock_bg_0">Dunkel</string>
+    <string name="id_clock_bg_1">Farbverlauf</string>
+    <string name="id_clock_bg_2">Hell</string>
+
+    <string name="id_leading_zero">Führende Null</string>
+    <string name="id_progress_bar_gradients">Bogenverläufe</string>
+
+    <string name="id_primary_theme">Primäres Design</string>
+    <string name="id_secondary_theme">Sekundäres Design</string>
+    <string name="id_tertiary_theme">Tertiäres Design</string>
+</resources>
