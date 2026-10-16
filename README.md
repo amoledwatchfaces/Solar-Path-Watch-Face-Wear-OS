@@ -48,26 +48,37 @@ Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)*
 - **Dual Clock Modes**:
   - **Digital Clock**: Clean, modern digital readout with optional leading zeros and alternate accent colors.
   - **Analog Clock**: Sleek hour, minute, and second hands with hour indices and date indicator.
-- **Watch Face Format (WFF v4)**:
+- **Watch Face Format (WFF v4 & v5)**:
   - Declarative XML rendering natively on the Wear OS system with zero background battery drain (`hasCode = false`).
   - Standalone WFF APK bundled inside the companion app and delivered via **AndroidX Watch Face Push** (`androidx.wear.watchfacepush`).
+  - Seamless automatic support for Watch Face Format 5 on Wear OS 6+ (API 37+) devices with multi-layout capability.
 
 ---
 
 ## 🧭 Complication Slots
 
-Solar Path features **4 customizable outer arc complication slots** around the dial perimeter, plus an internal communication slot powering the astronomical engine:
+Solar Path features customizable perimeter arc slots, a center application shortcut, and two large arc complication slots in Watch Face Format 5 (WFF 5), plus an internal communication channel powering the astronomical engine:
 
-| Slot ID | Type / Position | Angle Span | Supported Complication Types | Default Provider |
-|:---:|:---|:---:|:---|:---|
-| **0** | **Internal Data Bridge** *(Center)* | N/A | `SHORT_TEXT`, `EMPTY` *(Non-editable)* | **Solar Path Complication Service** (Encodes real-time solar milestone angles) |
-| **1** | **Top-Left Arc** | 270° → 360° | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Daily Steps (`Fitbit` / `Samsung Health` / `STEP_COUNT`) |
-| **2** | **Top-Right Arc** | 0° → 90° | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Active Calories / UV Index / Battery (`WATCH_BATTERY`) |
-| **3** | **Bottom-Right Arc** | 90° → 180° | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Current Weather (`Google Weather`) / `NEXT_EVENT` |
-| **4** | **Bottom-Left Arc** | 180° → 270° | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Distance / Precipitation / Battery (`WATCH_BATTERY`) |
+| Slot ID | Name / Position | Angle Span | Format | Supported Complication Types | Default Provider |
+|:---:|:---|:---:|:---:|:---|:---|
+| **1** | **Top-Left Arc** | 270° → 360° | WFF 4 & 5 | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Daily Steps (`Fitbit` / `Samsung Health` / `STEP_COUNT`) |
+| **2** | **Top-Right Arc** | 0° → 90° | WFF 4 & 5 | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Active Calories / UV Index / Battery (`WATCH_BATTERY`) |
+| **3** | **Bottom-Right Arc** | 90° → 180° | WFF 4 & 5 | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Current Weather (`Google Weather`) / `NEXT_EVENT` |
+| **4** | **Bottom-Left Arc** | 180° → 270° | WFF 4 & 5 | `RANGED_VALUE`, `LONG_TEXT`, `SHORT_TEXT`, `EMPTY` | Distance / Precipitation / Battery (`WATCH_BATTERY`) |
+| **5** | **App Shortcut** *(Center)* | Center Dial | WFF 4 & 5 | `MONOCHROMATIC_IMAGE`, `SMALL_IMAGE`, `EMPTY` | Custom App Shortcut (`APP_SHORTCUT`) |
+| **6** | **Internal Data Bridge** *(Center)* | N/A | WFF 4 & 5 | `SHORT_TEXT`, `EMPTY` *(Non-editable)* | **Solar Path Complication Service** (Encodes real-time solar milestone angles) |
+| **7** | **Top Large Arc** | 270° → 90° | WFF 5 only | `RANGED_VALUE`, `LONG_TEXT`, `EMPTY` | Daily Steps (`Fitbit` / `Samsung Health` / `WATCH_BATTERY`) |
+| **8** | **Bottom Large Arc** | 90° → 270° | WFF 5 only | `RANGED_VALUE`, `LONG_TEXT`, `EMPTY` | Next Event (`NEXT_EVENT`) |
 
 > [!NOTE]
-> **Complication Slot 0** is strictly non-editable (`isCustomizable="FALSE"`). It serves as the internal real-time communication channel between the Solar Path companion service and the Watch Face Format dial. It dynamically injects solar milestone coordinates (sunrise, sunset, dusk, dawn, solar noon, and nadir) directly into the dial's rendering pipeline.
+> **Complication Slot 6** is strictly non-editable (`isCustomizable="FALSE"`). It serves as the internal real-time communication channel between the Solar Path companion service and the Watch Face Format dial. It dynamically injects solar milestone coordinates (sunrise, sunset, dusk, dawn, solar noon, and nadir) directly into the dial's rendering pipeline.
+
+### 📐 Layout Configurations (WFF 5)
+In Watch Face Format 5 (Wear OS 6+ / API 37+), you can switch between **4 outer arc complication layouts**:
+- **4x (Default)**: Uses Slots 1, 2, 3, and 4 (four quadrant arcs).
+- **2x**: Uses Slots 7 and 8 (two large 180° top and bottom arcs).
+- **3x Up**: Uses Slot 7 (Top Large Arc) + Slots 3 and 4 (Bottom-Right and Bottom-Left quadrant arcs).
+- **3x Down**: Uses Slot 8 (Bottom Large Arc) + Slots 1 and 2 (Top-Left and Top-Right quadrant arcs).
 
 ---
 
@@ -76,16 +87,26 @@ Solar Path features **4 customizable outer arc complication slots** around the d
 Solar Path offers extensive customization options available directly in the Wear OS watch face picker and companion settings:
 
 - **Primary, Secondary & Tertiary Themes**: Over 70+ meticulously curated color palettes (Atmospheric Blue, Graphite, Alpine Green, Deep Ocean, Sunset Orange, Solar Gold, Cyberpunk Neon, Terracotta, and more).
+- **Layout (WFF 5)**: Switch outer arc configurations between `4x`, `2x`, `3x Up`, and `3x Down`.
 - **Clock Style**:
   - `Digital`: Crisp modern digital time readout.
   - `Analog`: Elegant minimalist analog hands and indices.
+- **Digital Clock Info (SubText)**:
+  - `Day of Week`: Current day name.
+  - `AM/PM`: 12-hour period indicator.
+  - `Seconds`: Live digital seconds counter.
+  - `Weather`: Real-time temperature & condition text.
+- **Seconds Indicator**:
+  - `Jump`: Classic ticking seconds hand.
+  - `Smooth`: Continuous sweeping seconds motion.
+  - `None`: Hidden seconds indicator for minimalist look.
 - **Clock Background**:
   - `Dark`: Solid contrast background disk behind the center dial.
   - `Transparent`: Clean, see-through dial showing the solar gradients and starfield.
 - **Always-On Display (AOD) Mode**:
   - `Dimmed`: Keeps dial elements visible with optimized ambient brightness.
   - `Dimmed & No Arcs`: Minimalist ambient face hiding outer arcs to conserve battery life.
-- **Arc Gradients**: Toggle smooth progress bar color gradients on slots 1–4 on or off.
+- **Arc Gradients**: Toggle smooth progress bar color gradients on outer arcs on or off.
 - **Leading Zero**: Toggle 12/24-hour leading zero (e.g. `09:41` vs `9:41`).
 - **Clock Alternate Colors**: Switch clock text and hands between primary theme and high-contrast accent colors.
 
