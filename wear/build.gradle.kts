@@ -127,6 +127,8 @@ dependencies {
 
     // Complications
     implementation ("androidx.wear.watchface:watchface-complications-data-source-ktx:1.3.0")
+    implementation ("androidx.wear.protolayout:protolayout-proto:1.4.2")
+    implementation ("androidx.wear.protolayout:protolayout-external-protobuf:1.4.2")
 
     // Astronomy Engine (Kastro)
     implementation ("dev.jamesyox:kastro:0.6.0")
