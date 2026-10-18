@@ -32,6 +32,7 @@ import androidx.compose.remote.creation.compose.state.rs
 import androidx.compose.remote.creation.compose.text.RemoteTimeDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.core.graphics.toColorInt
 import androidx.datastore.core.DataStore
 import androidx.glance.wear.AssociateWithGlanceWearWidget
 import androidx.glance.wear.GlanceWearWidget
@@ -42,7 +43,7 @@ import androidx.glance.wear.WearWidgetDocument
 import androidx.glance.wear.color
 import androidx.glance.wear.core.WearWidgetParams
 import androidx.wear.compose.material3.dynamicColorScheme
-import androidx.wear.compose.remote.material3.RemoteAppCard
+import androidx.wear.compose.remote.material3.RemoteCard
 import androidx.wear.compose.remote.material3.RemoteCardDefaults
 import androidx.wear.compose.remote.material3.RemoteColorScheme
 import androidx.wear.compose.remote.material3.RemoteIcon
@@ -56,7 +57,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import java.util.Date
 import javax.inject.Inject
-import androidx.core.graphics.toColorInt
 
 @AndroidEntryPoint
 @AssociateWithGlanceWearWidget(DuskTimesWidget::class)
@@ -236,41 +236,59 @@ fun DuskTimesWidgetContent(
                 MilestoneItemRow(
                     name = sunsetTitle,
                     time = sunsetTime,
-                    isNext = sunsetEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && sunsetEpoch == nextEpoch,
                     isPast = sunsetEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = civilTitle,
                     time = civilDuskTime,
-                    isNext = civilEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && civilEpoch == nextEpoch,
                     isPast = civilEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = nauticalTitle,
                     time = nauticalDuskTime,
-                    isNext = nauticalEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && nauticalEpoch == nextEpoch,
                     isPast = nauticalEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = astroTitle,
                     time = astroDuskTime,
-                    isNext = astroEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && astroEpoch == nextEpoch,
                     isPast = astroEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = midnightTitle,
                     time = midnightTime,
-                    isNext = midnightEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && midnightEpoch == nextEpoch,
                     isPast = midnightEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
             }
         }
     }
+    // Only Nicer Click effect
+    RemoteCard(
+        colors = RemoteCardDefaults.cardColors(containerColor = RemoteColor(Color.TRANSPARENT)),
+        modifier =
+            RemoteModifier
+                .fillMaxSize(),
+        onClick = pendingIntentAction { context ->
+            val intent = Intent(context, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
+    ){}
 }
 
 @SuppressLint("RestrictedApi")

@@ -17,7 +17,6 @@ import androidx.compose.remote.creation.compose.layout.RemoteComposable
 import androidx.compose.remote.creation.compose.layout.RemoteRow
 import androidx.compose.remote.creation.compose.modifier.RemoteModifier
 import androidx.compose.remote.creation.compose.modifier.background
-import androidx.compose.remote.creation.compose.modifier.clickable
 import androidx.compose.remote.creation.compose.modifier.fillMaxHeight
 import androidx.compose.remote.creation.compose.modifier.fillMaxSize
 import androidx.compose.remote.creation.compose.modifier.fillMaxWidth
@@ -43,6 +42,7 @@ import androidx.glance.wear.WearWidgetDocument
 import androidx.glance.wear.color
 import androidx.glance.wear.core.WearWidgetParams
 import androidx.wear.compose.material3.dynamicColorScheme
+import androidx.wear.compose.remote.material3.RemoteCard
 import androidx.wear.compose.remote.material3.RemoteCardDefaults
 import androidx.wear.compose.remote.material3.RemoteIcon
 import androidx.wear.compose.remote.material3.RemoteMaterialTheme
@@ -124,7 +124,7 @@ class DawnTimesWidget(
                 astroTitle = context.getString(R.string.astro_dawn),
                 nauticalTitle = context.getString(R.string.nautical_dawn),
                 civilTitle = context.getString(R.string.civil_dawn),
-                sunsetTitle = context.getString(R.string.sunrise),
+                sunriseTitle = context.getString(R.string.sunrise),
                 noonTitle = context.getString(R.string.solar_noon),
                 nextEpoch = nextMilestone?.epoch ?: 0L,
                 astroEpoch = solarData?.astroDawnEpoch ?: 0L,
@@ -149,7 +149,7 @@ fun DawnTimesWidgetContent(
     nauticalDawnTime: String,
     astroDawnTime: String,
     noonTime: String,
-    sunsetTitle: String,
+    sunriseTitle: String,
     civilTitle: String,
     nauticalTitle: String,
     astroTitle: String,
@@ -167,19 +167,6 @@ fun DawnTimesWidgetContent(
             .background(RemoteCardDefaults.cardColors().containerColor)
             .padding(4f.rf)
             .fillMaxSize()
-            .clickable(
-                pendingIntentAction { context ->
-                    val intent = Intent(context, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    }
-                    PendingIntent.getActivity(
-                        context,
-                        0,
-                        intent,
-                        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                    )
-                }
-            )
     ){
         RemoteColumn(
             modifier = RemoteModifier.fillMaxWidth().fillMaxHeight(),
@@ -234,35 +221,35 @@ fun DawnTimesWidgetContent(
                 MilestoneItemRow(
                     name = noonTitle,
                     time = noonTime,
-                    isNext = noonEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && noonEpoch == nextEpoch,
                     isPast = noonEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
-                    name = sunsetTitle,
+                    name = sunriseTitle,
                     time = sunriseTime,
-                    isNext = noonEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && sunriseEpoch == nextEpoch,
                     isPast = sunriseEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = civilTitle,
                     time = civilDawnTime,
-                    isNext = civilEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && civilEpoch == nextEpoch,
                     isPast = civilEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = nauticalTitle,
                     time = nauticalDawnTime,
-                    isNext = nauticalEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && nauticalEpoch == nextEpoch,
                     isPast = nauticalEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = astroTitle,
                     time = astroDawnTime,
-                    isNext = astroEpoch == nextEpoch,
+                    isNext = nextEpoch > 0L && astroEpoch == nextEpoch,
                     isPast = astroEpoch in 1..<currentTime,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
@@ -270,4 +257,22 @@ fun DawnTimesWidgetContent(
             }
         }
     }
+    // Only Nicer Click effect
+    RemoteCard(
+        colors = RemoteCardDefaults.cardColors(containerColor = RemoteColor(Color.TRANSPARENT)),
+        modifier =
+            RemoteModifier
+                .fillMaxSize(),
+        onClick = pendingIntentAction { context ->
+            val intent = Intent(context, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
+    ){}
 }
