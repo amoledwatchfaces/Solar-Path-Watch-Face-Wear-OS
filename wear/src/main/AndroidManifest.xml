@@ -109,7 +109,7 @@
                 android:resource="@xml/dusk_times_widget_info" />
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/wb_twilight_24px" />
+                android:resource="@drawable/widget_preview_dusk" />
         </service>
 
         <!-- Dawn Times Widget Service -->
@@ -128,7 +128,7 @@
                 android:resource="@xml/dawn_times_widget_info" />
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/wb_twilight_24px" />
+                android:resource="@drawable/widget_preview_dawn" />
         </service>
 
         <!-- Broadcast Receiver for Passive Location & System Events -->

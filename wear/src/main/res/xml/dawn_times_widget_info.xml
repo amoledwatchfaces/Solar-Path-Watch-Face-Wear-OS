@@ -6,5 +6,5 @@
     preferredType="LARGE">
     <container
         type="LARGE"
-        previewImage="@drawable/ic_dawn" />
+        previewImage="@drawable/widget_preview_dawn" />
 </wearwidget-provider>
