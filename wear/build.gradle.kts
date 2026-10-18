@@ -130,6 +130,23 @@ dependencies {
     implementation ("androidx.wear.protolayout:protolayout-proto:1.4.2")
     implementation ("androidx.wear.protolayout:protolayout-external-protobuf:1.4.2")
 
+    // Wear OS Widgets & Remote Compose
+    implementation ("androidx.compose.remote:remote-creation-compose:1.0.0-alpha21")
+    implementation ("androidx.compose.remote:remote-core:1.0.0-alpha21")
+    implementation ("androidx.glance.wear:wear:1.0.0-alpha20")
+    implementation ("androidx.glance.wear:wear-core:1.0.0-alpha20")
+    implementation ("androidx.wear.compose.remote:remote-material3:1.0.0-alpha13")
+
+    // Tiles & ProtoLayout
+    implementation ("androidx.wear.tiles:tiles:1.6.2")
+    implementation ("androidx.wear.protolayout:protolayout:1.4.2")
+    implementation ("androidx.wear.protolayout:protolayout-material3:1.4.2")
+
+    // Tooling for previews
+    implementation ("androidx.glance.wear:wear-tooling-preview:1.0.0-alpha20")
+    implementation ("androidx.compose.remote:remote-tooling-preview:1.0.0-alpha18")
+    implementation ("androidx.wear.tiles:tiles-tooling-preview:1.6.2")
+
     // Astronomy Engine (Kastro)
     implementation ("dev.jamesyox:kastro:0.6.0")
 

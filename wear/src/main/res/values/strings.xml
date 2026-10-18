@@ -89,4 +89,12 @@
     <string name="location_request_failed">Location request failed</string>
     <string name="no_results_found">No results found</string>
     <string name="unknown_location">Unknown</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">Dusk Times</string>
+    <string name="dusk_times_widget_desc">Evening twilight and sunset progression</string>
+    <string name="dawn_times_widget_label">Dawn Times</string>
+    <string name="dawn_times_widget_desc">Morning twilight and sunrise progression</string>
+    <string name="widget_location_not_set">Set location in app</string>
+    <string name="night_label">Night</string>
 </resources>

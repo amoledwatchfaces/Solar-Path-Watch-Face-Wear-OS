@@ -88,4 +88,12 @@
     <string name="location_request_failed">Échec de la demande de position</string>
     <string name="no_results_found">Aucun résultat trouvé</string>
     <string name="unknown_location">Inconnue</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">Heures du crépuscule</string>
+    <string name="dusk_times_widget_desc">Crépuscule du soir et coucher du soleil</string>
+    <string name="dawn_times_widget_label">Heures de l\'aube</string>
+    <string name="dawn_times_widget_desc">Crépuscule du matin et lever du soleil</string>
+    <string name="widget_location_not_set">Définir la position dans l\'app</string>
+    <string name="night_label">Nuit</string>
 </resources>

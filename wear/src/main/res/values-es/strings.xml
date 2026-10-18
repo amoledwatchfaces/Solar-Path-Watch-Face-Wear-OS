@@ -88,4 +88,12 @@
     <string name="location_request_failed">Error al solicitar la ubicación</string>
     <string name="no_results_found">No se encontraron resultados</string>
     <string name="unknown_location">Desconocida</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">Horas del crepúsculo</string>
+    <string name="dusk_times_widget_desc">Crepúsculo vespertino y puesta de sol</string>
+    <string name="dawn_times_widget_label">Horas del amanecer</string>
+    <string name="dawn_times_widget_desc">Crepúsculo matutino y salida del sol</string>
+    <string name="widget_location_not_set">Establecer ubicación en la app</string>
+    <string name="night_label">Noche</string>
 </resources>

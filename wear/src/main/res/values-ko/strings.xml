@@ -88,4 +88,12 @@
     <string name="location_request_failed">위치 요청 실패</string>
     <string name="no_results_found">검색 결과 없음</string>
     <string name="unknown_location">알 수 없음</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">황혼 시간</string>
+    <string name="dusk_times_widget_desc">저녁 황혼 및 일몰 시간</string>
+    <string name="dawn_times_widget_label">여명 시간</string>
+    <string name="dawn_times_widget_desc">새벽 여명 및 일출 시간</string>
+    <string name="widget_location_not_set">앱에서 위치를 설정하세요</string>
+    <string name="night_label">밤</string>
 </resources>

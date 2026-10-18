@@ -26,6 +26,7 @@ import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.utils.formatCoordinate
 import com.amoledwatchfaces.solarpath.utils.isOnline
 import com.amoledwatchfaces.solarpath.utils.updateComplications
+import com.amoledwatchfaces.solarpath.utils.updateWidgets
 import com.amoledwatchfaces.solarpath.watchfacepush.DEFAULT_WATCH_FACE
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFacePackageRepository
 import com.amoledwatchfaces.solarpath.workers.LocationWorker
@@ -112,6 +113,7 @@ class MainViewModel @Inject constructor(
         try {
             SolarCalculator.invalidateCache()
             context.updateComplications()
+            viewModelScope.launch { context.updateWidgets(dataStore) }
             _refreshTrigger.value = System.currentTimeMillis()
             Toast.makeText(context, R.string.solar_times_recalculated, Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
@@ -124,6 +126,7 @@ class MainViewModel @Inject constructor(
         if (forceRecalculate) {
             SolarCalculator.invalidateCache()
             context.updateComplications()
+            viewModelScope.launch { context.updateWidgets(dataStore) }
         }
         _refreshTrigger.value = System.currentTimeMillis()
     }
@@ -315,6 +318,7 @@ class MainViewModel @Inject constructor(
                                 )
                             }
                             context.updateComplications()
+                            context.updateWidgets(dataStore)
                             _loaderState.value = false
                         }
                     }
@@ -382,6 +386,7 @@ class MainViewModel @Inject constructor(
                 )
             }
             context.updateComplications()
+            context.updateWidgets(dataStore)
             _loaderState.value = false
         }
     }
@@ -404,6 +409,7 @@ class MainViewModel @Inject constructor(
                 )
             }
             context.updateComplications()
+            context.updateWidgets(dataStore)
             _loaderState.value = false
         }
     }

@@ -2,13 +2,16 @@ package com.amoledwatchfaces.solarpath.workers
 
 import android.content.Context
 import android.util.Log
+import androidx.datastore.core.DataStore
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.utils.updateComplications
+import com.amoledwatchfaces.solarpath.utils.updateWidgets
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import java.time.Duration
@@ -19,12 +22,14 @@ private const val WORK_NAME = "solar_periodic_refresh"
 @HiltWorker
 class SolarRefreshWorker @AssistedInject constructor(
     @Assisted private val context: Context,
-    @Assisted workerParams: WorkerParameters
+    @Assisted workerParams: WorkerParameters,
+    private val dataStore: DataStore<UserPreferences>
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        Log.i(TAG, "Solar periodic refresh worker running - updating complications")
+        Log.i(TAG, "Solar periodic refresh worker running - updating complications and widgets")
         context.updateComplications()
+        context.updateWidgets(dataStore)
         return Result.success()
     }
 

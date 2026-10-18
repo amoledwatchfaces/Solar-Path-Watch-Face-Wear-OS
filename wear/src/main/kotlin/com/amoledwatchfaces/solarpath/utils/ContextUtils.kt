@@ -56,6 +56,15 @@ fun Context.updateComplications() {
     req.requestUpdateAll()
 }
 
+suspend fun Context.updateWidgets(dataStore: androidx.datastore.core.DataStore<com.amoledwatchfaces.solarpath.data.UserPreferences>) {
+    try {
+        com.amoledwatchfaces.solarpath.widget.DuskTimesWidget(dataStore).triggerUpdateAll(this)
+        com.amoledwatchfaces.solarpath.widget.DawnTimesWidget(dataStore).triggerUpdateAll(this)
+    } catch (e: Exception) {
+        android.util.Log.w("ContextUtils", "Failed to update widgets", e)
+    }
+}
+
 fun Context.openPlayStore() {
     try {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))

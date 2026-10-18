@@ -88,4 +88,12 @@
     <string name="location_request_failed">Błąd pobierania lokalizacji</string>
     <string name="no_results_found">Nie znaleziono wyników</string>
     <string name="unknown_location">Nieznana</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">Czasy zmierzchu</string>
+    <string name="dusk_times_widget_desc">Przebieg zmierzchu i zachodu słońca</string>
+    <string name="dawn_times_widget_label">Czasy świtu</string>
+    <string name="dawn_times_widget_desc">Przebieg świtu i wschodu słońca</string>
+    <string name="widget_location_not_set">Ustaw lokalizację w aplikacji</string>
+    <string name="night_label">Noc</string>
 </resources>

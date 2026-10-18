@@ -93,6 +93,44 @@
                 android:value="0" />
         </service>
 
+        <!-- Dusk Times Widget Service -->
+        <service
+            android:name=".widget.DuskTimesWidgetService"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/dusk_times_widget_label"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.glance.wear.widget.provider"
+                android:resource="@xml/dusk_times_widget_info" />
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/wb_twilight_24px" />
+        </service>
+
+        <!-- Dawn Times Widget Service -->
+        <service
+            android:name=".widget.DawnTimesWidgetService"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/dawn_times_widget_label"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.glance.wear.widget.provider"
+                android:resource="@xml/dawn_times_widget_info" />
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/wb_twilight_24px" />
+        </service>
+
         <!-- Broadcast Receiver for Passive Location & System Events -->
         <receiver
             android:name=".receiver.SystemBroadcastReceiver"

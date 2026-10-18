@@ -31,6 +31,7 @@ import com.amoledwatchfaces.solarpath.location.AddressProvider
 import com.amoledwatchfaces.solarpath.receiver.SystemBroadcastReceiver
 import com.amoledwatchfaces.solarpath.utils.formatCoordinate
 import com.amoledwatchfaces.solarpath.utils.updateComplications
+import com.amoledwatchfaces.solarpath.utils.updateWidgets
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.first
@@ -85,6 +86,7 @@ class LocationWorker @AssistedInject constructor(
                     }
 
                     applicationContext.updateComplications()
+                    applicationContext.updateWidgets(dataStore)
                 } else {
                     Log.i(TAG, "Location change too small ($distance m). Skipping update.")
                 }
