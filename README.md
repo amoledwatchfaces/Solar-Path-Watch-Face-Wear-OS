@@ -195,7 +195,7 @@ Precompiled `.apk` packages (`wear-release.apk`) are available on our [GitHub Re
 ### Prerequisites
 - Android Studio Ladybug / Meerkat (2024.2+ recommended)
 - JDK 21
-- Wear OS 5.0+ / 6.0+ emulator or physical watch (API 34+ / Target SDK 37)
+- Wear OS 6.0+ emulator or physical watch (Min SDK 36 / Target SDK 37)
 
 ### Building Locally
 
