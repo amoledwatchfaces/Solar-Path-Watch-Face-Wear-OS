@@ -166,11 +166,8 @@ fun DuskTimesWidgetContent(
     astroDuskMinute: Float,
     midnightMinute: Float
 ) {
-    val time = RemoteTime()
-    val hour = time.Hour()
-    val minute = time.Minutes()
-    val currentMinute = hour.times(60f).plus(minute)
-    val isAfterMidnight = hour.isLessThan(12f.rf)
+    val currentMinute = RemoteTime().Minutes()
+    val isAfterMidnight = currentMinute.isLessThan(720f.rf)
     val currentAdjustedMinute = currentMinute.plus(isAfterMidnight.select(1440f.rf, 0f.rf))
 
     val isSunsetPast = if (hasLocation && sunsetMinute >= 0f) currentAdjustedMinute.isGreaterThanOrEqualTo(sunsetMinute.rf) else false.rb

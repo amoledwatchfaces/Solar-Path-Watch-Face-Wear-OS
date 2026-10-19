@@ -161,10 +161,7 @@ fun DawnTimesWidgetContent(
     astroDawnMinute: Float,
     noonMinute: Float
 ) {
-    val time = RemoteTime()
-    val hour = time.Hour()
-    val minute = time.Minutes()
-    val currentMinute = hour.times(60f).plus(minute)
+    val currentMinute = RemoteTime().Minutes()
 
     val isAstroPast = if (hasLocation && astroDawnMinute >= 0f) currentMinute.isGreaterThanOrEqualTo(astroDawnMinute.rf) else false.rb
     val isAstroNext = if (hasLocation && astroDawnMinute >= 0f) currentMinute.isLessThan(astroDawnMinute.rf) else false.rb
