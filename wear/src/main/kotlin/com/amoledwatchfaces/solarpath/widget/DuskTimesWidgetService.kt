@@ -35,14 +35,11 @@ import androidx.compose.remote.creation.compose.text.RemoteTimeDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.core.graphics.toColorInt
 import androidx.datastore.core.DataStore
 import androidx.glance.wear.AssociateWithGlanceWearWidget
 import androidx.glance.wear.GlanceWearWidget
 import androidx.glance.wear.GlanceWearWidgetService
 import androidx.glance.wear.WearWidgetBrush
-import java.time.Instant
-import java.time.ZoneId
 import androidx.glance.wear.WearWidgetData
 import androidx.glance.wear.WearWidgetDocument
 import androidx.glance.wear.color
@@ -57,9 +54,12 @@ import androidx.wear.compose.remote.material3.RemoteText
 import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.presentation.MainActivity
+import com.amoledwatchfaces.solarpath.presentation.ui.appColorScheme
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
+import java.time.Instant
+import java.time.ZoneId
 import java.util.Date
 import javax.inject.Inject
 
@@ -89,7 +89,9 @@ class DuskTimesWidget(
             longitude = -0.1278,
             locationName = "Bzince pod Javorinou"
         )
-        val backgroundColor = dynamicColorScheme(context)?.surfaceContainer?.rc ?: RemoteColor(color = "#332e3c".toColorInt())
+        val colorScheme = dynamicColorScheme(context) ?: appColorScheme
+        val remoteColorScheme = RemoteColorScheme(colorScheme)
+        val backgroundColor = colorScheme.surfaceContainer.rc
 
         val hasLocation = preferences.latitude != 0.0 || preferences.longitude != 0.0
         val currentTime = System.currentTimeMillis()
@@ -113,25 +115,27 @@ class DuskTimesWidget(
         return WearWidgetDocument(
             background = WearWidgetBrush.color(backgroundColor)
         ) {
-            DuskTimesWidgetContent(
-                hasLocation = hasLocation,
-                locationName = preferences.locationName,
-                sunsetTime = solarData?.let { timeFormat.format(Date(it.sunsetEpoch)) } ?: "- -",
-                civilDuskTime = solarData?.let { timeFormat.format(Date(it.civilDuskEpoch)) } ?: "- -",
-                nauticalDuskTime = solarData?.let { timeFormat.format(Date(it.nauticalDuskEpoch)) } ?: "- -",
-                astroDuskTime = solarData?.let { timeFormat.format(Date(it.astroDuskEpoch)) } ?: "- -",
-                midnightTime = solarData?.let { timeFormat.format(Date(it.solarNadirEpoch)) } ?: "- -",
-                sunsetTitle = context.getString(R.string.sunset),
-                civilTitle = context.getString(R.string.civil_dusk),
-                nauticalTitle = context.getString(R.string.nautical_dusk),
-                astroTitle = context.getString(R.string.astro_dusk),
-                midnightTitle = context.getString(R.string.solar_midnight),
-                sunsetMinute = sunsetMinute,
-                civilDuskMinute = civilDuskMinute,
-                nauticalDuskMinute = nauticalDuskMinute,
-                astroDuskMinute = astroDuskMinute,
-                midnightMinute = midnightMinute
-            )
+            RemoteMaterialTheme(colorScheme = remoteColorScheme) {
+                DuskTimesWidgetContent(
+                    hasLocation = hasLocation,
+                    locationName = preferences.locationName,
+                    sunsetTime = solarData?.let { timeFormat.format(Date(it.sunsetEpoch)) } ?: "- -",
+                    civilDuskTime = solarData?.let { timeFormat.format(Date(it.civilDuskEpoch)) } ?: "- -",
+                    nauticalDuskTime = solarData?.let { timeFormat.format(Date(it.nauticalDuskEpoch)) } ?: "- -",
+                    astroDuskTime = solarData?.let { timeFormat.format(Date(it.astroDuskEpoch)) } ?: "- -",
+                    midnightTime = solarData?.let { timeFormat.format(Date(it.solarNadirEpoch)) } ?: "- -",
+                    sunsetTitle = context.getString(R.string.sunset),
+                    civilTitle = context.getString(R.string.civil_dusk),
+                    nauticalTitle = context.getString(R.string.nautical_dusk),
+                    astroTitle = context.getString(R.string.astro_dusk),
+                    midnightTitle = context.getString(R.string.solar_midnight),
+                    sunsetMinute = sunsetMinute,
+                    civilDuskMinute = civilDuskMinute,
+                    nauticalDuskMinute = nauticalDuskMinute,
+                    astroDuskMinute = astroDuskMinute,
+                    midnightMinute = midnightMinute
+                )
+            }
         }
     }
 }

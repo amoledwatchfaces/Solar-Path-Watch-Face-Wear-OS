@@ -34,7 +34,6 @@ import androidx.compose.remote.creation.compose.text.RemoteTimeDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.core.graphics.toColorInt
 import androidx.datastore.core.DataStore
 import androidx.glance.wear.AssociateWithGlanceWearWidget
 import androidx.glance.wear.GlanceWearWidget
@@ -47,12 +46,14 @@ import androidx.glance.wear.core.WearWidgetParams
 import androidx.wear.compose.material3.dynamicColorScheme
 import androidx.wear.compose.remote.material3.RemoteCard
 import androidx.wear.compose.remote.material3.RemoteCardDefaults
+import androidx.wear.compose.remote.material3.RemoteColorScheme
 import androidx.wear.compose.remote.material3.RemoteIcon
 import androidx.wear.compose.remote.material3.RemoteMaterialTheme
 import androidx.wear.compose.remote.material3.RemoteText
 import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.presentation.MainActivity
+import com.amoledwatchfaces.solarpath.presentation.ui.appColorScheme
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
@@ -87,7 +88,9 @@ class DawnTimesWidget(
             longitude = -0.1278,
             locationName = "Bzince pod Javorinou"
         )
-        val backgroundColor = dynamicColorScheme(context)?.surfaceContainer?.rc ?: RemoteColor(color = "#332e3c".toColorInt())
+        val colorScheme = dynamicColorScheme(context) ?: appColorScheme
+        val remoteColorScheme = RemoteColorScheme(colorScheme)
+        val backgroundColor = colorScheme.surfaceContainer.rc
 
         val hasLocation = preferences.latitude != 0.0 || preferences.longitude != 0.0
         val currentTime = System.currentTimeMillis()
@@ -111,25 +114,27 @@ class DawnTimesWidget(
         return WearWidgetDocument(
             background = WearWidgetBrush.color(backgroundColor)
         ) {
-            DawnTimesWidgetContent(
-                hasLocation = hasLocation,
-                locationName = preferences.locationName,
-                astroDawnTime = solarData?.let { timeFormat.format(Date(it.astroDawnEpoch)) } ?: "- -",
-                nauticalDawnTime = solarData?.let { timeFormat.format(Date(it.nauticalDawnEpoch)) } ?: "- -",
-                civilDawnTime = solarData?.let { timeFormat.format(Date(it.civilDawnEpoch)) } ?: "- -",
-                sunriseTime = solarData?.let { timeFormat.format(Date(it.sunriseEpoch)) } ?: "- -",
-                noonTime = solarData?.let { timeFormat.format(Date(it.solarNoonEpoch)) } ?: "- -",
-                astroTitle = context.getString(R.string.astro_dawn),
-                nauticalTitle = context.getString(R.string.nautical_dawn),
-                civilTitle = context.getString(R.string.civil_dawn),
-                sunriseTitle = context.getString(R.string.sunrise),
-                noonTitle = context.getString(R.string.solar_noon),
-                astroDawnMinute = astroMinute,
-                nauticalDawnMinute = nauticalMinute,
-                civilDawnMinute = civilMinute,
-                sunriseMinute = sunriseMinute,
-                noonMinute = noonMinute
-            )
+            RemoteMaterialTheme(colorScheme = remoteColorScheme) {
+                DawnTimesWidgetContent(
+                    hasLocation = hasLocation,
+                    locationName = preferences.locationName,
+                    astroDawnTime = solarData?.let { timeFormat.format(Date(it.astroDawnEpoch)) } ?: "- -",
+                    nauticalDawnTime = solarData?.let { timeFormat.format(Date(it.nauticalDawnEpoch)) } ?: "- -",
+                    civilDawnTime = solarData?.let { timeFormat.format(Date(it.civilDawnEpoch)) } ?: "- -",
+                    sunriseTime = solarData?.let { timeFormat.format(Date(it.sunriseEpoch)) } ?: "- -",
+                    noonTime = solarData?.let { timeFormat.format(Date(it.solarNoonEpoch)) } ?: "- -",
+                    astroTitle = context.getString(R.string.astro_dawn),
+                    nauticalTitle = context.getString(R.string.nautical_dawn),
+                    civilTitle = context.getString(R.string.civil_dawn),
+                    sunriseTitle = context.getString(R.string.sunrise),
+                    noonTitle = context.getString(R.string.solar_noon),
+                    astroDawnMinute = astroMinute,
+                    nauticalDawnMinute = nauticalMinute,
+                    civilDawnMinute = civilMinute,
+                    sunriseMinute = sunriseMinute,
+                    noonMinute = noonMinute
+                )
+            }
         }
     }
 }
