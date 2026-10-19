@@ -2,6 +2,7 @@
 package com.amoledwatchfaces.solarpath.presentation
 
 import android.Manifest
+import android.text.format.DateFormat
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -41,7 +42,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -76,9 +76,7 @@ import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
 import com.amoledwatchfaces.solarpath.utils.PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE
 import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
 import com.amoledwatchfaces.solarpath.utils.openPlayStore
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import java.util.Date
 
 @Composable
 fun MainScreen(
@@ -112,11 +110,10 @@ fun MainScreen(
         }
     }
 
-    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", LocalLocale.current.platformLocale)
-        .withZone(ZoneId.systemDefault())
+    val timeFormat = DateFormat.getTimeFormat(context)
 
     fun formatEpoch(epoch: Long): String {
-        return if (epoch > 0) timeFormatter.format(Instant.ofEpochMilli(epoch)) else "- -"
+        return if (epoch > 0) timeFormat.format(Date(epoch)) else "- -"
     }
 
     ScreenScaffold(

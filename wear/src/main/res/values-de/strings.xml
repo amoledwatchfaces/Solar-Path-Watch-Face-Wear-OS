@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Installiert. In den Zifferblättern auswählen.</string>
     <string name="wfp_not_supported">Watch Face Push wird auf diesem Gerät nicht unterstützt.</string>
     <string name="updating_watch_face">Zifferblatt wird aktualisiert…</string>
-    <string name="updating_watch_face_wff5">Zifferblatt wird auf Watch Face Format Version 5 aktualisiert…</string>
+    <string name="updating_watch_face_wff5">Watch Face Format wird aktualisiert…</string>
     <string name="watch_face_updated">Zifferblatt aktualisiert!</string>
 
     <!-- Location -->
@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Abenddämmerung und Sonnenuntergang</string>
     <string name="dawn_times_widget_label">Morgendämmerung</string>
     <string name="dawn_times_widget_desc">Morgendämmerung und Sonnenaufgang</string>
+    <string name="solar_graph_widget_label">Sonnendiagramm</string>
+    <string name="solar_graph_widget_desc">24-Stunden-Sonnenstand und Horizontdiagramm</string>
     <string name="widget_location_not_set">Standort in App festlegen</string>
     <string name="night_label">Nacht</string>
 </resources>

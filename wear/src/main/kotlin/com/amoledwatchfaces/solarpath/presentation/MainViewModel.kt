@@ -164,7 +164,7 @@ class MainViewModel @Inject constructor(
         if (!WatchFacePushManagerFactory.isSupported()) return
 
         viewModelScope.launch {
-            val currentPrefs = preferences.first()
+            val currentPrefs = preferencesRepository.getPreferences().first()
             if (currentPrefs.isWff5Updated) return@launch
 
             Toast.makeText(context, R.string.updating_watch_face_wff5, Toast.LENGTH_LONG).show()

@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Installé. Sélectionnez-le parmi les cadrans.</string>
     <string name="wfp_not_supported">Watch Face Push n\'est pas pris en charge sur cet appareil.</string>
     <string name="updating_watch_face">Mise à jour du cadran…</string>
-    <string name="updating_watch_face_wff5">Mise à jour du cadran vers Watch Face Format version 5…</string>
+    <string name="updating_watch_face_wff5">Mise à niveau de Watch Face Format…</string>
     <string name="watch_face_updated">Cadran mis à jour !</string>
 
     <!-- Location -->
@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Crépuscule du soir et coucher du soleil</string>
     <string name="dawn_times_widget_label">Heures de l\'aube</string>
     <string name="dawn_times_widget_desc">Crépuscule du matin et lever du soleil</string>
+    <string name="solar_graph_widget_label">Graphique solaire</string>
+    <string name="solar_graph_widget_desc">Graphique sur 24 heures de la position du soleil et de l\'horizon</string>
     <string name="widget_location_not_set">Définir la position dans l\'app</string>
     <string name="night_label">Nuit</string>
 </resources>

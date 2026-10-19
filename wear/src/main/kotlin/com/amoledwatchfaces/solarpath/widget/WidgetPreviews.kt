@@ -80,3 +80,40 @@ fun DawnTimesWidgetRectangularPreview(
         params = params,
     )
 }
+
+/**
+ * Android Studio Design Panel previews for Solar Graph Widget.
+ */
+@Preview
+@Composable
+fun SolarGraphWidgetSquirclePreview(
+    @PreviewParameter(SquircleLargeWidgetPreviewParams::class) params: WearWidgetParams,
+) {
+    WearWidgetPreview(
+        widget = SolarGraphWidget(),
+        params = params,
+    )
+}
+
+@Preview
+@Composable
+fun SolarGraphWidgetRoundPreview(
+    @PreviewParameter(RoundLargeWidgetPreviewParams::class) params: WearWidgetParams,
+) {
+    WearWidgetPreview(
+        widget = SolarGraphWidget(),
+        params = params,
+    )
+}
+
+@Preview
+@Composable
+fun SolarGraphWidgetRectangularPreview(
+    @PreviewParameter(RectangularLargeWidgetPreviewParams::class) params: WearWidgetParams,
+) {
+    WearWidgetPreview(
+        widget = SolarGraphWidget(),
+        params = params,
+    )
+}
+

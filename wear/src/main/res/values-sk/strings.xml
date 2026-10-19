@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Nainštalované. Vyberte zo zoznamu ciferníkov.</string>
     <string name="wfp_not_supported">Watch Face Push nie je na tomto zariadení podporované.</string>
     <string name="updating_watch_face">Aktualizuje sa ciferník…</string>
-    <string name="updating_watch_face_wff5">Aktualizuje sa ciferník na Watch Face Format verziu 5…</string>
+    <string name="updating_watch_face_wff5">Aktualizuje sa Watch Face Format…</string>
     <string name="watch_face_updated">Ciferník bol aktualizovaný!</string>
 
     <!-- Location -->
@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Večerný súmrak a západ slnka</string>
     <string name="dawn_times_widget_label">Časy úsvitu</string>
     <string name="dawn_times_widget_desc">Ranný úsvit a východ slnka</string>
+    <string name="solar_graph_widget_label">Slnečný graf</string>
+    <string name="solar_graph_widget_desc">24-hodinový graf polohy slnka a horizontu</string>
     <string name="widget_location_not_set">Nastavte polohu v aplikácii</string>
     <string name="night_label">Noc</string>
 </resources>

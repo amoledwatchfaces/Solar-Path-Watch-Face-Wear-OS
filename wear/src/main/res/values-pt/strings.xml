@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Instalado. Selecione na lista de mostradores.</string>
     <string name="wfp_not_supported">O Watch Face Push não é suportado neste dispositivo.</string>
     <string name="updating_watch_face">Atualizando mostrador…</string>
-    <string name="updating_watch_face_wff5">Atualizando mostrador para Watch Face Format versão 5…</string>
+    <string name="updating_watch_face_wff5">Atualizando Watch Face Format…</string>
     <string name="watch_face_updated">Mostrador atualizado!</string>
 
     <!-- Location -->
@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Crepúsculo vespertino e pôr do sol</string>
     <string name="dawn_times_widget_label">Horários da alvorada</string>
     <string name="dawn_times_widget_desc">Crepúsculo matutino e nascer do sol</string>
+    <string name="solar_graph_widget_label">Gráfico solar</string>
+    <string name="solar_graph_widget_desc">Gráfico de 24 horas da posição do sol e do horizonte</string>
     <string name="widget_location_not_set">Definir localização no app</string>
     <string name="night_label">Noite</string>
 </resources>

@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Zainstalowano. Wybierz z listy tarcz.</string>
     <string name="wfp_not_supported">Watch Face Push nie jest obsługiwane na tym urządzeniu.</string>
     <string name="updating_watch_face">Aktualizowanie tarczy…</string>
-    <string name="updating_watch_face_wff5">Aktualizowanie tarczy do Watch Face Format wersja 5…</string>
+    <string name="updating_watch_face_wff5">Aktualizowanie Watch Face Format…</string>
     <string name="watch_face_updated">Tarcza zaktualizowana!</string>
 
     <!-- Location -->
@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Przebieg zmierzchu i zachodu słońca</string>
     <string name="dawn_times_widget_label">Czasy świtu</string>
     <string name="dawn_times_widget_desc">Przebieg świtu i wschodu słońca</string>
+    <string name="solar_graph_widget_label">Wykres słoneczny</string>
+    <string name="solar_graph_widget_desc">24-godzinny wykres pozycji słońca i horyzontu</string>
     <string name="widget_location_not_set">Ustaw lokalizację w aplikacji</string>
     <string name="night_label">Noc</string>
 </resources>

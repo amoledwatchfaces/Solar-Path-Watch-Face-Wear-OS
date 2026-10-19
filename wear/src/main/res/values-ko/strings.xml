@@ -10,7 +10,7 @@
     <string name="status_manual_activation">설치되었습니다. 워치 페이스 목록에서 선택하세요.</string>
     <string name="wfp_not_supported">이 기기에서는 Watch Face Push가 지원되지 않습니다.</string>
     <string name="updating_watch_face">워치 페이스 업데이트 중…</string>
-    <string name="updating_watch_face_wff5">Watch Face Format 버전 5로 워치 페이스 업데이트 중…</string>
+    <string name="updating_watch_face_wff5">Watch Face Format 업그레이드 중…</string>
     <string name="watch_face_updated">워치 페이스가 업데이트되었습니다!</string>
 
     <!-- Location -->
@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">저녁 황혼 및 일몰 시간</string>
     <string name="dawn_times_widget_label">여명 시간</string>
     <string name="dawn_times_widget_desc">새벽 여명 및 일출 시간</string>
+    <string name="solar_graph_widget_label">태양 그래프</string>
+    <string name="solar_graph_widget_desc">24시간 태양 위치 및 지평선 그래프</string>
     <string name="widget_location_not_set">앱에서 위치를 설정하세요</string>
     <string name="night_label">밤</string>
 </resources>
