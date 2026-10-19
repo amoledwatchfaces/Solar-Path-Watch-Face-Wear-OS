@@ -18,7 +18,6 @@ import androidx.compose.remote.creation.compose.layout.RemoteRow
 import androidx.compose.remote.creation.compose.layout.RemoteTime
 import androidx.compose.remote.creation.compose.modifier.RemoteModifier
 import androidx.compose.remote.creation.compose.modifier.background
-import androidx.compose.remote.creation.compose.modifier.clickable
 import androidx.compose.remote.creation.compose.modifier.fillMaxHeight
 import androidx.compose.remote.creation.compose.modifier.fillMaxSize
 import androidx.compose.remote.creation.compose.modifier.fillMaxWidth
@@ -26,7 +25,6 @@ import androidx.compose.remote.creation.compose.modifier.padding
 import androidx.compose.remote.creation.compose.modifier.size
 import androidx.compose.remote.creation.compose.state.RemoteBoolean
 import androidx.compose.remote.creation.compose.state.RemoteColor
-import androidx.compose.remote.creation.compose.state.RemoteFloat
 import androidx.compose.remote.creation.compose.state.RemoteString
 import androidx.compose.remote.creation.compose.state.rb
 import androidx.compose.remote.creation.compose.state.rc
@@ -373,21 +371,3 @@ fun MilestoneItemRow(
     }
 }
 
-@SuppressLint("RestrictedApi")
-@RemoteComposable
-@Composable
-fun MilestoneItemRow(
-    name: String,
-    time: String,
-    isNext: Boolean,
-    isPast: Boolean,
-    colorScheme: RemoteColorScheme
-) {
-    MilestoneItemRow(
-        name = name,
-        time = time,
-        isNext = isNext.rb,
-        isPast = isPast.rb,
-        colorScheme = colorScheme
-    )
-}
