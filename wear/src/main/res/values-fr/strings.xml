@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Crépuscule du soir et coucher du soleil</string>
     <string name="dawn_times_widget_label">Heures de l\'aube</string>
     <string name="dawn_times_widget_desc">Crépuscule du matin et lever du soleil</string>
+    <string name="solar_graph_widget_label">Graphique solaire</string>
+    <string name="solar_graph_widget_desc">Graphique sur 24 heures de la position du soleil et de l\'horizon</string>
     <string name="widget_location_not_set">Définir la position dans l\'app</string>
     <string name="night_label">Nuit</string>
 </resources>

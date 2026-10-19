@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Przebieg zmierzchu i zachodu słońca</string>
     <string name="dawn_times_widget_label">Czasy świtu</string>
     <string name="dawn_times_widget_desc">Przebieg świtu i wschodu słońca</string>
+    <string name="solar_graph_widget_label">Wykres słoneczny</string>
+    <string name="solar_graph_widget_desc">24-godzinny wykres pozycji słońca i horyzontu</string>
     <string name="widget_location_not_set">Ustaw lokalizację w aplikacji</string>
     <string name="night_label">Noc</string>
 </resources>

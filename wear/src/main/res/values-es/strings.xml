@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Crepúsculo vespertino y puesta de sol</string>
     <string name="dawn_times_widget_label">Horas del amanecer</string>
     <string name="dawn_times_widget_desc">Crepúsculo matutino y salida del sol</string>
+    <string name="solar_graph_widget_label">Gráfico solar</string>
+    <string name="solar_graph_widget_desc">Gráfico de posición solar y horizonte de 24 horas</string>
     <string name="widget_location_not_set">Establecer ubicación en la app</string>
     <string name="night_label">Noche</string>
 </resources>

@@ -62,6 +62,7 @@ fun Context.updateWidgets() {
         val updater = androidx.wear.tiles.TileService.getUpdater(this)
         updater.requestUpdate(com.amoledwatchfaces.solarpath.widget.DuskTimesWidgetService::class.java as Any as Class<out androidx.wear.tiles.TileService>)
         updater.requestUpdate(com.amoledwatchfaces.solarpath.widget.DawnTimesWidgetService::class.java as Any as Class<out androidx.wear.tiles.TileService>)
+        updater.requestUpdate(com.amoledwatchfaces.solarpath.widget.SolarGraphWidgetService::class.java as Any as Class<out androidx.wear.tiles.TileService>)
     } catch (e: Exception) {
         android.util.Log.w("ContextUtils", "Failed to update widgets", e)
     }

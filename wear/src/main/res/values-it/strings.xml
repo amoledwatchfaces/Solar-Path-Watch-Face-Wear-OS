@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Crepuscolo serale e tramonto</string>
     <string name="dawn_times_widget_label">Orari dell\'alba</string>
     <string name="dawn_times_widget_desc">Crepuscolo mattutino e alba</string>
+    <string name="solar_graph_widget_label">Grafico solare</string>
+    <string name="solar_graph_widget_desc">Grafico di 24 ore della posizione del sole e dell\'orizzonte</string>
     <string name="widget_location_not_set">Imposta posizione nell\'app</string>
     <string name="night_label">Notte</string>
 </resources>

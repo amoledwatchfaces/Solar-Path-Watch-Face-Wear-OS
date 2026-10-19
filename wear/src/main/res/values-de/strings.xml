@@ -94,6 +94,8 @@
     <string name="dusk_times_widget_desc">Abenddämmerung und Sonnenuntergang</string>
     <string name="dawn_times_widget_label">Morgendämmerung</string>
     <string name="dawn_times_widget_desc">Morgendämmerung und Sonnenaufgang</string>
+    <string name="solar_graph_widget_label">Sonnendiagramm</string>
+    <string name="solar_graph_widget_desc">24-Stunden-Sonnenstand und Horizontdiagramm</string>
     <string name="widget_location_not_set">Standort in App festlegen</string>
     <string name="night_label">Nacht</string>
 </resources>

@@ -95,6 +95,8 @@
     <string name="dusk_times_widget_desc">Evening twilight and sunset progression</string>
     <string name="dawn_times_widget_label">Dawn Times</string>
     <string name="dawn_times_widget_desc">Morning twilight and sunrise progression</string>
+    <string name="solar_graph_widget_label">Solar Graph</string>
+    <string name="solar_graph_widget_desc">24-hour sun position and horizon graph</string>
     <string name="widget_location_not_set">Set location in app</string>
     <string name="night_label">Night</string>
 </resources>

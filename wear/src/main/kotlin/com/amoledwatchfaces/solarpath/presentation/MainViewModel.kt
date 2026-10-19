@@ -164,17 +164,15 @@ class MainViewModel @Inject constructor(
         if (!WatchFacePushManagerFactory.isSupported()) return
 
         viewModelScope.launch {
-            val currentPrefs = preferences.first()
+            val currentPrefs = preferencesRepository.getPreferences().first()
             if (currentPrefs.isWff5Updated) return@launch
 
-            Toast.makeText(context, R.string.updating_watch_face_wff5, Toast.LENGTH_LONG).show()
             try {
                 Log.i(TAG, "Wear OS 7+ detected (API ${android.os.Build.VERSION.SDK_INT}). Auto-migrating default watch face to WFF 5...")
                 val result = packageRepository.updateToWff5WatchFace(scope = this)
                 if (result.isSuccess) {
                     Log.i(TAG, "Successfully updated default watch face to WFF 5 (slot ${result.getOrNull()})")
                     preferencesRepository.setWff5Updated(true)
-                    Toast.makeText(context, R.string.watch_face_updated, Toast.LENGTH_SHORT).show()
                 } else {
                     Log.w(TAG, "WFF 5 migration failed: ${result.exceptionOrNull()?.message}")
                 }
