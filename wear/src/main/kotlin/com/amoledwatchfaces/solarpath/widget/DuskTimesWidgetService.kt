@@ -203,9 +203,10 @@ fun DuskTimesWidgetContent(
 
     RemoteBox(
         modifier = RemoteModifier
+            .fillMaxSize()
             .background(RemoteCardDefaults.cardColors().containerColor)
             .padding(4f.rf)
-            .fillMaxSize()
+
     ){
         RemoteColumn(
             modifier = RemoteModifier.fillMaxWidth().fillMaxHeight(),
@@ -360,7 +361,7 @@ fun MilestoneItemRow(
                     .size(6.rdp)
                     .clip(RemoteCircleShape)
                     .background(fillColor)
-                    .border(1.rdp, dotColor, RemoteCircleShape)
+                    .border(1.5f.rdp, dotColor, RemoteCircleShape)
             ){}
             RemoteText(
                 text = name.rs,

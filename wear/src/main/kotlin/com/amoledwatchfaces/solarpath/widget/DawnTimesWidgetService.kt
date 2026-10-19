@@ -194,9 +194,9 @@ fun DawnTimesWidgetContent(
 
     RemoteBox(
         modifier = RemoteModifier
+            .fillMaxSize()
             .background(RemoteCardDefaults.cardColors().containerColor)
             .padding(4f.rf)
-            .fillMaxSize()
     ){
         RemoteColumn(
             modifier = RemoteModifier.fillMaxWidth().fillMaxHeight(),
