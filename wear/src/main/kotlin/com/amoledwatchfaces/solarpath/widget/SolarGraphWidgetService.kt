@@ -55,12 +55,14 @@ import androidx.glance.wear.core.WearWidgetParams
 import androidx.wear.compose.material3.dynamicColorScheme
 import androidx.wear.compose.remote.material3.RemoteCard
 import androidx.wear.compose.remote.material3.RemoteCardDefaults
+import androidx.wear.compose.remote.material3.RemoteColorScheme
 import androidx.wear.compose.remote.material3.RemoteIcon
 import androidx.wear.compose.remote.material3.RemoteMaterialTheme
 import androidx.wear.compose.remote.material3.RemoteText
 import com.amoledwatchfaces.solarpath.R
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.presentation.MainActivity
+import com.amoledwatchfaces.solarpath.presentation.ui.appColorScheme
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
@@ -97,8 +99,9 @@ class SolarGraphWidget(
             longitude = -0.1278,
             locationName = "Bzince pod Javorinou"
         )
-        val backgroundColor = dynamicColorScheme(context)?.surfaceContainer?.rc
-            ?: RemoteColor(color = "#332e3c".toColorInt())
+        val colorScheme = dynamicColorScheme(context) ?: appColorScheme
+        val remoteColorScheme = RemoteColorScheme(colorScheme)
+        val backgroundColor = colorScheme.surfaceContainer.rc
 
         val hasLocation = preferences.latitude != 0.0 || preferences.longitude != 0.0
         val currentTime = System.currentTimeMillis()
@@ -120,18 +123,20 @@ class SolarGraphWidget(
         return WearWidgetDocument(
             background = WearWidgetBrush.color(backgroundColor)
         ) {
-            SolarGraphWidgetContent(
-                hasLocation = hasLocation,
-                locationName = preferences.locationName,
-                sunriseTime = solarData?.let { if (it.sunriseEpoch > 0L) timeFormat.format(Date(it.sunriseEpoch)) else "- -" } ?: "- -",
-                sunsetTime = solarData?.let { if (it.sunsetEpoch > 0L) timeFormat.format(Date(it.sunsetEpoch)) else "- -" } ?: "- -",
-                sunriseTitle = context.getString(R.string.sunrise),
-                sunsetTitle = context.getString(R.string.sunset),
-                locationNotSetText = context.getString(R.string.widget_location_not_set),
-                sunriseMinute = sunriseMinute,
-                sunsetMinute = sunsetMinute,
-                noonMinute = noonMinute
-            )
+            RemoteMaterialTheme(colorScheme = remoteColorScheme) {
+                SolarGraphWidgetContent(
+                    hasLocation = hasLocation,
+                    locationName = preferences.locationName,
+                    sunriseTime = solarData?.let { if (it.sunriseEpoch > 0L) timeFormat.format(Date(it.sunriseEpoch)) else "- -" } ?: "- -",
+                    sunsetTime = solarData?.let { if (it.sunsetEpoch > 0L) timeFormat.format(Date(it.sunsetEpoch)) else "- -" } ?: "- -",
+                    sunriseTitle = context.getString(R.string.sunrise),
+                    sunsetTitle = context.getString(R.string.sunset),
+                    locationNotSetText = context.getString(R.string.widget_location_not_set),
+                    sunriseMinute = sunriseMinute,
+                    sunsetMinute = sunsetMinute,
+                    noonMinute = noonMinute
+                )
+            }
         }
     }
 }
