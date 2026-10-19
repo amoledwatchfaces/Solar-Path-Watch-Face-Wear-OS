@@ -93,7 +93,7 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
                 }
                 com.amoledwatchfaces.solarpath.workers.SolarRefreshWorker.schedule(context)
                 context.updateComplications()
-                context.updateWidgets(dataStore)
+                context.updateWidgets()
             }
         }
     }

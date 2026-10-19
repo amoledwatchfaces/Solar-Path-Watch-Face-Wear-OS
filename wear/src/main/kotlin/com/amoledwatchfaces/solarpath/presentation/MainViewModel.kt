@@ -113,7 +113,7 @@ class MainViewModel @Inject constructor(
         try {
             SolarCalculator.invalidateCache()
             context.updateComplications()
-            viewModelScope.launch { context.updateWidgets(dataStore) }
+            viewModelScope.launch { context.updateWidgets() }
             _refreshTrigger.value = System.currentTimeMillis()
             Toast.makeText(context, R.string.solar_times_recalculated, Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
@@ -126,7 +126,7 @@ class MainViewModel @Inject constructor(
         if (forceRecalculate) {
             SolarCalculator.invalidateCache()
             context.updateComplications()
-            viewModelScope.launch { context.updateWidgets(dataStore) }
+            viewModelScope.launch { context.updateWidgets() }
         }
         _refreshTrigger.value = System.currentTimeMillis()
     }
@@ -318,7 +318,7 @@ class MainViewModel @Inject constructor(
                                 )
                             }
                             context.updateComplications()
-                            context.updateWidgets(dataStore)
+                            context.updateWidgets()
                             _loaderState.value = false
                         }
                     }
@@ -386,7 +386,7 @@ class MainViewModel @Inject constructor(
                 )
             }
             context.updateComplications()
-            context.updateWidgets(dataStore)
+            context.updateWidgets()
             _loaderState.value = false
         }
     }
@@ -409,7 +409,7 @@ class MainViewModel @Inject constructor(
                 )
             }
             context.updateComplications()
-            context.updateWidgets(dataStore)
+            context.updateWidgets()
             _loaderState.value = false
         }
     }

@@ -29,7 +29,7 @@ class SolarRefreshWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         Log.i(TAG, "Solar periodic refresh worker running - updating complications and widgets")
         context.updateComplications()
-        context.updateWidgets(dataStore)
+        context.updateWidgets()
         return Result.success()
     }
 

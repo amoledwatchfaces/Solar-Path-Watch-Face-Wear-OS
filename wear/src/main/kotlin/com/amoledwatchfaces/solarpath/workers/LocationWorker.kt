@@ -86,7 +86,7 @@ class LocationWorker @AssistedInject constructor(
                     }
 
                     applicationContext.updateComplications()
-                    applicationContext.updateWidgets(dataStore)
+                    applicationContext.updateWidgets()
                 } else {
                     Log.i(TAG, "Location change too small ($distance m). Skipping update.")
                 }
