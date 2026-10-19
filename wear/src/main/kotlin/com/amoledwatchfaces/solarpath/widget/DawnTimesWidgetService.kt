@@ -15,6 +15,7 @@ import androidx.compose.remote.creation.compose.layout.RemoteBox
 import androidx.compose.remote.creation.compose.layout.RemoteColumn
 import androidx.compose.remote.creation.compose.layout.RemoteComposable
 import androidx.compose.remote.creation.compose.layout.RemoteRow
+import androidx.compose.remote.creation.compose.layout.RemoteTime
 import androidx.compose.remote.creation.compose.modifier.RemoteModifier
 import androidx.compose.remote.creation.compose.modifier.background
 import androidx.compose.remote.creation.compose.modifier.fillMaxHeight
@@ -22,14 +23,18 @@ import androidx.compose.remote.creation.compose.modifier.fillMaxSize
 import androidx.compose.remote.creation.compose.modifier.fillMaxWidth
 import androidx.compose.remote.creation.compose.modifier.padding
 import androidx.compose.remote.creation.compose.modifier.size
+import androidx.compose.remote.creation.compose.state.RemoteBoolean
 import androidx.compose.remote.creation.compose.state.RemoteColor
+import androidx.compose.remote.creation.compose.state.RemoteFloat
 import androidx.compose.remote.creation.compose.state.RemoteString
+import androidx.compose.remote.creation.compose.state.rb
 import androidx.compose.remote.creation.compose.state.rc
 import androidx.compose.remote.creation.compose.state.rdp
 import androidx.compose.remote.creation.compose.state.rf
 import androidx.compose.remote.creation.compose.state.rs
 import androidx.compose.remote.creation.compose.text.RemoteTimeDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.graphics.toColorInt
 import androidx.datastore.core.DataStore
@@ -53,6 +58,8 @@ import com.amoledwatchfaces.solarpath.presentation.MainActivity
 import com.amoledwatchfaces.solarpath.solar.SolarCalculator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
+import java.time.Instant
+import java.time.ZoneId
 import java.util.Date
 import javax.inject.Inject
 
@@ -79,7 +86,7 @@ class DawnTimesWidget(
         val preferences = dataStore?.data?.first() ?: UserPreferences(
             latitude = 51.5074,
             longitude = -0.1278,
-            locationName = "London"
+            locationName = "Bzince pod Javorinou"
         )
         val backgroundColor = dynamicColorScheme(context)?.surfaceContainer?.rc ?: RemoteColor(color = "#332e3c".toColorInt())
 
@@ -96,19 +103,11 @@ class DawnTimesWidget(
 
         val timeFormat = DateFormat.getTimeFormat(context)
 
-        data class Milestone(val name: String, val epoch: Long)
-
-        val milestones = if (solarData != null) {
-            listOf(
-                Milestone(context.getString(R.string.astro_dawn), solarData.astroDawnEpoch),
-                Milestone(context.getString(R.string.nautical_dawn), solarData.nauticalDawnEpoch),
-                Milestone(context.getString(R.string.civil_dawn), solarData.civilDawnEpoch),
-                Milestone(context.getString(R.string.sunrise), solarData.sunriseEpoch),
-                Milestone(context.getString(R.string.solar_noon), solarData.solarNoonEpoch)
-            )
-        } else emptyList()
-
-        val nextMilestone = milestones.firstOrNull { it.epoch > currentTime }
+        val astroMinute = solarData?.let { epochToMinuteOfDay(it.astroDawnEpoch) } ?: -1f
+        val nauticalMinute = solarData?.let { epochToMinuteOfDay(it.nauticalDawnEpoch) } ?: -1f
+        val civilMinute = solarData?.let { epochToMinuteOfDay(it.civilDawnEpoch) } ?: -1f
+        val sunriseMinute = solarData?.let { epochToMinuteOfDay(it.sunriseEpoch) } ?: -1f
+        val noonMinute = solarData?.let { epochToMinuteOfDay(it.solarNoonEpoch) } ?: -1f
 
         return WearWidgetDocument(
             background = WearWidgetBrush.color(backgroundColor)
@@ -126,16 +125,20 @@ class DawnTimesWidget(
                 civilTitle = context.getString(R.string.civil_dawn),
                 sunriseTitle = context.getString(R.string.sunrise),
                 noonTitle = context.getString(R.string.solar_noon),
-                nextEpoch = nextMilestone?.epoch ?: 0L,
-                astroEpoch = solarData?.astroDawnEpoch ?: 0L,
-                nauticalEpoch = solarData?.nauticalDawnEpoch ?: 0L,
-                civilEpoch = solarData?.civilDawnEpoch ?: 0L,
-                sunriseEpoch = solarData?.sunriseEpoch ?: 0L,
-                noonEpoch = solarData?.solarNoonEpoch ?: 0L,
-                currentTime = currentTime
+                astroDawnMinute = astroMinute,
+                nauticalDawnMinute = nauticalMinute,
+                civilDawnMinute = civilMinute,
+                sunriseMinute = sunriseMinute,
+                noonMinute = noonMinute
             )
         }
     }
+}
+
+private fun epochToMinuteOfDay(epoch: Long, zoneId: ZoneId = ZoneId.systemDefault()): Float {
+    if (epoch <= 0L) return -1f
+    val zdt = Instant.ofEpochMilli(epoch).atZone(zoneId)
+    return (zdt.hour * 60 + zdt.minute).toFloat()
 }
 
 @SuppressLint("RestrictedApi")
@@ -154,14 +157,40 @@ fun DawnTimesWidgetContent(
     nauticalTitle: String,
     astroTitle: String,
     noonTitle: String,
-    nextEpoch: Long,
-    sunriseEpoch: Long,
-    civilEpoch: Long,
-    nauticalEpoch: Long,
-    astroEpoch: Long,
-    noonEpoch: Long,
-    currentTime: Long
+    sunriseMinute: Float,
+    civilDawnMinute: Float,
+    nauticalDawnMinute: Float,
+    astroDawnMinute: Float,
+    noonMinute: Float
 ) {
+    val time = RemoteTime()
+    val hour = time.Hour()
+    val minute = time.Minutes()
+    val currentMinute = hour.times(60f).plus(minute)
+
+    val isAstroPast = if (hasLocation && astroDawnMinute >= 0f) currentMinute.isGreaterThanOrEqualTo(astroDawnMinute.rf) else false.rb
+    val isAstroNext = if (hasLocation && astroDawnMinute >= 0f) currentMinute.isLessThan(astroDawnMinute.rf) else false.rb
+
+    val isNauticalPast = if (hasLocation && nauticalDawnMinute >= 0f) currentMinute.isGreaterThanOrEqualTo(nauticalDawnMinute.rf) else false.rb
+    val isNauticalNext = if (hasLocation && nauticalDawnMinute >= 0f && astroDawnMinute >= 0f) {
+        currentMinute.isGreaterThanOrEqualTo(astroDawnMinute.rf).and(currentMinute.isLessThan(nauticalDawnMinute.rf))
+    } else false.rb
+
+    val isCivilPast = if (hasLocation && civilDawnMinute >= 0f) currentMinute.isGreaterThanOrEqualTo(civilDawnMinute.rf) else false.rb
+    val isCivilNext = if (hasLocation && civilDawnMinute >= 0f && nauticalDawnMinute >= 0f) {
+        currentMinute.isGreaterThanOrEqualTo(nauticalDawnMinute.rf).and(currentMinute.isLessThan(civilDawnMinute.rf))
+    } else false.rb
+
+    val isSunrisePast = if (hasLocation && sunriseMinute >= 0f) currentMinute.isGreaterThanOrEqualTo(sunriseMinute.rf) else false.rb
+    val isSunriseNext = if (hasLocation && sunriseMinute >= 0f && civilDawnMinute >= 0f) {
+        currentMinute.isGreaterThanOrEqualTo(civilDawnMinute.rf).and(currentMinute.isLessThan(sunriseMinute.rf))
+    } else false.rb
+
+    val isNoonPast = if (hasLocation && noonMinute >= 0f) currentMinute.isGreaterThanOrEqualTo(noonMinute.rf) else false.rb
+    val isNoonNext = if (hasLocation && noonMinute >= 0f && sunriseMinute >= 0f) {
+        currentMinute.isGreaterThanOrEqualTo(sunriseMinute.rf).and(currentMinute.isLessThan(noonMinute.rf))
+    } else false.rb
+
     RemoteBox(
         modifier = RemoteModifier
             .background(RemoteCardDefaults.cardColors().containerColor)
@@ -174,11 +203,12 @@ fun DawnTimesWidgetContent(
             horizontalAlignment = RemoteAlignment.CenterHorizontally
         ) {
             RemoteRow(
-                modifier = RemoteModifier.fillMaxWidth().padding(bottom = 2.rdp),
+                modifier = RemoteModifier.padding(bottom = 2.rdp),
                 verticalAlignment = RemoteAlignment.CenterVertically,
                 horizontalArrangement = RemoteArrangement.SpaceBetween
             ) {
                 RemoteRow(
+                    modifier = RemoteModifier.weight(5f),
                     verticalAlignment = RemoteAlignment.CenterVertically,
                     horizontalArrangement = RemoteArrangement.spacedBy(2.rdp)
                 ){
@@ -187,7 +217,7 @@ fun DawnTimesWidgetContent(
                         imageVector =
                             if (!hasLocation) RemoteImageVector.vectorResource(R.drawable.location_disabled_24px)
                             else RemoteImageVector.vectorResource(R.drawable.location_city_24px),
-                        contentDescription = "Dawn Icon".rs,
+                        contentDescription = "Dusk Icon".rs,
                         tint = RemoteMaterialTheme.colorScheme.secondaryDim
                     )
                     RemoteText(
@@ -199,6 +229,8 @@ fun DawnTimesWidgetContent(
                     )
                 }
                 RemoteText(
+                    modifier = RemoteModifier.weight(2f),
+                    textAlign = TextAlign.End,
                     style = RemoteMaterialTheme.typography.labelMedium,
                     color = RemoteMaterialTheme.colorScheme.secondary,
                     text = RemoteTimeDefaults.defaultTimeString()
@@ -221,39 +253,38 @@ fun DawnTimesWidgetContent(
                 MilestoneItemRow(
                     name = noonTitle,
                     time = noonTime,
-                    isNext = nextEpoch > 0L && noonEpoch == nextEpoch,
-                    isPast = noonEpoch in 1..<currentTime,
+                    isNext = isNoonNext,
+                    isPast = isNoonPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = sunriseTitle,
                     time = sunriseTime,
-                    isNext = nextEpoch > 0L && sunriseEpoch == nextEpoch,
-                    isPast = sunriseEpoch in 1..<currentTime,
+                    isNext = isSunriseNext,
+                    isPast = isSunrisePast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = civilTitle,
                     time = civilDawnTime,
-                    isNext = nextEpoch > 0L && civilEpoch == nextEpoch,
-                    isPast = civilEpoch in 1..<currentTime,
+                    isNext = isCivilNext,
+                    isPast = isCivilPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = nauticalTitle,
                     time = nauticalDawnTime,
-                    isNext = nextEpoch > 0L && nauticalEpoch == nextEpoch,
-                    isPast = nauticalEpoch in 1..<currentTime,
+                    isNext = isNauticalNext,
+                    isPast = isNauticalPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = astroTitle,
                     time = astroDawnTime,
-                    isNext = nextEpoch > 0L && astroEpoch == nextEpoch,
-                    isPast = astroEpoch in 1..<currentTime,
+                    isNext = isAstroNext,
+                    isPast = isAstroPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
-
             }
         }
     }

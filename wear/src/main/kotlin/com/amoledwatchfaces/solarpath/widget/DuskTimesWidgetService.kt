@@ -15,6 +15,7 @@ import androidx.compose.remote.creation.compose.layout.RemoteBox
 import androidx.compose.remote.creation.compose.layout.RemoteColumn
 import androidx.compose.remote.creation.compose.layout.RemoteComposable
 import androidx.compose.remote.creation.compose.layout.RemoteRow
+import androidx.compose.remote.creation.compose.layout.RemoteTime
 import androidx.compose.remote.creation.compose.modifier.RemoteModifier
 import androidx.compose.remote.creation.compose.modifier.background
 import androidx.compose.remote.creation.compose.modifier.clickable
@@ -23,14 +24,18 @@ import androidx.compose.remote.creation.compose.modifier.fillMaxSize
 import androidx.compose.remote.creation.compose.modifier.fillMaxWidth
 import androidx.compose.remote.creation.compose.modifier.padding
 import androidx.compose.remote.creation.compose.modifier.size
+import androidx.compose.remote.creation.compose.state.RemoteBoolean
 import androidx.compose.remote.creation.compose.state.RemoteColor
+import androidx.compose.remote.creation.compose.state.RemoteFloat
 import androidx.compose.remote.creation.compose.state.RemoteString
+import androidx.compose.remote.creation.compose.state.rb
 import androidx.compose.remote.creation.compose.state.rc
 import androidx.compose.remote.creation.compose.state.rdp
 import androidx.compose.remote.creation.compose.state.rf
 import androidx.compose.remote.creation.compose.state.rs
 import androidx.compose.remote.creation.compose.text.RemoteTimeDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.graphics.toColorInt
 import androidx.datastore.core.DataStore
@@ -38,6 +43,8 @@ import androidx.glance.wear.AssociateWithGlanceWearWidget
 import androidx.glance.wear.GlanceWearWidget
 import androidx.glance.wear.GlanceWearWidgetService
 import androidx.glance.wear.WearWidgetBrush
+import java.time.Instant
+import java.time.ZoneId
 import androidx.glance.wear.WearWidgetData
 import androidx.glance.wear.WearWidgetDocument
 import androidx.glance.wear.color
@@ -81,7 +88,7 @@ class DuskTimesWidget(
         val preferences = dataStore?.data?.first() ?: UserPreferences(
             latitude = 51.5074,
             longitude = -0.1278,
-            locationName = "London"
+            locationName = "Bzince pod Javorinou"
         )
         val backgroundColor = dynamicColorScheme(context)?.surfaceContainer?.rc ?: RemoteColor(color = "#332e3c".toColorInt())
 
@@ -98,19 +105,11 @@ class DuskTimesWidget(
 
         val timeFormat = DateFormat.getTimeFormat(context)
 
-        data class Milestone(val name: String, val epoch: Long)
-
-        val milestones = if (solarData != null) {
-            listOf(
-                Milestone(context.getString(R.string.sunset), solarData.sunsetEpoch),
-                Milestone(context.getString(R.string.civil_dusk), solarData.civilDuskEpoch),
-                Milestone(context.getString(R.string.nautical_dusk), solarData.nauticalDuskEpoch),
-                Milestone(context.getString(R.string.astro_dusk), solarData.astroDuskEpoch),
-                Milestone(context.getString(R.string.solar_midnight), solarData.solarNadirEpoch)
-            )
-        } else emptyList()
-
-        val nextMilestone = milestones.firstOrNull { it.epoch > currentTime }
+        val sunsetMinute = solarData?.let { epochToDuskMinute(it.sunsetEpoch) } ?: -1f
+        val civilDuskMinute = solarData?.let { epochToDuskMinute(it.civilDuskEpoch) } ?: -1f
+        val nauticalDuskMinute = solarData?.let { epochToDuskMinute(it.nauticalDuskEpoch) } ?: -1f
+        val astroDuskMinute = solarData?.let { epochToDuskMinute(it.astroDuskEpoch) } ?: -1f
+        val midnightMinute = solarData?.let { epochToDuskMinute(it.solarNadirEpoch) } ?: -1f
 
         return WearWidgetDocument(
             background = WearWidgetBrush.color(backgroundColor)
@@ -128,16 +127,23 @@ class DuskTimesWidget(
                 nauticalTitle = context.getString(R.string.nautical_dusk),
                 astroTitle = context.getString(R.string.astro_dusk),
                 midnightTitle = context.getString(R.string.solar_midnight),
-                nextEpoch = nextMilestone?.epoch ?: 0L,
-                sunsetEpoch = solarData?.sunsetEpoch ?: 0L,
-                civilEpoch = solarData?.civilDuskEpoch ?: 0L,
-                nauticalEpoch = solarData?.nauticalDuskEpoch ?: 0L,
-                astroEpoch = solarData?.astroDuskEpoch ?: 0L,
-                midnightEpoch = solarData?.solarNadirEpoch ?: 0L,
-                currentTime = currentTime
+                sunsetMinute = sunsetMinute,
+                civilDuskMinute = civilDuskMinute,
+                nauticalDuskMinute = nauticalDuskMinute,
+                astroDuskMinute = astroDuskMinute,
+                midnightMinute = midnightMinute
             )
         }
     }
+}
+
+private fun epochToDuskMinute(epoch: Long, zoneId: ZoneId = ZoneId.systemDefault()): Float {
+    if (epoch <= 0L) return -1f
+    val zdt = Instant.ofEpochMilli(epoch).atZone(zoneId)
+    val hour = zdt.hour
+    val minute = zdt.minute
+    val adjustedHour = if (hour < 12) hour + 24 else hour
+    return (adjustedHour * 60 + minute).toFloat()
 }
 
 @SuppressLint("RestrictedApi")
@@ -156,32 +162,47 @@ fun DuskTimesWidgetContent(
     nauticalTitle: String,
     astroTitle: String,
     midnightTitle: String,
-    nextEpoch: Long,
-    sunsetEpoch: Long,
-    civilEpoch: Long,
-    nauticalEpoch: Long,
-    astroEpoch: Long,
-    midnightEpoch: Long,
-    currentTime: Long
+    sunsetMinute: Float,
+    civilDuskMinute: Float,
+    nauticalDuskMinute: Float,
+    astroDuskMinute: Float,
+    midnightMinute: Float
 ) {
+    val time = RemoteTime()
+    val hour = time.Hour()
+    val minute = time.Minutes()
+    val currentMinute = hour.times(60f).plus(minute)
+    val isAfterMidnight = hour.isLessThan(12f.rf)
+    val currentAdjustedMinute = currentMinute.plus(isAfterMidnight.select(1440f.rf, 0f.rf))
+
+    val isSunsetPast = if (hasLocation && sunsetMinute >= 0f) currentAdjustedMinute.isGreaterThanOrEqualTo(sunsetMinute.rf) else false.rb
+    val isSunsetNext = if (hasLocation && sunsetMinute >= 0f) currentAdjustedMinute.isLessThan(sunsetMinute.rf) else false.rb
+
+    val isCivilPast = if (hasLocation && civilDuskMinute >= 0f) currentAdjustedMinute.isGreaterThanOrEqualTo(civilDuskMinute.rf) else false.rb
+    val isCivilNext = if (hasLocation && civilDuskMinute >= 0f && sunsetMinute >= 0f) {
+        currentAdjustedMinute.isGreaterThanOrEqualTo(sunsetMinute.rf).and(currentAdjustedMinute.isLessThan(civilDuskMinute.rf))
+    } else false.rb
+
+    val isNauticalPast = if (hasLocation && nauticalDuskMinute >= 0f) currentAdjustedMinute.isGreaterThanOrEqualTo(nauticalDuskMinute.rf) else false.rb
+    val isNauticalNext = if (hasLocation && nauticalDuskMinute >= 0f && civilDuskMinute >= 0f) {
+        currentAdjustedMinute.isGreaterThanOrEqualTo(civilDuskMinute.rf).and(currentAdjustedMinute.isLessThan(nauticalDuskMinute.rf))
+    } else false.rb
+
+    val isAstroPast = if (hasLocation && astroDuskMinute >= 0f) currentAdjustedMinute.isGreaterThanOrEqualTo(astroDuskMinute.rf) else false.rb
+    val isAstroNext = if (hasLocation && astroDuskMinute >= 0f && nauticalDuskMinute >= 0f) {
+        currentAdjustedMinute.isGreaterThanOrEqualTo(nauticalDuskMinute.rf).and(currentAdjustedMinute.isLessThan(astroDuskMinute.rf))
+    } else false.rb
+
+    val isMidnightPast = if (hasLocation && midnightMinute >= 0f) currentAdjustedMinute.isGreaterThanOrEqualTo(midnightMinute.rf) else false.rb
+    val isMidnightNext = if (hasLocation && midnightMinute >= 0f && astroDuskMinute >= 0f) {
+        currentAdjustedMinute.isGreaterThanOrEqualTo(astroDuskMinute.rf).and(currentAdjustedMinute.isLessThan(midnightMinute.rf))
+    } else false.rb
+
     RemoteBox(
         modifier = RemoteModifier
             .background(RemoteCardDefaults.cardColors().containerColor)
             .padding(4f.rf)
             .fillMaxSize()
-            .clickable(
-                pendingIntentAction { context ->
-                    val intent = Intent(context, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    }
-                    PendingIntent.getActivity(
-                        context,
-                        0,
-                        intent,
-                        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                    )
-                }
-            )
     ){
         RemoteColumn(
             modifier = RemoteModifier.fillMaxWidth().fillMaxHeight(),
@@ -189,11 +210,12 @@ fun DuskTimesWidgetContent(
             horizontalAlignment = RemoteAlignment.CenterHorizontally
         ) {
             RemoteRow(
-                modifier = RemoteModifier.fillMaxWidth().padding(bottom = 2.rdp),
+                modifier = RemoteModifier.padding(bottom = 2.rdp),
                 verticalAlignment = RemoteAlignment.CenterVertically,
                 horizontalArrangement = RemoteArrangement.SpaceBetween
             ) {
                 RemoteRow(
+                    modifier = RemoteModifier.weight(5f),
                     verticalAlignment = RemoteAlignment.CenterVertically,
                     horizontalArrangement = RemoteArrangement.spacedBy(2.rdp)
                 ){
@@ -214,6 +236,8 @@ fun DuskTimesWidgetContent(
                     )
                 }
                 RemoteText(
+                    modifier = RemoteModifier.weight(2f),
+                    textAlign = TextAlign.End,
                     style = RemoteMaterialTheme.typography.labelMedium,
                     color = RemoteMaterialTheme.colorScheme.secondary,
                     text = RemoteTimeDefaults.defaultTimeString()
@@ -236,36 +260,36 @@ fun DuskTimesWidgetContent(
                 MilestoneItemRow(
                     name = sunsetTitle,
                     time = sunsetTime,
-                    isNext = nextEpoch > 0L && sunsetEpoch == nextEpoch,
-                    isPast = sunsetEpoch in 1..<currentTime,
+                    isNext = isSunsetNext,
+                    isPast = isSunsetPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = civilTitle,
                     time = civilDuskTime,
-                    isNext = nextEpoch > 0L && civilEpoch == nextEpoch,
-                    isPast = civilEpoch in 1..<currentTime,
+                    isNext = isCivilNext,
+                    isPast = isCivilPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = nauticalTitle,
                     time = nauticalDuskTime,
-                    isNext = nextEpoch > 0L && nauticalEpoch == nextEpoch,
-                    isPast = nauticalEpoch in 1..<currentTime,
+                    isNext = isNauticalNext,
+                    isPast = isNauticalPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = astroTitle,
                     time = astroDuskTime,
-                    isNext = nextEpoch > 0L && astroEpoch == nextEpoch,
-                    isPast = astroEpoch in 1..<currentTime,
+                    isNext = isAstroNext,
+                    isPast = isAstroPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
                 MilestoneItemRow(
                     name = midnightTitle,
                     time = midnightTime,
-                    isNext = nextEpoch > 0L && midnightEpoch == nextEpoch,
-                    isPast = midnightEpoch in 1..<currentTime,
+                    isNext = isMidnightNext,
+                    isPast = isMidnightPast,
                     colorScheme = RemoteMaterialTheme.colorScheme
                 )
             }
@@ -297,20 +321,23 @@ fun DuskTimesWidgetContent(
 fun MilestoneItemRow(
     name: String,
     time: String,
-    isNext: Boolean,
-    isPast: Boolean,
+    isNext: RemoteBoolean,
+    isPast: RemoteBoolean,
     colorScheme: RemoteColorScheme
 ) {
-    val nameColor = when {
-        isNext -> colorScheme.tertiary
-        isPast -> colorScheme.onSurfaceVariant
-        else -> colorScheme.onSurface
-    }
-    val timeColor = when {
-        isNext -> colorScheme.tertiaryDim
-        isPast -> colorScheme.onSurfaceVariant
-        else -> colorScheme.primaryDim
-    }
+    val nameColor = isNext.select(
+        colorScheme.tertiary,
+        isPast.select(colorScheme.onSurfaceVariant, colorScheme.onSurface)
+    )
+    val timeColor = isNext.select(
+        colorScheme.tertiaryDim,
+        isPast.select(colorScheme.onSurfaceVariant, colorScheme.primaryDim)
+    )
+    val dotColor = isNext.select(
+        colorScheme.primary,
+        isPast.select(colorScheme.outlineVariant, colorScheme.outline)
+    )
+    val dotText = isNext.select("● ".rs, "○ ".rs)
 
     RemoteRow(
         modifier = RemoteModifier.fillMaxWidth(),
@@ -322,9 +349,8 @@ fun MilestoneItemRow(
             verticalAlignment = RemoteAlignment.CenterVertically,
             horizontalArrangement = RemoteArrangement.Start
         ) {
-            val dotColor = if (isNext) colorScheme.primary else if (isPast) colorScheme.outlineVariant else colorScheme.outline
             RemoteText(
-                text = (if (isNext) "● " else "○ ").rs,
+                text = dotText,
                 style = RemoteMaterialTheme.typography.bodySmall,
                 color = dotColor
             )
@@ -337,6 +363,7 @@ fun MilestoneItemRow(
             )
         }
         RemoteText(
+            textAlign = TextAlign.End,
             modifier = RemoteModifier,
             text = time.rs,
             style = RemoteMaterialTheme.typography.bodySmall,
@@ -344,4 +371,23 @@ fun MilestoneItemRow(
             maxLines = 1
         )
     }
+}
+
+@SuppressLint("RestrictedApi")
+@RemoteComposable
+@Composable
+fun MilestoneItemRow(
+    name: String,
+    time: String,
+    isNext: Boolean,
+    isPast: Boolean,
+    colorScheme: RemoteColorScheme
+) {
+    MilestoneItemRow(
+        name = name,
+        time = time,
+        isNext = isNext.rb,
+        isPast = isPast.rb,
+        colorScheme = colorScheme
+    )
 }
