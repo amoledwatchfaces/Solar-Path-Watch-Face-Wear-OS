@@ -1,16 +1,37 @@
 <resources>
-    <string name="app_name">Solar Path</string>
-    <string name="watch_face_name">Solar Path</string>
+    <string name="app_name" translatable="false">Solar Path</string>
+    <string name="watch_face_name" translatable="false">Solar Path</string>
+
     <string name="id_clock_style">Clock Style</string>
     <string name="id_clock_style_0">Digital</string>
     <string name="id_clock_style_1">Analog</string>
-    <string name="id_center_shortcut">Center Shortcut</string>
+
+    <string name="id_layout">Layout</string>
+    <string name="id_layout_0">4x</string>
+    <string name="id_layout_1">2x</string>
+    <string name="id_layout_2">3x Up</string>
+    <string name="id_layout_3">3x Down</string>
+
+    <string name="id_center_shortcut">App Shortcut</string>
     <string name="id_slot_top_left">Top Left Arc</string>
     <string name="id_slot_top_right">Top Right Arc</string>
     <string name="id_slot_bottom_right">Bottom Right Arc</string>
     <string name="id_slot_bottom_left">Bottom Left Arc</string>
+    <string name="id_slot_large_top">Top Large Arc</string>
+    <string name="id_slot_large_bottom">Bottom Large Arc</string>
 
-    <string name="id_clock_alt_colors">Vibrant Clock</string>
+    <string name="id_seconds">Seconds Indicator</string>
+    <string name="id_seconds_0">Jump</string>
+    <string name="id_seconds_1">Smooth</string>
+    <string name="id_seconds_2">None</string>
+
+    <string name="id_clock_alt_colors">Vibrant Clock Colors</string>
+
+    <string name="id_clock_subText">Digital Clock Info</string>
+    <string name="id_clock_subText_0">Day of Week</string>
+    <string name="id_clock_subText_1">Am-Pm</string>
+    <string name="id_clock_subText_2">Seconds</string>
+    <string name="id_clock_subText_3">Weather</string>
 
     <string name="id_aod">Ambient Mode</string>
     <string name="id_aod_0">Dimmed</string>
@@ -22,121 +43,112 @@
     <string name="id_clock_bg_1">Gradient</string>
     <string name="id_clock_bg_2">Light</string>
 
-    <string name="id_clock_subtext">Clock Subtext</string>
-    <string name="id_clock_subtext_0">Day of Week</string>
-    <string name="id_clock_subtext_1">AM / PM</string>
-    <string name="id_clock_subtext_2">Seconds</string>
-    <string name="id_clock_subtext_3">Weather</string>
-
-
     <string name="id_leading_zero">Leading Zero</string>
     <string name="id_progress_bar_gradients">Arc Gradients</string>
-    <string name="id_parallax">Parallax Effect</string>
-    <string name="id_smooth_seconds">Smooth Seconds</string>
 
     <string name="id_primary_theme">Primary Theme</string>
     <string name="id_secondary_theme">Secondary Theme</string>
     <string name="id_tertiary_theme">Tertiary Theme</string>
 
-    <string name="id_color_graphite">Graphite</string>
-    <string name="id_color_cloud">Cloud</string>
-    <string name="id_color_almond">Almond</string>
-    <string name="id_color_watermelon">Watermelon</string>
-    <string name="id_color_pomelo">Pomelo</string>
-    <string name="id_color_champagne">Champagne</string>
-    <string name="id_color_wheat">Wheat</string>
-    <string name="id_color_limoncello">Limoncello</string>
-    <string name="id_color_lime">Lime</string>
-    <string name="id_color_pear">Pear</string>
-    <string name="id_color_mint">Mint</string>
-    <string name="id_color_jade">Jade</string>
-    <string name="id_color_sage">Sage</string>
-    <string name="id_color_forest">Forest</string>
-    <string name="id_color_spearmint">Spearmint</string>
-    <string name="id_color_sky">Sky</string>
-    <string name="id_color_ocean">Ocean</string>
-    <string name="id_color_sapphire">Sapphire</string>
-    <string name="id_color_amethyst">Amethyst</string>
-    <string name="id_color_flamingo">Flamingo</string>
-    <string name="id_color_bubbleGum">Bubble Gum</string>
-    <string name="id_color_coral">Coral</string>
-    <string name="id_color_peach">Peach</string>
-    <string name="id_color_chai">Chai</string>
-    <string name="id_color_sand">Sand</string>
-    <string name="id_color_honey">Honey</string>
-    <string name="id_color_melon">Melon</string>
-    <string name="id_color_dandelion">Dandelion</string>
-    <string name="id_color_fern">Fern</string>
-    <string name="id_color_stream">Stream</string>
-    <string name="id_color_aqua">Aqua</string>
-    <string name="id_color_lilac">Lilac</string>
-    <string name="id_color_lavender">Lavender</string>
-    <string name="id_color_guava">Guava</string>
-    <string name="id_color_lemongrass">Lemongrass</string>
-    <string name="id_color_milkshake">Milkshake</string>
-    <string name="id_color_verbena">Verbena</string>
-    <string name="id_color_salmon">Salmon</string>
-    <string name="id_color_amber">Amber</string>
-    <string name="id_color_creamsicle">Creamsicle</string>
-    <string name="id_color_mustard">Mustard</string>
-    <string name="id_color_keylime">Key Lime</string>
-    <string name="id_color_spring">Spring</string>
-    <string name="id_color_avocado">Avocado</string>
-    <string name="id_color_polar">Polar</string>
-    <string name="id_color_arctic">Arctic</string>
-    <string name="id_color_winter">Winter</string>
-    <string name="id_color_macaron">Macaron</string>
-    <string name="id_color_sunset">Sunset</string>
-    <string name="id_color_seafoam">Seafoam</string>
-    <string name="id_color_charcoal">Charcoal</string>
-    <string name="id_color_icy_blue">Icy Blue</string>
-    <string name="id_color_steam_green">Steam Green</string>
-    <string name="id_color_radar">Radar</string>
-    <string name="id_color_submarine">Submarine</string>
-    <string name="id_color_cyborg">Cyborg</string>
-    <string name="id_color_sealab">Sealab</string>
-    <string name="id_color_thermal">Thermal</string>
-    <string name="id_color_voltage">Voltage</string>
-    <string name="id_color_oceanresearch">Ocean Research</string>
-    <string name="id_color_nothing">Nothing</string>
-    <string name="id_color_moss">Moss Green</string>
-    <string name="id_color_orbital">Orbital Blue</string>
-    <string name="id_color_red">True Red</string>
-    <string name="id_color_green">True Green</string>
-    <string name="id_color_lagoon">Lagoon</string>
-    <string name="id_color_royalblue">Royal Blue</string>
-    <string name="id_color_protoblue">Proto Blue</string>
-    <string name="id_color_grass_green">Grass Green</string>
-    <string name="id_color_proto_green">Proto Green</string>
-    <string name="id_color_true_red">True Red</string>
-    <string name="id_color_true_green">True Green</string>
-    <string name="id_color_uv">UV</string>
-    <string name="id_color_cherry_pink">Cherry Pink</string>
-    <string name="id_color_neon_red">Neon Red</string>
-    <string name="id_color_khaki">Khaki</string>
-    <string name="id_color_khaki_vibrant">Khaki Vibrant</string>
-    <string name="id_color_orange">Orange</string>
+    <string translatable="false" name="id_color_graphite">Graphite</string>
+    <string translatable="false" name="id_color_cloud">Cloud</string>
+    <string translatable="false" name="id_color_almond">Almond</string>
+    <string translatable="false" name="id_color_watermelon">Watermelon</string>
+    <string translatable="false" name="id_color_pomelo">Pomelo</string>
+    <string translatable="false" name="id_color_champagne">Champagne</string>
+    <string translatable="false" name="id_color_wheat">Wheat</string>
+    <string translatable="false" name="id_color_limoncello">Limoncello</string>
+    <string translatable="false" name="id_color_lime">Lime</string>
+    <string translatable="false" name="id_color_pear">Pear</string>
+    <string translatable="false" name="id_color_mint">Mint</string>
+    <string translatable="false" name="id_color_jade">Jade</string>
+    <string translatable="false" name="id_color_sage">Sage</string>
+    <string translatable="false" name="id_color_forest">Forest</string>
+    <string translatable="false" name="id_color_spearmint">Spearmint</string>
+    <string translatable="false" name="id_color_sky">Sky</string>
+    <string translatable="false" name="id_color_ocean">Ocean</string>
+    <string translatable="false" name="id_color_sapphire">Sapphire</string>
+    <string translatable="false" name="id_color_amethyst">Amethyst</string>
+    <string translatable="false" name="id_color_flamingo">Flamingo</string>
+    <string translatable="false" name="id_color_bubbleGum">Bubble Gum</string>
+    <string translatable="false" name="id_color_coral">Coral</string>
+    <string translatable="false" name="id_color_peach">Peach</string>
+    <string translatable="false" name="id_color_chai">Chai</string>
+    <string translatable="false" name="id_color_sand">Sand</string>
+    <string translatable="false" name="id_color_honey">Honey</string>
+    <string translatable="false" name="id_color_melon">Melon</string>
+    <string translatable="false" name="id_color_dandelion">Dandelion</string>
+    <string translatable="false" name="id_color_fern">Fern</string>
+    <string translatable="false" name="id_color_stream">Stream</string>
+    <string translatable="false" name="id_color_aqua">Aqua</string>
+    <string translatable="false" name="id_color_lilac">Lilac</string>
+    <string translatable="false" name="id_color_lavender">Lavender</string>
+    <string translatable="false" name="id_color_guava">Guava</string>
+    <string translatable="false" name="id_color_lemongrass">Lemongrass</string>
+    <string translatable="false" name="id_color_milkshake">Milkshake</string>
+    <string translatable="false" name="id_color_verbena">Verbena</string>
+    <string translatable="false" name="id_color_salmon">Salmon</string>
+    <string translatable="false" name="id_color_amber">Amber</string>
+    <string translatable="false" name="id_color_creamsicle">Creamsicle</string>
+    <string translatable="false" name="id_color_mustard">Mustard</string>
+    <string translatable="false" name="id_color_keylime">Key Lime</string>
+    <string translatable="false" name="id_color_spring">Spring</string>
+    <string translatable="false" name="id_color_avocado">Avocado</string>
+    <string translatable="false" name="id_color_polar">Polar</string>
+    <string translatable="false" name="id_color_arctic">Arctic</string>
+    <string translatable="false" name="id_color_winter">Winter</string>
+    <string translatable="false" name="id_color_macaron">Macaron</string>
+    <string translatable="false" name="id_color_sunset">Sunset</string>
+    <string translatable="false" name="id_color_seafoam">Seafoam</string>
+    <string translatable="false" name="id_color_charcoal">Charcoal</string>
+    <string translatable="false" name="id_color_icy_blue">Icy Blue</string>
+    <string translatable="false" name="id_color_steam_green">Steam Green</string>
+    <string translatable="false" name="id_color_radar">Radar</string>
+    <string translatable="false" name="id_color_submarine">Submarine</string>
+    <string translatable="false" name="id_color_cyborg">Cyborg</string>
+    <string translatable="false" name="id_color_sealab">Sealab</string>
+    <string translatable="false" name="id_color_thermal">Thermal</string>
+    <string translatable="false" name="id_color_voltage">Voltage</string>
+    <string translatable="false" name="id_color_oceanresearch">Ocean Research</string>
+    <string translatable="false" name="id_color_nothing">Nothing</string>
+    <string translatable="false" name="id_color_moss">Moss Green</string>
+    <string translatable="false" name="id_color_orbital">Orbital Blue</string>
+    <string translatable="false" name="id_color_red">True Red</string>
+    <string translatable="false" name="id_color_green">True Green</string>
+    <string translatable="false" name="id_color_lagoon">Lagoon</string>
+    <string translatable="false" name="id_color_royalblue">Royal Blue</string>
+    <string translatable="false" name="id_color_protoblue">Proto Blue</string>
+    <string translatable="false" name="id_color_grass_green">Grass Green</string>
+    <string translatable="false" name="id_color_proto_green">Proto Green</string>
+    <string translatable="false" name="id_color_true_red">True Red</string>
+    <string translatable="false" name="id_color_true_green">True Green</string>
+    <string translatable="false" name="id_color_uv">UV</string>
+    <string translatable="false" name="id_color_cherry_pink">Cherry Pink</string>
+    <string translatable="false" name="id_color_neon_red">Neon Red</string>
+    <string translatable="false" name="id_color_khaki">Khaki</string>
+    <string translatable="false" name="id_color_khaki_vibrant">Khaki Vibrant</string>
+    <string translatable="false" name="id_color_orange">Orange</string>
 
-    <string name="id_color_olive_vibrant">Olive Vibrant</string>
-    <string name="id_color_olive_dull">Olive Dull</string>
-    <string name="id_color_candy">Candy</string>
-    <string name="id_color_united_24">United 24</string>
-    <string name="id_color_iridescent">Iridescent</string>
-    <string name="id_color_industrial">Industrial</string>
-    <string name="id_color_green_shock">Green Shock</string>
-    <string name="id_color_juniper_haze">Juniper Haze</string>
-    <string name="id_color_neon_green">Neon Green</string>
-    <string name="id_color_neon_lime">Neon Lime</string>
-    <string name="id_color_pine">Pine Green</string>
-    <string name="id_color_neon_orange">Neon Orange</string>
-    <string name="id_color_alpine_green">Alpine Green</string>
+    <string translatable="false" name="id_color_olive_vibrant">Olive Vibrant</string>
+    <string translatable="false" name="id_color_olive_dull">Olive Dull</string>
+    <string translatable="false" name="id_color_candy">Candy</string>
+    <string translatable="false" name="id_color_united_24">United 24</string>
+    <string translatable="false" name="id_color_iridescent">Iridescent</string>
+    <string translatable="false" name="id_color_industrial">Industrial</string>
+    <string translatable="false" name="id_color_green_shock">Green Shock</string>
+    <string translatable="false" name="id_color_juniper_haze">Juniper Haze</string>
+    <string translatable="false" name="id_color_neon_green">Neon Green</string>
+    <string translatable="false" name="id_color_neon_lime">Neon Lime</string>
+    <string translatable="false" name="id_color_pine">Pine Green</string>
+    <string translatable="false" name="id_color_neon_orange">Neon Orange</string>
+    <string translatable="false" name="id_color_alpine_green">Alpine Green</string>
 
-    <string name="id_color_default">White</string>
+    <string translatable="false" name="id_color_default">White</string>
 
-    <string name="id_color_oak_brown">Oak Brown</string>
-    <string name="id_color_walnut_brown">Walnut Brown</string>
-    <string name="id_color_grey_brown">Grey Brown</string>
-    <string name="id_color_grey_mud">Grey Mud</string>
+    <string translatable="false" name="id_color_oak_brown">Oak Brown</string>
+    <string translatable="false" name="id_color_walnut_brown">Walnut Brown</string>
+    <string translatable="false" name="id_color_grey_brown">Grey Brown</string>
+    <string translatable="false" name="id_color_grey_mud">Grey Mud</string>
 
-    <string name="id_color_atmospheric">Atmospheric</string>
+    <string translatable="false" name="id_color_atmospheric">Atmospheric</string>
 </resources>

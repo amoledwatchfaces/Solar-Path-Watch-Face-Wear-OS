@@ -1,20 +1,21 @@
 <resources>
     <string name="app_name">Solar Path</string>
     <string name="watch_face_name">Solar Path</string>
-    <string name="solar_path_comp_name">Solar Path Shortcut</string>
+    <string name="solar_path_comp_name">Solar Path</string>
     
-    <!-- Location Disabled Screen -->
-    <string name="enable_location_permissions">Enable location permissions</string>
-    <string name="use_without_location">Use without location</string>
-
-    <!-- Watch Face Status -->
+    <!-- Watch Face Push -->
+    <string name="push_watch_face">Set Watch Face</string>
+    <string name="activating_watch_face">Activating watch face…</string>
     <string name="watch_face_active">Solar Path is active</string>
     <string name="status_manual_activation">Installed. Select from watch faces.</string>
     <string name="wfp_not_supported">Watch Face Push not supported on this device.</string>
+    <string name="updating_watch_face">Updating watch face…</string>
+    <string name="updating_watch_face_wff5">Updating watch face to Watch Face Format version 5…</string>
+    <string name="watch_face_updated">Watch face updated!</string>
+    <string name="default_wf_token" translatable="false">placeholder</string>
+    <string name="wff5_wf_token" translatable="false">placeholder</string>
 
     <!-- Location -->
-    <string name="set_location_button">Set Location</string>
-    <string name="no_location_set">No location set</string>
     <string name="set_location">Location</string>
     <string name="locations">Locations</string>
     <string name="search">Search</string>
@@ -23,10 +24,15 @@
     <string name="recent">Recent</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="no_location">Location not available</string>
-    <string name="background_location">Background Location Updates</string>
+    <string name="background_location">Background Location</string>
+    <string name="background_location_summary">Automatically update location periodically</string>
     <string name="update_interval">Update Interval</string>
+    <string name="enable_permission_toast">Please grant location permission</string>
     <string name="location_disclosure_title">Location Access</string>
-    <string name="location_disclosure_message">Solar Path uses location to fetch and calculate local sun times. Background location access can also be enabled for continuous updates. Data is processed locally on-device and is never shared.\n\nYou can also set your location manually if you don\'t wish to enable these permissions.</string>
+    <string name="location_disclosure_message">Solar Path needs approximate location to calculate accurate sunrise, sunset, and solar twilight times for your local horizon.\n\nYour location data is processed locally on-device and is never shared.</string>
+    <string name="background_location_rationale">Solar Path will collect approximate location data to enable accurate solar calculations even when the app is closed or not in use.</string>
+    <string name="background_location_instruction">Please tick \'All the time\' to finish background location setting.</string>
+    <string name="all_the_time_not_granted">All the time permission not granted…</string>
 
     <!-- Solar & Astronomical Terms -->
     <string name="next_event">Next Event</string>
@@ -41,8 +47,13 @@
     <string name="nautical_dusk">Nautical Dusk</string>
     <string name="astro_dawn">Astro Dawn</string>
     <string name="astro_dusk">Astro Dusk</string>
+    <string name="daylight">Daylight</string>
+    <string name="night">Night</string>
+    <string name="elevation">Elevation</string>
+    <string name="azimuth">Azimuth</string>
+    <string name="open_app">Open Solar Path</string>
     <string name="refresh_calculation">Recalculate</string>
-    <string name="watch_face_refreshed">Watch face refreshed!</string>
+    <string name="solar_times_recalculated">Solar times recalculated!</string>
     <string name="location_not_set">Location not set!</string>
     <string name="something_went_wrong">Something went wrong!</string>
 
@@ -66,5 +77,24 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="check_your_phone">Check your phone</string>
     <string name="check_your_phone_failure">Phone can\'t be reached</string>
-    <string name="copyright_footer">Copyright (c) 2026\namoledwatchfaces™\nAll rights reserved</string>
+    <!-- Actions & Common UI -->
+    <string name="continue_action">Continue</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete">Delete</string>
+    <string name="submit">Submit</string>
+    <string name="minutes_unit">min</string>
+    <string name="day_unit">day</string>
+    <string name="solar_status_format">%1$.1f° %2$s • %3$dh %4$dm %5$s</string>
+    <string name="push_failed">Push failed: %1$s</string>
+    <string name="location_request_failed">Location request failed</string>
+    <string name="no_results_found">No results found</string>
+    <string name="unknown_location">Unknown</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">Dusk Times</string>
+    <string name="dusk_times_widget_desc">Evening twilight and sunset progression</string>
+    <string name="dawn_times_widget_label">Dawn Times</string>
+    <string name="dawn_times_widget_desc">Morning twilight and sunrise progression</string>
+    <string name="widget_location_not_set">Set location in app</string>
+    <string name="night_label">Night</string>
 </resources>

@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">Solar Path</string>
+    <string name="watch_face_name">Solar Path</string>
+    <string name="solar_path_comp_name">Solar Path</string>
+    
+    <!-- Watch Face Push -->
+    <string name="push_watch_face">Ustaw tarczę</string>
+    <string name="activating_watch_face">Aktywowanie tarczy…</string>
+    <string name="watch_face_active">Solar Path jest aktywna</string>
+    <string name="status_manual_activation">Zainstalowano. Wybierz z listy tarcz.</string>
+    <string name="wfp_not_supported">Watch Face Push nie jest obsługiwane na tym urządzeniu.</string>
+    <string name="updating_watch_face">Aktualizowanie tarczy…</string>
+    <string name="updating_watch_face_wff5">Aktualizowanie tarczy do Watch Face Format wersja 5…</string>
+    <string name="watch_face_updated">Tarcza zaktualizowana!</string>
+
+    <!-- Location -->
+    <string name="set_location">Lokalizacja</string>
+    <string name="locations">Lokalizacje</string>
+    <string name="search">Szukaj</string>
+    <string name="location">Lokalizacja</string>
+    <string name="current_location">Bieżąca lokalizacja</string>
+    <string name="recent">Ostatnie</string>
+    <string name="no_internet_connection">Brak połączenia z Internetem</string>
+    <string name="no_location">Lokalizacja niedostępna</string>
+    <string name="background_location">Lokalizacja w tle</string>
+    <string name="background_location_summary">Automatycznie aktualizuj lokalizację okresowo</string>
+    <string name="update_interval">Częstotliwość aktualizacji</string>
+    <string name="enable_permission_toast">Przyznaj uprawnienie do lokalizacji</string>
+    <string name="location_disclosure_title">Dostęp do lokalizacji</string>
+    <string name="location_disclosure_message">Solar Path potrzebuje przybliżonej lokalizacji, aby obliczyć dokładne godziny wschodu i zachodu słońca oraz zmierzchu dla Twojego horyzontu.\n\nDane o lokalizacji są przetwarzane lokalnie na urządzeniu i nigdy nie są udostępniane.</string>
+    <string name="background_location_rationale">Solar Path zbiera przybliżone dane o lokalizacji, aby umożliwić precyzyjne obliczenia słoneczne nawet wtedy, gdy aplikacja jest zamknięta lub nieużywana.</string>
+    <string name="background_location_instruction">Zaznacz opcję \'Zawsze zezwalaj\', aby dokończyć konfigurację lokalizacji w tle.</string>
+    <string name="all_the_time_not_granted">Uprawnienie \'Zawsze zezwalaj\' nie zostało przyznane…</string>
+
+    <!-- Solar & Astronomical Terms -->
+    <string name="next_event">Następne zdarzenie</string>
+    <string name="solar_times">Czasy słoneczne</string>
+    <string name="sunrise">Wschód słońca</string>
+    <string name="sunset">Zachód słońca</string>
+    <string name="solar_noon">Południe słoneczne</string>
+    <string name="solar_midnight">Północ słoneczna</string>
+    <string name="civil_dawn">Świt cywilny</string>
+    <string name="civil_dusk">Zmierzch cywilny</string>
+    <string name="nautical_dawn">Świt nawigacyjny</string>
+    <string name="nautical_dusk">Zmierzch nawigacyjny</string>
+    <string name="astro_dawn">Świt astronomiczny</string>
+    <string name="astro_dusk">Zmierzch astronomiczny</string>
+    <string name="daylight">Światło dzienne</string>
+    <string name="night">Noc</string>
+    <string name="elevation">Elewacja</string>
+    <string name="azimuth">Azymut</string>
+    <string name="open_app">Otwórz Solar Path</string>
+    <string name="refresh_calculation">Przelicz ponownie</string>
+    <string name="solar_times_recalculated">Czasy słoneczne przeliczone!</string>
+    <string name="location_not_set">Lokalizacja nie została ustawiona!</string>
+    <string name="something_went_wrong">Coś poszło nie tak!</string>
+
+    <!-- FAQ -->
+    <string name="faq">Często zadawane pytania</string>
+    <string name="faq_subtitle">Jak działa ta tarcza</string>
+    <string name="faq_dial_title">24-godzinna tarcza słoneczna</string>
+    <string name="faq_dial_desc">W przeciwieństwie do standardowych zegarów 12-godzinnych ta tarcza przedstawia pełny 24-godzinny cykl słoneczny. Południe słoneczne (zenit) znajduje się na górze (12:00), a północ słoneczna (nadir) na dole (00:00). Słońce porusza się zgodnie z ruchem wskazówek zegara wzdłuż ścieżki.</string>
+    <string name="faq_phases_title">5 faz nieba i zmierzchu</string>
+    <string name="faq_phases_desc">Tarcza prezentuje pięć odrębnych faz astronomicznych:\n\n• Dzień: Słońce powyżej horyzontu (&gt; 0°)\n• Zmierzch cywilny: Od 0° do -6° (naturalne światło otoczenia)\n• Zmierzch nawigacyjny: Od -6° do -12° (widoczne gwiazdy nawigacyjne)\n• Zmierzch astronomiczny: Od -12° do -18° (głęboki zmierzch)\n• Noc: Poniżej -18° (pełna noc astronomiczna z gwiazdami)</string>
+    <string name="faq_marker_title">Wskaźnik słońca i promień</string>
+    <string name="faq_marker_desc">Wskaźnik słońca krąży po 24-godzinnej ścieżce. W ciągu dnia jest białą pełną tarczą, a w nocy, gdy słońce chowa się pod horyzontem, staje się pustym pierścieniem. Promień radialny wskazuje aktualny czas słoneczny.</string>
+    <string name="faq_dots_title">10 punktów na osi czasu</string>
+    <string name="faq_dots_desc">Punkty wokół pierścienia oznaczają 10 kamieni milowych słońca:\n\n• Rano: Świt astronomiczny, nawigacyjny i cywilny, wschód słońca oraz południe słoneczne\n• Wieczór: Zachód słońca, zmierzch cywilny, nawigacyjny i astronomiczny oraz północ słoneczna</string>
+    <string name="faq_location_title">Lokalizacja i obliczenia</string>
+    <string name="faq_location_desc">Wszystkie obliczenia astronomiczne opierają się na precyzyjnych algorytmach NOAA. Dokładne czasy zmierzchu i słońca są wyliczane indywidualnie dla Twoich współrzędnych geograficznych (szerokości i długości).</string>
+
+    <!-- About & Privacy -->
+    <string name="about">O aplikacji</string>
+    <string name="version">Wersja</string>
+    <string name="privacy_policy">Polityka prywatności</string>
+    <string name="check_your_phone">Sprawdź telefon</string>
+    <string name="check_your_phone_failure">Nie można połączyć się z telefonem</string>
+
+    <!-- Actions & Common UI -->
+    <string name="continue_action">Dalej</string>
+    <string name="confirm">Potwierdź</string>
+    <string name="delete">Usuń</string>
+    <string name="submit">Zatwierdź</string>
+    <string name="minutes_unit">min</string>
+    <string name="day_unit">dzień</string>
+    <string name="solar_status_format">%1$.1f° %2$s • %3$dg %4$dmin %5$s</string>
+    <string name="push_failed">Przesyłanie nie powiodło się: %1$s</string>
+    <string name="location_request_failed">Błąd pobierania lokalizacji</string>
+    <string name="no_results_found">Nie znaleziono wyników</string>
+    <string name="unknown_location">Nieznana</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">Czasy zmierzchu</string>
+    <string name="dusk_times_widget_desc">Przebieg zmierzchu i zachodu słońca</string>
+    <string name="dawn_times_widget_label">Czasy świtu</string>
+    <string name="dawn_times_widget_desc">Przebieg świtu i wschodu słońca</string>
+    <string name="widget_location_not_set">Ustaw lokalizację w aplikacji</string>
+    <string name="night_label">Noc</string>
+</resources>

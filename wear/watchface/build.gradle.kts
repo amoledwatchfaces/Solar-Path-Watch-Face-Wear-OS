@@ -10,13 +10,24 @@ android {
 
     defaultConfig {
         applicationId = rootProject.extra["namespace"].toString()+watchFacePkgExt
-        minSdk = 36
         targetSdk = 37
-        versionCode = rootProject.extra["versionCode"] as Int
         versionName = rootProject.extra["versionName"] as String
+    }
 
-        versionNameSuffix = "-defaultwatchface"
-        versionCode = 30000 + (versionCode ?: 0)
+    flavorDimensions += "version"
+    productFlavors {
+        create("wff4") {
+            dimension = "version"
+            minSdk = 36
+            versionNameSuffix = "-defaultwatchface"
+            versionCode = 30000 + (rootProject.extra["versionCode"] as Int)
+        }
+        create("wff5") {
+            dimension = "version"
+            minSdk = 37
+            versionNameSuffix = "-wff5"
+            versionCode = 30000 + (rootProject.extra["versionCode"] as Int) + 1
+        }
     }
 
     buildTypes {

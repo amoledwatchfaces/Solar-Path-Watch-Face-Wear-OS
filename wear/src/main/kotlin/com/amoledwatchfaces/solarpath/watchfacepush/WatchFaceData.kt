@@ -27,3 +27,10 @@ val DEFAULT_WATCH_FACE = WatchFaceData(
     packageName = "com.amoledwatchfaces.solarpath.watchfacepush.defaultwatchface",
     versionCode = 30000001L
 )
+
+val SOLARPATH_WFF5_WATCH_FACE = WatchFaceData(
+    name = "solarpath_wff5.apk",
+    assetPath = "solarpath_wff5.apk",
+    packageName = "com.amoledwatchfaces.solarpath.watchfacepush.defaultwatchface",
+    versionCode = 30000002L
+)

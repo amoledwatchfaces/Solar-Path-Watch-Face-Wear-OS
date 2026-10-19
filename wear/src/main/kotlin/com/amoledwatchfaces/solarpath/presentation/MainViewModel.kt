@@ -26,6 +26,7 @@ import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
 import com.amoledwatchfaces.solarpath.utils.formatCoordinate
 import com.amoledwatchfaces.solarpath.utils.isOnline
 import com.amoledwatchfaces.solarpath.utils.updateComplications
+import com.amoledwatchfaces.solarpath.utils.updateWidgets
 import com.amoledwatchfaces.solarpath.watchfacepush.DEFAULT_WATCH_FACE
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFacePackageRepository
 import com.amoledwatchfaces.solarpath.workers.LocationWorker
@@ -43,6 +44,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
@@ -78,8 +80,8 @@ class MainViewModel @Inject constructor(
     private val _pushStatus = MutableStateFlow<String?>(null)
     val pushStatus: StateFlow<String?> = _pushStatus.asStateFlow()
 
-    private val _isWatchFaceActive = MutableStateFlow(false)
-    val isWatchFaceActive: StateFlow<Boolean> = _isWatchFaceActive.asStateFlow()
+    private val _isWatchFaceActive = MutableStateFlow<Boolean?>(null)
+    val isWatchFaceActive: StateFlow<Boolean?> = _isWatchFaceActive.asStateFlow()
 
     private val _backgroundLocationDialogState = MutableStateFlow(false)
     val backgroundLocationDialogState: StateFlow<Boolean> = _backgroundLocationDialogState.asStateFlow()
@@ -95,47 +97,38 @@ class MainViewModel @Inject constructor(
         _initialLocationDialogState.value = state
     }
 
-    fun dismissLocationPrompt() {
-        viewModelScope.launch {
-            dataStore.updateData { it.copy(isLocationPromptDismissed = true) }
-            context.updateComplications()
-        }
-    }
-
     private val _refreshTrigger = MutableStateFlow(System.currentTimeMillis())
 
-    fun refresh(forceRecalculate: Boolean = false, showFeedbackToast: Boolean = false) {
-        if (forceRecalculate) {
-            val prefs = preferences.value
-            val isLocationConfigured = prefs.locationName != "- -" && (prefs.latitude != 0.0 || prefs.longitude != 0.0)
+    fun recalculate() {
+        val prefs = preferences.value
+        val isLocationSet = prefs.locationName.isNotBlank() &&
+                prefs.locationName != "- -" &&
+                (prefs.latitude != 0.0 || prefs.longitude != 0.0)
 
-            if (!isLocationConfigured) {
-                if (showFeedbackToast) {
-                    Toast.makeText(context, R.string.location_not_set, Toast.LENGTH_SHORT).show()
-                }
-                return
-            }
-
-            try {
-                SolarCalculator.invalidateCache()
-                context.updateComplications()
-                _refreshTrigger.value = System.currentTimeMillis()
-                if (showFeedbackToast) {
-                    Toast.makeText(context, R.string.watch_face_refreshed, Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "Error refreshing watch face data: ${e.message}", e)
-                if (showFeedbackToast) {
-                    Toast.makeText(context, R.string.something_went_wrong, Toast.LENGTH_SHORT).show()
-                }
-            }
+        if (!isLocationSet) {
+            Toast.makeText(context, R.string.location_not_set, Toast.LENGTH_SHORT).show()
             return
         }
-        _refreshTrigger.value = System.currentTimeMillis()
+
+        try {
+            SolarCalculator.invalidateCache()
+            context.updateComplications()
+            viewModelScope.launch { context.updateWidgets() }
+            _refreshTrigger.value = System.currentTimeMillis()
+            Toast.makeText(context, R.string.solar_times_recalculated, Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Log.e(TAG, "Recalculation error: ${e.message}", e)
+            Toast.makeText(context, R.string.something_went_wrong, Toast.LENGTH_SHORT).show()
+        }
     }
 
-    fun recalculate() {
-        refresh(forceRecalculate = true, showFeedbackToast = true)
+    fun refresh(forceRecalculate: Boolean = false) {
+        if (forceRecalculate) {
+            SolarCalculator.invalidateCache()
+            context.updateComplications()
+            viewModelScope.launch { context.updateWidgets() }
+        }
+        _refreshTrigger.value = System.currentTimeMillis()
     }
 
     private val timeTickerFlow = kotlinx.coroutines.flow.flow {
@@ -163,6 +156,34 @@ class MainViewModel @Inject constructor(
 
     init {
         checkWatchFaceActiveStatus()
+        checkAndMigrateToWff5()
+    }
+
+    private fun checkAndMigrateToWff5() {
+        if (android.os.Build.VERSION.SDK_INT < 37) return
+        if (!WatchFacePushManagerFactory.isSupported()) return
+
+        viewModelScope.launch {
+            val currentPrefs = preferences.first()
+            if (currentPrefs.isWff5Updated) return@launch
+
+            Toast.makeText(context, R.string.updating_watch_face_wff5, Toast.LENGTH_LONG).show()
+            try {
+                Log.i(TAG, "Wear OS 7+ detected (API ${android.os.Build.VERSION.SDK_INT}). Auto-migrating default watch face to WFF 5...")
+                val result = packageRepository.updateToWff5WatchFace(scope = this)
+                if (result.isSuccess) {
+                    Log.i(TAG, "Successfully updated default watch face to WFF 5 (slot ${result.getOrNull()})")
+                    preferencesRepository.setWff5Updated(true)
+                    Toast.makeText(context, R.string.watch_face_updated, Toast.LENGTH_SHORT).show()
+                } else {
+                    Log.w(TAG, "WFF 5 migration failed: ${result.exceptionOrNull()?.message}")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error during WFF 5 migration: ${e.message}", e)
+            } finally {
+                checkWatchFaceActiveStatus()
+            }
+        }
     }
 
     fun checkWatchFaceActiveStatus() {
@@ -187,11 +208,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _loaderState.value = true
             try {
-                val result = packageRepository.updateOrInstallDefaultWatchFace(
-                    scope = this,
-                    watchFaceData = defaultWatchFace,
-                    setAsActive = true
-                )
+                val result = packageRepository.setWatchFaceAsActive(defaultWatchFace)
                 if (result.isSuccess) {
                     val wfpManager = WatchFacePushManagerFactory.createWatchFacePushManager(context)
                     val isActive = wfpManager.isWatchFaceActive(defaultWatchFace.packageName)
@@ -206,7 +223,47 @@ class MainViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Watch Face Push error: ${e.message}", e)
-                Toast.makeText(context, "Push failed: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, context.getString(R.string.push_failed, e.message ?: ""), Toast.LENGTH_LONG).show()
+            } finally {
+                _loaderState.value = false
+                checkWatchFaceActiveStatus()
+            }
+        }
+    }
+
+    fun updateDefaultWatchFace() {
+        if (!WatchFacePushManagerFactory.isSupported()) {
+            Toast.makeText(context, R.string.wfp_not_supported, Toast.LENGTH_LONG).show()
+            return
+        }
+
+        viewModelScope.launch {
+            _loaderState.value = true
+            if (android.os.Build.VERSION.SDK_INT >= 37) {
+                Toast.makeText(context, R.string.updating_watch_face_wff5, Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(context, R.string.updating_watch_face, Toast.LENGTH_SHORT).show()
+            }
+            try {
+                val result = if (android.os.Build.VERSION.SDK_INT >= 37) {
+                    packageRepository.updateToWff5WatchFace(scope = this).also {
+                        if (it.isSuccess) preferencesRepository.setWff5Updated(true)
+                    }
+                } else {
+                    packageRepository.updateOrInstallDefaultWatchFace(
+                        scope = this,
+                        watchFaceData = defaultWatchFace
+                    )
+                }
+                if (result.isSuccess) {
+                    Toast.makeText(context, R.string.watch_face_updated, Toast.LENGTH_SHORT).show()
+                } else {
+                    val errorMsg = result.exceptionOrNull()?.message ?: context.getString(R.string.something_went_wrong)
+                    Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show()
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Watch face update error: ${e.message}", e)
+                Toast.makeText(context, R.string.something_went_wrong, Toast.LENGTH_SHORT).show()
             } finally {
                 _loaderState.value = false
                 checkWatchFaceActiveStatus()
@@ -261,13 +318,14 @@ class MainViewModel @Inject constructor(
                                 )
                             }
                             context.updateComplications()
+                            context.updateWidgets()
                             _loaderState.value = false
                         }
                     }
                 }
                 .addOnFailureListener {
                     _loaderState.value = false
-                    Toast.makeText(context, "Location request failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.location_request_failed, Toast.LENGTH_SHORT).show()
                 }
         }
     }
@@ -283,7 +341,7 @@ class MainViewModel @Inject constructor(
             val predictions = fetchLocations(query)
             _loaderState.value = false
             if (predictions.isEmpty()) {
-                Toast.makeText(context, "No results found", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.no_results_found, Toast.LENGTH_LONG).show()
             }
             _searchPredictions.value = predictions
             callback.invoke(predictions.isNotEmpty())
@@ -328,6 +386,7 @@ class MainViewModel @Inject constructor(
                 )
             }
             context.updateComplications()
+            context.updateWidgets()
             _loaderState.value = false
         }
     }
@@ -350,6 +409,7 @@ class MainViewModel @Inject constructor(
                 )
             }
             context.updateComplications()
+            context.updateWidgets()
             _loaderState.value = false
         }
     }

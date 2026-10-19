@@ -2,6 +2,9 @@
 package com.amoledwatchfaces.solarpath.presentation
 
 import android.Manifest
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,17 +18,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
-import androidx.compose.material.icons.filled.LocationOff
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.WatchLater
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,7 +40,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.res.stringResource
@@ -55,7 +59,6 @@ import androidx.wear.compose.material3.FilledTonalButton
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.ListSubHeader
 import androidx.wear.compose.material3.MaterialTheme
-import androidx.wear.compose.material3.OutlinedButton
 import androidx.wear.compose.material3.ProgressIndicatorDefaults
 import androidx.wear.compose.material3.ScreenScaffold
 import androidx.wear.compose.material3.Slider
@@ -68,8 +71,9 @@ import androidx.wear.compose.material3.lazy.TransformationSpec
 import androidx.wear.compose.material3.lazy.transformedHeight
 import com.amoledwatchfaces.solarpath.BuildConfig
 import com.amoledwatchfaces.solarpath.R
+import com.amoledwatchfaces.solarpath.presentation.ui.BackgroundPermissionDialog
 import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
-import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
+import com.amoledwatchfaces.solarpath.utils.PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE
 import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
 import com.amoledwatchfaces.solarpath.utils.openPlayStore
 import java.time.Instant
@@ -82,16 +86,31 @@ fun MainScreen(
     viewModel: MainViewModel,
     transformationSpec: TransformationSpec,
     focusRequester: FocusRequester,
-    listState: TransformingLazyColumnState,
-    onEnableLocation: () -> Unit = {}
+    listState: TransformingLazyColumnState
 ) {
     val preferences by viewModel.preferences.collectAsState()
     val solarData by viewModel.solarData.collectAsState()
     val isLoading by viewModel.loaderState.collectAsState()
+    val isWatchFaceActive by viewModel.isWatchFaceActive.collectAsState()
+    val isLocationSet = preferences.locationName.isNotBlank() &&
+            preferences.locationName != "- -" &&
+            (preferences.latitude != 0.0 || preferences.longitude != 0.0)
 
     val context = LocalContext.current
     var showConfirmation by remember { mutableStateOf(false) }
     var confirmationState by remember { mutableStateOf(true) }
+    var solarCardTapCount by remember { mutableIntStateOf(0) }
+    var lastSolarCardTapTime by remember { mutableLongStateOf(0L) }
+
+    val setWatchFacePermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            viewModel.pushDefaultWatchFace()
+        } else {
+            Toast.makeText(context, R.string.status_manual_activation, Toast.LENGTH_LONG).show()
+        }
+    }
 
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", LocalLocale.current.platformLocale)
         .withZone(ZoneId.systemDefault())
@@ -113,72 +132,8 @@ fun MainScreen(
                 ),
             state = listState,
         ) {
-
-            val isLocationSet = preferences.locationName.isNotBlank() &&
-                    preferences.locationName != "- -" &&
-                    (preferences.latitude != 0.0 || preferences.longitude != 0.0)
-
-            // Set Location Button (only shown if no location is set; placed above everything else)
-            if (!isLocationSet) {
-                item {
-                    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
-                    val topSpacerHeight = ((screenHeight / 2) - 26.dp - paddingValues.calculateTopPadding()).coerceAtLeast(0.dp)
-                    Spacer(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(topSpacerHeight)
-                    )
-                }
-                item {
-                    val alertRed = Color(0xFFE57373)
-                    OutlinedButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .transformedHeight(this, transformationSpec),
-                        transformation = SurfaceTransformation(transformationSpec),
-                        onClick = { navController.navigate("location_choose") },
-                        border = ButtonDefaults.outlinedButtonBorder(
-                            enabled = true,
-                            borderColor = alertRed,
-                            borderWidth = 2.dp
-                        ),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = alertRed,
-                            secondaryContentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                        ),
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Default.LocationOn,
-                                contentDescription = stringResource(R.string.set_location_button),
-                                tint = alertRed
-                            )
-                        },
-                        label = {
-                            Text(
-                                text = stringResource(R.string.set_location_button),
-                                color = alertRed,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        },
-                        secondaryLabel = {
-                            Text(
-                                text = stringResource(R.string.no_location_set),
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    )
-                }
-                item {
-                    Spacer(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(16.dp)
-                    )
-                }
-            }
-
             // Next Event Header
-            item {
+            item(key = "header") {
                 ListSubHeader(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -197,7 +152,7 @@ fun MainScreen(
             }
 
             // Next Event / Current Solar Status
-            item {
+            item(key = "next_event") {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -205,7 +160,7 @@ fun MainScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = solarData.nextEventName.uppercase(),
+                        text = stringResource(solarData.nextEventNameResId).uppercase(),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.tertiary
                     )
@@ -217,15 +172,58 @@ fun MainScreen(
                     )
                     Text(
                         textAlign = TextAlign.Center,
-                        text = "${String.format(LocalLocale.current.platformLocale, "%.1f", solarData.sunElevation)}° elevation • ${solarData.daylightDurationMinutes / 60}h ${solarData.daylightDurationMinutes % 60}m day",
+                        text = stringResource(
+                            R.string.solar_status_format,
+                            solarData.sunElevation,
+                            stringResource(R.string.elevation),
+                            solarData.daylightDurationMinutes / 60,
+                            solarData.daylightDurationMinutes % 60,
+                            stringResource(R.string.day_unit)
+                        ),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
 
+            // Set Watch Face Button
+            item(key = "set_watch_face_button") {
+                Button(
+                    enabled = isWatchFaceActive == false,
+                    colors = if (isWatchFaceActive == true) {
+                        ButtonDefaults.filledTonalButtonColors()
+                    } else {
+                        ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = {
+                        if (context.isPermissionGranted(PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE)) {
+                            viewModel.pushDefaultWatchFace()
+                        } else {
+                            setWatchFacePermissionLauncher.launch(PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE)
+                        }
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = if (isWatchFaceActive == true) Icons.Default.Check else Icons.Default.WatchLater,
+                            contentDescription = stringResource(R.string.watch_face_name),
+                            tint = if (isWatchFaceActive == true) MaterialTheme.colorScheme.primary.copy(alpha = 0.6f) else MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = if (isWatchFaceActive == true) stringResource(R.string.watch_face_active) else stringResource(R.string.push_watch_face),
+                            color = if (isWatchFaceActive == true) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f) else MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                )
+            }
+
             // Solar Times Breakdown
-            item {
+            item(key = "solar_times_header") {
                 ListSubHeader(
                     modifier = Modifier.fillMaxWidth(),
                     label = {
@@ -239,15 +237,26 @@ fun MainScreen(
                     }
                 )
             }
-
-            item {
+            item(key = "solar_times") {
                 TitleCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .transformedHeight(this, transformationSpec),
                     transformation = SurfaceTransformation(transformationSpec),
                     title = {},
-                    onClick = {},
+                    onClick = {
+                        val currentTime = System.currentTimeMillis()
+                        if (currentTime - lastSolarCardTapTime < 1000L) {
+                            solarCardTapCount++
+                        } else {
+                            solarCardTapCount = 1
+                        }
+                        lastSolarCardTapTime = currentTime
+                        if (solarCardTapCount >= 7) {
+                            solarCardTapCount = 0
+                            viewModel.updateDefaultWatchFace()
+                        }
+                    },
                     subtitle = {
                         val currentTimeMillis = System.currentTimeMillis()
                         val solarEvents = listOf(
@@ -283,9 +292,8 @@ fun MainScreen(
                     }
                 )
             }
-
             // Recalculate Button
-            item {
+            item(key = "recalculate_button") {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -308,7 +316,7 @@ fun MainScreen(
             }
 
             // Location Header & Chip
-            item {
+            item(key = "location_header") {
                 ListSubHeader(
                     modifier = Modifier.fillMaxWidth(),
                     label = {
@@ -323,7 +331,7 @@ fun MainScreen(
                 )
             }
 
-            item {
+            item(key = "location") {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -333,7 +341,7 @@ fun MainScreen(
                     icon = {
                         Image(
                             imageVector = Icons.Default.LocationOn,
-                            contentDescription = "Location",
+                            contentDescription = stringResource(R.string.location),
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary)
                         )
                     },
@@ -355,7 +363,7 @@ fun MainScreen(
             }
 
             // Background Location Toggle
-            item {
+            item(key = "background_location") {
                 SwitchButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -367,19 +375,18 @@ fun MainScreen(
                             if (context.isPermissionGranted(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                                 viewModel.setBackgroundLocation(true)
                             } else {
-                                viewModel.setInitialLocationDialogState(true)
+                                viewModel.setBackgroundLocationDialogState(true)
                             }
                         } else {
                             viewModel.setBackgroundLocation(false)
                         }
                     },
-                    label = { Text(stringResource(R.string.background_location)) },
-                    secondaryLabel = { Text("${preferences.backgroundLocationRepeatInterval} min") }
+                    label = { Text(stringResource(R.string.background_location)) }
                 )
             }
 
             if (preferences.backgroundLocationState) {
-                item {
+                item(key = "update_interval_text") {
                     Text(
                         textAlign = TextAlign.Center,
                         modifier = Modifier
@@ -387,11 +394,10 @@ fun MainScreen(
                             .padding(top = 4.dp),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        text = "${stringResource(R.string.update_interval)}: ${preferences.backgroundLocationRepeatInterval} min"
+                        text = "${stringResource(R.string.update_interval)}: ${preferences.backgroundLocationRepeatInterval} ${stringResource(R.string.minutes_unit)}"
                     )
                 }
-
-                item {
+                item(key = "update_interval_slider") {
                     Slider(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -400,7 +406,7 @@ fun MainScreen(
                         onValueChange = {
                             viewModel.setBackgroundLocationRepeatInterval(it.toLong())
                         },
-                        valueProgression = IntProgression.fromClosedRange(30, 240, 30),
+                        valueProgression = IntProgression.fromClosedRange(30, 240, 15),
                         decreaseIcon = {
                             SliderDefaults.DecreaseIcon()
                         },
@@ -412,7 +418,7 @@ fun MainScreen(
             }
 
             // About Section Header
-            item {
+            item(key = "about_header") {
                 ListSubHeader(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -431,7 +437,7 @@ fun MainScreen(
             }
 
             // FAQ Button
-            item {
+            item(key = "faq") {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -454,7 +460,7 @@ fun MainScreen(
             }
 
             // Privacy Policy Button
-            item {
+            item(key = "privacy_policy") {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -483,7 +489,7 @@ fun MainScreen(
             }
 
             // App Version Button
-            item {
+            item(key = "version") {
                 FilledTonalButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -510,7 +516,7 @@ fun MainScreen(
             }
 
             // amoledwatchfaces.com
-            item {
+            item(key = "footer") {
                 ListSubHeader(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -521,7 +527,7 @@ fun MainScreen(
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center,
                             color = MaterialTheme.colorScheme.outlineVariant,
-                            text = stringResource(R.string.copyright_footer),
+                            text = "amoledwatchfaces.com",
                             style = MaterialTheme.typography.bodySmall
                         )
                     }
@@ -542,6 +548,13 @@ fun MainScreen(
             confirmationState = confirmationState,
             onTimeout = { showConfirmation = false }
         )
+
+        val backgroundLocationDialogState by viewModel.backgroundLocationDialogState.collectAsState()
+        if (backgroundLocationDialogState) {
+            BackgroundPermissionDialog(
+                viewModel = viewModel
+            )
+        }
 
         if (isLoading) {
             Box(

@@ -11,6 +11,7 @@ import androidx.work.WorkManager
 import com.amoledwatchfaces.solarpath.data.UserPreferences
 import com.amoledwatchfaces.solarpath.data.UserPreferencesRepository
 import com.amoledwatchfaces.solarpath.utils.updateComplications
+import com.amoledwatchfaces.solarpath.utils.updateWidgets
 import com.amoledwatchfaces.solarpath.workers.LocationWorker
 import com.amoledwatchfaces.solarpath.watchfacepush.WatchFacePackageRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,10 +54,15 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
             val pendingResult = goAsync()
             scope.launch {
                 try {
-                    val result = packageRepository.updateOrInstallDefaultWatchFace(
-                        scope = this,
-                        setAsActive = false
-                    )
+                    val result = if (android.os.Build.VERSION.SDK_INT >= 37) {
+                        packageRepository.updateToWff5WatchFace(scope = this).also {
+                            if (it.isSuccess) {
+                                UserPreferencesRepository(dataStore).setWff5Updated(true)
+                            }
+                        }
+                    } else {
+                        packageRepository.updateOrInstallDefaultWatchFace(scope = this)
+                    }
                     if (result.isSuccess) {
                         Log.i(TAG, "Successfully updated bundled watch face on MY_PACKAGE_REPLACED: slot ${result.getOrNull()}")
                     } else {
@@ -87,6 +93,7 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
                 }
                 com.amoledwatchfaces.solarpath.workers.SolarRefreshWorker.schedule(context)
                 context.updateComplications()
+                context.updateWidgets()
             }
         }
     }

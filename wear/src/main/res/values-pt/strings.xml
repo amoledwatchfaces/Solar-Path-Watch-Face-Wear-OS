@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">Solar Path</string>
+    <string name="watch_face_name">Solar Path</string>
+    <string name="solar_path_comp_name">Solar Path</string>
+    
+    <!-- Watch Face Push -->
+    <string name="push_watch_face">Definir mostrador</string>
+    <string name="activating_watch_face">Ativando mostrador…</string>
+    <string name="watch_face_active">Solar Path está ativo</string>
+    <string name="status_manual_activation">Instalado. Selecione na lista de mostradores.</string>
+    <string name="wfp_not_supported">O Watch Face Push não é suportado neste dispositivo.</string>
+    <string name="updating_watch_face">Atualizando mostrador…</string>
+    <string name="updating_watch_face_wff5">Atualizando mostrador para Watch Face Format versão 5…</string>
+    <string name="watch_face_updated">Mostrador atualizado!</string>
+
+    <!-- Location -->
+    <string name="set_location">Localização</string>
+    <string name="locations">Localizações</string>
+    <string name="search">Pesquisar</string>
+    <string name="location">Localização</string>
+    <string name="current_location">Localização atual</string>
+    <string name="recent">Recentes</string>
+    <string name="no_internet_connection">Sem conexão com a internet</string>
+    <string name="no_location">Localização não disponível</string>
+    <string name="background_location">Localização em segundo plano</string>
+    <string name="background_location_summary">Atualizar a localização periodicamente de forma automática</string>
+    <string name="update_interval">Intervalo de atualização</string>
+    <string name="enable_permission_toast">Conceda a permissão de localização</string>
+    <string name="location_disclosure_title">Acesso à localização</string>
+    <string name="location_disclosure_message">O Solar Path necessita da sua localização aproximada para calcular os horários exatos do nascer do sol, pôr do sol e crepúsculos para o seu horizonte local.\n\nOs seus dados de localização são processados localmente no dispositivo e nunca são compartilhados.</string>
+    <string name="background_location_rationale">O Solar Path coletará dados de localização aproximada para permitir cálculos solares precisos, mesmo quando o aplicativo estiver fechado ou não estiver em uso.</string>
+    <string name="background_location_instruction">Marque \'Permitir o tempo todo\' para concluir a configuração da localização em segundo plano.</string>
+    <string name="all_the_time_not_granted">A permissão \'Permitir o tempo todo\' não foi concedida…</string>
+
+    <!-- Solar & Astronomical Terms -->
+    <string name="next_event">Próximo evento</string>
+    <string name="solar_times">Horários solares</string>
+    <string name="sunrise">Nascer do sol</string>
+    <string name="sunset">Pôr do sol</string>
+    <string name="solar_noon">Meio-dia solar</string>
+    <string name="solar_midnight">Meia-noite solar</string>
+    <string name="civil_dawn">Amanhecer civil</string>
+    <string name="civil_dusk">Crepúsculo civil</string>
+    <string name="nautical_dawn">Amanhecer náutico</string>
+    <string name="nautical_dusk">Crepúsculo náutico</string>
+    <string name="astro_dawn">Amanhecer astronômico</string>
+    <string name="astro_dusk">Crepúsculo astronômico</string>
+    <string name="daylight">Luz do dia</string>
+    <string name="night">Noite</string>
+    <string name="elevation">Elevação</string>
+    <string name="azimuth">Azimute</string>
+    <string name="open_app">Abrir Solar Path</string>
+    <string name="refresh_calculation">Recalcular</string>
+    <string name="solar_times_recalculated">Horários solares recalculados!</string>
+    <string name="location_not_set">Localização não definida!</string>
+    <string name="something_went_wrong">Algo deu errado!</string>
+
+    <!-- FAQ -->
+    <string name="faq">Perguntas frequentes</string>
+    <string name="faq_subtitle">Como funciona este mostrador</string>
+    <string name="faq_dial_title">Mostrador solar de 24 horas</string>
+    <string name="faq_dial_desc">Ao contrário dos relógios padrão de 12 horas, este mostrador exibe o ciclo solar completo de 24 horas. O meio-dia solar (zênite) fica no topo (12:00) e a meia-noite solar (nadir) na parte inferior (00:00). O sol se move no sentido horário ao longo da trajetória.</string>
+    <string name="faq_phases_title">5 fases do céu e crepúsculo</string>
+    <string name="faq_phases_desc">O mostrador exibe cinco fases astronômicas distintas:\n\n• Luz do dia: Sol acima do horizonte (&gt; 0°)\n• Crepúsculo civil: 0° a -6° (luz natural residual)\n• Crepúsculo náutico: -6° a -12° (estrelas de navegação visíveis)\n• Crepúsculo astronômico: -12° a -18° (crepúsculo profundo)\n• Noite: Abaixo de -18° (noite astronômica completa com estrelas)</string>
+    <string name="faq_marker_title">Marcador solar e feixe</string>
+    <string name="faq_marker_desc">O marcador solar orbita a trilha de 24 horas. É um disco branco sólido durante o dia e se transforma em um anel oco à noite quando o sol está abaixo do horizonte. O feixe radial aponta para a hora solar atual.</string>
+    <string name="faq_dots_title">10 pontos de eventos na linha do tempo</string>
+    <string name="faq_dots_desc">Os pontos ao redor do anel temporal marcam 10 marcos solares:\n\n• Manhã: Amanhecer astronômico, náutico e civil, nascer do sol e meio-dia solar\n• Tarde/Noite: Pôr do sol, crepúsculo civil, náutico e astronômico, e meia-noite solar</string>
+    <string name="faq_location_title">Localização e cálculos</string>
+    <string name="faq_location_desc">Todos os cálculos astronômicos utilizam algoritmos de alta precisão da NOAA. Os horários exatos de crepúsculo e sol são calculados especificamente para suas coordenadas geográficas (latitude e longitude).</string>
+
+    <!-- About & Privacy -->
+    <string name="about">Sobre</string>
+    <string name="version">Versão</string>
+    <string name="privacy_policy">Política de privacidade</string>
+    <string name="check_your_phone">Verifique no smartphone</string>
+    <string name="check_your_phone_failure">Não foi possível conectar ao smartphone</string>
+
+    <!-- Actions & Common UI -->
+    <string name="continue_action">Continuar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="delete">Excluir</string>
+    <string name="submit">Enviar</string>
+    <string name="minutes_unit">min</string>
+    <string name="day_unit">dia</string>
+    <string name="solar_status_format">%1$.1f° %2$s • %3$dh %4$dm %5$s</string>
+    <string name="push_failed">Falha ao enviar: %1$s</string>
+    <string name="location_request_failed">Falha ao solicitar localização</string>
+    <string name="no_results_found">Nenhum resultado encontrado</string>
+    <string name="unknown_location">Desconhecida</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">Horários do crepúsculo</string>
+    <string name="dusk_times_widget_desc">Crepúsculo vespertino e pôr do sol</string>
+    <string name="dawn_times_widget_label">Horários da alvorada</string>
+    <string name="dawn_times_widget_desc">Crepúsculo matutino e nascer do sol</string>
+    <string name="widget_location_not_set">Definir localização no app</string>
+    <string name="night_label">Noite</string>
+</resources>

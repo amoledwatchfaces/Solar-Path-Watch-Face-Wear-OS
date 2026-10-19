@@ -73,7 +73,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Solar Path Complication Service (Solar Path Shortcut) -->
+
+        <!-- Solar Path Complication Service -->
         <service
             android:name=".complication.SolarPathComplicationService"
             android:exported="true"
@@ -86,10 +87,48 @@
 
             <meta-data
                 android:name="android.support.wearable.complications.SUPPORTED_TYPES"
-                android:value="SHORT_TEXT,MONOCHROMATIC_IMAGE,SMALL_IMAGE,LONG_TEXT" />
+                android:value="SHORT_TEXT" />
             <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="0" />
+        </service>
+
+        <!-- Dusk Times Widget Service -->
+        <service
+            android:name=".widget.DuskTimesWidgetService"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/dusk_times_widget_label"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.glance.wear.widget.provider"
+                android:resource="@xml/dusk_times_widget_info" />
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/widget_preview_dusk" />
+        </service>
+
+        <!-- Dawn Times Widget Service -->
+        <service
+            android:name=".widget.DawnTimesWidgetService"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/dawn_times_widget_label"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.glance.wear.widget.provider"
+                android:resource="@xml/dawn_times_widget_info" />
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/widget_preview_dawn" />
         </service>
 
         <!-- Broadcast Receiver for Passive Location & System Events -->

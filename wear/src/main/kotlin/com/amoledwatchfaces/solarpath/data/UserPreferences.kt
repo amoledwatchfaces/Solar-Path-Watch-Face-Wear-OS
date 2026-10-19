@@ -32,13 +32,17 @@ data class UserPreferences(
     val locationName: String = "- -",
     val locationSubName: String = "",
     val recentLocations: List<SavedLocation> = emptyList(),
-    val isLocationPromptDismissed: Boolean = false,
+    val isWff5Updated: Boolean = false,
 )
 
 class UserPreferencesRepository @Inject constructor(
     private val dataStore: DataStore<UserPreferences>
 ) {
     fun getPreferences() = dataStore.data
+
+    suspend fun setWff5Updated(updated: Boolean) {
+        dataStore.updateData { it.copy(isWff5Updated = updated) }
+    }
 }
 
 object UserPreferencesSerializer : Serializer<UserPreferences> {

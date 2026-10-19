@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">Solar Path</string>
+    <string name="watch_face_name">Solar Path</string>
+    <string name="solar_path_comp_name">Solar Path</string>
+    
+    <!-- Watch Face Push -->
+    <string name="push_watch_face">Imposta quadrante</string>
+    <string name="activating_watch_face">Attivazione del quadrante…</string>
+    <string name="watch_face_active">Solar Path è attivo</string>
+    <string name="status_manual_activation">Installato. Selezionalo tra i quadranti.</string>
+    <string name="wfp_not_supported">Watch Face Push non è supportato su questo dispositivo.</string>
+    <string name="updating_watch_face">Aggiornamento del quadrante…</string>
+    <string name="updating_watch_face_wff5">Aggiornamento del quadrante a Watch Face Format versione 5…</string>
+    <string name="watch_face_updated">Quadrante aggiornato!</string>
+
+    <!-- Location -->
+    <string name="set_location">Posizione</string>
+    <string name="locations">Posizioni</string>
+    <string name="search">Cerca</string>
+    <string name="location">Posizione</string>
+    <string name="current_location">Posizione attuale</string>
+    <string name="recent">Recenti</string>
+    <string name="no_internet_connection">Nessuna connessione Internet</string>
+    <string name="no_location">Posizione non disponibile</string>
+    <string name="background_location">Posizione in background</string>
+    <string name="background_location_summary">Aggiorna automaticamente la posizione periodicamente</string>
+    <string name="update_interval">Intervallo di aggiornamento</string>
+    <string name="enable_permission_toast">Concedi l\'autorizzazione per la posizione</string>
+    <string name="location_disclosure_title">Accesso alla posizione</string>
+    <string name="location_disclosure_message">Solar Path richiede la posizione approssimativa per calcolare con precisione gli orari di alba, tramonto e crepuscoli per il tuo orizzonte locale.\n\nI dati sulla posizione vengono elaborati localmente sul dispositivo e non vengono mai condivisi.</string>
+    <string name="background_location_rationale">Solar Path raccoglierà dati approssimativi sulla posizione per consentire calcoli solari precisi anche quando l\'app è chiusa o non in uso.</string>
+    <string name="background_location_instruction">Seleziona \'Sempre\' per completare l\'impostazione della posizione in background.</string>
+    <string name="all_the_time_not_granted">Autorizzazione \'Sempre\' non concessa…</string>
+
+    <!-- Solar & Astronomical Terms -->
+    <string name="next_event">Prossimo evento</string>
+    <string name="solar_times">Orari solari</string>
+    <string name="sunrise">Alba</string>
+    <string name="sunset">Tramonto</string>
+    <string name="solar_noon">Mezzogiorno solare</string>
+    <string name="solar_midnight">Mezzanotte solare</string>
+    <string name="civil_dawn">Alba civile</string>
+    <string name="civil_dusk">Crepuscolo civile</string>
+    <string name="nautical_dawn">Alba nautica</string>
+    <string name="nautical_dusk">Crepuscolo nautico</string>
+    <string name="astro_dawn">Alba astronomica</string>
+    <string name="astro_dusk">Crepuscolo astronomico</string>
+    <string name="daylight">Luce diurna</string>
+    <string name="night">Notte</string>
+    <string name="elevation">Elevazione</string>
+    <string name="azimuth">Azimut</string>
+    <string name="open_app">Apri Solar Path</string>
+    <string name="refresh_calculation">Ricalcola</string>
+    <string name="solar_times_recalculated">Orari solari ricalcolati!</string>
+    <string name="location_not_set">Posizione non impostata!</string>
+    <string name="something_went_wrong">Si è verificato un errore!</string>
+
+    <!-- FAQ -->
+    <string name="faq">Domande frequenti</string>
+    <string name="faq_subtitle">Come funziona questo quadrante</string>
+    <string name="faq_dial_title">Quadrante solare di 24 ore</string>
+    <string name="faq_dial_desc">A differenza dei normali orologi a 12 ore, questo quadrante mostra il ciclo solare completo di 24 ore. Il mezzogiorno solare (zenit) si trova in alto (12:00) e la mezzanotte solare (nadir) in basso (00:00). Il sole si muove in senso orario lungo il percorso.</string>
+    <string name="faq_phases_title">5 fasi del cielo e crepuscolo</string>
+    <string name="faq_phases_desc">Il quadrante mostra cinque fasi astronomiche distinte:\n\n• Luce diurna: Il sole è sopra l\'orizzonte (&gt; 0°)\n• Crepuscolo civile: Da 0° a -6° (luce naturale residua)\n• Crepuscolo nautico: Da -6° a -12° (stelle di navigazione visibili)\n• Crepuscolo astronomico: Da -12° a -18° (crepuscolo profondo)\n• Notte: Sotto i -18° (notte astronomica completa con stelle)</string>
+    <string name="faq_marker_title">Indicatore solare e raggio</string>
+    <string name="faq_marker_desc">L\'indicatore solare orbita lungo il tracciato delle 24 ore. È un disco bianco pieno durante il giorno e diventa un anello cavo di notte quando il sole è sotto l\'orizzonte. Il raggio radiale indica l\'ora solare attuale.</string>
+    <string name="faq_dots_title">10 punti evento della sequenza temporale</string>
+    <string name="faq_dots_desc">I punti attorno alla ghiera temporale segnano 10 tappe solari:\n\n• Mattina: Alba astronomica, nautica e civile, sorgere del sole e mezzogiorno solare\n• Sera: Tramonto, crepuscolo civile, nautico e astronomico, e mezzanotte solare</string>
+    <string name="faq_location_title">Posizione e calcoli</string>
+    <string name="faq_location_desc">Tutti i calcoli astronomici utilizzano algoritmi NOAA ad alta precisione. Gli orari precisi di crepuscolo e solari vengono calcolati specificamente per le tue coordinate geografiche (latitudine e longitudine).</string>
+
+    <!-- About & Privacy -->
+    <string name="about">Informazioni</string>
+    <string name="version">Versione</string>
+    <string name="privacy_policy">Informativa sulla privacy</string>
+    <string name="check_your_phone">Controlla il telefono</string>
+    <string name="check_your_phone_failure">Impossibile raggiungere il telefono</string>
+
+    <!-- Actions & Common UI -->
+    <string name="continue_action">Continua</string>
+    <string name="confirm">Conferma</string>
+    <string name="delete">Elimina</string>
+    <string name="submit">Invia</string>
+    <string name="minutes_unit">min</string>
+    <string name="day_unit">giorno</string>
+    <string name="solar_status_format">%1$.1f° %2$s • %3$dh %4$dm %5$s</string>
+    <string name="push_failed">Invio non riuscito: %1$s</string>
+    <string name="location_request_failed">Richiesta della posizione non riuscita</string>
+    <string name="no_results_found">Nessun risultato trovato</string>
+    <string name="unknown_location">Sconosciuta</string>
+
+    <!-- Wear OS Widgets -->
+    <string name="dusk_times_widget_label">Orari del crepuscolo</string>
+    <string name="dusk_times_widget_desc">Crepuscolo serale e tramonto</string>
+    <string name="dawn_times_widget_label">Orari dell\'alba</string>
+    <string name="dawn_times_widget_desc">Crepuscolo mattutino e alba</string>
+    <string name="widget_location_not_set">Imposta posizione nell\'app</string>
+    <string name="night_label">Notte</string>
+</resources>

@@ -1,5 +1,6 @@
 package com.amoledwatchfaces.solarpath.solar
 
+import com.amoledwatchfaces.solarpath.R
 import dev.jamesyox.kastro.sol.SolarEvent
 import dev.jamesyox.kastro.sol.SolarEventSequence
 import dev.jamesyox.kastro.sol.calculateSolarState
@@ -191,38 +192,42 @@ object SolarCalculator {
         val solarState = currentInstant.calculateSolarState(latitude = lat, longitude = lon)
         val isDay = solarState.trueAltitude > 0.0
 
+        data class UpcomingEvent(val name: String, val resId: Int, val epoch: Long)
+
         val todayEvents = listOf(
-            "Sunrise" to daily.sunrise,
-            "Solar Noon" to daily.noon,
-            "Sunset" to daily.sunset,
-            "Civil Dusk" to daily.civilDusk,
-            "Nautical Dusk" to daily.nauticalDusk,
-            "Astro Dusk" to daily.astroDusk,
-            "Solar Midnight" to daily.nadir,
-            "Astro Dawn" to daily.astroDawn,
-            "Nautical Dawn" to daily.nauticalDawn,
-            "Civil Dawn" to daily.civilDawn
+            UpcomingEvent("Sunrise", R.string.sunrise, daily.sunrise),
+            UpcomingEvent("Solar Noon", R.string.solar_noon, daily.noon),
+            UpcomingEvent("Sunset", R.string.sunset, daily.sunset),
+            UpcomingEvent("Civil Dusk", R.string.civil_dusk, daily.civilDusk),
+            UpcomingEvent("Nautical Dusk", R.string.nautical_dusk, daily.nauticalDusk),
+            UpcomingEvent("Astro Dusk", R.string.astro_dusk, daily.astroDusk),
+            UpcomingEvent("Solar Midnight", R.string.solar_midnight, daily.nadir),
+            UpcomingEvent("Astro Dawn", R.string.astro_dawn, daily.astroDawn),
+            UpcomingEvent("Nautical Dawn", R.string.nautical_dawn, daily.nauticalDawn),
+            UpcomingEvent("Civil Dawn", R.string.civil_dawn, daily.civilDawn)
         )
 
         val tomorrowEvents = listOf(
-            "Sunrise" to dailyTomorrow.sunrise,
-            "Solar Noon" to dailyTomorrow.noon,
-            "Sunset" to dailyTomorrow.sunset,
-            "Civil Dusk" to dailyTomorrow.civilDusk,
-            "Nautical Dusk" to dailyTomorrow.nauticalDusk,
-            "Astro Dusk" to dailyTomorrow.astroDusk,
-            "Solar Midnight" to dailyTomorrow.nadir,
-            "Astro Dawn" to dailyTomorrow.astroDawn,
-            "Nautical Dawn" to dailyTomorrow.nauticalDawn,
-            "Civil Dawn" to dailyTomorrow.civilDawn
+            UpcomingEvent("Sunrise", R.string.sunrise, dailyTomorrow.sunrise),
+            UpcomingEvent("Solar Noon", R.string.solar_noon, dailyTomorrow.noon),
+            UpcomingEvent("Sunset", R.string.sunset, dailyTomorrow.sunset),
+            UpcomingEvent("Civil Dusk", R.string.civil_dusk, dailyTomorrow.civilDusk),
+            UpcomingEvent("Nautical Dusk", R.string.nautical_dusk, dailyTomorrow.nauticalDusk),
+            UpcomingEvent("Astro Dusk", R.string.astro_dusk, dailyTomorrow.astroDusk),
+            UpcomingEvent("Solar Midnight", R.string.solar_midnight, dailyTomorrow.nadir),
+            UpcomingEvent("Astro Dawn", R.string.astro_dawn, dailyTomorrow.astroDawn),
+            UpcomingEvent("Nautical Dawn", R.string.nautical_dawn, dailyTomorrow.nauticalDawn),
+            UpcomingEvent("Civil Dawn", R.string.civil_dawn, dailyTomorrow.civilDawn)
         )
 
         val upcomingEvents = (todayEvents + tomorrowEvents)
-            .filter { it.second > effectiveTimeMillis }
-            .sortedBy { it.second }
+            .filter { it.epoch > effectiveTimeMillis }
+            .sortedBy { it.epoch }
 
-        val nextEvent = upcomingEvents.firstOrNull() ?: (
-            "Sunrise" to if (daily.sunrise > 0 && daily.sunrise < effectiveTimeMillis) daily.sunrise + 86_400_000L else daily.sunrise
+        val nextEvent = upcomingEvents.firstOrNull() ?: UpcomingEvent(
+            "Sunrise",
+            R.string.sunrise,
+            if (daily.sunrise > 0 && daily.sunrise < effectiveTimeMillis) daily.sunrise + 86_400_000L else daily.sunrise
         )
 
         // Daylight progress fraction (0..1)
@@ -245,8 +250,9 @@ object SolarCalculator {
             sunElevation = solarState.trueAltitude,
             sunAzimuth = solarState.azimuth,
             isDay = isDay,
-            nextEventName = nextEvent.first,
-            nextEventEpoch = nextEvent.second,
+            nextEventName = nextEvent.name,
+            nextEventNameResId = nextEvent.resId,
+            nextEventEpoch = nextEvent.epoch,
             progressFraction = progress,
             sunriseAngle = daily.sunriseAngle,
             sunsetAngle = daily.sunsetAngle,
@@ -271,7 +277,11 @@ object SolarCalculator {
         return angle.toFloat()
     }
 
-    fun formatAnglesForComplication(solar: SolarData, nextEventName: String): String {
+    fun formatAnglesForComplication(
+        solar: SolarData,
+        nextEventName: String,
+        locationAvailable: Boolean = true
+    ): String {
         val ss = (solar.sunsetAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val cdusk = (solar.civilDuskAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val ndusk = (solar.nauticalDuskAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
@@ -282,9 +292,10 @@ object SolarCalculator {
         val sr = (solar.sunriseAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val noon = (solar.solarNoonAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
         val midnight = (solar.solarMidnightAngle.toInt() % 360).let { if (it < 0) it + 360 else it }
+        val loc = if (locationAvailable) 1 else 0
 
-        return "\uFEFF%03d%03d%03d%03d%03d%03d%03d%03d%03d%03d %s".format(
-            ss, cdusk, ndusk, adusk, adawn, ndawn, cdawn, sr, noon, midnight, nextEventName.uppercase()
+        return "\uFEFF%03d%03d%03d%03d%03d%03d%03d%03d%03d%03d%d %s".format(
+            ss, cdusk, ndusk, adusk, adawn, ndawn, cdawn, sr, noon, midnight, loc, nextEventName.uppercase()
         )
     }
 

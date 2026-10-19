@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wearwidget-provider
+    description="@string/dawn_times_widget_desc"
+    icon="@mipmap/ic_launcher"
+    label="@string/dawn_times_widget_label"
+    preferredType="LARGE">
+    <container
+        type="LARGE"
+        previewImage="@drawable/widget_preview_dawn" />
+</wearwidget-provider>

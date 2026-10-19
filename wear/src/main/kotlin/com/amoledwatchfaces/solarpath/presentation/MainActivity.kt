@@ -8,9 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusRequester
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -23,11 +21,10 @@ import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
-import androidx.activity.compose.BackHandler
 import androidx.compose.ui.platform.LocalContext
+import com.amoledwatchfaces.solarpath.presentation.ui.InitialLocationDialog
 import com.amoledwatchfaces.solarpath.presentation.ui.SolarPathAppTheme
 import com.amoledwatchfaces.solarpath.utils.areLocationPermissionsGranted
-import com.amoledwatchfaces.solarpath.utils.isPermissionGranted
 import com.amoledwatchfaces.solarpath.utils.updateComplications
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,6 +44,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.refresh()
+        viewModel.checkWatchFaceActiveStatus()
         updateComplications()
     }
 }
@@ -67,50 +65,18 @@ fun SolarPathMainApp(
     val preferences by viewModel.preferences.collectAsState()
     val initialLocationDialogState by viewModel.initialLocationDialogState.collectAsState()
 
-    var launchBackgroundPermission by remember { mutableStateOf(false) }
-
-    val backgroundPermissionState = rememberPermissionState(
-        permission = android.Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-        onPermissionResult = { isGranted ->
-            if (isGranted) {
-                viewModel.setBackgroundLocation(true)
-            }
-        }
-    )
-
-    val foregroundPermissionState = rememberPermissionState(
+    val permissionState = rememberPermissionState(
         permission = android.Manifest.permission.ACCESS_COARSE_LOCATION,
         onPermissionResult = { isGranted ->
             if (isGranted) {
                 viewModel.requestLocation()
-                if (navController.currentDestination?.route == "location_choose") {
-                    navController.popBackStack()
-                }
-                if (!context.isPermissionGranted(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-                    launchBackgroundPermission = true
-                }
             }
         }
     )
 
-    LaunchedEffect(launchBackgroundPermission) {
-        if (launchBackgroundPermission) {
-            launchBackgroundPermission = false
-            backgroundPermissionState.launchPermissionRequest()
-        }
-    }
-
-    val requestPermissionsSequentially: () -> Unit = {
-        if (!context.areLocationPermissionsGranted()) {
-            foregroundPermissionState.launchPermissionRequest()
-        } else if (!context.isPermissionGranted(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-            backgroundPermissionState.launchPermissionRequest()
-        } else {
-            viewModel.setBackgroundLocation(true)
-            viewModel.requestLocation()
-            if (navController.currentDestination?.route == "location_choose") {
-                navController.popBackStack()
-            }
+    LaunchedEffect(Unit) {
+        if (preferences.latitude == 0.0 && preferences.longitude == 0.0 && !context.areLocationPermissionsGranted()) {
+            viewModel.setInitialLocationDialogState(true)
         }
     }
 
@@ -121,29 +87,20 @@ fun SolarPathMainApp(
                 startDestination = "main"
             ) {
                 composable("main") {
-                    if (!context.areLocationPermissionsGranted() && !preferences.isLocationPromptDismissed) {
-                        LocationDisabledScreen(
-                            transformationSpec = transformationSpec,
-                            onEnableLocation = requestPermissionsSequentially,
-                            onUseWithoutLocation = { viewModel.dismissLocationPrompt() }
-                        )
-                    } else {
-                        MainScreen(
-                            navController = navController,
-                            viewModel = viewModel,
-                            transformationSpec = transformationSpec,
-                            focusRequester = focusRequester,
-                            listState = listState,
-                            onEnableLocation = requestPermissionsSequentially
-                        )
-                    }
+                    MainScreen(
+                        navController = navController,
+                        viewModel = viewModel,
+                        transformationSpec = transformationSpec,
+                        focusRequester = focusRequester,
+                        listState = listState
+                    )
                 }
 
                 composable("location_choose") {
                     LocationChooseScreen(
                         navController = navController,
                         viewModel = viewModel,
-                        permissionState = foregroundPermissionState,
+                        permissionState = permissionState,
                         transformationSpec = transformationSpec,
                         focusRequester = focusRequester,
                         listState = locationListState
@@ -161,16 +118,12 @@ fun SolarPathMainApp(
             }
 
             if (initialLocationDialogState) {
-                BackHandler {
-                    viewModel.setInitialLocationDialogState(false)
-                }
-                LocationDisabledScreen(
-                    transformationSpec = transformationSpec,
-                    onEnableLocation = {
+                InitialLocationDialog(
+                    onConfirm = {
                         viewModel.setInitialLocationDialogState(false)
-                        requestPermissionsSequentially()
+                        permissionState.launchPermissionRequest()
                     },
-                    onUseWithoutLocation = {
+                    onDismiss = {
                         viewModel.setInitialLocationDialogState(false)
                     }
                 )

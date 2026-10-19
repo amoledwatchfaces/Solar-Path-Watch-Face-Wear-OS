@@ -8,8 +8,8 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.Uri
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
 import com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService
 import kotlin.math.abs
@@ -27,6 +27,8 @@ fun formatCoordinate(coordinate: Double, isLatitude: Boolean): String {
 
     return "$degrees°$minutes'$direction"
 }
+
+const val PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE = "com.google.wear.permission.SET_PUSHED_WATCH_FACE_AS_ACTIVE"
 
 fun Context.areLocationPermissionsGranted(): Boolean {
     return isPermissionGranted(android.Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -50,14 +52,26 @@ fun Context.isLocationEnabled(): Boolean {
 
 fun Context.updateComplications() {
     val component = ComponentName(this, SolarPathComplicationService::class.java)
-    ComplicationDataSourceUpdateRequester.create(this, component).requestUpdateAll()
+    val req = ComplicationDataSourceUpdateRequester.create(this, component)
+    req.requestUpdateAll()
+}
+
+@Suppress("UNCHECKED_CAST")
+fun Context.updateWidgets() {
+    try {
+        val updater = androidx.wear.tiles.TileService.getUpdater(this)
+        updater.requestUpdate(com.amoledwatchfaces.solarpath.widget.DuskTimesWidgetService::class.java as Any as Class<out androidx.wear.tiles.TileService>)
+        updater.requestUpdate(com.amoledwatchfaces.solarpath.widget.DawnTimesWidgetService::class.java as Any as Class<out androidx.wear.tiles.TileService>)
+    } catch (e: Exception) {
+        android.util.Log.w("ContextUtils", "Failed to update widgets", e)
+    }
 }
 
 fun Context.openPlayStore() {
     try {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     } catch (_: ActivityNotFoundException) {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=$packageName".toUri()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 }
 
