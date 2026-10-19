@@ -18,11 +18,14 @@ import androidx.compose.remote.creation.compose.layout.RemoteRow
 import androidx.compose.remote.creation.compose.layout.RemoteTime
 import androidx.compose.remote.creation.compose.modifier.RemoteModifier
 import androidx.compose.remote.creation.compose.modifier.background
+import androidx.compose.remote.creation.compose.modifier.border
+import androidx.compose.remote.creation.compose.modifier.clip
 import androidx.compose.remote.creation.compose.modifier.fillMaxHeight
 import androidx.compose.remote.creation.compose.modifier.fillMaxSize
 import androidx.compose.remote.creation.compose.modifier.fillMaxWidth
 import androidx.compose.remote.creation.compose.modifier.padding
 import androidx.compose.remote.creation.compose.modifier.size
+import androidx.compose.remote.creation.compose.shapes.RemoteCircleShape
 import androidx.compose.remote.creation.compose.state.RemoteBoolean
 import androidx.compose.remote.creation.compose.state.RemoteColor
 import androidx.compose.remote.creation.compose.state.RemoteString
@@ -337,7 +340,10 @@ fun MilestoneItemRow(
         colorScheme.primary,
         isPast.select(colorScheme.outlineVariant, colorScheme.outline)
     )
-    val dotText = isNext.select("● ".rs, "○ ".rs)
+    val fillColor = isNext.select(
+        colorScheme.primary,
+        RemoteColor(Color.TRANSPARENT)
+    )
 
     RemoteRow(
         modifier = RemoteModifier.fillMaxWidth(),
@@ -347,13 +353,15 @@ fun MilestoneItemRow(
         RemoteRow(
             modifier = RemoteModifier.weight(2f),
             verticalAlignment = RemoteAlignment.CenterVertically,
-            horizontalArrangement = RemoteArrangement.Start
+            horizontalArrangement = RemoteArrangement.spacedBy(6.rdp)
         ) {
-            RemoteText(
-                text = dotText,
-                style = RemoteMaterialTheme.typography.bodySmall,
-                color = dotColor
-            )
+            RemoteBox(
+                modifier = RemoteModifier
+                    .size(6.rdp)
+                    .clip(RemoteCircleShape)
+                    .background(fillColor)
+                    .border(1.rdp, dotColor, RemoteCircleShape)
+            ){}
             RemoteText(
                 text = name.rs,
                 style = RemoteMaterialTheme.typography.bodySmall,
