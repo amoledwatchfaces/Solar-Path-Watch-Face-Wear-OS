@@ -77,6 +77,7 @@ class DawnTimesWidget(
     private val dataStore: DataStore<UserPreferences>? = null
 ) : GlanceWearWidget() {
 
+    @SuppressLint("RestrictedApi")
     override suspend fun provideWidgetData(
         context: Context,
         params: WearWidgetParams
@@ -139,7 +140,7 @@ private fun epochToMinuteOfDay(epoch: Long, zoneId: ZoneId = ZoneId.systemDefaul
     return (zdt.hour * 60 + zdt.minute).toFloat()
 }
 
-@SuppressLint("RestrictedApi")
+@SuppressLint("RestrictedApi", "WearRecents")
 @RemoteComposable
 @Composable
 fun DawnTimesWidgetContent(

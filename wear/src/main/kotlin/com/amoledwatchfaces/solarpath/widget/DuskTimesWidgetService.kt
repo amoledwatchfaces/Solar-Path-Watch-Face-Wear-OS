@@ -79,6 +79,7 @@ class DuskTimesWidget(
     private val dataStore: DataStore<UserPreferences>? = null
 ) : GlanceWearWidget() {
 
+    @SuppressLint("RestrictedApi")
     override suspend fun provideWidgetData(
         context: Context,
         params: WearWidgetParams
@@ -144,7 +145,7 @@ private fun epochToDuskMinute(epoch: Long, zoneId: ZoneId = ZoneId.systemDefault
     return (adjustedHour * 60 + minute).toFloat()
 }
 
-@SuppressLint("RestrictedApi")
+@SuppressLint("RestrictedApi", "WearRecents")
 @RemoteComposable
 @Composable
 fun DuskTimesWidgetContent(
@@ -340,7 +341,7 @@ fun MilestoneItemRow(
         verticalAlignment = RemoteAlignment.CenterVertically
     ) {
         RemoteRow(
-            modifier = RemoteModifier,
+            modifier = RemoteModifier.weight(2f),
             verticalAlignment = RemoteAlignment.CenterVertically,
             horizontalArrangement = RemoteArrangement.Start
         ) {
@@ -359,8 +360,9 @@ fun MilestoneItemRow(
         }
         RemoteText(
             textAlign = TextAlign.End,
-            modifier = RemoteModifier,
+            modifier = RemoteModifier.weight(1f),
             text = time.rs,
+            overflow = TextOverflow.Ellipsis,
             style = RemoteMaterialTheme.typography.bodySmall,
             color = timeColor,
             maxLines = 1
