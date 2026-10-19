@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Instalada. Selecciónala en las esferas.</string>
     <string name="wfp_not_supported">Watch Face Push no es compatible con este dispositivo.</string>
     <string name="updating_watch_face">Actualizando esfera…</string>
-    <string name="updating_watch_face_wff5">Actualizando esfera a Watch Face Format versión 5…</string>
+    <string name="updating_watch_face_wff5">Actualizando Watch Face Format…</string>
     <string name="watch_face_updated">¡Esfera actualizada!</string>
 
     <!-- Location -->

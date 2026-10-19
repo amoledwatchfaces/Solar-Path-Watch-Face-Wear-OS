@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Installed. Select from watch faces.</string>
     <string name="wfp_not_supported">Watch Face Push not supported on this device.</string>
     <string name="updating_watch_face">Updating watch face…</string>
-    <string name="updating_watch_face_wff5">Updating watch face to Watch Face Format version 5…</string>
+    <string name="updating_watch_face_wff5">Upgrading Watch Face Format…</string>
     <string name="watch_face_updated">Watch face updated!</string>
     <string name="default_wf_token" translatable="false">placeholder</string>
     <string name="wff5_wf_token" translatable="false">placeholder</string>

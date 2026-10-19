@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Nainštalované. Vyberte zo zoznamu ciferníkov.</string>
     <string name="wfp_not_supported">Watch Face Push nie je na tomto zariadení podporované.</string>
     <string name="updating_watch_face">Aktualizuje sa ciferník…</string>
-    <string name="updating_watch_face_wff5">Aktualizuje sa ciferník na Watch Face Format verziu 5…</string>
+    <string name="updating_watch_face_wff5">Aktualizuje sa Watch Face Format…</string>
     <string name="watch_face_updated">Ciferník bol aktualizovaný!</string>
 
     <!-- Location -->

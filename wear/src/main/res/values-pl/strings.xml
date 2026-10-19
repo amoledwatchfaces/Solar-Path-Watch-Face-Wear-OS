@@ -10,7 +10,7 @@
     <string name="status_manual_activation">Zainstalowano. Wybierz z listy tarcz.</string>
     <string name="wfp_not_supported">Watch Face Push nie jest obsługiwane na tym urządzeniu.</string>
     <string name="updating_watch_face">Aktualizowanie tarczy…</string>
-    <string name="updating_watch_face_wff5">Aktualizowanie tarczy do Watch Face Format wersja 5…</string>
+    <string name="updating_watch_face_wff5">Aktualizowanie Watch Face Format…</string>
     <string name="watch_face_updated">Tarcza zaktualizowana!</string>
 
     <!-- Location -->
