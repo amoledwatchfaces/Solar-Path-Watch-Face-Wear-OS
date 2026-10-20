@@ -106,7 +106,10 @@ fun SolarGraphWidgetRoundPreview(
     )
 }
 
-@Preview
+@Preview(
+    name = "Widget Preview Asset",
+    device = "spec:width=1000dp,height=1000dp,dpi=320",
+)
 @Composable
 fun SolarGraphWidgetRectangularPreview(
     @PreviewParameter(RectangularLargeWidgetPreviewParams::class) params: WearWidgetParams,

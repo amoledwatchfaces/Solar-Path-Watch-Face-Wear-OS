@@ -86,7 +86,7 @@ class DawnTimesWidget(
         val preferences = dataStore?.data?.first() ?: UserPreferences(
             latitude = 51.5074,
             longitude = -0.1278,
-            locationName = "Bzince pod Javorinou"
+            locationName = "London"
         )
         val colorScheme = dynamicColorScheme(context) ?: appColorScheme
         val remoteColorScheme = RemoteColorScheme(colorScheme)

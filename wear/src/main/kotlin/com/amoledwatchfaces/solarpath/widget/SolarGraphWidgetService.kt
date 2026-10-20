@@ -26,7 +26,9 @@ import androidx.compose.remote.creation.compose.modifier.fillMaxSize
 import androidx.compose.remote.creation.compose.modifier.fillMaxWidth
 import androidx.compose.remote.creation.compose.modifier.padding
 import androidx.compose.remote.creation.compose.modifier.size
+import androidx.compose.remote.creation.compose.state.ComposeRemoteColorFilter
 import androidx.compose.remote.creation.compose.state.RemoteColor
+import androidx.compose.remote.creation.compose.state.RemoteColorFilter
 import androidx.compose.remote.creation.compose.state.RemotePaint
 import androidx.compose.remote.creation.compose.state.RemoteString
 import androidx.compose.remote.creation.compose.state.clamp
@@ -43,7 +45,6 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.core.graphics.toColorInt
 import androidx.datastore.core.DataStore
 import androidx.glance.wear.AssociateWithGlanceWearWidget
 import androidx.glance.wear.GlanceWearWidget
@@ -100,7 +101,7 @@ class SolarGraphWidget(
         val preferences = dataStore?.data?.first() ?: UserPreferences(
             latitude = 51.5074,
             longitude = -0.1278,
-            locationName = "Bzince pod Javorinou"
+            locationName = "London"
         )
         val colorScheme = dynamicColorScheme(context) ?: appColorScheme
         val remoteColorScheme = RemoteColorScheme(colorScheme)
@@ -347,6 +348,7 @@ private fun SolarArcGraphCanvas(
     val sunGlowPaint = RemotePaint {
         color = colorScheme.tertiaryDim
         style = PaintingStyle.Fill
+
     }
     val sunCutoutPaint = RemotePaint {
         color = containerColor
@@ -409,7 +411,7 @@ private fun SolarArcGraphCanvas(
             )
         }
 
-        // Night path (pre-dawn [0..srMin] and post-dusk [ssMin..1440])
+        // Night path (pre-dawn [0...srMin] and post-dusk [ssMin...1440])
         val nightPath = RemotePath()
         val preDawnMid = srMin * 0.5f
         addCosineCubic(nightPath, 0f, preDawnMid, moveToStart = true)
@@ -420,7 +422,7 @@ private fun SolarArcGraphCanvas(
         addCosineCubic(nightPath, postDuskMid, 1440f, moveToStart = false)
         drawPath(path = nightPath, paint = nightCurvePaint)
 
-        // Day path (morning [srMin..centerMin] and afternoon [centerMin..ssMin])
+        // Day path (morning [srMin...centerMin] and afternoon [centerMin...ssMin])
         val dayPath = RemotePath()
         addCosineCubic(dayPath, srMin, centerMin, moveToStart = true)
         addCosineCubic(dayPath, centerMin, ssMin, moveToStart = false)
@@ -453,24 +455,24 @@ private fun SolarArcGraphCanvas(
             drawConditionally(isDayNow) {
                 drawCircle(
                     paint = sunGlowPaint,
-                    radius = 9.5f.rf,
+                    radius = 16.5f.rf,
                     center = sunCenter
                 )
             }
             drawCircle(
                 paint = sunCutoutPaint,
-                radius = 7.5f.rf,
+                radius = 13.5f.rf,
                 center = sunCenter
             )
             drawCircle(
                 paint = sunFillPaint,
-                radius = 5.5f.rf,
+                radius = 11.5f.rf,
                 center = sunCenter
             )
             drawConditionally(isNightNow) {
                 drawCircle(
                     paint = sunCutoutPaint,
-                    radius = 3f.rf,
+                    radius = 9f.rf,
                     center = sunCenter
                 )
             }
