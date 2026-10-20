@@ -84,14 +84,6 @@ class WatchFacePackageRepository(
         token = context.getString(R.string.default_wf_token)
     )
 
-    suspend fun updateToWff5WatchFace(
-        scope: CoroutineScope
-    ): Result<String> = updateOrInstallWatchFace(
-        scope = scope,
-        watchFaceData = SOLARPATH_WFF5_WATCH_FACE,
-        token = context.getString(R.string.wff5_wf_token)
-    )
-
     suspend fun setWatchFaceAsActive(
         watchFaceData: WatchFaceData = DEFAULT_WATCH_FACE
     ): Result<String> = withContext(Dispatchers.IO) {

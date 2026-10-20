@@ -31,13 +31,24 @@ android {
 
     defaultConfig {
         applicationId = rootProject.extra["namespace"] as String
-        minSdk = 36
         targetSdk = 37
-        versionCode = rootProject.extra["versionCode"] as Int
         versionName = rootProject.extra["versionName"] as String
+    }
 
-        versionNameSuffix = "-wear"
-        versionCode = 20000 + (versionCode ?: 0)
+    flavorDimensions += "version"
+    productFlavors {
+        create("wff4") {
+            dimension = "version"
+            minSdk = 36
+            versionCode = 20000 + (rootProject.extra["versionCode"] as Int)
+            versionNameSuffix = "-wff4"
+        }
+        create("wff5") {
+            dimension = "version"
+            minSdk = 37
+            versionCode = 30000 + (rootProject.extra["versionCode"] as Int)
+            versionNameSuffix = "-wff5"
+        }
     }
 
     signingConfigs {
@@ -208,19 +219,17 @@ dependencies {
 
 androidComponents.onVariants { variant ->
     val capsVariant = variant.name.replaceFirstChar { it.uppercase() }
+    val flavorName = variant.flavorName ?: "wff4"
+    val capsFlavor = flavorName.replaceFirstChar { it.uppercase() }
+    val buildType = variant.buildType?.replaceFirstChar { it.uppercase() } ?: "Debug"
 
     val copyTaskProvider = tasks.register<Copy>("copyWatchface${capsVariant}Output") {
-        description = ""
-        val packageWff4Task = project(":wear:watchface").tasks.named("packageWff4$capsVariant")
-        val packageWff5Task = project(":wear:watchface").tasks.named("packageWff5$capsVariant")
+        description = "Copies watchface APK into assets for $variant"
+        val packageWatchfaceTask = project(":wear:watchface").tasks.named("package${capsFlavor}${buildType}")
 
-        from(packageWff4Task) {
+        from(packageWatchfaceTask) {
             include("**/*.apk")
             rename { "default_watchface.apk" }
-        }
-        from(packageWff5Task) {
-            include("**/*.apk")
-            rename { "solarpath_wff5.apk" }
         }
         into(layout.buildDirectory.dir("intermediates/watchfaceAssets/${variant.name}"))
 
@@ -229,7 +238,7 @@ androidComponents.onVariants { variant ->
     }
 
     val tokenTask = tasks.register<ProcessFilesTask>("generateToken${capsVariant}Res") {
-        description = ""
+        description = "Generates token resource for $variant"
         val resDir = layout.buildDirectory.dir("generated/wfTokenRes/${variant.name}/res")
         val assetsDir = layout.buildDirectory.dir("generated/wfAssets/${variant.name}")
         val tokenFile = resDir.map { it.file("values/wf_token.xml") }
@@ -275,16 +284,11 @@ abstract class ProcessFilesTask : DefaultTask() {
     fun taskAction() {
         val defaultApk = inputAssets.asFileTree.files.find { it.name == "default_watchface.apk" }
             ?: throw GradleException("default_watchface.apk not found in inputAssets. Files: ${inputAssets.asFileTree.files.joinToString()}")
-        val wff5Apk = inputAssets.asFileTree.files.find { it.name == "solarpath_wff5.apk" }
-            ?: throw GradleException("solarpath_wff5.apk not found in inputAssets. Files: ${inputAssets.asFileTree.files.joinToString()}")
 
-        // Copy APKs to apkDirectory
+        // Copy APK to apkDirectory
         val targetDefaultFile = apkDirectory.get().file("default_watchface.apk").asFile
         targetDefaultFile.parentFile.mkdirs()
         defaultApk.copyTo(targetDefaultFile, overwrite = true)
-
-        val targetWff5File = apkDirectory.get().file("solarpath_wff5.apk").asFile
-        wff5Apk.copyTo(targetWff5File, overwrite = true)
 
         fun generateToken(apk: File): String {
             val stdOut = ByteArrayOutputStream()
@@ -326,13 +330,11 @@ abstract class ProcessFilesTask : DefaultTask() {
         }
 
         val defaultToken = generateToken(defaultApk)
-        val wff5Token = generateToken(wff5Apk)
 
         val output = outputFile.get().asFile
         output.parentFile.mkdirs()
         val tokenResText = """<resources>
                      |    <string name="default_wf_token">$defaultToken</string>
-                     |    <string name="wff5_wf_token">$wff5Token</string>
                      |</resources>
                    """.trimMargin()
         output.writeText(tokenResText)

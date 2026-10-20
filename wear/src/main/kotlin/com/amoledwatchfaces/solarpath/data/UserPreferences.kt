@@ -39,10 +39,6 @@ class UserPreferencesRepository @Inject constructor(
     private val dataStore: DataStore<UserPreferences>
 ) {
     fun getPreferences() = dataStore.data
-
-    suspend fun setWff5Updated(updated: Boolean) {
-        dataStore.updateData { it.copy(isWff5Updated = updated) }
-    }
 }
 
 object UserPreferencesSerializer : Serializer<UserPreferences> {

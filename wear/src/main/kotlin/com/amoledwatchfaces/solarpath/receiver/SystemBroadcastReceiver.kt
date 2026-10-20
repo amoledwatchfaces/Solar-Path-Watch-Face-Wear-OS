@@ -54,15 +54,7 @@ class SystemBroadcastReceiver : BroadcastReceiver() {
             val pendingResult = goAsync()
             scope.launch {
                 try {
-                    val result = if (android.os.Build.VERSION.SDK_INT >= 37) {
-                        packageRepository.updateToWff5WatchFace(scope = this).also {
-                            if (it.isSuccess) {
-                                UserPreferencesRepository(dataStore).setWff5Updated(true)
-                            }
-                        }
-                    } else {
-                        packageRepository.updateOrInstallDefaultWatchFace(scope = this)
-                    }
+                    val result = packageRepository.updateOrInstallDefaultWatchFace(scope = this)
                     if (result.isSuccess) {
                         Log.i(TAG, "Successfully updated bundled watch face on MY_PACKAGE_REPLACED: slot ${result.getOrNull()}")
                     } else {

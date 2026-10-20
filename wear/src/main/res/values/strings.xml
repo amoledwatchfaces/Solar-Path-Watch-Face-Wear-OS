@@ -13,7 +13,6 @@
     <string name="updating_watch_face_wff5">Upgrading Watch Face Format…</string>
     <string name="watch_face_updated">Watch face updated!</string>
     <string name="default_wf_token" translatable="false">placeholder</string>
-    <string name="wff5_wf_token" translatable="false">placeholder</string>
 
     <!-- Location -->
     <string name="set_location">Location</string>

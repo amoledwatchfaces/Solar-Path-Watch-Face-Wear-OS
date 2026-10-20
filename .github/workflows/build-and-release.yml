@@ -62,20 +62,20 @@ jobs:
       - name: Locate Artifacts
         run: |
           echo "Finding APKs..."
-          find wear/build/outputs/apk/release -name "*.apk" || echo "No APKs found"
+          find wear/build/outputs/apk -name "*.apk" || echo "No APKs found"
 
       - name: Upload Build Artifacts (CI)
         if: github.ref_type != 'tag'
         uses: actions/upload-artifact@v4
         with:
           name: solar-path-wear-release
-          path: wear/build/outputs/apk/release/*.apk
+          path: wear/build/outputs/apk/**/release/*.apk
 
       - name: Create GitHub Release and Upload Assets
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: wear/build/outputs/apk/release/*.apk
+          files: wear/build/outputs/apk/**/release/*.apk
           draft: false
           prerelease: false
           generate_release_notes: true
