@@ -26,9 +26,7 @@ import androidx.compose.remote.creation.compose.modifier.fillMaxSize
 import androidx.compose.remote.creation.compose.modifier.fillMaxWidth
 import androidx.compose.remote.creation.compose.modifier.padding
 import androidx.compose.remote.creation.compose.modifier.size
-import androidx.compose.remote.creation.compose.state.ComposeRemoteColorFilter
 import androidx.compose.remote.creation.compose.state.RemoteColor
-import androidx.compose.remote.creation.compose.state.RemoteColorFilter
 import androidx.compose.remote.creation.compose.state.RemotePaint
 import androidx.compose.remote.creation.compose.state.RemoteString
 import androidx.compose.remote.creation.compose.state.clamp
@@ -434,12 +432,12 @@ private fun SolarArcGraphCanvas(
             val sunsetX = padX + (graphW * (ssMin / 1440f))
             drawCircle(
                 paint = milestoneDotPaint,
-                radius = 3.5f.rf,
+                radius = 4f.rf,
                 center = RemoteOffset(sunriseX, horizonY)
             )
             drawCircle(
                 paint = milestoneDotPaint,
-                radius = 3.5f.rf,
+                radius = 4f.rf,
                 center = RemoteOffset(sunsetX, horizonY)
             )
 
@@ -452,21 +450,21 @@ private fun SolarArcGraphCanvas(
             val sunY = topPad + (graphH * sunV)
             val sunCenter = RemoteOffset(sunX, sunY)
 
-            drawConditionally(isDayNow) {
-                drawCircle(
-                    paint = sunGlowPaint,
-                    radius = 16.5f.rf,
-                    center = sunCenter
-                )
-            }
+//            drawConditionally(isDayNow) {
+//                drawCircle(
+//                    paint = sunGlowPaint,
+//                    radius = 16.5f.rf,
+//                    center = sunCenter
+//                )
+//            }
             drawCircle(
                 paint = sunCutoutPaint,
-                radius = 13.5f.rf,
+                radius = 14f.rf,
                 center = sunCenter
             )
             drawCircle(
                 paint = sunFillPaint,
-                radius = 11.5f.rf,
+                radius = 11f.rf,
                 center = sunCenter
             )
             drawConditionally(isNightNow) {

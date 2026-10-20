@@ -6,5 +6,5 @@
     preferredType="LARGE">
     <container
         type="LARGE"
-        previewImage="@drawable/widget_preview_solar_graph" />
+        previewImage="@drawable/widget_preview_large_solar_graph" />
 </wearwidget-provider>

@@ -109,7 +109,7 @@
                 android:resource="@xml/dusk_times_widget_info" />
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/widget_preview_dusk" />
+                android:resource="@drawable/tile_preview_dusk_times" />
         </service>
 
         <!-- Dawn Times Widget Service -->
@@ -128,7 +128,7 @@
                 android:resource="@xml/dawn_times_widget_info" />
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/widget_preview_dawn" />
+                android:resource="@drawable/tile_preview_dawn_times" />
         </service>
 
         <!-- Solar Graph Widget Service -->
@@ -147,7 +147,7 @@
                 android:resource="@xml/solar_graph_widget_info" />
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/widget_preview_solar_graph" />
+                android:resource="@drawable/tile_preview_solar_graph" />
         </service>
 
         <!-- Broadcast Receiver for Passive Location & System Events -->

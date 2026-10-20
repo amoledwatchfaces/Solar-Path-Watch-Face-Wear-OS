@@ -373,7 +373,7 @@ fun MilestoneItemRow(
         }
         RemoteText(
             textAlign = TextAlign.End,
-            modifier = RemoteModifier.weight(1f),
+            modifier = RemoteModifier.weight(1.1f),
             text = time.rs,
             overflow = TextOverflow.Ellipsis,
             style = RemoteMaterialTheme.typography.bodySmall,

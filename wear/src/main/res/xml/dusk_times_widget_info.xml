@@ -6,5 +6,5 @@
     preferredType="LARGE">
     <container
         type="LARGE"
-        previewImage="@drawable/widget_preview_dusk" />
+        previewImage="@drawable/widget_preview_large_dusk_times" />
 </wearwidget-provider>

@@ -34,7 +34,10 @@ fun DuskTimesWidgetRoundPreview(
     )
 }
 
-@Preview
+@Preview(
+    name = "Dusk Times Preview",
+    device = "spec:width=1000dp,height=1000dp,dpi=320",
+)
 @Composable
 fun DuskTimesWidgetRectangularPreview(
     @PreviewParameter(RectangularLargeWidgetPreviewParams::class) params: WearWidgetParams,
@@ -70,7 +73,10 @@ fun DawnTimesWidgetRoundPreview(
     )
 }
 
-@Preview
+@Preview(
+    name = "Dawn Times Preview",
+    device = "spec:width=1000dp,height=1000dp,dpi=320",
+)
 @Composable
 fun DawnTimesWidgetRectangularPreview(
     @PreviewParameter(RectangularLargeWidgetPreviewParams::class) params: WearWidgetParams,
@@ -107,7 +113,7 @@ fun SolarGraphWidgetRoundPreview(
 }
 
 @Preview(
-    name = "Widget Preview Asset",
+    name = "Solar Graph Preview",
     device = "spec:width=1000dp,height=1000dp,dpi=320",
 )
 @Composable
