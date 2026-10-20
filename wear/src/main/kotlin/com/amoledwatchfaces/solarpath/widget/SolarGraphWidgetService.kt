@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.text.format.DateFormat
+import androidx.compose.remote.creation.RemotePath
 import androidx.compose.remote.creation.compose.action.pendingIntentAction
 import androidx.compose.remote.creation.compose.capture.RemoteImageVector
 import androidx.compose.remote.creation.compose.capture.vectorResource
@@ -72,6 +73,8 @@ import java.util.Date
 import javax.inject.Inject
 import kotlin.math.PI
 import kotlin.math.cos as mathCos
+import kotlin.math.sin as mathSin
+import kotlin.math.tan as mathTan
 
 @AndroidEntryPoint
 @AssociateWithGlanceWearWidget(SolarGraphWidget::class)
@@ -306,7 +309,7 @@ private fun SolarArcGraphCanvas(
     val halfDayMin = (ssMin - srMin) / 2f
 
     val twoPiOverDay = (2.0 * PI / 1440.0).toFloat()
-    val horizonElevation = mathCos((halfDayMin * twoPiOverDay).toDouble()).toFloat().coerceIn(-0.85f, 0.85f)
+    val horizonElevation = mathCos((halfDayMin * twoPiOverDay).toDouble()).toFloat()
     val horizonV = (1f - horizonElevation) * 0.5f
 
     val currentMinute = RemoteTime().Minutes()
@@ -354,13 +357,6 @@ private fun SolarArcGraphCanvas(
         style = PaintingStyle.Fill
     }
 
-    fun pointAtMinute(t: Float): Pair<Float, Float> {
-        val u = (t / 1440f).coerceIn(0f, 1f)
-        val elev = mathCos(((t - centerMin) * twoPiOverDay).toDouble()).toFloat()
-        val v = (1f - elev) * 0.5f
-        return u to v
-    }
-
     RemoteCanvas(
         modifier = RemoteModifier.fillMaxSize()
     ) {
@@ -378,47 +374,57 @@ private fun SolarArcGraphCanvas(
             end = RemoteOffset(width - padX, horizonY)
         )
 
-        // Morning night segment (00:00 -> Sunrise)
-        val morningSteps = 10
-        for (i in 0 until morningSteps) {
-            val t0 = srMin * (i.toFloat() / morningSteps)
-            val t1 = srMin * ((i + 1).toFloat() / morningSteps)
-            val (u0, v0) = pointAtMinute(t0)
-            val (u1, v1) = pointAtMinute(t1)
-            drawLine(
-                paint = nightCurvePaint,
-                start = RemoteOffset(padX + (graphW * u0), topPad + (graphH * v0)),
-                end = RemoteOffset(padX + (graphW * u1), topPad + (graphH * v1))
+        fun addCosineCubic(path: RemotePath, t0: Float, t3: Float, moveToStart: Boolean) {
+            val u0 = t0 / 1440f
+            val u3 = t3 / 1440f
+            val du = (u3 - u0) / 3f
+
+            val theta0 = ((t0 - centerMin) * twoPiOverDay).toDouble()
+            val theta3 = ((t3 - centerMin) * twoPiOverDay).toDouble()
+            val deltaTheta = theta3 - theta0
+            val tangentScale = ((4.0 / 3.0) * mathTan(deltaTheta / 4.0)).toFloat()
+
+            val v0 = ((1.0 - mathCos(theta0)) * 0.5).toFloat()
+            val v3 = ((1.0 - mathCos(theta3)) * 0.5).toFloat()
+            val v1 = v0 + 0.5f * tangentScale * mathSin(theta0).toFloat()
+            val v2 = v3 - 0.5f * tangentScale * mathSin(theta3).toFloat()
+
+            if (moveToStart) {
+                val x0 = padX + (graphW * u0)
+                val y0 = topPad + (graphH * v0)
+                path.moveTo(x0.floatId, y0.floatId)
+            }
+
+            val x1 = padX + (graphW * (u0 + du))
+            val y1 = topPad + (graphH * v1)
+            val x2 = padX + (graphW * (u3 - du))
+            val y2 = topPad + (graphH * v2)
+            val x3 = padX + (graphW * u3)
+            val y3 = topPad + (graphH * v3)
+
+            path.cubicTo(
+                x1.floatId, y1.floatId,
+                x2.floatId, y2.floatId,
+                x3.floatId, y3.floatId
             )
         }
 
-        // Evening night segment (Sunset -> 24:00)
-        val eveningSteps = 10
-        for (i in 0 until eveningSteps) {
-            val t0 = ssMin + (1440f - ssMin) * (i.toFloat() / eveningSteps)
-            val t1 = ssMin + (1440f - ssMin) * ((i + 1).toFloat() / eveningSteps)
-            val (u0, v0) = pointAtMinute(t0)
-            val (u1, v1) = pointAtMinute(t1)
-            drawLine(
-                paint = nightCurvePaint,
-                start = RemoteOffset(padX + (graphW * u0), topPad + (graphH * v0)),
-                end = RemoteOffset(padX + (graphW * u1), topPad + (graphH * v1))
-            )
-        }
+        // Night path (pre-dawn [0..srMin] and post-dusk [ssMin..1440])
+        val nightPath = RemotePath()
+        val preDawnMid = srMin * 0.5f
+        addCosineCubic(nightPath, 0f, preDawnMid, moveToStart = true)
+        addCosineCubic(nightPath, preDawnMid, srMin, moveToStart = false)
 
-        // Daylight arc segment (Sunrise -> Solar Noon -> Sunset)
-        val daySteps = 16
-        for (i in 0 until daySteps) {
-            val t0 = srMin + (ssMin - srMin) * (i.toFloat() / daySteps)
-            val t1 = srMin + (ssMin - srMin) * ((i + 1).toFloat() / daySteps)
-            val (u0, v0) = pointAtMinute(t0)
-            val (u1, v1) = pointAtMinute(t1)
-            drawLine(
-                paint = dayCurvePaint,
-                start = RemoteOffset(padX + (graphW * u0), topPad + (graphH * v0)),
-                end = RemoteOffset(padX + (graphW * u1), topPad + (graphH * v1))
-            )
-        }
+        val postDuskMid = (ssMin + 1440f) * 0.5f
+        addCosineCubic(nightPath, ssMin, postDuskMid, moveToStart = true)
+        addCosineCubic(nightPath, postDuskMid, 1440f, moveToStart = false)
+        drawPath(path = nightPath, paint = nightCurvePaint)
+
+        // Day path (morning [srMin..centerMin] and afternoon [centerMin..ssMin])
+        val dayPath = RemotePath()
+        addCosineCubic(dayPath, srMin, centerMin, moveToStart = true)
+        addCosineCubic(dayPath, centerMin, ssMin, moveToStart = false)
+        drawPath(path = dayPath, paint = dayCurvePaint)
 
         if (hasValidSolar) {
             // Horizon intersection dots at Sunrise and Sunset
