@@ -36,7 +36,7 @@
     <string name="id_aod">Ambient Mode</string>
     <string name="id_aod_0">Dimmed</string>
     <string name="id_aod_1">No Arcs</string>
-    <string name="id_aod_2">Time Only</string>
+    <string name="id_aod_2">Center Only</string>
 
     <string name="id_clock_bg">Clock Background</string>
     <string name="id_clock_bg_0">Dark</string>

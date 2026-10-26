@@ -106,6 +106,7 @@ Solar Path offers extensive customization options available directly in the Wear
 - **Always-On Display (AOD) Mode**:
   - `Dimmed`: Keeps dial elements visible with optimized ambient brightness.
   - `Dimmed & No Arcs`: Minimalist ambient face hiding outer arcs to conserve battery life.
+  - `Center Only`: Minimalist ambient mode showing only the clock and solar track for maximum power conservation and burn-in prevention.
 - **Arc Gradients**: Toggle smooth progress bar color gradients on outer arcs on or off.
 - **Leading Zero**: Toggle 12/24-hour leading zero (e.g. `09:41` vs `9:41`).
 - **Clock Alternate Colors**: Switch clock text and hands between primary theme and high-contrast accent colors.

@@ -33,7 +33,7 @@
     <string name="id_aod">Tryb Always-On</string>
     <string name="id_aod_0">Przyciemniony</string>
     <string name="id_aod_1">Bez łuków</string>
-    <string name="id_aod_2">Tylko czas</string>
+    <string name="id_aod_2">Tylko środek</string>
 
     <string name="id_clock_bg">Tło zegara</string>
     <string name="id_clock_bg_0">Ciemne</string>

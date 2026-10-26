@@ -33,7 +33,7 @@
     <string name="id_aod">Režim Always-On</string>
     <string name="id_aod_0">Stmavený</string>
     <string name="id_aod_1">Bez oblúkov</string>
-    <string name="id_aod_2">Iba čas</string>
+    <string name="id_aod_2">Iba stred</string>
 
     <string name="id_clock_bg">Pozadie hodín</string>
     <string name="id_clock_bg_0">Tmavé</string>

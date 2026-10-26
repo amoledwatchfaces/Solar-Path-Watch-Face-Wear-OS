@@ -33,7 +33,7 @@
     <string name="id_aod">Modalità ambient</string>
     <string name="id_aod_0">Attenuato</string>
     <string name="id_aod_1">Senza archi</string>
-    <string name="id_aod_2">Solo ora</string>
+    <string name="id_aod_2">Solo centro</string>
 
     <string name="id_clock_bg">Sfondo orologio</string>
     <string name="id_clock_bg_0">Scuro</string>

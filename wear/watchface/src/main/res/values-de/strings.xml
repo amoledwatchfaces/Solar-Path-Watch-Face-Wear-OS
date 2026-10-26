@@ -33,7 +33,7 @@
     <string name="id_aod">Always-On-Modus</string>
     <string name="id_aod_0">Gedimmt</string>
     <string name="id_aod_1">Keine Bögen</string>
-    <string name="id_aod_2">Nur Zeit</string>
+    <string name="id_aod_2">Nur Mitte</string>
 
     <string name="id_clock_bg">Uhrenhintergrund</string>
     <string name="id_clock_bg_0">Dunkel</string>

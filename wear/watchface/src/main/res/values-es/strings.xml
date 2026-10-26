@@ -33,7 +33,7 @@
     <string name="id_aod">Modo ambiente</string>
     <string name="id_aod_0">Atenuado</string>
     <string name="id_aod_1">Sin arcos</string>
-    <string name="id_aod_2">Solo hora</string>
+    <string name="id_aod_2">Solo centro</string>
 
     <string name="id_clock_bg">Fondo del reloj</string>
     <string name="id_clock_bg_0">Oscuro</string>

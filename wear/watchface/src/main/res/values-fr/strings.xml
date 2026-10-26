@@ -33,7 +33,7 @@
     <string name="id_aod">Mode ambiant</string>
     <string name="id_aod_0">Estompé</string>
     <string name="id_aod_1">Sans arcs</string>
-    <string name="id_aod_2">Heure uniquement</string>
+    <string name="id_aod_2">Centre uniquement</string>
 
     <string name="id_clock_bg">Fond de l\'horloge</string>
     <string name="id_clock_bg_0">Sombre</string>

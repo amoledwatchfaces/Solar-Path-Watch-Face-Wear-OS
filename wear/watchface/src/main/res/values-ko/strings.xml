@@ -33,7 +33,7 @@
     <string name="id_aod">AOD 모드</string>
     <string name="id_aod_0">어둡게</string>
     <string name="id_aod_1">원호 숨김</string>
-    <string name="id_aod_2">시간만 표시</string>
+    <string name="id_aod_2">중앙만 표시</string>
 
     <string name="id_clock_bg">시계 배경</string>
     <string name="id_clock_bg_0">어둡게</string>
