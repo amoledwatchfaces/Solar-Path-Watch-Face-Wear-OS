@@ -14,13 +14,13 @@ tasks.register("clean", Delete::class) {
 
 buildscript {
     /** Set version for wear & watchface modules **/
-    extra.set("versionCode", 10000031)
-    extra.set("versionName", "1.3.1")
+    extra.set("versionCode", 10000032)
+    extra.set("versionName", "1.3.2")
     extra.set("namespace", "com.amoledwatchfaces.solarpath")
 
     dependencies {
         classpath ("com.android.tools.build:gradle:9.4.1")
-        classpath ("org.jetbrains.kotlin:kotlin-serialization:2.4.10")
+        classpath ("org.jetbrains.kotlin:kotlin-serialization:2.4.21")
     }
     repositories {
         google()

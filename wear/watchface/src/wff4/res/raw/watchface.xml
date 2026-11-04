@@ -306,6 +306,7 @@
         <ListConfiguration defaultValue="1" displayName="id_aod" id="aod">
             <ListOption displayName="id_aod_0" icon="prev_aod_0" id="0" />
             <ListOption displayName="id_aod_1" icon="prev_aod_1" id="1" />
+            <ListOption displayName="id_aod_2" icon="prev_aod_2" id="2" />
         </ListConfiguration>
         <!-- Boolean Configurations -->
         <BooleanConfiguration defaultValue="TRUE" displayName="id_progress_bar_gradients" id="progressGradients"/>
@@ -428,10 +429,19 @@
                 <Transform target="x" value="[REFERENCE.aod] == 2 ? 0 : 185" />
                 <Reference name="innerAlpha" source="x" defaultValue="0" />
             </Group>
+            <Group name="solar_path" x="0" y="0" height="1" width="1" alpha="0">
+                <Transform target="x" value="[REFERENCE.aod] == 2 ? 0 : 255" />
+                <Reference name="solarPathAlpha" source="x" defaultValue="0" />
+            </Group>
+            <Group name="clock" x="0" y="0" height="1" width="1" alpha="0">
+                <Transform target="x" value="[REFERENCE.aod] == 0 ? 1 : [REFERENCE.aod] == 1 ? 1.2 : 2" />
+                <Reference name="clockScale" source="x" defaultValue="1" />
+            </Group>
         </Group>
 
         <!-- 24-Hour Solar Path Ring -->
         <Group name="solar_wrapper" width="450" height="450" x="0" y="0">
+            <Variant mode="AMBIENT" target="alpha" value="[REFERENCE.solarPathAlpha]" />
             <Variant mode="AMBIENT" target="scaleX" value="[REFERENCE.arcsScale]" />
             <Variant mode="AMBIENT" target="scaleY" value="[REFERENCE.arcsScale]" />
             <!-- Base -->
@@ -1065,24 +1075,66 @@
             <Transform target="angle" value="180+[REFERENCE.solarTrack]"/>
             <Group name="clock" x="0" y="0" width="184" height="184">
                 <Variant mode="AMBIENT" target="y" value="39" />
-                <Variant mode="AMBIENT" target="scaleX" value="[REFERENCE.arcsScale]" />
-                <Variant mode="AMBIENT" target="scaleY" value="[REFERENCE.arcsScale]" />
+                <Variant mode="AMBIENT" target="scaleX" value="[REFERENCE.clockScale]" />
+                <Variant mode="AMBIENT" target="scaleY" value="[REFERENCE.clockScale]" />
                 <Transform target="angle" value="-(180+[REFERENCE.solarTrack])"/>
-                <ListConfiguration id="clockBg">
-                    <ListOption id="0">
-                        <PartDraw x="0" y="0" width="184" height="184" alpha="195">
-                            <Ellipse
-                                x="0"
-                                y="0"
-                                width="184"
-                                height="184">
-                                <Fill color="#1F1F1F"/>
-                            </Ellipse>
-                        </PartDraw>
-                    </ListOption>
-                    <ListOption id="1">
-                        <Group name="bg" x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.2]">
-                            <PartDraw x="0" y="0" width="184" height="184" alpha="195" renderMode="ALL">
+                <Group name="background" x="0" y="0" width="184" height="184">
+                    <Variant mode="AMBIENT" target="alpha" value="[REFERENCE.solarPathAlpha]" />
+                    <Condition>
+                        <Expressions>
+                            <Expression name="clockBg1">[CONFIGURATION.clockBg] == 1</Expression>
+                        </Expressions>
+                        <Compare expression="clockBg1">
+                            <Group name="bg" x="0" y="0" width="184" height="184" tintColor="[CONFIGURATION.secondaryTheme.2]">
+                                <PartDraw x="0" y="0" width="184" height="184" alpha="195" renderMode="ALL">
+                                    <Ellipse
+                                        x="0"
+                                        y="0"
+                                        width="184"
+                                        height="184">
+                                        <Fill color="#1F1F1F"/>
+                                    </Ellipse>
+                                </PartDraw>
+                                <PartDraw x="0" y="0" width="184" height="184">
+                                    <Variant
+                                        target="alpha"
+                                        value="0"
+                                        mode="AMBIENT"/>
+                                    <Ellipse
+                                        x="0"
+                                        y="0"
+                                        width="184"
+                                        height="184">
+                                        <Fill color="#ffffff">
+                                            <LinearGradient
+                                                startX="92"
+                                                startY="0"
+                                                endX="92"
+                                                endY="184"
+                                                colors="#ffffffff #00000000"
+                                                positions="0 1"/>
+                                        </Fill>
+                                    </Ellipse>
+                                    <Ellipse
+                                        x="0"
+                                        y="0"
+                                        width="184"
+                                        height="184">
+                                        <Fill color="#ffffff">
+                                            <LinearGradient
+                                                startX="92"
+                                                startY="0"
+                                                endX="92"
+                                                endY="184"
+                                                colors="#00000000 #ff494949"
+                                                positions="0 1"/>
+                                        </Fill>
+                                    </Ellipse>
+                                </PartDraw>
+                            </Group>
+                        </Compare>
+                        <Default>
+                            <PartDraw x="0" y="0" width="184" height="184" alpha="195">
                                 <Ellipse
                                     x="0"
                                     y="0"
@@ -1091,45 +1143,9 @@
                                     <Fill color="#1F1F1F"/>
                                 </Ellipse>
                             </PartDraw>
-                            <PartDraw x="0" y="0" width="184" height="184">
-                                <Variant
-                                    target="alpha"
-                                    value="0"
-                                    mode="AMBIENT"/>
-                                <Ellipse
-                                    x="0"
-                                    y="0"
-                                    width="184"
-                                    height="184">
-                                    <Fill color="#ffffff">
-                                        <LinearGradient
-                                            startX="92"
-                                            startY="0"
-                                            endX="92"
-                                            endY="184"
-                                            colors="#ffffffff #00000000"
-                                            positions="0 1"/>
-                                    </Fill>
-                                </Ellipse>
-                                <Ellipse
-                                    x="0"
-                                    y="0"
-                                    width="184"
-                                    height="184">
-                                    <Fill color="#ffffff">
-                                        <LinearGradient
-                                            startX="92"
-                                            startY="0"
-                                            endX="92"
-                                            endY="184"
-                                            colors="#00000000 #ff494949"
-                                            positions="0 1"/>
-                                    </Fill>
-                                </Ellipse>
-                            </PartDraw>
-                        </Group>
-                    </ListOption>
-                </ListConfiguration>
+                        </Default>
+                    </Condition>
+                </Group>
                 <Condition>
                     <Expressions>
                         <Expression name="digital">[CONFIGURATION.clockStyle] == 0</Expression>

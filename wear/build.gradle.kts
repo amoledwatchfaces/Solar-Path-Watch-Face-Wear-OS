@@ -142,11 +142,11 @@ dependencies {
     implementation ("androidx.wear.protolayout:protolayout-external-protobuf:1.4.2")
 
     // Wear OS Widgets & Remote Compose
-    implementation ("androidx.compose.remote:remote-creation-compose:1.0.0-alpha21")
-    implementation ("androidx.compose.remote:remote-core:1.0.0-alpha21")
-    implementation ("androidx.glance.wear:wear:1.0.0-alpha20")
-    implementation ("androidx.glance.wear:wear-core:1.0.0-alpha20")
-    implementation ("androidx.wear.compose.remote:remote-material3:1.0.0-alpha13")
+    implementation ("androidx.compose.remote:remote-creation-compose:1.0.0-alpha22")
+    implementation ("androidx.compose.remote:remote-core:1.0.0-alpha22")
+    implementation ("androidx.glance.wear:wear:1.0.0-alpha21")
+    implementation ("androidx.glance.wear:wear-core:1.0.0-alpha21")
+    implementation ("androidx.wear.compose.remote:remote-material3:1.0.0-alpha14")
 
     // Tiles & ProtoLayout
     implementation ("androidx.wear.tiles:tiles:1.6.2")
@@ -154,8 +154,8 @@ dependencies {
     implementation ("androidx.wear.protolayout:protolayout-material3:1.4.2")
 
     // Tooling for previews
-    implementation ("androidx.glance.wear:wear-tooling-preview:1.0.0-alpha20")
-    implementation ("androidx.compose.remote:remote-tooling-preview:1.0.0-alpha18")
+    implementation ("androidx.glance.wear:wear-tooling-preview:1.0.0-alpha21")
+    implementation ("androidx.compose.remote:remote-tooling-preview:1.0.0-alpha22")
     implementation ("androidx.wear.tiles:tiles-tooling-preview:1.6.2")
 
     // Astronomy Engine (Kastro)
@@ -197,8 +197,8 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.11.0")
 
     // DataStore & Serialization
-    implementation ("androidx.datastore:datastore:1.2.1")
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
+    implementation ("androidx.datastore:datastore:1.3.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.12.0")
 
     // Hilt
     implementation ("androidx.hilt:hilt-navigation-compose:1.4.0")

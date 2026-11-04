@@ -52,6 +52,8 @@ Developed with ❤️ by **[amoledwatchfaces™](https://amoledwatchfaces.com/)*
   - Declarative XML rendering natively on the Wear OS system with zero background battery drain (`hasCode = false`).
   - Standalone WFF APK bundled inside the companion app and delivered via **AndroidX Watch Face Push** (`androidx.wear.watchfacepush`).
   - Seamless automatic support for Watch Face Format 5 on Wear OS 6+ (API 37+) devices with multi-layout capability.
+- **Glanceable Wear OS Widgets & Tiles**:
+  - Three standalone widgets and tiles (**Solar Graph**, **Dawn Times**, and **Dusk Times**) accessible directly from your Wear OS carousel.
 
 ---
 
@@ -142,6 +144,18 @@ Solar Path also provides a dedicated standalone complication data source that ca
 
 ---
 
+## 🪟 Wear OS Widgets & Tiles
+
+Solar Path includes three interactive, glanceable Wear OS Widgets and Tiles powered by Jetpack Glance and Remote Compose:
+
+| Widget / Tile | Description | Key Features |
+|:---|:---|:---|
+| **Solar Graph** | Graphical representation of the sun's 24-hour journey across the sky. | Real-time position marker, smooth sun elevation curve, glowing solar aura, horizon line, sunrise & sunset times, and zenith metrics. |
+| **Dawn Times** | Morning twilight breakdown. | Fast access to Astronomical, Nautical, and Civil Dawn schedules leading into Sunrise and Solar Noon. |
+| **Dusk Times** | Evening twilight breakdown. | Complete chronological timeline for Sunset, Civil, Nautical, and Astronomical Dusk into Solar Nadir / Midnight. |
+
+---
+
 ## 📱 Wear OS Companion App
 
 The integrated Wear OS companion application provides astronomical calculations and location management:
@@ -160,9 +174,10 @@ The integrated Wear OS companion application provides astronomical calculations 
 
 ## 🛠️ Tech Stack & Architecture
 
-- **Watch Face**: [Watch Face Format (WFF v4)](https://developer.android.com/training/wearables/wff) XML rendered natively by the Wear OS system.
+- **Watch Face**: [Watch Face Format (WFF v4 & v5)](https://developer.android.com/training/wearables/wff) XML rendered natively by the Wear OS system.
 - **Deployment**: [AndroidX Watch Face Push](https://developer.android.com/reference/androidx/wear/watchfacepush/package-summary) (`androidx.wear.watchfacepush:1.0.0`).
 - **UI & Presentation**: [Jetpack Compose for Wear OS](https://developer.android.com/training/wearables/compose) using **Wear Material 3**.
+- **Widgets & Tiles**: [Jetpack Glance for Wear OS](https://developer.android.com/training/wearables/compose/glance) (`androidx.glance.wear:1.0.0-alpha20`), **AndroidX Wear Tiles** (`androidx.wear.tiles:1.6.2`), and **Remote Compose** (`androidx.compose.remote:remote-creation-compose:1.0.0-alpha21`) for high-performance canvas rendering.
 - **Astronomy Engine**: [Kastro](https://github.com/Yox/kastro) — 100% on-device astronomical calculations (no external APIs or network required).
 - **Location**: Privacy-friendly Approximate Location (`ACCESS_COARSE_LOCATION`) via Google Play Services Location (`play-services-location:21.4.0`) with `Geocoder`.
 - **Dependency Injection**: [Dagger Hilt](https://dagger.dev/hilt/) (`hilt-android:2.60.1`).
