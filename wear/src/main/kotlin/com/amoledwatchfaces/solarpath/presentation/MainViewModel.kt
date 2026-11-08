@@ -408,6 +408,15 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun setComplicationTrackingMode(mode: Int) {
+        viewModelScope.launch {
+            dataStore.updateData { it.copy(complicationTrackingMode = mode) }
+            SolarCalculator.invalidateCache()
+            context.updateComplications()
+            _refreshTrigger.value = System.currentTimeMillis()
+        }
+    }
+
     fun openLinkOnPhone(link: String, onOpened: (Boolean) -> Unit) {
         viewModelScope.launch {
             val remoteActivityHelper = RemoteActivityHelper(context)

@@ -173,12 +173,14 @@ object SolarCalculator {
         lon: Double,
         date: LocalDate = LocalDate.now(),
         currentTimeMillis: Long = System.currentTimeMillis(),
-        zoneId: ZoneId = ZoneId.systemDefault()
+        zoneId: ZoneId = ZoneId.systemDefault(),
+        trackingMode: Int = 1 // 0 = Sunrise & Sunset, 1 = 4 Milestones, 2 = All Twilights
     ): SolarData {
         if (lat == 0.0 && lon == 0.0) {
             return SolarData()
         }
 
+        val dailyYesterday = getOrCalculateDailyEvents(lat, lon, date.minusDays(1), zoneId)
         val daily = getOrCalculateDailyEvents(lat, lon, date, zoneId)
         val dailyTomorrow = getOrCalculateDailyEvents(lat, lon, date.plusDays(1), zoneId)
 
@@ -194,40 +196,41 @@ object SolarCalculator {
 
         data class UpcomingEvent(val name: String, val resId: Int, val epoch: Long)
 
-        val todayEvents = listOf(
-            UpcomingEvent("Sunrise", R.string.sunrise, daily.sunrise),
-            UpcomingEvent("Solar Noon", R.string.solar_noon, daily.noon),
-            UpcomingEvent("Sunset", R.string.sunset, daily.sunset),
-            UpcomingEvent("Civil Dusk", R.string.civil_dusk, daily.civilDusk),
-            UpcomingEvent("Nautical Dusk", R.string.nautical_dusk, daily.nauticalDusk),
-            UpcomingEvent("Astro Dusk", R.string.astro_dusk, daily.astroDusk),
-            UpcomingEvent("Solar Midnight", R.string.solar_midnight, daily.nadir),
-            UpcomingEvent("Astro Dawn", R.string.astro_dawn, daily.astroDawn),
-            UpcomingEvent("Nautical Dawn", R.string.nautical_dawn, daily.nauticalDawn),
-            UpcomingEvent("Civil Dawn", R.string.civil_dawn, daily.civilDawn)
-        )
+        fun eventsFor(d: DailySolarEvents): List<UpcomingEvent> = when (trackingMode) {
+            0 -> listOf(
+                UpcomingEvent("Sunrise", R.string.sunrise, d.sunrise),
+                UpcomingEvent("Sunset", R.string.sunset, d.sunset)
+            )
+            2 -> listOf(
+                UpcomingEvent("Sunrise", R.string.sunrise, d.sunrise),
+                UpcomingEvent("Noon", R.string.noon, d.noon),
+                UpcomingEvent("Sunset", R.string.sunset, d.sunset),
+                UpcomingEvent("Dusk", R.string.dusk, d.astroDusk),
+                UpcomingEvent("Midnight", R.string.midnight, d.nadir),
+                UpcomingEvent("Dawn", R.string.dawn, d.astroDawn)
+            )
+            else -> listOf(
+                UpcomingEvent("Sunrise", R.string.sunrise, d.sunrise),
+                UpcomingEvent("Noon", R.string.noon, d.noon),
+                UpcomingEvent("Sunset", R.string.sunset, d.sunset),
+                UpcomingEvent("Midnight", R.string.midnight, d.nadir)
+            )
+        }
 
-        val tomorrowEvents = listOf(
-            UpcomingEvent("Sunrise", R.string.sunrise, dailyTomorrow.sunrise),
-            UpcomingEvent("Solar Noon", R.string.solar_noon, dailyTomorrow.noon),
-            UpcomingEvent("Sunset", R.string.sunset, dailyTomorrow.sunset),
-            UpcomingEvent("Civil Dusk", R.string.civil_dusk, dailyTomorrow.civilDusk),
-            UpcomingEvent("Nautical Dusk", R.string.nautical_dusk, dailyTomorrow.nauticalDusk),
-            UpcomingEvent("Astro Dusk", R.string.astro_dusk, dailyTomorrow.astroDusk),
-            UpcomingEvent("Solar Midnight", R.string.solar_midnight, dailyTomorrow.nadir),
-            UpcomingEvent("Astro Dawn", R.string.astro_dawn, dailyTomorrow.astroDawn),
-            UpcomingEvent("Nautical Dawn", R.string.nautical_dawn, dailyTomorrow.nauticalDawn),
-            UpcomingEvent("Civil Dawn", R.string.civil_dawn, dailyTomorrow.civilDawn)
-        )
-
-        val upcomingEvents = (todayEvents + tomorrowEvents)
-            .filter { it.epoch > effectiveTimeMillis }
+        val allEvents = (eventsFor(dailyYesterday) + eventsFor(daily) + eventsFor(dailyTomorrow))
+            .filter { it.epoch > 0 }
             .sortedBy { it.epoch }
 
-        val nextEvent = upcomingEvents.firstOrNull() ?: UpcomingEvent(
+        val nextEvent = allEvents.firstOrNull { it.epoch > effectiveTimeMillis } ?: UpcomingEvent(
             "Sunrise",
             R.string.sunrise,
-            if (daily.sunrise > 0 && daily.sunrise < effectiveTimeMillis) daily.sunrise + 86_400_000L else daily.sunrise
+            if (dailyTomorrow.sunrise > 0) dailyTomorrow.sunrise else effectiveTimeMillis + 86_400_000L
+        )
+
+        val prevEvent = allEvents.lastOrNull { it.epoch <= effectiveTimeMillis } ?: UpcomingEvent(
+            "Sunset",
+            R.string.sunset,
+            if (dailyYesterday.sunset > 0) dailyYesterday.sunset else effectiveTimeMillis - 86_400_000L
         )
 
         // Daylight progress fraction (0..1)
@@ -253,6 +256,9 @@ object SolarCalculator {
             nextEventName = nextEvent.name,
             nextEventNameResId = nextEvent.resId,
             nextEventEpoch = nextEvent.epoch,
+            prevEventName = prevEvent.name,
+            prevEventNameResId = prevEvent.resId,
+            prevEventEpoch = prevEvent.epoch,
             progressFraction = progress,
             sunriseAngle = daily.sunriseAngle,
             sunsetAngle = daily.sunsetAngle,

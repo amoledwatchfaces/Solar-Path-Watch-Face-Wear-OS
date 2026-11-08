@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.wear.watchface.complications.datasource.ComplicationDataSourceUpdateRequester
 import com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService
+import com.amoledwatchfaces.solarpath.complication.SolarPathCountdownComplicationService
 import kotlin.math.abs
 
 fun formatCoordinate(coordinate: Double, isLatitude: Boolean): String {
@@ -51,9 +52,14 @@ fun Context.isLocationEnabled(): Boolean {
 }
 
 fun Context.updateComplications() {
-    val component = ComponentName(this, SolarPathComplicationService::class.java)
-    val req = ComplicationDataSourceUpdateRequester.create(this, component)
-    req.requestUpdateAll()
+    listOf(
+        SolarPathComplicationService::class.java,
+        SolarPathCountdownComplicationService::class.java
+    ).forEach { serviceClass ->
+        val component = ComponentName(this, serviceClass)
+        val req = ComplicationDataSourceUpdateRequester.create(this, component)
+        req.requestUpdateAll()
+    }
 }
 
 @Suppress("UNCHECKED_CAST")

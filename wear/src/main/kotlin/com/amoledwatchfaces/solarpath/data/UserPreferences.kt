@@ -33,6 +33,7 @@ data class UserPreferences(
     val locationSubName: String = "",
     val recentLocations: List<SavedLocation> = emptyList(),
     val isWff5Updated: Boolean = false,
+    val complicationTrackingMode: Int = 1, // 0 = Sunrise & Sunset, 1 = 4 Milestones, 2 = All Twilights
 )
 
 class UserPreferencesRepository @Inject constructor(

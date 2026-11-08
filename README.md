@@ -134,13 +134,14 @@ Quickly switch between **11 curated style presets** designed for different aesth
 
 ---
 
-## 🧩 Standalone Complication Service
+## 🧩 Standalone Complication Services
 
-Solar Path also provides a dedicated standalone complication data source that can be added to **any Wear OS watch face**:
+Solar Path also provides dedicated standalone complication data sources that can be added to **any Wear OS watch face**:
 
 | Complication Service | Supported Types | Description |
 |:---|:---|:---|
-| **Solar Path Complication** | `SHORT_TEXT` | Displays the next upcoming solar event (e.g., `SUNRISE`, `SUNSET`, `SOLAR NOON`, `CIVIL DUSK`) with exact time and icon. Tapping opens the Solar Path app. |
+| **Solar Path Complication** | `SHORT_TEXT`, `LONG_TEXT` | Displays the next upcoming solar event (e.g., `SUNRISE`, `NOON`, `SUNSET`, `MIDNIGHT`) with exact time and dynamic event icon. Tapping opens the Solar Path app. |
+| **Solar Path Countdown** | `RANGED_VALUE`, `SHORT_TEXT`, `LONG_TEXT` | Displays a live countdown (and cycle progress) towards the upcoming solar event with dynamic icon. |
 
 ---
 
@@ -161,6 +162,10 @@ Solar Path includes three interactive, glanceable Wear OS Widgets and Tiles powe
 The integrated Wear OS companion application provides astronomical calculations and location management:
 
 - **Astronomical Timeline**: Cards showing sunrise, sunset, civil/nautical/astronomical dawn & dusk, solar noon, and nadir times.
+- **Configurable Complication Tracking**: Choose which solar milestones complications track:
+  - **Sunrise & Sunset** (2 primary transitions)
+  - **4 Milestones** (Sunrise, Noon, Sunset, Midnight)
+  - **6 Milestones (+ Twilight)** (Sunrise, Noon, Sunset, Dusk, Midnight, Dawn)
 - **Smart Location Management**:
   - Automatic positioning via `FusedLocationProviderClient` using privacy-friendly Approximate Location (`ACCESS_COARSE_LOCATION` only — no precise GPS tracking required).
   - Manual location search with `Geocoder` and recent locations history.

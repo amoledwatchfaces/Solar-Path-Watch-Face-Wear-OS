@@ -414,6 +414,35 @@ fun MainScreen(
                 }
             }
 
+            // Complication Tracking Mode Option
+            item(key = "complication_tracking_mode") {
+                val currentMode = preferences.complicationTrackingMode
+                val modeLabel = when (currentMode) {
+                    0 -> stringResource(R.string.complication_tracking_mode_2)
+                    2 -> stringResource(R.string.complication_tracking_mode_all)
+                    else -> stringResource(R.string.complication_tracking_mode_4)
+                }
+
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = {
+                        val nextMode = (currentMode + 1) % 3
+                        viewModel.setComplicationTrackingMode(nextMode)
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Default.WatchLater,
+                            contentDescription = stringResource(R.string.complication_tracking_mode)
+                        )
+                    },
+                    label = { Text(stringResource(R.string.complication_tracking_mode)) },
+                    secondaryLabel = { Text(modeLabel) }
+                )
+            }
+
             // About Section Header
             item(key = "about_header") {
                 ListSubHeader(

@@ -3258,41 +3258,22 @@
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
-        <!-- Complication Slot 6: Custom App Shortcut -->
-        <ComplicationSlot slotId="5"
-            isCustomizable="TRUE"
-            supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY"
-            displayName="id_center_shortcut"
-            width="224"
-            height="224"
-            x="113"
-            y="113"
-            alpha="0">
-            <DefaultProviderPolicy
-                defaultSystemProvider="APP_SHORTCUT"
-                defaultSystemProviderType="SMALL_IMAGE"/>
-            <BoundingOval x="0" y="0" width="224" height="224"/>
-            <Complication type="MONOCHROMATIC_IMAGE"/>
-            <Complication type="SMALL_IMAGE"/>
-            <Complication type="EMPTY"/>
-        </ComplicationSlot>
-
-        <!-- Complication Slot 5: Center Solar Complication & Angle Reference Provider -->
+        <!-- Center Solar Complication & Angle Reference Provider -->
         <ComplicationSlot slotId="6"
             isCustomizable="FALSE"
             supportedTypes="SHORT_TEXT EMPTY"
             displayName="app_name"
-            width="224"
-            height="224"
-            x="113"
-            y="113">
+            width="1"
+            height="1"
+            x="0"
+            y="0">
             <Variant target="alpha" value="0" mode="AMBIENT"/>
             <DefaultProviderPolicy
                 primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
                 primaryProviderType="SHORT_TEXT"
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingOval x="0" y="0" width="224" height="224"/>
+            <BoundingOval x="0" y="0" width="1" height="1"/>
             <Complication type="SHORT_TEXT">
                 <!-- Angle extraction references for the 8 solar arcs -->
                 <Group name="ref_ss" x="0" y="0" width="1" height="1" alpha="0">
@@ -3343,9 +3324,28 @@
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
+        <!-- Complication Slot 5: Custom App Shortcut -->
+        <ComplicationSlot slotId="5"
+            isCustomizable="TRUE"
+            supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY"
+            displayName="id_center_shortcut"
+            width="224"
+            height="224"
+            x="113"
+            y="113"
+            alpha="0">
+            <DefaultProviderPolicy
+                defaultSystemProvider="APP_SHORTCUT"
+                defaultSystemProviderType="SMALL_IMAGE"/>
+            <BoundingOval x="0" y="0" width="224" height="224"/>
+            <Complication type="MONOCHROMATIC_IMAGE"/>
+            <Complication type="SMALL_IMAGE"/>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
+
         <!-- Arc Complications -->
         <ComplicationSlot slotId="7"
-            supportedTypes="RANGED_VALUE LONG_TEXT EMPTY"
+            supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
             displayName="id_slot_large_top"
             width="450"
             height="225"
@@ -3639,10 +3639,148 @@
                     </Condition>
                 </Group>
             </Complication>
+            <Complication type="SHORT_TEXT">
+                <Group name="wrapper" width="450" height="450" x="0" y="0">
+                    <Condition>
+                        <Expressions>
+                            <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                            <Expression name="textImageTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.SMALL_IMAGE] != null</Expression>
+                            <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                            <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        </Expressions>
+                        <Compare expression="textIconTitle">
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="225"
+                                    direction="CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                            resource="empty_icon"
+                                            source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                            width="26"
+                                            height="26" />
+                                        <Template><![CDATA[ %s]]>
+                                            <Parameter expression="[COMPLICATION.TITLE]" />
+                                        </Template>
+                                    </Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Compare>
+                        <Compare expression="textImageTitle">
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="225"
+                                    direction="CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <InlineImage
+                                            resource="empty_icon"
+                                            source="COMPLICATION.SMALL_IMAGE"
+                                            width="26"
+                                            height="26" />
+                                        <Template><![CDATA[ %s]]>
+                                            <Parameter expression="[COMPLICATION.TITLE]" />
+                                        </Template>
+                                    </Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Compare>
+                        <Compare expression="textTitle">
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="225"
+                                    direction="CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TITLE]" />
+                                        </Template>
+                                    </Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Compare>
+                        <Compare expression="textIcon">
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="225"
+                                    direction="CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                            resource="empty_icon"
+                                            source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                            width="26"
+                                            height="26" />
+                                    </Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Compare>
+                        <Default>
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="225"
+                                    direction="CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    width="419"
+                                    height="419">
+                                    <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Default>
+                    </Condition>
+                </Group>
+            </Complication>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
         <ComplicationSlot slotId="8"
-            supportedTypes="RANGED_VALUE LONG_TEXT EMPTY"
+            supportedTypes="RANGED_VALUE LONG_TEXT SHORT_TEXT EMPTY"
             displayName="id_slot_large_bottom"
             x="0"
             y="225"
@@ -3795,6 +3933,144 @@
                 </Group>
             </Complication>
             <Complication type="LONG_TEXT">
+                <Group name="wrapper" width="450" height="450" x="0" y="0" pivotY="0">
+                    <Condition>
+                        <Expressions>
+                            <Expression name="textIconTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                            <Expression name="textImageTitle">[COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.SMALL_IMAGE] != null</Expression>
+                            <Expression name="textTitle">[COMPLICATION.TITLE] != null</Expression>
+                            <Expression name="textIcon">[COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
+                        </Expressions>
+                        <Compare expression="textIconTitle">
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="0"
+                                    direction="COUNTER_CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                            resource="empty_icon"
+                                            source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                            width="26"
+                                            height="26" />
+                                        <Template><![CDATA[ %s]]>
+                                            <Parameter expression="[COMPLICATION.TITLE]" />
+                                        </Template>
+                                    </Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Compare>
+                        <Compare expression="textImageTitle">
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="0"
+                                    direction="COUNTER_CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <InlineImage
+                                            resource="empty_icon"
+                                            source="COMPLICATION.SMALL_IMAGE"
+                                            width="26"
+                                            height="26" />
+                                        <Template><![CDATA[ %s]]>
+                                            <Parameter expression="[COMPLICATION.TITLE]" />
+                                        </Template>
+                                    </Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Compare>
+                        <Compare expression="textTitle">
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="0"
+                                    direction="COUNTER_CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TITLE]" />
+                                        </Template>
+                                    </Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Compare>
+                        <Compare expression="textIcon">
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="0"
+                                    direction="COUNTER_CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <InlineImage color="[CONFIGURATION.primaryTheme.0]"
+                                            resource="empty_icon"
+                                            source="COMPLICATION.MONOCHROMATIC_IMAGE"
+                                            width="26"
+                                            height="26" />
+                                    </Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.0]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26"><![CDATA[ • ]]></Font>
+                                    <Font color="[CONFIGURATION.primaryTheme.2]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Compare>
+                        <Default>
+                            <PartText width="450" height="225" x="0" y="0">
+                                <TextCircular centerX="225"
+                                    centerY="0"
+                                    direction="COUNTER_CLOCKWISE"
+                                    ellipsis="TRUE"
+                                    startAngle="270"
+                                    endAngle="90"
+                                    height="420"
+                                    width="420">
+                                    <Font color="[CONFIGURATION.primaryTheme.1]" family="SYNC_TO_DEVICE" weight="SEMI_BOLD" size="26">
+                                        <Template>%s
+                                            <Parameter expression="[COMPLICATION.TEXT]" />
+                                        </Template>
+                                    </Font>
+                                </TextCircular>
+                            </PartText>
+                        </Default>
+                    </Condition>
+                </Group>
+            </Complication>
+            <Complication type="SHORT_TEXT">
                 <Group name="wrapper" width="450" height="450" x="0" y="0" pivotY="0">
                     <Condition>
                         <Expressions>

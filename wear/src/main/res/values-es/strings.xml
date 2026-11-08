@@ -2,6 +2,15 @@
     <string name="app_name">Solar Path</string>
     <string name="watch_face_name">Solar Path</string>
     <string name="solar_path_comp_name">Solar Path</string>
+    <string name="solar_path_countdown_comp_name">Solar Path Countdown</string>
+    <string name="complication_tracking_mode">Complication Events</string>
+    <string name="complication_tracking_mode_2">Sunrise &amp; Sunset</string>
+    <string name="complication_tracking_mode_4">4 Milestones (Noon/Midnight)</string>
+    <string name="complication_tracking_mode_all">6 hitos (+ Crepúsculo)</string>
+    <string name="noon">Mediodía</string>
+    <string name="midnight">Medianoche</string>
+    <string name="dawn">Amanecer</string>
+    <string name="dusk">Atardecer</string>
     
     <!-- Watch Face Push -->
     <string name="push_watch_face">Establecer esfera</string>
