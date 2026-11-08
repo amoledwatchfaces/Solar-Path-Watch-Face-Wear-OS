@@ -21,6 +21,9 @@ data class SolarData(
     val nextEventName: String = "Sunrise",
     @StringRes val nextEventNameResId: Int = R.string.sunrise,
     val nextEventEpoch: Long = 0L,
+    val prevEventName: String = "Sunset",
+    @StringRes val prevEventNameResId: Int = R.string.sunset,
+    val prevEventEpoch: Long = 0L,
     val progressFraction: Float = 0f,
     // Exact 24-hour dial angles in degrees (0..360, 0 = Solar Noon / 12:00 at top)
     val sunriseAngle: Float = 270f,

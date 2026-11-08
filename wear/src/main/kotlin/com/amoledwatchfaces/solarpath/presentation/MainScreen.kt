@@ -42,6 +42,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -71,6 +72,7 @@ import androidx.wear.compose.material3.lazy.TransformationSpec
 import androidx.wear.compose.material3.lazy.transformedHeight
 import com.amoledwatchfaces.solarpath.BuildConfig
 import com.amoledwatchfaces.solarpath.R
+import com.amoledwatchfaces.solarpath.data.ComplicationTrackingMode
 import com.amoledwatchfaces.solarpath.presentation.ui.BackgroundPermissionDialog
 import com.amoledwatchfaces.solarpath.presentation.ui.ConfirmationOverlay
 import com.amoledwatchfaces.solarpath.utils.PERMISSION_SET_PUSHED_WATCH_FACE_AS_ACTIVE
@@ -412,6 +414,47 @@ fun MainScreen(
                         }
                     )
                 }
+            }
+
+            // Complication Tracking Mode
+            item(key = "complication_events") {
+                FilledTonalButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    onClick = {
+                        val nextMode = when (preferences.complicationTrackingMode) {
+                            ComplicationTrackingMode.SUNRISE_SUNSET -> ComplicationTrackingMode.NOON_MIDNIGHT
+                            ComplicationTrackingMode.NOON_MIDNIGHT -> ComplicationTrackingMode.DAWN_DUSK
+                            else -> ComplicationTrackingMode.SUNRISE_SUNSET
+                        }
+                        viewModel.setComplicationTrackingMode(nextMode)
+                    },
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.wb_twilight_24px),
+                            contentDescription = stringResource(R.string.complication_events),
+                            tint = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    label = {
+                        Text(text = stringResource(R.string.complication_events))
+                    },
+                    secondaryLabel = {
+                        val modeText = when (preferences.complicationTrackingMode) {
+                            ComplicationTrackingMode.SUNRISE_SUNSET -> "${stringResource(R.string.sunrise)} & ${stringResource(R.string.sunset)}"
+                            ComplicationTrackingMode.NOON_MIDNIGHT -> "+ Noon & Midnight"
+                            ComplicationTrackingMode.DAWN_DUSK -> "+ Dawn & Dusk"
+                            else -> "+ Noon & Midnight"
+                        }
+                        Text(
+                            text = modeText,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                )
             }
 
             // About Section Header

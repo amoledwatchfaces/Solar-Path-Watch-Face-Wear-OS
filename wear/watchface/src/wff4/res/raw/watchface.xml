@@ -3252,41 +3252,22 @@
             <Complication type="EMPTY"/>
         </ComplicationSlot>
 
-        <!-- Complication Slot 6: Custom App Shortcut -->
-        <ComplicationSlot slotId="5"
-            isCustomizable="TRUE"
-            supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY"
-            displayName="id_center_shortcut"
-            width="224"
-            height="224"
-            x="113"
-            y="113"
-            alpha="0">
-            <DefaultProviderPolicy
-                defaultSystemProvider="APP_SHORTCUT"
-                defaultSystemProviderType="SMALL_IMAGE"/>
-            <BoundingOval x="0" y="0" width="224" height="224"/>
-            <Complication type="MONOCHROMATIC_IMAGE"/>
-            <Complication type="SMALL_IMAGE"/>
-            <Complication type="EMPTY"/>
-        </ComplicationSlot>
-
-        <!-- Complication Slot 5: Center Solar Complication & Angle Reference Provider -->
+        <!-- Center Solar Complication & Angle Reference Provider -->
         <ComplicationSlot slotId="6"
             isCustomizable="FALSE"
             supportedTypes="SHORT_TEXT EMPTY"
             displayName="app_name"
-            width="224"
-            height="224"
-            x="113"
-            y="113">
+            width="1"
+            height="1"
+            x="0"
+            y="0">
             <Variant target="alpha" value="0" mode="AMBIENT"/>
             <DefaultProviderPolicy
                 primaryProvider="com.amoledwatchfaces.solarpath/com.amoledwatchfaces.solarpath.complication.SolarPathComplicationService"
                 primaryProviderType="SHORT_TEXT"
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT"/>
-            <BoundingOval x="0" y="0" width="224" height="224"/>
+            <BoundingOval x="0" y="0" width="1" height="1"/>
             <Complication type="SHORT_TEXT">
                 <!-- Angle extraction references for the 8 solar arcs -->
                 <Group name="ref_ss" x="0" y="0" width="1" height="1" alpha="0">
@@ -3334,6 +3315,25 @@
                     <Reference name="locationAvailable" source="x" defaultValue="1"/>
                 </Group>
             </Complication>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
+
+        <!-- Complication Slot 5: Custom App Shortcut -->
+        <ComplicationSlot slotId="5"
+            isCustomizable="TRUE"
+            supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY"
+            displayName="id_center_shortcut"
+            width="224"
+            height="224"
+            x="113"
+            y="113"
+            alpha="0">
+            <DefaultProviderPolicy
+                defaultSystemProvider="APP_SHORTCUT"
+                defaultSystemProviderType="SMALL_IMAGE"/>
+            <BoundingOval x="0" y="0" width="224" height="224"/>
+            <Complication type="MONOCHROMATIC_IMAGE"/>
+            <Complication type="SMALL_IMAGE"/>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
     </Scene>
