@@ -22,6 +22,18 @@ data class SavedLocation(
     val longitude: Double
 )
 
+/**
+ * Milestone tracking modes for watch face complications.
+ * - [SUNRISE_SUNSET]: Tracks Sunrise and Sunset (2 events).
+ * - [NOON_MIDNIGHT]: Tracks Sunrise, Solar Noon, Sunset, and Solar Midnight (4 events, default).
+ * - [DAWN_DUSK]: Tracks Dawn, Sunrise, Solar Noon, Sunset, Dusk, and Solar Midnight (6 events).
+ */
+object ComplicationTrackingMode {
+    const val SUNRISE_SUNSET = 0
+    const val NOON_MIDNIGHT = 1
+    const val DAWN_DUSK = 2
+}
+
 @Immutable
 @Serializable
 data class UserPreferences(
@@ -33,12 +45,17 @@ data class UserPreferences(
     val locationSubName: String = "",
     val recentLocations: List<SavedLocation> = emptyList(),
     val isWff5Updated: Boolean = false,
+    val complicationTrackingMode: Int = ComplicationTrackingMode.NOON_MIDNIGHT
 )
 
 class UserPreferencesRepository @Inject constructor(
     private val dataStore: DataStore<UserPreferences>
 ) {
     fun getPreferences() = dataStore.data
+
+    suspend fun setComplicationTrackingMode(mode: Int) {
+        dataStore.updateData { it.copy(complicationTrackingMode = mode) }
+    }
 }
 
 object UserPreferencesSerializer : Serializer<UserPreferences> {

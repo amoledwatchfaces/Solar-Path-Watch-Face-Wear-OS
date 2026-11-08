@@ -408,6 +408,13 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun setComplicationTrackingMode(mode: Int) {
+        viewModelScope.launch {
+            dataStore.updateData { it.copy(complicationTrackingMode = mode) }
+            context.updateComplications()
+        }
+    }
+
     fun openLinkOnPhone(link: String, onOpened: (Boolean) -> Unit) {
         viewModelScope.launch {
             val remoteActivityHelper = RemoteActivityHelper(context)

@@ -134,13 +134,14 @@ Quickly switch between **11 curated style presets** designed for different aesth
 
 ---
 
-## 🧩 Standalone Complication Service
+## 🧩 Standalone Complication Services
 
-Solar Path also provides a dedicated standalone complication data source that can be added to **any Wear OS watch face**:
+Solar Path also provides dedicated standalone complication data sources that can be added to **any Wear OS watch face**:
 
 | Complication Service | Supported Types | Description |
 |:---|:---|:---|
-| **Solar Path Complication** | `SHORT_TEXT` | Displays the next upcoming solar event (e.g., `SUNRISE`, `SUNSET`, `SOLAR NOON`, `CIVIL DUSK`) with exact time and icon. Tapping opens the Solar Path app. |
+| **Solar Path Complication** | `SHORT_TEXT`, `LONG_TEXT` | Displays the next upcoming astronomical solar event time and text (`Sunrise`, `Sunset`, `Noon`, `Midnight`, `Dawn`, or `Dusk`) with dynamic event icon. Tapping opens the Solar Path app. |
+| **Solar Path Countdown** | `RANGED_VALUE`, `SHORT_TEXT`, `LONG_TEXT` | Displays a live countdown (and cycle progress) towards the upcoming astronomical solar event (`Sunrise`, `Sunset`, `Noon`, `Midnight`, `Dawn`, or `Dusk`) with dynamic icon. Tapping opens the Solar Path app. |
 
 ---
 
@@ -161,6 +162,10 @@ Solar Path includes three interactive, glanceable Wear OS Widgets and Tiles powe
 The integrated Wear OS companion application provides astronomical calculations and location management:
 
 - **Astronomical Timeline**: Cards showing sunrise, sunset, civil/nautical/astronomical dawn & dusk, solar noon, and nadir times.
+- **Configurable Complication Events**: Tap the complication button in settings to toggle tracked milestones:
+  - **Sunrise & Sunset** (2 events)
+  - **Sunrise, Noon, Sunset, Midnight (Default)** (4 events)
+  - **Dawn, Sunrise, Noon, Sunset, Dusk, Midnight** (6 events)
 - **Smart Location Management**:
   - Automatic positioning via `FusedLocationProviderClient` using privacy-friendly Approximate Location (`ACCESS_COARSE_LOCATION` only — no precise GPS tracking required).
   - Manual location search with `Geocoder` and recent locations history.
@@ -233,5 +238,6 @@ cd Solar-Path-Watch-Face-Wear-OS
 - Licensed under the **[GNU General Public License v3.0 (GPLv3)](LICENSE)**.
 - Developed by **[amoledwatchfaces™](https://amoledwatchfaces.com/)**.
 - Ephemeris calculations powered by [Kastro](https://github.com/Yox/kastro).
+- Sunrise and sunset vector drawables and countdown complication UX ported from [Complications Suite for Wear OS](https://github.com/amoledwatchfaces/Complications-Suite-Wear-OS).
 - All trademarks and brand names belong to their respective owners.
 

@@ -126,6 +126,18 @@ fun FaqScreen(
                 )
             }
 
+            // 6. Solar Complications
+            item {
+                FaqCard(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .transformedHeight(this, transformationSpec),
+                    transformation = SurfaceTransformation(transformationSpec),
+                    title = stringResource(R.string.faq_complications_title),
+                    description = stringResource(R.string.faq_complications_desc)
+                )
+            }
+
             // Footer: amoledwatchfaces.com
             item {
                 ListSubHeader(

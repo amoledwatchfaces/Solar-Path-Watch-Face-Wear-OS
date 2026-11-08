@@ -2,6 +2,8 @@
     <string name="app_name">Solar Path</string>
     <string name="watch_face_name">Solar Path</string>
     <string name="solar_path_comp_name">Solar Path</string>
+    <string name="solar_path_countdown_comp_name">Solar Path Countdown</string>
+    <string name="complication_events">Complication Events</string>
     
     <!-- Watch Face Push -->
     <string name="push_watch_face">Set Watch Face</string>
@@ -69,6 +71,8 @@
     <string name="faq_dots_desc">The dots around the timeline ring mark 10 solar milestones:\n\n• Morning: Astro Dawn, Nautical Dawn, Civil Dawn, Sunrise, and Solar Noon\n• Evening: Sunset, Civil Dusk, Nautical Dusk, Astro Dusk, and Solar Midnight</string>
     <string name="faq_location_title">Location &amp; Calculations</string>
     <string name="faq_location_desc">All astronomical calculations use high-precision NOAA algorithms. Accurate twilight and solar times are computed specifically for your geographic coordinates (latitude and longitude).</string>
+    <string name="faq_complications_title">Solar Complications</string>
+    <string name="faq_complications_desc">Solar Path provides two standalone complications for any Wear OS watch face:\n\n• Solar Event: Displays upcoming astronomical solar event time and title (Sunrise, Sunset, Noon, Midnight, Dawn, Dusk) with dynamic icon\n• Solar Countdown: Live countdown timer and progress arc towards next milestone\n\nTracked astronomical solar events can be toggled in app settings (Sunrise &amp; Sunset; Sunrise, Noon, Sunset, Midnight; or Dawn, Sunrise, Noon, Sunset, Dusk, Midnight). Tapping either complication opens Solar Path.</string>
 
     <!-- About & Privacy -->
     <string name="about">About</string>
